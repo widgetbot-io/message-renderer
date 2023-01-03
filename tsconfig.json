@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "module": "ESNext",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "es6", "dom"],
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "declarationDir": "types",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": ["src/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@svg/*": ["src/assets/svg/*"],
+      "@types": ["src/types"],
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "src/stories"]
+}
