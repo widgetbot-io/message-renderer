@@ -1,5 +1,5 @@
 import { cx } from "emotion";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import Emoji from "@root/Emoji";
 
 import { Message_mentions } from "@types";

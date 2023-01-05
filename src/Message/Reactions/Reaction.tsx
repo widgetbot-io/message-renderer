@@ -5,7 +5,7 @@ import {
   ReactionEmojiBase,
 } from "@root/Message/elements";
 import React, { useCallback, useMemo } from "react";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import { Message_reactions } from "@types";
 
 interface ReactionProps {

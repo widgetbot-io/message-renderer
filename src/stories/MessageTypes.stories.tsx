@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Color from "color";
-import { Message } from "../../dist/esm/index.js";
+import { Message, MessageRendererProvider } from "../../dist/esm/index.js";
 import { ThemeProvider } from "emotion-theming";
 
 const theme = {
@@ -31,13 +31,15 @@ const themeContext = {
 function Wrapper(Story) {
   return (
     <ThemeProvider theme={themeContext}>
-      <>{Story()}</>
+      <MessageRendererProvider>
+        {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
+      </MessageRendererProvider>
     </ThemeProvider>
   );
 }
 
 export default {
-  title: "Examples/Message Types",
+  title: "Message Types/Normal",
   component: Message,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -50,27 +52,83 @@ const Template: ComponentStory<typeof Message> = (args) => (
   <Message {...args} />
 );
 
-export const Normal = Template.bind({});
-Normal.args = {
+export const Basic = Template.bind({});
+Basic.args = {
+  isFirstMessage: true,
+  showButtons: true,
+  overrides: {
+    userMentioned: true,
+  },
+  message: {
+    id: "1042882684902453278",
+    channelId: "998637045327081502",
+    content:
+      '🔓 **__Upcoming Change for Command Permissions__** 🔐 \n\nBased on feedback, we\'re making some updates to permissions for application commands to simplify permission management and to make command permissions more closely resemble other permissions systems in Discord. Server admins can begin to opt-in to the command permission changes outlined in the change log on a per-server basis **starting on December 16, 2022**. However, changes will not be applied to all servers **until late January or early February**.\n\n> **📰 Change log: <http://discord.com/developers/docs/change-log#upcoming-application-command-permission-changes>**. This includes many more context and details about whether you\'ll be affected + how to update your app accordingly.\n\n> <:SystemMessageWarn:842172192401915971>﻿ Most apps will be unaffected by this change, but **if your app uses the `PUT /applications/<application_id>/guilds/<guild_id>/commands/<command_id>/permissions` endpoint, you may need to make updates.**\n\nThere are two main changes included:\n\n**1️⃣ The logic used to apply permission configurations to a user in a given context within Discord clients.**\nThe new command permissions configuration behavior allows command-level permissions, app-level permissions, and `default_member_permissions` to work together rather than independently.\n   - `default_member_permissions` acts as a “default” that a developer can set when creating or updating a command\n   - App-level permission configurations (typically set by admins) now act as the "base" configuration\n   - Command-level permission configurations (typically set by admins) now act as an “override” of the app-level\n\n**2️⃣ A new `APPLICATION_COMMAND_PERMISSIONS_V2` guild feature flag to indicate whether that guild is using the old permissions logic or the new (upcoming) logic.**\n\nAnd now....a flowchart to help understand and visualize *how* permissions configurations are used by Discord clients *(it\'s huge, so you might want to click "Open Original" to see all of it)*',
+    type: "Default",
+    flags: 2,
+    createdAt: 1668713007904,
+    editedAt: 1668737411977,
+    isGuest: false,
+    author: {
+      avatarUrl: null,
+      bot: true,
+      discrim: "0000",
+      id: "998882498719273090",
+      flags: null,
+      name: "Discord Developers #api-announcements",
+      roles: [],
+      system: false,
+      isWebhook: true,
+      __typename: "User",
+      color: 0,
+    },
+    attachments: [
+      {
+        url: "https://via.placeholder.com/1000x591.webp",
+        height: 591,
+        width: 1000,
+        filename: "flowchart-for-new-permissions.png",
+        size: 981134,
+        __typename: "Attachment",
+      },
+    ],
+    stickers: [],
+    reactions: null,
+    messageReference: {
+      guildId: "613425648685547541",
+      channelId: "697138785317814292",
+      messageId: "1042878163170119741",
+      __typename: "MessageReference",
+    },
+    embeds: [],
+    mentions: [],
+    interaction: null,
+    thread: null,
+    __typename: "Message",
+    referencedMessage: null,
+  },
+};
+
+export const YouTubeEmbed = Template.bind({});
+YouTubeEmbed.args = {
   isFirstMessage: true,
   message: {
-    id: "1013056935886590032",
+    id: "997882132233986079",
     channelId: "993210446096105522",
-    content:
-      "this `supports` __a__ **subset** *of* ~~markdown~~ 😃 ```js\nfunction foo(bar) {\n  console.log(bar);\n}\n\nfoo(1);```",
+    content: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     type: "Default",
     flags: 0,
-    createdAt: 1661601995203,
+    createdAt: 1657984040078,
     editedAt: null,
     isGuest: false,
     author: {
       avatarUrl:
-        "https://cdn.discordapp.com/avatars/398690824721924107/aa710e791ef95cec9bf23350cabfcd1f.webp",
-      bot: true,
-      discrim: "2249",
-      id: "398690824721924107",
-      flags: 65536,
-      name: "AdvaithBot",
+        "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
+      bot: false,
+      discrim: "0001",
+      id: "132819036282159104",
+      flags: 4457220,
+      name: "JohnyTheCarrot",
       roles: ["859803268372758550"],
       system: false,
       isWebhook: false,
@@ -83,77 +141,42 @@ Normal.args = {
     messageReference: null,
     embeds: [
       {
-        title: "title ~~(did you know you can have markdown here too?)~~",
+        title: "Rick Astley - Never Gonna Give You Up (Official Music Video)",
         description:
-          "this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```",
-        url: "https://discordapp.com",
-        timestamp: "2022-08-27T12:05:51.251Z",
-        color: 4994011,
-        type: "Rich",
+          "The official video for “Never Gonna Give You Up” by Rick Astley\nTaken from the album ‘Whenever You Need Somebody’ – deluxe 2CD and digital deluxe out 6th May 2022 Pre-order here – https://RickAstley.lnk.to/WYNS2022ID\n\n“Never Gonna Give You Up” was a global smash on its release in July 1987, topping the charts in 25 countries including Rick’s nat...",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        timestamp: null,
+        color: 16711680,
+        type: "Video",
         author: {
-          url: "https://discordapp.com",
-          name: "author name",
-          proxyIconUrl:
-            "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+          url: "https://www.youtube.com/channel/UCuAXFkgsw1L7xaCfnd5JJOw",
+          name: "Rick Astley",
+          proxyIconUrl: null,
           __typename: "EmbedAuthor",
         },
-        fields: [
-          {
-            value: "some of these properties have certain limits...",
-            name: "🤔",
-            inline: false,
-            __typename: "EmbedField",
-          },
-          {
-            value: "try exceeding some of them!",
-            name: "😱",
-            inline: false,
-            __typename: "EmbedField",
-          },
-          {
-            value:
-              "an informative error should show up, and this view will remain as-is until all issues are fixed",
-            name: "🙄",
-            inline: false,
-            __typename: "EmbedField",
-          },
-          {
-            value: "these last two",
-            name: ":thonkang:",
-            inline: true,
-            __typename: "EmbedField",
-          },
-          {
-            value: "are inline fields",
-            name: ":thonkang:",
-            inline: true,
-            __typename: "EmbedField",
-          },
-        ],
-        image: {
-          url: "https://cdn.discordapp.com/embed/avatars/0.png",
-          proxyUrl:
-            "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
-          width: 256,
-          height: 256,
-          __typename: "EmbedImage",
+        fields: null,
+        image: null,
+        provider: {
+          name: "YouTube",
+          url: "https://www.youtube.com",
+          __typename: "EmbedProvider",
         },
-        provider: null,
-        footer: {
-          proxyIconUrl:
-            "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
-          text: "footer text",
-          __typename: "EmbedFooter",
-        },
+        footer: null,
         thumbnail: {
-          height: 256,
-          width: 256,
-          url: "https://cdn.discordapp.com/embed/avatars/0.png",
+          height: 720,
+          width: 1280,
+          url: "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
           proxyUrl:
-            "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+            "https://images-ext-1.discordapp.net/external/l-AFI3CsQVpcpSDYFtsDvDKag46BJ-uaQ9BTcU2JPC8/https/i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
           __typename: "EmbedThumbnail",
         },
-        video: null,
+        video: {
+          height: 720,
+          width: 1280,
+          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          proxyUrl: null,
+          __typename: "EmbedVideo",
+        },
         __typename: "Embed",
       },
     ],
@@ -162,5 +185,126 @@ Normal.args = {
     thread: null,
     __typename: "Message",
     referencedMessage: null,
+  },
+};
+
+export const Attachment = Template.bind({});
+Attachment.args = {
+  isFirstMessage: true,
+  message: {
+    id: "1042882684902453278",
+    channelId: "998637045327081502",
+    content: ":)",
+    type: "Default",
+    flags: 2,
+    createdAt: 1668713007904,
+    editedAt: 1668737411977,
+    isGuest: false,
+    author: {
+      avatarUrl: null,
+      bot: false,
+      discrim: "0000",
+      id: "1",
+      flags: null,
+      name: "Gort",
+      roles: [],
+      system: false,
+      isWebhook: false,
+      __typename: "User",
+      color: 0,
+    },
+    attachments: [
+      {
+        url: "https://via.placeholder.com/1000x591.webp",
+        height: 591,
+        width: 1000,
+        filename: "SPOILER_flowchart-for-new-permissions.png",
+        size: 981134,
+        __typename: "Attachment",
+      },
+    ],
+    stickers: [],
+    reactions: null,
+    embeds: [],
+    mentions: [],
+    interaction: null,
+    thread: null,
+    __typename: "Message",
+    referencedMessage: null,
+  },
+};
+
+export const Reply = Template.bind({});
+Reply.args = {
+  isFirstMessage: true,
+  message: {
+    id: "1060142796708773898",
+    channelId: "993105555042357268",
+    content: "bababooey",
+    type: "Reply",
+    flags: 0,
+    createdAt: 1672828139236,
+    editedAt: null,
+    isGuest: false,
+    author: {
+      avatarUrl:
+        "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
+      bot: false,
+      discrim: "0001",
+      id: "132819036282159104",
+      flags: 4457220,
+      name: "JohnyTheCarrot",
+      roles: ["859803268372758550"],
+      system: false,
+      isWebhook: false,
+      __typename: "User",
+      color: 0,
+    },
+    attachments: [],
+    stickers: [],
+    reactions: null,
+    messageReference: {
+      guildId: "1",
+      channelId: "993105555042357268",
+      messageId: "1027889767460909076",
+      __typename: "MessageReference",
+    },
+    embeds: [],
+    mentions: [],
+    interaction: null,
+    thread: null,
+    __typename: "Message",
+    referencedMessage: {
+      id: "1027889767460909076",
+      channelId: "993105555042357268",
+      content: "ya same",
+      type: "Default",
+      flags: 0,
+      createdAt: 1665138417831,
+      editedAt: null,
+      isGuest: false,
+      author: {
+        avatarUrl:
+          "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
+        bot: false,
+        discrim: "0001",
+        id: "132819036282159104",
+        flags: 4457220,
+        name: "JohnyTheCarrot",
+        system: false,
+        isWebhook: false,
+        __typename: "User",
+        color: 3319955,
+      },
+      attachments: [],
+      stickers: [],
+      reactions: null,
+      messageReference: null,
+      embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
+      __typename: "Message",
+    },
   },
 };

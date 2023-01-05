@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
 import { GuildInfo_guild_roles } from "@types";
 import { RoleIconBase, UnicodeEmojiBase } from "@root/Message/elements";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import webpCheck from "@utils/webpCheck";
 import { memoize } from "lodash";
 import * as React from "react";

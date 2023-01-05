@@ -1,13 +1,13 @@
 import {
   IconsBase,
   SystemMessageLinkBase,
-  SystemMessageBase,
   SystemMessageContentBase,
 } from "../elements";
 import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import React, { useCallback } from "react";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface ChannelPinnedMessageProps {
   author: Message_author;

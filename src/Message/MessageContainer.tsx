@@ -1,7 +1,8 @@
-import { MessageContainerStyle } from "@root/Message/elements";
+import { MessageContainerStyle as Old } from "@root/Message/elements";
 import { ReactNode } from "react";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import React from "react";
+import { MessageContainerStyle } from "@root/Message/style/message";
 
 export interface MessageButtonListOption {
   onClick: () => void;
@@ -17,20 +18,20 @@ interface MessageContainerProps {
 function MessageContainer(props: MessageContainerProps) {
   return (
     <MessageContainerStyle.Base>
-      <MessageContainerStyle.Buttons className="buttons">
+      <MessageContainerStyle.Buttons>
         {props.buttons.map((option) => (
           <Tooltip
             overlay={option.actionDescription}
             placement="top"
             key={option.actionDescription}
           >
-            <MessageContainerStyle.Button onClick={option.onClick}>
+            <Old.Button onClick={option.onClick}>
               <img
                 src={option.icon}
                 alt={option.actionDescription}
                 width={20}
               />
-            </MessageContainerStyle.Button>
+            </Old.Button>
           </Tooltip>
         ))}
       </MessageContainerStyle.Buttons>

@@ -1,6 +1,6 @@
 import styled from "react-emotion";
 import Moment from "moment";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import React from "react";
 
 enum TimestampStyle {

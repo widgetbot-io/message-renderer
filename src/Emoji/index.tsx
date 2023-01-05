@@ -4,7 +4,7 @@ import memoize from "memoizee";
 import * as React from "react";
 import emoji from "react-easy-emoji";
 import { Base, Emote } from "./elements";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import { defaultEmojis } from "@root/emoji";
 
 interface Props {
@@ -47,7 +47,7 @@ class Emoji extends React.PureComponent<Props> {
     // Resolve all text representations of emojis
     if (resolveNames) text = this.resolve(text);
 
-    const resolved = emoji(text, (code, string, key) => {
+    return emoji(text, (code, string, key) => {
       let emoji = defaultEmojis.find(
         ({ emoji, keywords }) => emoji === string || keywords?.includes(string)
       );
@@ -75,9 +75,7 @@ class Emoji extends React.PureComponent<Props> {
       ) : (
         emote
       );
-    });
-
-    return resolved; // this.jumbofy(resolved)
+    }); // this.jumbofy(resolved)
   }
 
   getText() {

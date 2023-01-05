@@ -5,26 +5,24 @@ import {
   Message_referencedMessage,
 } from "@types";
 import {
-  MessageBase,
-  MessageHeaderBase,
   MiniUserAvatarBase,
   MiniUserNameBase,
   ReplyInfoBase,
   ReplySpineBase,
   ReplyUserBase,
   SlashCommandBase,
-  SmallTimestampBase,
   UnknownReplyIcon,
   UnknownReplyText,
 } from "@root/Message/elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import Content from "@root/Content";
 import Moment from "moment";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import getAvatar, { GetAvatarOptions } from "@utils/getAvatar";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import ChatTag from "@root/ChatTag";
 import { MessageType } from "@root/types/globalTypes";
+import * as Styles from "@root/Message/style/message";
 
 interface ReplyInfoProps {
   referencedMessage: Message_referencedMessage | null;
@@ -147,6 +145,9 @@ interface MessageProps {
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;
   hideTimestamp?: boolean;
+  overrides?: {
+    userMentioned?: boolean;
+  };
 }
 
 function NormalMessage(props: MessageProps) {
@@ -156,7 +157,7 @@ function NormalMessage(props: MessageProps) {
 
   const isUserMentioned = useMemo(() => {
     // todo: make work
-    return false;
+    return props.overrides?.userMentioned ?? false;
     // const user = authStore.user;
     //
     // if (!user) return false;
@@ -168,11 +169,11 @@ function NormalMessage(props: MessageProps) {
     // );
     //
     // return Boolean(userMentioned);
-  }, [props.message.mentions]);
+  }, [props.message.mentions, props.overrides?.userMentioned]);
 
   if (props.isFirstMessage)
     return (
-      <MessageBase isUserMentioned={isUserMentioned}>
+      <Styles.MessageBase data-is-mentioned={isUserMentioned}>
         {shouldShowReply && (
           <ReplyInfo
             referencedMessage={props.message.referencedMessage ?? null}
@@ -183,7 +184,7 @@ function NormalMessage(props: MessageProps) {
             isContextMenuInteraction={props.isContextMenuInteraction}
           />
         )}
-        <MessageHeaderBase>
+        <Styles.MessageHeaderBase>
           <MessageAuthor
             author={props.message.author}
             avatarAnimated={props.isHovered ?? false}
@@ -193,30 +194,27 @@ function NormalMessage(props: MessageProps) {
           {props.hideTimestamp || (
             <LargeTimestamp timestamp={props.message.createdAt} />
           )}
-        </MessageHeaderBase>
+        </Styles.MessageHeaderBase>
         <Content
           message={props.message}
           noThreadButton={props.noThreadButton}
         />
-      </MessageBase>
+      </Styles.MessageBase>
     );
 
   return (
-    <MessageBase isUserMentioned={isUserMentioned}>
+    <Styles.MessageBase data-is-mentioned={isUserMentioned}>
       <Tooltip
         placement="top"
         overlay={Moment(props.message.createdAt).format("LLLL")}
         mouseEnterDelay={1}
       >
-        <SmallTimestampBase
-          dateTime={props.message.createdAt}
-          className="short-time"
-        >
+        <Styles.SmallTimestampBase dateTime={props.message.createdAt}>
           {Moment(props.message.createdAt).format("h:mm A")}
-        </SmallTimestampBase>
+        </Styles.SmallTimestampBase>
       </Tooltip>
       <Content message={props.message} noThreadButton={props.noThreadButton} />
-    </MessageBase>
+    </Styles.MessageBase>
   );
 }
 

@@ -23,40 +23,6 @@ import { ThreadButtonHeight } from "@root/Content/elements";
  */
 
 export namespace MessageContainerStyle {
-  export const Base = styled("div")<Record<string, unknown>>`
-    position: relative;
-    margin-right: 14px;
-
-    &:hover {
-      --background-color: ${({ theme }) =>
-        theme.colors._background.darken(0.07).string()};
-
-      .buttons {
-        display: flex;
-      }
-    }
-  `;
-
-  export const Buttons = styled("div")<Record<string, unknown>>`
-    position: absolute;
-    right: 14px;
-    top: 0;
-    transform: translateY(-50%);
-    display: none;
-    flex-direction: row;
-    box-shadow: 0 0 0 1px rgba(4, 4, 5, 0.15);
-    background-color: ${(props) => props.theme.colors.background};
-    z-index: 1;
-    border-radius: 4px;
-    overflow: hidden;
-    transition: box-shadow 0.1s ease-in-out;
-
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0 0 0 1px rgba(4, 4, 5, 0.15), 0 4px 4px rgba(0, 0, 0, 0.16);
-    }
-  `;
-
   export const Button = styled("button")<Record<string, unknown>>`
     border: none;
     border-radius: 0;
@@ -71,55 +37,6 @@ export namespace MessageContainerStyle {
     }
   `;
 }
-
-interface MessageBaseProps {
-  isUserMentioned?: boolean;
-}
-export const MessageBase = styled("div")<
-  MessageBaseProps & Record<string, unknown>
->`
-  position: relative;
-  padding: 2px 48px 2px 72px;
-
-  &:hover .short-time {
-    display: inherit;
-  }
-
-  ${({ isUserMentioned }) =>
-    isUserMentioned &&
-    css`
-      --background-color: rgba(250, 168, 26, 0.1);
-
-      &:hover {
-        --background-color: rgba(250, 168, 26, 0.08);
-      }
-
-      &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 2px;
-        height: 100%;
-        background-color: #faa81a;
-      }
-    `}
-
-  & .short-time {
-    display: none;
-  }
-
-  a {
-    color: #00b0f4;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  background-color: ${({ theme }) => theme.colors.background};
-`;
 
 export const DeferredMessage = styled("div")<Record<string, unknown>>`
   font-size: 14px;
@@ -174,12 +91,6 @@ export const TypingIndicator = styled("svg")<Record<string, unknown>>`
     transform-origin: 21px center;
     animation-delay: 0.3s;
   }
-`;
-
-export const SystemMessageBase = styled(MessageBase)<Record<string, unknown>>`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
 `;
 
 export const SystemMessageContentBase = styled("span")<
@@ -367,24 +278,6 @@ export const MiniUserNameBase = styled("span")<
   color: ${({ color }) => color};
 `;
 
-export const MessageHeaderBase = styled("div")<Record<string, unknown>>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const SmallTimestampBase = styled("time")<Record<string, unknown>>`
-  position: absolute;
-  left: 0;
-  width: 56px;
-  text-align: right;
-  font-size: 0.6875rem;
-  margin-top: 4px;
-  user-select: none;
-
-  color: ${({ theme }) => theme.colors._primary.fade(0.5).string()};
-`;
-
 export const LargeTimestampBase = styled("time")<Record<string, unknown>>`
   font-size: 0.75rem;
   margin-left: 8px;
@@ -472,9 +365,7 @@ export const MessageAccessoriesBase = styled("div")<Record<string, unknown>>`
   grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
 `;
 
-export const ReactionsBase = styled("div")<
-  Record<string, unknown> & Record<string, unknown>
->`
+export const ReactionsBase = styled("div")<Record<string, unknown>>`
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -520,12 +411,6 @@ export const ReactionCountBase = styled("span")<Record<string, unknown>>`
 
 ==============================================================
  */
-
-export const AuthorBase = styled("span")<
-  Record<string, unknown> & Record<string, unknown>
->`
-  display: inline-flex;
-`;
 
 interface UsernameBaseProps {
   color: string | undefined;

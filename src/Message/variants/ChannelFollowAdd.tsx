@@ -2,12 +2,12 @@ import { Message_author } from "@types";
 import {
   IconsBase,
   SystemMessageLinkBase,
-  SystemMessageBase,
   SystemMessageContentBase,
 } from "../elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface ChannelFollowAddProps {
   content: string;

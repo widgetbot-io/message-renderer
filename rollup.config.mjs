@@ -1,5 +1,6 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import { uglify } from "rollup-plugin-uglify";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
 import alias from "@rollup/plugin-alias";
@@ -33,6 +34,7 @@ export default [
       commonjs(),
       url(),
       json(),
+      uglify(),
       alias({
         entries: [{ find: "@images", replacement: "src/assets/images/" }],
       }),

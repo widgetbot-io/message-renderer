@@ -1,7 +1,6 @@
 import { Message_thread } from "@types";
 import {
   IconsBase,
-  SystemMessageBase,
   SystemMessageContentBase,
   SystemMessageLinkBase,
 } from "@root/Message/elements";
@@ -11,6 +10,7 @@ import ThreadButton from "@root/Content/Thread/ThreadButton";
 import { Message_author, Message_messageReference } from "@types";
 import React from "react";
 import { MessageType } from "@root/types/globalTypes";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface ThreadCreatedProps {
   createdAt: number;

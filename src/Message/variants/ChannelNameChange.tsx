@@ -1,12 +1,9 @@
 import { Message_author } from "@types";
-import {
-  SystemMessageBase,
-  IconsBase,
-  SystemMessageContentBase,
-} from "../elements";
+import { IconsBase, SystemMessageContentBase } from "../elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface ChannelNameChangeProps {
   content: string;

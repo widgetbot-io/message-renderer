@@ -1,6 +1,6 @@
 import Moment from "moment/moment";
 import { LargeTimestampBase } from "@root/Message/elements";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import React, { memo } from "react";
 
 function LargeTimestamp({ timestamp }: { timestamp: number }) {

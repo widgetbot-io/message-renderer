@@ -1,13 +1,9 @@
-import {
-  IconsBase,
-  SystemMessageBase,
-  SystemMessageContentBase,
-  UsernameBase,
-} from "../elements";
+import { IconsBase, SystemMessageContentBase, UsernameBase } from "../elements";
 import { Message_author, Message_mentions } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface RecipientAddProps {
   createdAt: number;

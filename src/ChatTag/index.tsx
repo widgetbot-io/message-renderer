@@ -1,11 +1,11 @@
-import Tooltip from "rc-tooltip";
-import { Tag, VerifiedBot } from "./elements";
+import Tooltip from "@root/Tooltip";
 import { Message_author } from "@types";
 import React from "react";
+import * as Styles from "./style";
 
 const verified = (
   <Tooltip placement="top" overlay="Verified Bot">
-    <VerifiedBot
+    <Styles.VerifiedBot
       aria-label="Verified Bot"
       aria-hidden="false"
       width="16"
@@ -16,7 +16,7 @@ const verified = (
         d="M7.4,11.17,4,8.62,5,7.26l2,1.53L10.64,4l1.36,1Z"
         fill="currentColor"
       />
-    </VerifiedBot>
+    </Styles.VerifiedBot>
   </Tooltip>
 );
 
@@ -31,14 +31,16 @@ const ChatTag = ({ author, crosspost, referenceGuild }: TagProps) => {
   if (!author.bot) return null;
 
   if (author.system || referenceGuild === "667560445975986187")
-    return <Tag className="verified system">{verified} system</Tag>;
+    return (
+      <Styles.Tag className="verified system">{verified} system</Styles.Tag>
+    );
 
-  if (crosspost) return <Tag className="server">server</Tag>;
+  if (crosspost) return <Styles.Tag className="server">server</Styles.Tag>;
 
   if (author.flags & (1 << 16))
-    return <Tag className="verified bot">{verified} bot</Tag>;
+    return <Styles.Tag className="verified bot">{verified} bot</Styles.Tag>;
 
-  return <Tag className="bot">bot</Tag>;
+  return <Styles.Tag className="bot">bot</Styles.Tag>;
 };
 
 export default ChatTag;

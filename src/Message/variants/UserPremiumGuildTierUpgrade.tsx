@@ -1,13 +1,10 @@
 import { Message_author } from "@types";
-import {
-  IconsBase,
-  SystemMessageBase,
-  SystemMessageContentBase,
-} from "@root/Message/elements";
+import { IconsBase, SystemMessageContentBase } from "@root/Message/elements";
 import { MessageType } from "@root/types/globalTypes";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import React, { useMemo } from "react";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface UserPremiumGuildTier2Props {
   createdAt: number;

@@ -1,4 +1,4 @@
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import StickerIcon from "@images/discordAssets/sticker-icon.svg";
 import {
   LottieStickerWrapper,

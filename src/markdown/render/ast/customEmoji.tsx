@@ -1,5 +1,5 @@
 import Emoji from "@root/Emoji";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import SimpleMarkdown from "simple-markdown";
 import React from "react";
 

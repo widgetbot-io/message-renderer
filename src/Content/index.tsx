@@ -9,7 +9,7 @@ import {
   MessageAccessoriesBase,
   TypingIndicator,
 } from "@root/Message/elements";
-import Tooltip from "rc-tooltip";
+import Tooltip from "@root/Tooltip";
 import Moment from "moment/moment";
 import Reactions from "@root/Message/Reactions";
 import Attachment from "@root/Content/Attachment";
@@ -39,7 +39,7 @@ const Edited = memo((props: EditedProps) => {
       placement="top"
       mouseEnterDelay={1}
     >
-      <EditedBase>edited</EditedBase>
+      <EditedBase>(edited)</EditedBase>
     </Tooltip>
   );
 });

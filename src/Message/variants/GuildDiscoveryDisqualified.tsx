@@ -1,10 +1,7 @@
-import {
-  IconsBase,
-  SystemMessageBase,
-  SystemMessageContentBase,
-} from "../elements";
+import { IconsBase, SystemMessageContentBase } from "../elements";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
+import { SystemMessageBase } from "@root/Message/style/message";
 
 interface GuildDiscoveryDisqualifiedProps {
   createdAt: number;

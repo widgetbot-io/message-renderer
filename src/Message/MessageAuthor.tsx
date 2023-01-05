@@ -1,11 +1,12 @@
 import * as React from "react";
 import { PureComponent } from "react";
-import { AuthorBase, AvatarBase, UsernameBase } from "@root/Message/elements";
+import { AvatarBase } from "@root/Message/elements";
 import { memoize } from "lodash";
 import ChatTag from "@root/ChatTag";
 import RoleIcon from "@root/Message/RoleIcon";
 import getAvatar from "@utils/getAvatar";
 import { Message_author, GuildInfo_guild_roles } from "@types";
+import * as Styles from "@root/Message/style/author";
 
 interface MessageAuthorProps {
   author: Message_author;
@@ -70,20 +71,24 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
 
     if (this.props.onlyShowUsername)
       return (
-        <AuthorBase>
-          <UsernameBase color={color}>{this.props.author.name}</UsernameBase>
-        </AuthorBase>
+        <Styles.Base>
+          <Styles.Username color={color}>
+            {this.props.author.name}
+          </Styles.Username>
+        </Styles.Base>
       );
 
     return (
-      <AuthorBase>
+      <Styles.Base>
         <AvatarBase
           src={getAvatar(this.props.author, {
             animated: this.props.avatarAnimated ?? false,
           })}
           draggable={false}
         />
-        <UsernameBase color={color}>{this.props.author.name}</UsernameBase>
+        <Styles.Username color={color}>
+          {this.props.author.name}
+        </Styles.Username>
         {dominantRoleIconRole !== null && (
           <RoleIcon role={dominantRoleIconRole} />
         )}
@@ -92,7 +97,7 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
           crosspost={this.props.crosspost}
           referenceGuild={this.props.referenceGuild}
         />
-      </AuthorBase>
+      </Styles.Base>
     );
   }
 }
