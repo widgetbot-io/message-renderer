@@ -1,8 +1,9 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Color from "color";
-import { Message, MessageRendererProvider } from "../../dist/esm/index.js";
+// import { Message, MessageRendererProvider } from "../../dist/esm/index.js";
 import { ThemeProvider } from "emotion-theming";
+import { Message, MessageRendererProvider } from "../index";
 
 const theme = {
   __typename: "ThemeSettings",
@@ -32,7 +33,11 @@ function Wrapper(Story) {
   return (
     <ThemeProvider theme={themeContext}>
       <MessageRendererProvider>
-        {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
+        {({ themeClass }) => (
+          <div className={themeClass} style={{ padding: 20 }}>
+            {Story()}
+          </div>
+        )}
       </MessageRendererProvider>
     </ThemeProvider>
   );
@@ -57,20 +62,21 @@ Basic.args = {
   isFirstMessage: true,
   showButtons: true,
   overrides: {
-    userMentioned: true,
+    userMentioned: false,
   },
   message: {
-    id: "1042882684902453278",
+    id: "1040037702583730266",
     channelId: "998637045327081502",
     content:
-      '🔓 **__Upcoming Change for Command Permissions__** 🔐 \n\nBased on feedback, we\'re making some updates to permissions for application commands to simplify permission management and to make command permissions more closely resemble other permissions systems in Discord. Server admins can begin to opt-in to the command permission changes outlined in the change log on a per-server basis **starting on December 16, 2022**. However, changes will not be applied to all servers **until late January or early February**.\n\n> **📰 Change log: <http://discord.com/developers/docs/change-log#upcoming-application-command-permission-changes>**. This includes many more context and details about whether you\'ll be affected + how to update your app accordingly.\n\n> <:SystemMessageWarn:842172192401915971>﻿ Most apps will be unaffected by this change, but **if your app uses the `PUT /applications/<application_id>/guilds/<guild_id>/commands/<command_id>/permissions` endpoint, you may need to make updates.**\n\nThere are two main changes included:\n\n**1️⃣ The logic used to apply permission configurations to a user in a given context within Discord clients.**\nThe new command permissions configuration behavior allows command-level permissions, app-level permissions, and `default_member_permissions` to work together rather than independently.\n   - `default_member_permissions` acts as a “default” that a developer can set when creating or updating a command\n   - App-level permission configurations (typically set by admins) now act as the "base" configuration\n   - Command-level permission configurations (typically set by admins) now act as an “override” of the app-level\n\n**2️⃣ A new `APPLICATION_COMMAND_PERMISSIONS_V2` guild feature flag to indicate whether that guild is using the old permissions logic or the new (upcoming) logic.**\n\nAnd now....a flowchart to help understand and visualize *how* permissions configurations are used by Discord clients *(it\'s huge, so you might want to click "Open Original" to see all of it)*',
+      "🔞 **__Upcoming Change for Age-Restricted Commands__** 🔞\n\n**Next Wednesday, November 16**, we’re making updates to how age-restricted commands appear and are used in Discord. As some may know, commands have accepted an `nsfw` field in the API for some time, and we're ready to release the next part of that feature which will hide those commands from underage users on Discord. \n\n> ℹ️ Apps in the directory are unaffected—as a reminder, age-restricted content is not allowed in discoverable apps.\n\nIn line with Discord’s other policies on age-restricted content, here’s how commands marked `nsfw` will work. Users who are 18 or older can opt in to age-restricted commands by going to **User Settings** > **Privacy**, and enabling the age-restricted commands toggle (which will be turned off by default). \n\n- **In servers**, these commands will only be visible and usable within age-restricted (`nsfw`) channels\n- **In DMs**, these commands will be visible and usable if\n    - The user is 18 years or older\n    - They have turned on age-restricted commands within Discord settings\n- Age-restricted commands will not show as popular commands on app profiles\n\nYou can see some screenshots of how this will work in the thread attached to this message. In the future, we will also start automatically tagging commands as `nsfw` if they fall within our policy but are not properly flagged.\n\nWe really appreciate those of you who have been asking for this feature, and your commitment to helping us keep Discord safe <:pikaheartbig:639883910326779924> \n\n💡 Help Center article: https://support.discord.com/hc/en-us/articles/10123937946007\n❓ If you have questions, feel free to ask them in <#963510648917069899>",
     type: "Default",
-    flags: 2,
-    createdAt: 1668713007904,
-    editedAt: 1668737411977,
+    flags: 6,
+    createdAt: 1668034711262,
+    editedAt: null,
     isGuest: false,
     author: {
-      avatarUrl: null,
+      avatarUrl:
+        "https://cdn.discordapp.com/avatars/998882498719273090/bd8d3fcb2f0e01f163d1d36f1f61fe60.webp",
       bot: true,
       discrim: "0000",
       id: "998882498719273090",
@@ -82,22 +88,13 @@ Basic.args = {
       __typename: "User",
       color: 0,
     },
-    attachments: [
-      {
-        url: "https://via.placeholder.com/1000x591.webp",
-        height: 591,
-        width: 1000,
-        filename: "flowchart-for-new-permissions.png",
-        size: 981134,
-        __typename: "Attachment",
-      },
-    ],
+    attachments: [],
     stickers: [],
     reactions: null,
     messageReference: {
       guildId: "613425648685547541",
       channelId: "697138785317814292",
-      messageId: "1042878163170119741",
+      messageId: "1040031507026284645",
       __typename: "MessageReference",
     },
     embeds: [],

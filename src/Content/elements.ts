@@ -6,32 +6,6 @@ export const ReplyIconBase = styled("img")<Record<string, unknown>>`
   height: 20px;
 `;
 
-export const ContentContainerBase = styled("div")<Record<string, unknown>>`
-  color: ${(props) => props.theme.colors._primary.fade(0.2).string()};
-  font-weight: 400;
-
-  &[data-is-reply-content="true"] {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex: 0 1 auto;
-
-    .codeblock {
-      display: inline;
-      padding: 2px;
-      font-size: 12px;
-    }
-  }
-`;
-
-export const ReplyAccessoryText = styled("span")<Record<string, unknown>>`
-  font-style: italic;
-`;
-
-export const ContentMessageTooltipBase = styled("div")<Record<string, unknown>>`
-  max-width: 60vw;
-`;
-
 export const LottieStickerWrapper = styled("span")<Record<string, unknown>>`
   width: fit-content;
 `;

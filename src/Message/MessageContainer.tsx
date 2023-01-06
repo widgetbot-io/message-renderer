@@ -1,4 +1,3 @@
-import { MessageContainerStyle as Old } from "@root/Message/elements";
 import { ReactNode } from "react";
 import Tooltip from "@root/Tooltip";
 import React from "react";
@@ -25,13 +24,13 @@ function MessageContainer(props: MessageContainerProps) {
             placement="top"
             key={option.actionDescription}
           >
-            <Old.Button onClick={option.onClick}>
+            <MessageContainerStyle.Button onClick={option.onClick}>
               <img
                 src={option.icon}
                 alt={option.actionDescription}
                 width={20}
               />
-            </Old.Button>
+            </MessageContainerStyle.Button>
           </Tooltip>
         ))}
       </MessageContainerStyle.Buttons>

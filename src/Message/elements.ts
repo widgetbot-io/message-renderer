@@ -22,22 +22,6 @@ import { ThreadButtonHeight } from "@root/Content/elements";
 ==============================================================
  */
 
-export namespace MessageContainerStyle {
-  export const Button = styled("button")<Record<string, unknown>>`
-    border: none;
-    border-radius: 0;
-    display: flex;
-    padding: 6px;
-    opacity: 0.7;
-
-    &:hover {
-      background-color: ${(props) =>
-        props.theme.colors._primary.fade(0.9).string()};
-      opacity: 1;
-    }
-  `;
-}
-
 export const DeferredMessage = styled("div")<Record<string, unknown>>`
   font-size: 14px;
 `;
@@ -179,37 +163,6 @@ export const EditedBase = styled("span")<Record<string, unknown>>`
   white-space: nowrap;
 
   color: ${({ theme }) => theme.colors._primary.darken(0.5).string()};
-`;
-
-interface ContentBaseProps {
-  isReplyContent?: boolean;
-}
-export const ContentBase = styled("span")<
-  ContentBaseProps & Record<string, unknown>
->`
-  color: ${({ theme }) => theme.colors._primary.fade(1 - 0.827).string()};
-
-  ${({ isReplyContent }: ContentBaseProps) =>
-    isReplyContent
-      ? css`
-          font-size: 14px;
-          opacity: 0.64;
-          cursor: pointer;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          display: flex;
-          max-width: calc(100% - 72px);
-          align-items: center;
-
-          &:hover {
-            opacity: 1;
-          }
-        `
-      : css`
-          white-space: break-spaces;
-          font-size: 16px;
-        `}
 `;
 
 export namespace SlashCommandBase {
@@ -355,15 +308,6 @@ export namespace IconsBase {
 
 ==============================================================
  */
-
-export const MessageAccessoriesBase = styled("div")<Record<string, unknown>>`
-  display: grid;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  grid-auto-flow: row;
-  grid-row-gap: 4px;
-  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-`;
 
 export const ReactionsBase = styled("div")<Record<string, unknown>>`
   display: flex;

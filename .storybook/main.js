@@ -11,6 +11,9 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       "@lib": path.resolve(__dirname, "../dist"),
+      "@root": path.resolve(__dirname, "../src"),
+      "@images": path.resolve(__dirname, "../src/assets/images"),
+      "@utils": path.resolve(__dirname, "../src/utils"),
     };
     return config;
   },

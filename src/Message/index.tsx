@@ -19,7 +19,7 @@ import copyIdIcon from "@images/discordAssets/3fef4f31f944477f5f3e9643cbcaab7a.s
 export type MessageDataModified = Omit<MessageData, "referencedMessage"> &
   Partial<MessageData>;
 
-interface MessageProps {
+export interface MessageProps {
   isFirstMessage?: boolean;
   message: MessageDataModified;
   isHovered?: boolean;

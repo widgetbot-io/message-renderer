@@ -2,11 +2,8 @@ import React, { Children, memo, ReactChild, ReactNode, useMemo } from "react";
 import Markdown, { LinkMarkdown } from "@root/markdown/render";
 import { Message as MessageData, Message_referencedMessage } from "@types";
 import {
-  ContentBase,
-  DeferredMessage,
   EditedBase,
   FailedInteraction,
-  MessageAccessoriesBase,
   TypingIndicator,
 } from "@root/Message/elements";
 import Tooltip from "@root/Tooltip";
@@ -17,16 +14,12 @@ import StickerIcon from "@images/discordAssets/sticker-icon.svg";
 import Danger from "@images/discordAssets/danger.svg";
 import AttachmentIcon from "@images/discordAssets/attachment-icon.svg";
 import CommandIcon from "@images/discordAssets/command-icon.svg";
-import {
-  ContentContainerBase,
-  ContentMessageTooltipBase,
-  ReplyAccessoryText,
-  ReplyIconBase,
-} from "@root/Content/elements";
+import { ReplyIconBase } from "@root/Content/elements";
 import Sticker from "@root/Content/Sticker";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
 import Message from "../Message";
 import Embed from "@root/Content/Embed";
+import * as Styles from "./style";
 
 interface EditedProps {
   editedAt: number;
@@ -69,7 +62,7 @@ interface MessageAccessoriesProps {
 function MessageAccessories({ children, active }: MessageAccessoriesProps) {
   if (!active || !children || Children.count(children) === 0) return <></>;
 
-  return <MessageAccessoriesBase>{children}</MessageAccessoriesBase>;
+  return <Styles.MessageAccessories>{children}</Styles.MessageAccessories>;
 }
 
 interface ContentCoreProps {
@@ -84,9 +77,9 @@ function ContentCore(props: ContentCoreProps) {
   return (
     <Tooltip
       overlay={
-        <ContentMessageTooltipBase>
+        <Styles.ContentMessageTooltip>
           <Message message={props.referencedMessage} isFirstMessage={true} />
-        </ContentMessageTooltipBase>
+        </Styles.ContentMessageTooltip>
       }
       placement="top"
       trigger={["click"]}
@@ -145,7 +138,7 @@ function Content(props: ContentProps) {
       );
 
     return (
-      <DeferredMessage>
+      <Styles.DeferredContent>
         <TypingIndicator width={25.5} height={7} style={{ marginRight: 5 }}>
           <g>
             <circle
@@ -172,18 +165,18 @@ function Content(props: ContentProps) {
           </g>
         </TypingIndicator>
         {props.message.author.name} is thinking...
-      </DeferredMessage>
+      </Styles.DeferredContent>
     );
   }
 
   return (
     <>
-      <ContentBase isReplyContent={props.isReplyContent}>
+      <Styles.Base isReplyContent={props.isReplyContent}>
         <ContentCore
           referencedMessage={props.message}
           showTooltip={props.isReplyContent}
         >
-          <ContentContainerBase data-is-reply-content={props.isReplyContent}>
+          <Styles.ContentContainer isReplyContent={props.isReplyContent}>
             {props.message.content.length > 0 ? (
               <>
                 {props.message.author.isWebhook ? (
@@ -200,12 +193,14 @@ function Content(props: ContentProps) {
                 )}
               </>
             ) : (
-              <ReplyAccessoryText>{dominantAccessoryText}</ReplyAccessoryText>
+              <Styles.ReplyAccessoryText>
+                {dominantAccessoryText}
+              </Styles.ReplyAccessoryText>
             )}
-          </ContentContainerBase>
+          </Styles.ContentContainer>
         </ContentCore>
         {props.isReplyContent && <ReplyIcon message={props.message} />}
-      </ContentBase>
+      </Styles.Base>
       {!props.isReplyContent && (
         <MessageAccessories
           active={
