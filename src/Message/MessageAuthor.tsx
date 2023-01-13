@@ -1,6 +1,5 @@
 import * as React from "react";
 import { PureComponent } from "react";
-import { AvatarBase } from "@root/Message/elements";
 import { memoize } from "lodash";
 import ChatTag from "@root/ChatTag";
 import RoleIcon from "@root/Message/RoleIcon";
@@ -71,22 +70,22 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
 
     if (this.props.onlyShowUsername)
       return (
-        <Styles.Base>
-          <Styles.Username color={color}>
+        <Styles.MessageAuthor>
+          <Styles.Username css={{ color }}>
             {this.props.author.name}
           </Styles.Username>
-        </Styles.Base>
+        </Styles.MessageAuthor>
       );
 
     return (
-      <Styles.Base>
-        <AvatarBase
+      <Styles.MessageAuthor>
+        <Styles.Avatar
           src={getAvatar(this.props.author, {
             animated: this.props.avatarAnimated ?? false,
           })}
           draggable={false}
         />
-        <Styles.Username color={color}>
+        <Styles.Username css={{ color }}>
           {this.props.author.name}
         </Styles.Username>
         {dominantRoleIconRole !== null && (
@@ -97,7 +96,7 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
           crosspost={this.props.crosspost}
           referenceGuild={this.props.referenceGuild}
         />
-      </Styles.Base>
+      </Styles.MessageAuthor>
     );
   }
 }

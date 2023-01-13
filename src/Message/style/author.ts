@@ -1,8 +1,8 @@
 import { css, styled, theme } from "@root/Stitches/stitches.config";
 
-export const Base = styled(
+export const MessageAuthor = styled(
   "span",
-  "message-author-base",
+  "message-author",
   css({
     display: "inline-flex",
   })
@@ -18,5 +18,19 @@ export const Username = styled(
     display: "inline",
     verticalAlign: "baseline",
     whiteSpace: "nowrap",
+  })
+);
+
+export const Avatar = styled(
+  "img",
+  "message-author-avatar",
+  css({
+    position: "absolute",
+    left: 16,
+    marginTop: 1,
+    borderRadius: "100%",
+    width: 40,
+    height: 40,
+    zIndex: 1,
   })
 );

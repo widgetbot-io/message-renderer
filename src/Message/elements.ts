@@ -304,36 +304,6 @@ export namespace IconsBase {
 /*
 ==============================================================
 
-  Message Author
-
-==============================================================
- */
-
-interface UsernameBaseProps {
-  color: string | undefined;
-}
-export const UsernameBase = memo(styled("span")<UsernameBaseProps>`
-  color: ${(props) => props.color ?? props.theme.colors.primary};
-  font-weight: 500;
-  font-size: 16px;
-  display: inline;
-  vertical-align: baseline;
-  white-space: nowrap;
-`);
-
-export const AvatarBase = styled("img")<Record<string, unknown>>`
-  position: absolute;
-  left: 16px;
-  margin-top: 1px;
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
-  z-index: 1;
-`;
-
-/*
-==============================================================
-
   Role Icon
 
 ==============================================================

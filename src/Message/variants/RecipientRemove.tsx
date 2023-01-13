@@ -1,4 +1,5 @@
-import { IconsBase, SystemMessageContentBase, UsernameBase } from "../elements";
+import { IconsBase, SystemMessageContentBase } from "../elements";
+import * as AuthorStyles from "../style/author";
 import { Message_author, Message_mentions } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
@@ -17,7 +18,7 @@ function RecipientRemove(props: RecipientRemoveProps) {
       <IconsBase.Remove />
       <SystemMessageContentBase>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> removed{" "}
-        <UsernameBase color={undefined}>{props.target.name}</UsernameBase> from
+        <AuthorStyles.Username>{props.target.name}</AuthorStyles.Username> from
         the thread.
       </SystemMessageContentBase>
       <LargeTimestamp timestamp={props.createdAt} />
