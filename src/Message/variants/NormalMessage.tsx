@@ -141,7 +141,7 @@ type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
 interface MessageProps {
   isFirstMessage?: boolean;
   message: Message;
-  isHovered?: boolean;
+    isHovered?: boolean;
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;
   hideTimestamp?: boolean;

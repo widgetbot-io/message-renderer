@@ -2,7 +2,6 @@ import memoize from "memoizee";
 import * as R from "ramda";
 import baseRules from "@root/markdown/render/ast";
 import {
-  Code,
   Highlighter,
   Link,
   QuoteContainer,
@@ -15,6 +14,7 @@ import TextSpoiler from "@root/markdown/render/elements/TextSpoiler";
 import { Message_author, Message_mentions } from "@types";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
+import { InlineCode } from "@root/markdown/render/elements/code/style";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {
   const parser = SimpleMarkdown.parserFor(rules);
@@ -90,9 +90,9 @@ function createRules(rule: { [key: string]: any }) {
     inlineCode: {
       ...inlineCode,
       react: (node, recurseOutput, state) => (
-        <Code inline={true} className="inline" key={state.key}>
+        <InlineCode key={state.key}>
           {recurse(node, recurseOutput, state)}
-        </Code>
+        </InlineCode>
       ),
     },
     codeBlock: {

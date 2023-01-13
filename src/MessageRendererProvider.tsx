@@ -6,6 +6,7 @@ import {
   theme,
 } from "@root/Stitches/stitches.config";
 import { tooltipPrefix } from "@root/Tooltip";
+import { hljsTheme } from "@root/markdown/render/elements/code/hljs";
 
 type MessageRendererProviderProps = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;
@@ -116,14 +117,16 @@ const globalStyles = globalCss({
   },
 });
 
-const fontStyle = css({
+const extraCss = css({
   fontFamily: "Open Sans, sans-serif",
+  backgroundColor: theme.colors.background, // todo: this is only for testing!
 });
 
 function MessageRendererProvider({ children }: MessageRendererProviderProps) {
   globalStyles();
+  hljsTheme();
 
-  return <>{children({ themeClass: `${theme} ${fontStyle}` })}</>;
+  return <>{children({ themeClass: `${theme} ${extraCss}` })}</>;
 }
 
 export default MessageRendererProvider;

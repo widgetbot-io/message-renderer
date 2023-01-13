@@ -55,7 +55,7 @@ class Emoji extends React.PureComponent<Props> {
       const emote = (
         <Emote
           innerRef={this.handleErrors}
-          src={`https://twemoji.maxcdn.com/2/svg/${code + ".svg"}`}
+          src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
           alt={string}
           className={cx("emoji", className)}
           key={key}

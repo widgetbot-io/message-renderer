@@ -1,4 +1,4 @@
-import React, { Children, memo, ReactChild, ReactNode, useMemo } from "react";
+import React, { Children, memo, ReactNode, useMemo } from "react";
 import Markdown, { LinkMarkdown } from "@root/markdown/render";
 import { Message as MessageData, Message_referencedMessage } from "@types";
 import {
@@ -66,7 +66,7 @@ function MessageAccessories({ children, active }: MessageAccessoriesProps) {
 }
 
 interface ContentCoreProps {
-  children: ReactChild;
+  children: ReactNode;
   showTooltip: boolean;
   referencedMessage: Message_referencedMessage | null;
 }
@@ -171,12 +171,14 @@ function Content(props: ContentProps) {
 
   return (
     <>
-      <Styles.Base isReplyContent={props.isReplyContent}>
+      <Styles.Base stitchesProps={{ isReplyContent: props.isReplyContent }}>
         <ContentCore
           referencedMessage={props.message}
           showTooltip={props.isReplyContent}
         >
-          <Styles.ContentContainer isReplyContent={props.isReplyContent}>
+          <Styles.ContentContainer
+            stitchesProps={{ isReplyContent: props.isReplyContent }}
+          >
             {props.message.content.length > 0 ? (
               <>
                 {props.message.author.isWebhook ? (

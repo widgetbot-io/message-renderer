@@ -1,6 +1,6 @@
 import { Message_author } from "@types";
 
-type User = Pick<Message_author, "avatarUrl">;
+type User = Pick<Message_author, "avatarUrl" | "discrim">;
 
 type AvatarSize =
   | 16
@@ -36,7 +36,7 @@ type AvatarSize =
   | 4096;
 
 function gifCheck(url: string) {
-  return url.includes("/a_") ? url.replace("webp", "gif") : url;
+  return url?.includes("/a_") ? url.replace("webp", "gif") : url;
 }
 
 function getAvatarProperty(
@@ -60,7 +60,7 @@ function getAvatar(
   { animated, size }: GetAvatarOptions = {}
 ): string {
   // assign default values
-  animated ??= true;
+  animated ??= false;
   size ??= 80;
 
   const avatarUrl = getAvatarProperty(user, size);
@@ -68,7 +68,9 @@ function getAvatar(
 
   return avatarUrl
     ? potentialGif.replace("webp", "png")
-    : "https://cdn.discordapp.com/embed/avatars/0.png";
+    : `https://cdn.discordapp.com/embed/avatars/${
+        Number(user.discrim) % 5
+      }.png`;
 }
 
 export default getAvatar;
