@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CodeBlock } from "@root/markdown/render/elements/code/style";
+import * as Styles from "@root/markdown/render/elements/code/style";
 
 interface Props {
   children: string;
@@ -58,12 +58,12 @@ class Highlighter extends React.Component<Props> {
     const initialCode = this.props.children;
 
     return highlightedCode ? (
-      <CodeBlock
+      <Styles.CodeBlock
         dangerouslySetInnerHTML={{ __html: highlightedCode }}
         className="highlighted codeblock"
       />
     ) : (
-      <CodeBlock className="codeblock">{initialCode}</CodeBlock>
+      <Styles.CodeBlock className="codeblock">{initialCode}</Styles.CodeBlock>
     );
   }
 }

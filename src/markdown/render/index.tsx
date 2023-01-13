@@ -1,13 +1,8 @@
 import memoize from "memoizee";
 import * as R from "ramda";
 import baseRules from "@root/markdown/render/ast";
-import {
-  Highlighter,
-  Link,
-  QuoteContainer,
-  QuoteBar,
-  Quote,
-} from "@root/markdown/render/elements";
+import { Highlighter } from "@root/markdown/render/elements";
+import * as Styles from "./elements";
 import { astToString, flattenAst, recurse } from "@root/markdown/render/util";
 import SimpleMarkdown from "simple-markdown";
 import TextSpoiler from "@root/markdown/render/elements/TextSpoiler";
@@ -76,7 +71,7 @@ function createRules(rule: { [key: string]: any }) {
     link: {
       ...link,
       react: (node, recurseOutput, state) => (
-        <Link
+        <Styles.Link
           title={node.title || astToString(node.content)}
           href={SimpleMarkdown.sanitizeUrl(node.target)}
           target="_blank"
@@ -84,7 +79,7 @@ function createRules(rule: { [key: string]: any }) {
           key={state.key}
         >
           {recurseOutput(node.content, state)}
-        </Link>
+        </Styles.Link>
       ),
     },
     inlineCode: {
@@ -106,10 +101,10 @@ function createRules(rule: { [key: string]: any }) {
     blockQuote: {
       ...blockQuote,
       react: (node, recurseOutput, state) => (
-        <QuoteContainer key={state.key}>
-          <QuoteBar></QuoteBar>
-          <Quote>{recurse(node, recurseOutput, state)}</Quote>
-        </QuoteContainer>
+        <Styles.QuoteContainer key={state.key}>
+          <Styles.QuoteBar />
+          <Styles.Quote>{recurse(node, recurseOutput, state)}</Styles.Quote>
+        </Styles.QuoteContainer>
       ),
     },
     spoiler: {
