@@ -1,6 +1,7 @@
 import { Message_author } from "@types";
 
-type User = Pick<Message_author, "avatarUrl" | "discrim">;
+type User = Pick<Message_author, "avatarUrl"> &
+  Partial<Pick<Message_author, "discrim">>;
 
 type AvatarSize =
   | 16
@@ -69,7 +70,7 @@ function getAvatar(
   return avatarUrl
     ? potentialGif.replace("webp", "png")
     : `https://cdn.discordapp.com/embed/avatars/${
-        Number(user.discrim) % 5
+        Number(user.discrim ?? 0) % 5
       }.png`;
 }
 

@@ -30,7 +30,10 @@ export function styled<
 >(component: Comp, overrideClassName: string, cssClass: Css) {
   const componentToReturn = (
     props: React.ComponentProps<Comp> & {
-      stitchesProps?: Css extends (arg: infer P) => string ? P : {};
+      stitchesProps?: (Css extends (arg: infer P) => string ? P : {}) &
+        (React.ComponentProps<Comp> extends { stitchesProps: infer P }
+          ? P
+          : {});
     }
   ) => {
     const { stitchesProps, ...restOfProps } = props;

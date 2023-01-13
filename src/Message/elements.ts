@@ -1,5 +1,5 @@
 import styled from "../ThemeContext";
-import { Twemoji } from "@root/Emoji/emoji";
+import { Twemoji } from "@root/Emoji/style";
 import { css } from "react-emotion";
 import { memo } from "react";
 import add from "@images/discordAssets/e06a573355c490f7ce6e3125ac01db81.svg";
@@ -300,53 +300,6 @@ export namespace IconsBase {
     background-image: url("${threadNameChanged}");
   `);
 }
-
-/*
-==============================================================
-
-  Message Accessories
-
-==============================================================
- */
-
-export const ReactionsBase = styled("div")<Record<string, unknown>>`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  user-select: none;
-`;
-
-export const ReactionBase = styled("span")<Record<string, unknown>>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 4px 6px;
-  border-radius: 8px;
-  cursor: not-allowed;
-
-  background-color: ${({ theme }) =>
-    theme.colors._background.darken(0.2).string()};
-`;
-
-export const EmojiTooltipBase = styled("div")<Record<string, unknown>>`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-export const ReactionEmojiBase = styled(Twemoji)<Record<string, unknown>>`
-  width: 16px;
-  height: 16px;
-`;
-
-export const ReactionCountBase = styled("span")<Record<string, unknown>>`
-  margin-left: 6px;
-  min-width: 9px;
-  font-weight: 500;
-  font-size: 14px;
-
-  color: ${({ theme }) => theme.colors._primary.fade(0.3).string()};
-`;
 
 /*
 ==============================================================

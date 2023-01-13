@@ -3,11 +3,13 @@ import { cx } from "emotion";
 import memoize from "memoizee";
 import * as React from "react";
 import emoji from "react-easy-emoji";
-import { Base, Emote } from "./elements";
+import * as Styles from "./style";
 import Tooltip from "@root/Tooltip";
 import { defaultEmojis } from "@root/emoji";
 
-interface Props {
+// todo: refactor
+
+export interface EmojiProps {
   [key: string]: any;
   children?: any;
   text?: string;
@@ -18,7 +20,7 @@ interface Props {
   disableTooltip?: boolean;
 }
 
-class Emoji extends React.PureComponent<Props> {
+class Emoji extends React.PureComponent<EmojiProps> {
   static withComponent =
     (Component) =>
     ({ children, ...props }) =>
@@ -33,14 +35,15 @@ class Emoji extends React.PureComponent<Props> {
     let { className, resolveNames, src, disableTooltip } = this.props;
 
     // Return a custom emoji
-    if (src) return <Emote src={src} className={cx("emoji", className)} />;
+    if (src)
+      return <Styles.Emoji src={src} className={cx("emoji", className)} />;
 
     // Validate props
     if (typeof text !== "string") {
       if (typeof text === "undefined" || text === null) return null;
 
       return React.cloneElement(text, {
-        className: cx("emoji", Base, className),
+        className: cx("emoji", Styles.emojiCss(), className),
       });
     }
 
@@ -53,8 +56,8 @@ class Emoji extends React.PureComponent<Props> {
       );
 
       const emote = (
-        <Emote
-          innerRef={this.handleErrors}
+        <Styles.Emoji
+          // ref={this.handleErrors} // todo: fix fallback, prob for refactor tbh
           src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
           alt={string}
           className={cx("emoji", className)}

@@ -1,9 +1,4 @@
-import {
-  EmojiTooltipBase,
-  ReactionBase,
-  ReactionCountBase,
-  ReactionEmojiBase,
-} from "@root/Message/elements";
+import * as Styles from "./style";
 import React, { useCallback, useMemo } from "react";
 import Tooltip from "@root/Tooltip";
 import { Message_reactions } from "@types";
@@ -29,13 +24,16 @@ function Reaction(props: ReactionProps) {
     }?v=1&size=64&quality=lossless`;
 
     return (
-      <EmojiTooltipBase>
+      <Styles.ReactionTooltip>
         {props.reaction.emojiId !== null ? (
-          <ReactionEmojiBase className="enlarged" src={url} />
+          <Styles.ReactionEmoji stitchesProps={{ enlarged: true }} src={url} />
         ) : (
-          <ReactionEmojiBase className="enlarged" disableTooltip={true}>
+          <Styles.ReactionEmoji
+            stitchesProps={{ enlarged: true }}
+            disableTooltip={true}
+          >
             {props.reaction.emojiName}
-          </ReactionEmojiBase>
+          </Styles.ReactionEmoji>
         )}
         :
         {props.reaction.emojiId !== null
@@ -43,7 +41,7 @@ function Reaction(props: ReactionProps) {
           : // todo: make work
             /* generalStore.emojis.get(props.reaction.emojiName)?.keywords[0] ?? */ "unknown emoji"}
         :
-      </EmojiTooltipBase>
+      </Styles.ReactionTooltip>
     );
   }, [
     props.reaction.animated,
@@ -53,16 +51,16 @@ function Reaction(props: ReactionProps) {
 
   return (
     <Tooltip overlay={<Emoji />} placement="top" mouseEnterDelay={0.5}>
-      <ReactionBase>
+      <Styles.Reaction>
         {emojiUrl ? (
-          <ReactionEmojiBase src={emojiUrl} />
+          <Styles.ReactionEmoji src={emojiUrl} />
         ) : (
-          <ReactionEmojiBase disableTooltip={true}>
+          <Styles.ReactionEmoji disableTooltip={true}>
             {props.reaction.emojiName}
-          </ReactionEmojiBase>
+          </Styles.ReactionEmoji>
         )}
-        <ReactionCountBase>{props.reaction.count}</ReactionCountBase>
-      </ReactionBase>
+        <Styles.ReactionCount>{props.reaction.count}</Styles.ReactionCount>
+      </Styles.Reaction>
     </Tooltip>
   );
 }
