@@ -22,6 +22,7 @@ function UserPremiumGuildSubscription(
         boosted the server
         {props.content !== "" && (
           <>
+            {" "}
             <strong>{props.content}</strong> times
           </>
         )}

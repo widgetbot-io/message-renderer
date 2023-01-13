@@ -12,6 +12,13 @@ import MessageContainer, {
 //   MessageButtonListOption,
 // } from "@root/Message/MessageContainer";
 import copyIdIcon from "@images/discordAssets/3fef4f31f944477f5f3e9643cbcaab7a.svg";
+import RecipientRemove from "@root/Message/variants/RecipientRemove";
+import RecipientAdd from "@root/Message/variants/RecipientAdd";
+import UserPremiumGuildTierUpgrade from "@root/Message/variants/UserPremiumGuildTierUpgrade";
+import UserPremiumGuildSubscription from "@root/Message/variants/UserPremiumGuildSubscription";
+import GuildDiscoveryGracePeriodInitialWarning from "@root/Message/variants/GuildDiscoveryGracePeriodInitialWarning";
+import GuildDiscoveryGracePeriodFinalWarning from "@root/Message/variants/GuildDiscoveryGracePeriodFinalWarning";
+import GuildDiscoveryDisqualified from "@root/Message/variants/GuildDiscoveryDisqualified";
 // import linkIcon from "@images/discordAssets/a4c2ef2964ee9977baf61a2f6017b93d.svg";
 // import speakIcon from "@images/discordAssets/speak.svg";
 // import deleteIcon from "@images/discordAssets/delete.svg";
@@ -46,41 +53,41 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
       );
     case MessageType.GuildDiscoveryRequalified:
       return <GuildDiscoveryRequalified createdAt={props.message.createdAt} />;
-    // case MessageType.UserPremiumGuildTier1:
-    // case MessageType.UserPremiumGuildTier2:
-    // case MessageType.UserPremiumGuildTier3:
-    //   return (
-    //     <UserPremiumGuildTierUpgrade
-    //       content={props.message.content}
-    //       createdAt={props.message.createdAt}
-    //       author={props.message.author}
-    //       type={props.message.type}
-    //     />
-    //   );
-    // case MessageType.UserPremiumGuildSubscription:
-    //   return (
-    //     <UserPremiumGuildSubscription
-    //       createdAt={props.message.createdAt}
-    //       author={props.message.author}
-    //       content={props.message.content}
-    //     />
-    //   );
-    // case MessageType.RecipientAdd:
-    //   return (
-    //     <RecipientAdd
-    //       createdAt={props.message.createdAt}
-    //       author={props.message.author}
-    //       target={props.message.mentions[0]}
-    //     />
-    //   );
-    // case MessageType.RecipientRemove:
-    //   return (
-    //     <RecipientRemove
-    //       createdAt={props.message.createdAt}
-    //       author={props.message.author}
-    //       target={props.message.mentions[0]}
-    //     />
-    //   );
+    case MessageType.UserPremiumGuildTier1:
+    case MessageType.UserPremiumGuildTier2:
+    case MessageType.UserPremiumGuildTier3:
+      return (
+        <UserPremiumGuildTierUpgrade
+          content={props.message.content}
+          createdAt={props.message.createdAt}
+          author={props.message.author}
+          type={props.message.type}
+        />
+      );
+    case MessageType.UserPremiumGuildSubscription:
+      return (
+        <UserPremiumGuildSubscription
+          createdAt={props.message.createdAt}
+          author={props.message.author}
+          content={props.message.content}
+        />
+      );
+    case MessageType.RecipientAdd:
+      return (
+        <RecipientAdd
+          createdAt={props.message.createdAt}
+          author={props.message.author}
+          target={props.message.mentions[0]}
+        />
+      );
+    case MessageType.RecipientRemove:
+      return (
+        <RecipientRemove
+          createdAt={props.message.createdAt}
+          author={props.message.author}
+          target={props.message.mentions[0]}
+        />
+      );
     // case MessageType.ChannelNameChange:
     //   return (
     //     <ChannelNameChange
@@ -112,20 +119,20 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     //       content={props.message.content}
     //     />
     //   );
-    // case MessageType.GuildDiscoveryGracePeriodInitialWarning:
-    //   return (
-    //     <GuildDiscoveryGracePeriodInitialWarning
-    //       createdAt={props.message.createdAt}
-    //     />
-    //   );
-    // case MessageType.GuildDiscoveryGracePeriodFinalWarning:
-    //   return (
-    //     <GuildDiscoveryGracePeriodFinalWarning
-    //       createdAt={props.message.createdAt}
-    //     />
-    //   );
-    // case MessageType.GuildDiscoveryDisqualified:
-    //   return <GuildDiscoveryDisqualified createdAt={props.message.createdAt} />;
+    case MessageType.GuildDiscoveryGracePeriodInitialWarning:
+      return (
+        <GuildDiscoveryGracePeriodInitialWarning
+          createdAt={props.message.createdAt}
+        />
+      );
+    case MessageType.GuildDiscoveryGracePeriodFinalWarning:
+      return (
+        <GuildDiscoveryGracePeriodFinalWarning
+          createdAt={props.message.createdAt}
+        />
+      );
+    case MessageType.GuildDiscoveryDisqualified:
+      return <GuildDiscoveryDisqualified createdAt={props.message.createdAt} />;
     // case MessageType.ContextMenuCommand:
     //   return <NormalMessage {...props} isContextMenuInteraction={true} />;
     // case MessageType.ThreadStarterMessage:

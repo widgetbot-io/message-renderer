@@ -1,5 +1,5 @@
 import React, { CSSProperties, useState } from "react";
-import { MessageGroupBase } from "@root/elements";
+import * as Styles from "./style";
 import Message from "@root/Message";
 import { Message as MessageData } from "@types";
 
@@ -15,8 +15,11 @@ function MessageGroup(props: MessageProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <MessageGroupBase
-      style={props.style}
+    <Styles.MessageGroup
+      style={{
+        ...props.style,
+        marginTop: 0, // todo: temporary
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -35,7 +38,7 @@ function MessageGroup(props: MessageProps) {
           thread={props.thread}
         />
       ))}
-    </MessageGroupBase>
+    </Styles.MessageGroup>
   );
 }
 
