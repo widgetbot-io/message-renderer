@@ -5,7 +5,7 @@ import * as React from "react";
 import emoji from "react-easy-emoji";
 import * as Styles from "./style";
 import Tooltip from "@root/Tooltip";
-import { defaultEmojis } from "@root/emoji";
+import { findDefaultEmojiByUnicode } from "@root/emoji";
 
 // todo: refactor
 
@@ -51,9 +51,7 @@ class Emoji extends React.PureComponent<EmojiProps> {
     if (resolveNames) text = this.resolve(text);
 
     return emoji(text, (code, string, key) => {
-      let emoji = defaultEmojis.find(
-        ({ emoji, keywords }) => emoji === string || keywords?.includes(string)
-      );
+      let emoji = findDefaultEmojiByUnicode(string);
 
       const emote = (
         <Styles.Emoji
@@ -88,9 +86,7 @@ class Emoji extends React.PureComponent<EmojiProps> {
 
   resolve = memoize((text: string) => {
     return text.replace(/:([^\s:]+?):/g, (match, name) => {
-      const result = defaultEmojis.find(
-        ({ emoji, keywords }) => emoji === name || keywords?.includes(name)
-      );
+      const result = findDefaultEmojiByUnicode(name);
       return result ? result.emoji : match;
     });
   });

@@ -2,6 +2,7 @@ import * as Styles from "./style";
 import React, { useCallback, useMemo } from "react";
 import Tooltip from "@root/Tooltip";
 import { Message_reactions } from "@types";
+import { findDefaultEmojiByUnicode } from "@root/emoji";
 
 interface ReactionProps {
   reaction: Message_reactions;
@@ -38,8 +39,8 @@ function Reaction(props: ReactionProps) {
         :
         {props.reaction.emojiId !== null
           ? props.reaction.emojiName
-          : // todo: make work
-            /* generalStore.emojis.get(props.reaction.emojiName)?.keywords[0] ?? */ "unknown emoji"}
+          : findDefaultEmojiByUnicode(props.reaction.emojiName)
+              ?.keywords?.[0] ?? "unknown emoji"}
         :
       </Styles.ReactionTooltip>
     );
