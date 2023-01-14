@@ -3,6 +3,8 @@ import text from "@root/markdown/render/ast/text";
 import { defaultRules, inlineRegex } from "simple-markdown";
 
 import { customEmoji } from "./customEmoji";
+import Emoji from "@root/Emoji";
+import React from "react";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -47,6 +49,21 @@ const baseRules = {
   },
   customEmoji,
   text,
+  emojiUnicode: {
+    order: defaultRules.text.order,
+    match: (source) =>
+      /^(\s*)(:([^\s:]+?):|\p{Extended_Pictographic})/gu.exec(source),
+    parse: (match) => ({
+      spacing: match[1],
+      content: match[2],
+    }),
+    react: ({ spacing, content }) => (
+      <>
+        {spacing}
+        <Emoji emojiName={content} />
+      </>
+    ),
+  },
 
   mention,
   channel,

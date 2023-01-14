@@ -44,7 +44,7 @@ export function styled<
     return (
       <OverridableStyledComponent
         {...(restOfProps as React.ComponentProps<Comp>)}
-        Component={component}
+        component={component}
         className={actualClassName}
         overrideClassName={overrideClassName}
       />

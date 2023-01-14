@@ -4,13 +4,13 @@ type Props<C extends keyof JSX.IntrinsicElements | React.ComponentType<any>> =
   React.ComponentProps<C> & {
     overrideClassName?: string;
     className?: string;
-    Component: C;
+    component: C;
   };
 
 function OverridableStyledComponent<
   C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>
->({ Component, overrideClassName, className, ...props }: Props<C>) {
-  className ??= overrideClassName;
+>({ component: Component, overrideClassName, className, ...props }: Props<C>) {
+  className ??= "";
 
   return (
     <Component {...props} className={`${className} ${overrideClassName}`} />

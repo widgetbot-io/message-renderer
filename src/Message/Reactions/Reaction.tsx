@@ -27,14 +27,20 @@ function Reaction(props: ReactionProps) {
     return (
       <Styles.ReactionTooltip>
         {props.reaction.emojiId !== null ? (
-          <Styles.ReactionEmoji stitchesProps={{ enlarged: true }} src={url} />
+          <Styles.ReactionEmoji
+            emojiName={props.reaction.emojiName}
+            stitchesProps={{ enlarged: true }}
+            src={url}
+            disableTooltip
+            enlarged
+          />
         ) : (
           <Styles.ReactionEmoji
+            emojiName={props.reaction.emojiName}
             stitchesProps={{ enlarged: true }}
-            disableTooltip={true}
-          >
-            {props.reaction.emojiName}
-          </Styles.ReactionEmoji>
+            disableTooltip
+            enlarged
+          />
         )}
         :
         {props.reaction.emojiId !== null
@@ -54,11 +60,16 @@ function Reaction(props: ReactionProps) {
     <Tooltip overlay={<Emoji />} placement="top" mouseEnterDelay={0.5}>
       <Styles.Reaction>
         {emojiUrl ? (
-          <Styles.ReactionEmoji src={emojiUrl} />
+          <Styles.ReactionEmoji
+            src={emojiUrl}
+            emojiName={props.reaction.emojiName}
+            disableTooltip
+          />
         ) : (
-          <Styles.ReactionEmoji disableTooltip={true}>
-            {props.reaction.emojiName}
-          </Styles.ReactionEmoji>
+          <Styles.ReactionEmoji
+            emojiName={props.reaction.emojiName}
+            disableTooltip
+          />
         )}
         <Styles.ReactionCount>{props.reaction.count}</Styles.ReactionCount>
       </Styles.Reaction>

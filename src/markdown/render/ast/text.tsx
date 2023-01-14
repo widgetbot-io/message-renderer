@@ -1,4 +1,3 @@
-import Emoji from "@root/Emoji";
 import SimpleMarkdown from "simple-markdown";
 import React from "react";
 
@@ -11,14 +10,6 @@ const text = {
           ...state,
           nested: true,
         }),
-
-  react: (node, recurseOutput, state) => {
-    return (
-      <Emoji key={state.key} resolveNames>
-        {node.content}
-      </Emoji>
-    );
-  },
 };
 
 export default text;

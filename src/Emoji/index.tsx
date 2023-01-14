@@ -1,145 +1,83 @@
-import autobind from "autobind-decorator";
-import { cx } from "emotion";
-import memoize from "memoizee";
-import * as React from "react";
-import emoji from "react-easy-emoji";
 import * as Styles from "./style";
-import Tooltip from "@root/Tooltip";
+import React, { ReactNode, useMemo } from "react";
 import { findDefaultEmojiByUnicode } from "@root/emoji";
+import emoji from "react-easy-emoji";
+import Tooltip from "@root/Tooltip";
 
-// todo: refactor
+type EmojiTooltipProps = {
+  key?: number;
+  tooltipContent: string;
+  children: ReactNode;
+  disabled: boolean;
+};
 
-export interface EmojiProps {
-  [key: string]: any;
-  children?: any;
-  text?: string;
-  className?: string;
-  resolveNames?: boolean;
-  onlyEmojiClassName?: string;
-  src?: string;
-  disableTooltip?: boolean;
+function EmojiTooltip({
+  children,
+  disabled,
+  key,
+  tooltipContent,
+}: EmojiTooltipProps) {
+  if (disabled) return <>{children}</>;
+
+  return (
+    <Tooltip
+      key={key}
+      placement="top"
+      overlay={`:${tooltipContent}:`}
+      mouseEnterDelay={0.6}
+      mouseLeaveDelay={0}
+    >
+      {children}
+    </Tooltip>
+  );
 }
 
-class Emoji extends React.PureComponent<EmojiProps> {
-  static withComponent =
-    (Component) =>
-    ({ children, ...props }) =>
-      (
-        <Component {...props}>
-          <Emoji>{children}</Emoji>
-        </Component>
-      );
+export type EmojiProps = {
+  resolveNames?: boolean;
+  disableTooltip?: boolean;
+  emojiName: string;
+  enlarged?: boolean;
+} & React.ComponentPropsWithRef<"img">;
 
-  render() {
-    let text = this.getText();
-    let { className, resolveNames, src, disableTooltip } = this.props;
+function Emoji({
+  src,
+  disableTooltip,
+  resolveNames = false,
+  emojiName,
+  enlarged,
+  ...props
+}: EmojiProps) {
+  const defaultEmoji = useMemo(
+    () => findDefaultEmojiByUnicode(emojiName),
+    [emojiName]
+  );
 
-    // Return a custom emoji
-    if (src)
-      return <Styles.Emoji src={src} className={cx("emoji", className)} />;
-
-    // Validate props
-    if (typeof text !== "string") {
-      if (typeof text === "undefined" || text === null) return null;
-
-      return React.cloneElement(text, {
-        className: cx("emoji", Styles.emojiCss(), className),
-      });
-    }
-
-    // Resolve all text representations of emojis
-    if (resolveNames) text = this.resolve(text);
-
-    return emoji(text, (code, string, key) => {
-      let emoji = findDefaultEmojiByUnicode(string);
-
-      const emote = (
+  if (src !== undefined)
+    return (
+      <EmojiTooltip tooltipContent={emojiName} disabled={disableTooltip}>
         <Styles.Emoji
-          // ref={this.handleErrors} // todo: fix fallback, prob for refactor tbh
-          src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
-          alt={string}
-          className={cx("emoji", className)}
-          key={key}
+          {...props}
+          stitchesProps={{ enlarged }}
+          src={src}
+          alt={emojiName}
         />
-      );
+      </EmojiTooltip>
+    );
 
-      return emoji && !disableTooltip ? (
-        <Tooltip
-          key={key}
-          placement="top"
-          overlay={`:${emoji.keywords[0]}:`}
-          mouseEnterDelay={0.6}
-          mouseLeaveDelay={0}
-        >
-          <span>{emote}</span>
-        </Tooltip>
-      ) : (
-        emote
-      );
-    }); // this.jumbofy(resolved)
-  }
-
-  getText() {
-    let { children, text } = this.props;
-    return children && !text ? children : text;
-  }
-
-  resolve = memoize((text: string) => {
-    return text.replace(/:([^\s:]+?):/g, (match, name) => {
-      const result = findDefaultEmojiByUnicode(name);
-      return result ? result.emoji : match;
-    });
-  });
-
-  /**
-   * Resolves emojis as text embedded inside SVG if the CDN fails to load
-   */
-  @autobind
-  handleErrors(img: HTMLImageElement) {
-    if (!img) return;
-
-    img.onerror = () => {
-      const alt = img.getAttribute("alt");
-      if (alt === null) return;
-
-      const escape = document.createElement("span");
-      escape.innerText = alt;
-
-      img.setAttribute(
-        "src",
-        `data:image/svg+xml;charset=UTF-8, ${encodeURIComponent(
-          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100" preserveAspectRatio="xMidYMid meet"><text font-size="80" dy=".35em" dx="-0.7em">${escape.innerHTML}</text></svg>`
-        )}`
-      );
-    };
-  }
-
-  // jumbofy(fragment: any[]) {
-  //   const { onlyEmojiClassName } = this.props
-
-  //   if (onlyEmojiClassName) {
-  //     // Iterate through all fragment elements
-  //     // until a either the fragment is not an object
-  //     // and it's string contains characters other than
-  //     // a space (or line break)
-  //     const onlyEmoji = !fragment.find(
-  //       fragment => !(fragment instanceof Object || !/\S/.test(fragment))
-  //     )
-
-  //     if (onlyEmoji) {
-  //       return fragment.map(
-  //         piece =>
-  //           piece instanceof Object
-  //             ? React.cloneElement(piece, {
-  //                 className: cx(onlyEmojiClassName, piece.props.className)
-  //               })
-  //             : piece
-  //       )
-  //     }
-  //   }
-
-  //   return fragment
-  // }
+  return emoji(defaultEmoji.emoji, (code, string, key) => (
+    <EmojiTooltip
+      tooltipContent={defaultEmoji.keywords[0]}
+      disabled={disableTooltip}
+      key={key}
+    >
+      <Styles.Emoji
+        {...props}
+        stitchesProps={{ enlarged }}
+        src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
+        alt={string}
+      />
+    </EmojiTooltip>
+  ));
 }
 
 export default Emoji;
