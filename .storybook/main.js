@@ -17,6 +17,7 @@ module.exports = {
     };
     return config;
   },
+  staticDirs: ["../src/stories/assets"],
   core: {
     builder: "webpack5",
   },

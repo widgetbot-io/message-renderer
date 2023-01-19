@@ -12,7 +12,7 @@ export const Username = styled(
   "span",
   "message-author-username",
   css("span", {
-    color: theme.colors.primary100,
+    color: theme.colors.primaryOpacity100,
     fontWeight: 500,
     fontSize: 16,
     display: "inline",

@@ -2,9 +2,9 @@ import { css, styled, theme } from "@root/Stitches/stitches.config";
 
 export const Base = styled(
   "span",
-  "content-base",
+  "message-content",
   css({
-    color: theme.colors.primary20,
+    color: theme.colors.primaryOpacity20,
     whiteSpace: "break-spaces",
     fontSize: 16,
     variants: {
@@ -41,7 +41,7 @@ export const ContentContainer = styled(
   "div",
   "content-container",
   css({
-    color: theme.colors.primary80,
+    color: theme.colors.primaryOpacity80,
     fontWeight: 400,
     lineHeight: "1.375rem",
 
@@ -92,5 +92,16 @@ export const DeferredContent = styled(
   "deferred-content",
   css({
     fontSize: 14,
+  })
+);
+
+export const Edited = styled(
+  "span",
+  "edited",
+  css({
+    fontSize: 10,
+    marginLeft: 4,
+    whiteSpace: "nowrap",
+    color: theme.colors.textMuted,
   })
 );

@@ -141,7 +141,7 @@ type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
 interface MessageProps {
   isFirstMessage?: boolean;
   message: Message;
-    isHovered?: boolean;
+  isHovered?: boolean;
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;
   hideTimestamp?: boolean;
@@ -209,9 +209,9 @@ function NormalMessage(props: MessageProps) {
         overlay={Moment(props.message.createdAt).format("LLLL")}
         mouseEnterDelay={1}
       >
-        <Styles.SmallTimestampBase dateTime={props.message.createdAt}>
+        <Styles.SmallTimestamp dateTime={props.message.createdAt}>
           {Moment(props.message.createdAt).format("h:mm A")}
-        </Styles.SmallTimestampBase>
+        </Styles.SmallTimestamp>
       </Tooltip>
       <Content message={props.message} noThreadButton={props.noThreadButton} />
     </Styles.MessageBase>

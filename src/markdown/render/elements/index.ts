@@ -25,7 +25,7 @@ export const QuoteBar = styled(
     margin: "8px 0",
     width: 4,
     borderRadius: 4,
-    backgroundColor: theme.colors.primary10,
+    backgroundColor: theme.colors.primaryOpacity10,
   })
 );
 

@@ -5,11 +5,13 @@ import OverridableStyledComponent from "@root/Stitches/OverridableStyledComponen
 const stitches = createStitches({
   theme: {
     colors: {
-      primary10: "rgba(255, 255, 255, 0.1)",
-      primary20: "rgba(255, 255, 255, 0.2)",
-      primary50: "rgba(255, 255, 255, 0.5)",
-      primary80: "rgba(255, 255, 255, 0.8)",
-      primary100: "rgba(255, 255, 255, 1.0)",
+      primaryOpacity10: "rgba(255, 255, 255, 0.1)",
+      primaryOpacity20: "rgba(255, 255, 255, 0.2)",
+      primaryOpacity50: "rgba(255, 255, 255, 0.5)",
+      primaryOpacity80: "rgba(255, 255, 255, 0.8)",
+      primaryOpacity100: "rgba(255, 255, 255, 1.0)",
+      textMuted: "rgb(163, 166, 170)",
+      interactiveNormal: "rgb(185, 187, 190)",
       accent: "#5865f2",
       background: "#36393f",
       backgroundSecondary: "#2f3136",
@@ -24,18 +26,25 @@ const stitches = createStitches({
   },
 });
 
+type Element = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
+
 export function styled<
-  Comp extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
-  Css extends string | ((args: Record<string, unknown>) => string)
+  Comp extends Element,
+  Css extends
+    | string
+    | ((args: { as?: Element } & Record<string, unknown>) => string)
 >(component: Comp, overrideClassName: string, cssClass: Css) {
-  const componentToReturn = (
-    props: React.ComponentProps<Comp> & {
-      stitchesProps?: (Css extends (arg: infer P) => string ? P : {}) &
+  function componentToReturn<TStitchesProps extends { as?: Element }>(
+    props: React.ComponentProps<
+      TStitchesProps extends { as: Element } ? TStitchesProps["as"] : Comp
+    > & {
+      stitchesProps?: TStitchesProps &
+        (Css extends (arg: infer P) => string ? P : {}) &
         (React.ComponentProps<Comp> extends { stitchesProps: infer P }
           ? P
           : {});
     }
-  ) => {
+  ) {
     const { stitchesProps, ...restOfProps } = props;
 
     const actualClassName =
@@ -49,7 +58,7 @@ export function styled<
         overrideClassName={overrideClassName}
       />
     );
-  };
+  }
 
   componentToReturn.toString = () => `.${overrideClassName}`;
 

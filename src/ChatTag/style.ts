@@ -37,6 +37,6 @@ export const Tag = styled(
     display: "flex",
     alignItems: "center",
     backgroundColor: theme.colors.accent,
-    color: theme.colors.primary100,
+    color: theme.colors.primaryOpacity100,
   })
 );

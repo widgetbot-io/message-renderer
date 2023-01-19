@@ -3,12 +3,13 @@ import GifVEmbed from "@root/Content/Embed/GifVEmbed";
 import ImageEmbed from "@root/Content/Embed/ImageEmbed";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
 import { EmbedStyle } from "@root/Content/Embed/elements";
+import * as Styles from "./style";
 import numberToRgb from "@utils/numberToRgb";
 import moment from "moment";
 import { LinkMarkdown, parseEmbedTitle } from "@root/markdown/render";
 import useSize from "@root/Content/Embed/useSize";
 import EmbedVideo from "@root/Content/Embed/EmbedVideo";
-import React from "react";
+import React, { useMemo } from "react";
 
 export interface EmbedProps {
   embed: Message_embeds;
@@ -40,25 +41,31 @@ function Embed({ embed, images }: EmbedProps) {
     isLarge: isThumbnailLarge,
   } = useSize(embed.type, embed.thumbnail, undefined);
 
+  const isEmbedThin = useMemo(
+    () =>
+      widthImage !== null ||
+      (embed.type.toLowerCase() === "video" && embed.thumbnail !== null),
+    [widthImage, embed.type, embed.thumbnail]
+  );
+
   return (
-    <EmbedStyle.Base
-      color={embedColor}
-      thumbnailIsLarge={widthImage !== null}
-      hasVideoWithThumbnail={
-        embed.type.toLowerCase() === "video" && embed.thumbnail !== null
-      }
+    <Styles.Embed
+      style={{ borderLeftColor: embedColor }}
+      stitchesProps={{ thin: isEmbedThin }}
     >
-      <EmbedStyle.ContentAndThumbnail thumbnailIsLarge={isThumbnailLarge}>
-        <EmbedStyle.Content>
+      <Styles.ContentAndThumbnail
+        stitchesProps={{ hasLargeThumbnail: isThumbnailLarge }}
+      >
+        <Styles.Content>
           {embed.provider && (
-            <EmbedStyle.Provider>{embed.provider.name}</EmbedStyle.Provider>
+            <Styles.Provider>{embed.provider.name}</Styles.Provider>
           )}
           {embed.author && (
-            <EmbedStyle.Author>
+            <Styles.Author>
               {embed.author.proxyIconUrl && (
-                <EmbedStyle.AuthorIcon src={embed.author.proxyIconUrl} />
+                <Styles.AuthorIcon src={embed.author.proxyIconUrl} />
               )}
-              <EmbedStyle.AuthorName>
+              <Styles.AuthorName>
                 {embed.author.url ? (
                   <a href={embed.author.url} target="_blank">
                     {embed.author.name}
@@ -66,18 +73,20 @@ function Embed({ embed, images }: EmbedProps) {
                 ) : (
                   embed.author.name
                 )}
-              </EmbedStyle.AuthorName>
-            </EmbedStyle.Author>
+              </Styles.AuthorName>
+            </Styles.Author>
           )}
           {embed.title &&
             (embed.url !== null ? (
-              <EmbedStyle.TitleWithUrl href={embed.url} target="_blank">
+              <Styles.Title
+                stitchesProps={{ as: "a", link: true }}
+                href={embed.url}
+                target="_blank"
+              >
                 {parseEmbedTitle(embed.title)}
-              </EmbedStyle.TitleWithUrl>
+              </Styles.Title>
             ) : (
-              <EmbedStyle.Title>
-                {parseEmbedTitle(embed.title)}
-              </EmbedStyle.Title>
+              <Styles.Title>{parseEmbedTitle(embed.title)}</Styles.Title>
             ))}
           {embed.type.toLowerCase() === "video" ? (
             <EmbedVideo
@@ -89,57 +98,54 @@ function Embed({ embed, images }: EmbedProps) {
             />
           ) : (
             embed.description && (
-              <EmbedStyle.Description>
+              <Styles.Description>
                 <LinkMarkdown>{embed.description}</LinkMarkdown>
-              </EmbedStyle.Description>
+              </Styles.Description>
             )
           )}
           {embed.fields && embed.fields.length > 0 && (
-            <EmbedStyle.Fields>
+            <Styles.Fields>
               {embed.fields.map((field) => (
-                <EmbedStyle.Field
+                <Styles.Field
                   key={field.name + field.value}
-                  inline={field.inline}
+                  stitchesProps={{ inline: field.inline }}
                 >
-                  <EmbedStyle.FieldName>
+                  <Styles.FieldName>
                     {parseEmbedTitle(field.name)}
-                  </EmbedStyle.FieldName>
-                  <EmbedStyle.FieldValue>
+                  </Styles.FieldName>
+                  <Styles.FieldValue>
                     <LinkMarkdown>{field.value}</LinkMarkdown>
-                  </EmbedStyle.FieldValue>
-                </EmbedStyle.Field>
+                  </Styles.FieldValue>
+                </Styles.Field>
               ))}
-            </EmbedStyle.Fields>
+            </Styles.Fields>
           )}
-        </EmbedStyle.Content>
+        </Styles.Content>
         {embed.thumbnail && embed.type.toLowerCase() !== "video" && (
-          <EmbedStyle.Image
+          <Styles.Image
             src={embed.thumbnail.proxyUrl}
             // originalUrl={embed.thumbnail.url}
             width={widthThumbnail}
             height={heightThumbnail}
           />
         )}
-      </EmbedStyle.ContentAndThumbnail>
+      </Styles.ContentAndThumbnail>
       {(images === undefined || images?.length === 0) && embed.image && (
-        <EmbedStyle.Image
+        <Styles.Image
           src={embed.image.proxyUrl}
           // originalUrl={embed.image.url}
           width={widthImage}
           height={heightImage}
-          large={true}
         />
       )}
       {images?.length > 0 && (
         <EmbedStyle.Images amount={images.length}>
           {images.map((image) => (
             <EmbedStyle.MultiImageImageContainer key={image.url}>
-              <EmbedStyle.Image
-                // fillMaxSize={true}
+              <Styles.Image
                 src={image.proxyUrl}
                 // originalUrl={image.url}
-                large={true}
-                withMargin={false}
+                stitchesProps={{ withMargin: true }}
               />
             </EmbedStyle.MultiImageImageContainer>
           ))}
@@ -160,7 +166,7 @@ function Embed({ embed, images }: EmbedProps) {
           )}
         </EmbedStyle.Footer>
       )}
-    </EmbedStyle.Base>
+    </Styles.Embed>
   );
 }
 

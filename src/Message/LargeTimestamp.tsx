@@ -1,5 +1,5 @@
 import Moment from "moment/moment";
-import { LargeTimestampBase } from "@root/Message/elements";
+import * as Styles from "./style/message";
 import Tooltip from "@root/Tooltip";
 import React, { memo } from "react";
 
@@ -10,9 +10,9 @@ function LargeTimestamp({ timestamp }: { timestamp: number }) {
       overlay={Moment(timestamp).format("LLLL")}
       mouseEnterDelay={1}
     >
-      <LargeTimestampBase dateTime={timestamp.toString()}>
+      <Styles.LargeTimestamp dateTime={timestamp.toString()}>
         {Moment(timestamp).calendar()}
-      </LargeTimestampBase>
+      </Styles.LargeTimestamp>
     </Tooltip>
   );
 }

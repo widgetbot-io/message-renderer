@@ -64,6 +64,8 @@ function Emoji({
       </EmojiTooltip>
     );
 
+  if (defaultEmoji === undefined) return emojiName;
+
   return emoji(defaultEmoji.emoji, (code, string, key) => (
     <EmojiTooltip
       tooltipContent={defaultEmoji.keywords[0]}

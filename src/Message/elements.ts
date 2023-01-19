@@ -157,14 +157,6 @@ export const ReplySpineBase = memo(styled("div")`
   border-top-left-radius: 6px;
 `);
 
-export const EditedBase = styled("span")<Record<string, unknown>>`
-  font-size: 10px;
-  margin-left: 4px;
-  white-space: nowrap;
-
-  color: ${({ theme }) => theme.colors._primary.darken(0.5).string()};
-`;
-
 export namespace SlashCommandBase {
   export const Base = styled("span")<Record<string, unknown>>`
     color: ${({ theme }) => theme.colors._primary.fade(1 - 0.64).string()};
@@ -229,16 +221,6 @@ export const MiniUserNameBase = styled("span")<
   text-overflow: ellipsis;
 
   color: ${({ color }) => color};
-`;
-
-export const LargeTimestampBase = styled("time")<Record<string, unknown>>`
-  font-size: 0.75rem;
-  margin-left: 8px;
-  cursor: default;
-  height: fit-content;
-  white-space: nowrap;
-
-  color: ${({ theme }) => theme.colors._primary.fade(0.5).string()};
 `;
 
 export namespace IconsBase {

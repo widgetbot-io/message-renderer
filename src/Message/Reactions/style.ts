@@ -53,6 +53,6 @@ export const ReactionCount = styled(
     minWidth: 9,
     fontWeight: 500,
     fontSize: 14,
-    color: theme.colors.primary80,
+    color: theme.colors.primaryOpacity80,
   })
 );

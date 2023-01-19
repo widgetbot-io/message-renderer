@@ -1,11 +1,7 @@
 import React, { Children, memo, ReactNode, useMemo } from "react";
 import Markdown, { LinkMarkdown } from "@root/markdown/render";
 import { Message as MessageData, Message_referencedMessage } from "@types";
-import {
-  EditedBase,
-  FailedInteraction,
-  TypingIndicator,
-} from "@root/Message/elements";
+import { FailedInteraction, TypingIndicator } from "@root/Message/elements";
 import Tooltip from "@root/Tooltip";
 import Moment from "moment/moment";
 import Reactions from "@root/Message/Reactions";
@@ -32,7 +28,7 @@ const Edited = memo((props: EditedProps) => {
       placement="top"
       mouseEnterDelay={1}
     >
-      <EditedBase>(edited)</EditedBase>
+      <Styles.Edited>(edited)</Styles.Edited>
     </Tooltip>
   );
 });

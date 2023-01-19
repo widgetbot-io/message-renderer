@@ -1,47 +1,9 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Color from "color";
 // import { Message, MessageRendererProvider } from "../../dist/esm/index.js";
-import { ThemeProvider } from "emotion-theming";
-import MessageGroup, { MessageRendererProvider } from "../index";
-
-const theme = {
-  __typename: "ThemeSettings",
-  colors: {
-    __typename: "ThemeColorSettings",
-    primary: "#fff",
-    accent: "#5865f2",
-    background: "#36393f",
-  },
-  css: ``,
-};
-
-const themeContext = {
-  readonly: false,
-  guestMode: false,
-  singleChannel: true,
-  colors: {
-    ...theme.colors,
-    _primary: Color(theme.colors.primary),
-    _background: Color(theme.colors.background),
-    _accent: Color(theme.colors.accent),
-  },
-  loadedSettings: false,
-};
-
-function Wrapper(Story) {
-  return (
-    <ThemeProvider theme={themeContext}>
-      <MessageRendererProvider>
-        {({ themeClass }) => (
-          <div className={themeClass} style={{ padding: 20 }}>
-            {Story()}
-          </div>
-        )}
-      </MessageRendererProvider>
-    </ThemeProvider>
-  );
-}
+import MessageGroup from "../index";
+import { testUser } from "./commonTestData";
+import Wrapper from "./Wrapper";
 
 export default {
   title: "Message Types/Normal",
@@ -186,25 +148,114 @@ CodeBlock.args = {
       createdAt: 1673005159016,
       editedAt: null,
       isGuest: false,
-      author: {
-        avatarUrl:
-          "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
-        bot: false,
-        discrim: "0001",
-        id: "132819036282159104",
-        flags: 4457220,
-        name: "JohnyTheCarrot",
-        roles: ["859803268372758550"],
-        system: false,
-        isWebhook: false,
-        __typename: "User",
-        color: 0,
-      },
+      author: testUser,
       attachments: [],
       stickers: [],
       reactions: null,
       messageReference: null,
       embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
+      __typename: "Message",
+      referencedMessage: null,
+    },
+  ],
+};
+
+export const Embed = Template.bind({});
+Embed.args = {
+  messages: [
+    {
+      id: "1060885271480115241",
+      channelId: "993105555042357268",
+      content: "",
+      type: "Default",
+      flags: 0,
+      createdAt: 1673005159016,
+      editedAt: null,
+      isGuest: false,
+      author: testUser,
+      attachments: [],
+      stickers: [],
+      reactions: null,
+      messageReference: null,
+      embeds: [
+        {
+          title: "title ~~(did you know you can have markdown here too?)~~",
+          description:
+            "this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```",
+          url: "https://discordapp.com",
+          timestamp: "2022-08-27T12:05:51.251Z",
+          color: 4994011,
+          type: "Rich",
+          author: {
+            url: "https://discordapp.com",
+            name: "author name",
+            proxyIconUrl:
+              "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+            __typename: "EmbedAuthor",
+          },
+          fields: [
+            {
+              value: "some of these properties have certain limits...",
+              name: "🤔",
+              inline: false,
+              __typename: "EmbedField",
+            },
+            {
+              value: "try exceeding some of them!",
+              name: "😱",
+              inline: false,
+              __typename: "EmbedField",
+            },
+            {
+              value:
+                "an informative error should show up, and this view will remain as-is until all issues are fixed",
+              name: "🙄",
+              inline: false,
+              __typename: "EmbedField",
+            },
+            {
+              value: "these last two",
+              name: ":thonkang:",
+              inline: true,
+              __typename: "EmbedField",
+            },
+            {
+              value: "are inline fields",
+              name: ":thonkang:",
+              inline: true,
+              __typename: "EmbedField",
+            },
+          ],
+          image: {
+            url: "https://cdn.discordapp.com/embed/avatars/0.png",
+            proxyUrl:
+              "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+            width: 256,
+            height: 256,
+            __typename: "EmbedImage",
+          },
+          provider: null,
+          footer: {
+            proxyIconUrl:
+              "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+            text: "footer text",
+            __typename: "EmbedFooter",
+          },
+          thumbnail: {
+            height: 256,
+            width: 256,
+            url: "https://cdn.discordapp.com/embed/avatars/0.png",
+            proxyUrl:
+              "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+            __typename: "EmbedThumbnail",
+          },
+          video: null,
+          __typename: "Embed",
+        },
+      ],
       mentions: [],
       interaction: null,
       thread: null,
@@ -226,20 +277,7 @@ YouTubeEmbed.args = {
       createdAt: 1657984040078,
       editedAt: null,
       isGuest: false,
-      author: {
-        avatarUrl:
-          "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
-        bot: false,
-        discrim: "0001",
-        id: "132819036282159104",
-        flags: 4457220,
-        name: "JohnyTheCarrot",
-        roles: ["859803268372758550"],
-        system: false,
-        isWebhook: false,
-        __typename: "User",
-        color: 0,
-      },
+      author: testUser,
       attachments: [],
       stickers: [],
       reactions: null,
@@ -306,19 +344,7 @@ Attachment.args = {
       createdAt: 1668713007904,
       editedAt: 1668737411977,
       isGuest: false,
-      author: {
-        avatarUrl: null,
-        bot: false,
-        discrim: "0000",
-        id: "1",
-        flags: null,
-        name: "Gort",
-        roles: [],
-        system: false,
-        isWebhook: false,
-        __typename: "User",
-        color: 0,
-      },
+      author: testUser,
       attachments: [
         {
           url: "https://via.placeholder.com/1000x591.webp",
@@ -353,20 +379,7 @@ Reply.args = {
       createdAt: 1672828139236,
       editedAt: null,
       isGuest: false,
-      author: {
-        avatarUrl:
-          "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
-        bot: false,
-        discrim: "0001",
-        id: "132819036282159104",
-        flags: 4457220,
-        name: "JohnyTheCarrot",
-        roles: ["859803268372758550"],
-        system: false,
-        isWebhook: false,
-        __typename: "User",
-        color: 0,
-      },
+      author: testUser,
       attachments: [],
       stickers: [],
       reactions: null,
@@ -390,19 +403,7 @@ Reply.args = {
         createdAt: 1665138417831,
         editedAt: null,
         isGuest: false,
-        author: {
-          avatarUrl:
-            "https://cdn.discordapp.com/avatars/132819036282159104/a_e857e4e72ad559a4941fe7ab807e8a86.webp",
-          bot: false,
-          discrim: "0001",
-          id: "132819036282159104",
-          flags: 4457220,
-          name: "JohnyTheCarrot",
-          system: false,
-          isWebhook: false,
-          __typename: "User",
-          color: 3319955,
-        },
+        author: testUser,
         attachments: [],
         stickers: [],
         reactions: null,

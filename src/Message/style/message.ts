@@ -1,6 +1,6 @@
 import { css, styled, theme } from "@root/Stitches/stitches.config";
 
-export const SmallTimestampBase = styled(
+export const SmallTimestamp = styled(
   "time",
   "small-timestamp",
   css({
@@ -11,7 +11,20 @@ export const SmallTimestampBase = styled(
     fontSize: "0.6875rem",
     marginTop: "4px",
     userSelect: "none",
-    color: theme.colors.primary50,
+    color: theme.colors.primaryOpacity50,
+  })
+);
+
+export const LargeTimestamp = styled(
+  "time",
+  "large-timestamp",
+  css({
+    fontSize: "0.75rem",
+    marginLeft: 8,
+    cursor: "default",
+    height: "fit-content",
+    whiteSpace: "nowrap",
+    color: theme.colors.primaryOpacity50,
   })
 );
 
@@ -28,10 +41,10 @@ export const MessageBase = styled(
         textDecoration: "underline",
       },
     },
-    [`${SmallTimestampBase}`]: {
+    [`${SmallTimestamp}`]: {
       display: "none",
     },
-    [`&:hover ${SmallTimestampBase}`]: {
+    [`&:hover ${SmallTimestamp}`]: {
       display: "inherit",
     },
     // todo: styling
@@ -110,7 +123,7 @@ export namespace MessageContainerStyle {
       backgroundColor: "transparent",
 
       "&:hover": {
-        backgroundColor: theme.colors.primary10,
+        backgroundColor: theme.colors.primaryOpacity10,
         opacity: 1,
       },
     })

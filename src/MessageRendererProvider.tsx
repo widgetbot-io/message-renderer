@@ -36,6 +36,12 @@ const rcToolTipZoomOut = keyframes({
 
 // todo: finish
 const globalStyles = globalCss({
+  // emotion snitch
+  [`[class^="css-"]`]: {
+    backgroundColor: "red",
+    outline: "2px solid red",
+  },
+
   [`.${tooltipPrefix}`]: {
     position: "absolute",
     zIndex: 1070,
