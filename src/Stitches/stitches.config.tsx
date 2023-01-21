@@ -11,7 +11,7 @@ const stitches = createStitches({
       primaryOpacity80: "rgba(255, 255, 255, 0.8)",
       primaryOpacity100: "rgba(255, 255, 255, 1.0)",
       textMuted: "rgb(163, 166, 170)",
-      interactiveNormal: "rgb(185, 187, 190)",
+      interactiveNormal: "#dcddde",
       accent: "#5865f2",
       background: "#36393f",
       backgroundSecondary: "#2f3136",
@@ -22,6 +22,7 @@ const stitches = createStitches({
       mentionedHover: "rgba(250, 168, 26, 0.08)",
       tooltipBackground: "#18191c",
       tooltipForeground: "#dcddde",
+      transparentBlack: "rgba(0, 0, 0, 0.6)",
     },
   },
 });

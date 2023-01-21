@@ -1,6 +1,6 @@
 import useSize from "@root/Content/Attachment/useSize";
-import { MediaEmbedBase } from "@root/Content/Embed/elements";
 import { Message_embeds } from "@types";
+import * as Styles from "./style";
 import React from "react";
 
 export interface GifVEmbedProps {
@@ -11,8 +11,8 @@ function GifVEmbed({ embed }: GifVEmbedProps) {
   const size = useSize(embed.video.width, embed.video.height);
 
   return (
-    <video
-      className={MediaEmbedBase}
+    <Styles.MediaEmbed
+      stitchesProps={{ as: "video" }}
       src={embed.video.proxyUrl ?? embed.video.url}
       width={size.width}
       height={size.height}

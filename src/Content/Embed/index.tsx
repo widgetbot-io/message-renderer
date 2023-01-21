@@ -2,7 +2,6 @@ import { Embed_image, Message_embeds } from "@types";
 import GifVEmbed from "@root/Content/Embed/GifVEmbed";
 import ImageEmbed from "@root/Content/Embed/ImageEmbed";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
-import { EmbedStyle } from "@root/Content/Embed/elements";
 import * as Styles from "./style";
 import numberToRgb from "@utils/numberToRgb";
 import moment from "moment";
@@ -139,23 +138,25 @@ function Embed({ embed, images }: EmbedProps) {
         />
       )}
       {images?.length > 0 && (
-        <EmbedStyle.Images amount={images.length}>
+        <Styles.Images
+          stitchesProps={{ nImages: images.length as 1 | 2 | 3 | 4 }}
+        >
           {images.map((image) => (
-            <EmbedStyle.MultiImageImageContainer key={image.url}>
+            <Styles.ImageGridImageContainer key={image.url}>
               <Styles.Image
                 src={image.proxyUrl}
                 // originalUrl={image.url}
                 stitchesProps={{ withMargin: true }}
               />
-            </EmbedStyle.MultiImageImageContainer>
+            </Styles.ImageGridImageContainer>
           ))}
-        </EmbedStyle.Images>
+        </Styles.Images>
       )}
 
       {(embed.footer || embed.timestamp) && (
-        <EmbedStyle.Footer>
+        <Styles.Footer>
           {embed.footer?.proxyIconUrl && (
-            <EmbedStyle.FooterIcon src={embed.footer.proxyIconUrl} />
+            <Styles.FooterIcon src={embed.footer.proxyIconUrl} />
           )}
           {embed.footer?.text}
           {embed.timestamp && (
@@ -164,7 +165,7 @@ function Embed({ embed, images }: EmbedProps) {
               {moment(embed.timestamp).calendar()}
             </>
           )}
-        </EmbedStyle.Footer>
+        </Styles.Footer>
       )}
     </Styles.Embed>
   );

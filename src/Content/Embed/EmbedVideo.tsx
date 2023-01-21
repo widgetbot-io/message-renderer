@@ -1,5 +1,5 @@
 import { Embed_thumbnail, Embed_video } from "@types";
-import { VideoIframe, VideoThumbnail } from "@root/Content/Embed/elements";
+import * as Styles from "./style";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
 import React, { ReactNode, useState } from "react";
 import useSize from "@root/Content/Attachment/useSize";
@@ -29,13 +29,13 @@ function ThumbnailWrapper({
   if (!thumbnail || hideThumbnail) return <>{children}</>;
 
   return (
-    <VideoThumbnail
+    <Styles.VideoThumbnail
       onClick={() => setHideThumbnail(true)}
-      src={error ? DiscordImageFailure : thumbnail}
       onError={() => setError(true)}
       style={{
         width: adjustedWidth,
         height: adjustedHeight,
+        backgroundImage: `url(${error ? DiscordImageFailure : thumbnail})`,
       }}
     />
   );
@@ -75,7 +75,7 @@ function EmbedVideo(props: EmbedVideoProps) {
       width={props.width}
       height={props.height}
     >
-      <VideoIframe
+      <Styles.VideoIframe
         width={400}
         height={225}
         src={url.toString()}
