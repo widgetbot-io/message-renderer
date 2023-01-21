@@ -12,6 +12,7 @@ interface RecipientAddProps {
   target: Message_mentions;
 }
 
+// todo: check if this also applies to group chats, and support those as well.
 function RecipientAdd(props: RecipientAddProps) {
   return (
     <SystemMessageBase>
