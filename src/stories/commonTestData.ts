@@ -1,5 +1,6 @@
 export const testUser = {
-  avatarUrl: "/demo-pfp.png",
+  avatarUrl:
+    "https://github.com/widgetbot-io/message-renderer/blob/master/src/stories/assets/demo-pfp.png?raw=true",
   bot: false,
   discrim: "0001",
   id: "132819036282159104",
