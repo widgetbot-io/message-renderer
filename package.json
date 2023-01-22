@@ -11,9 +11,7 @@
   "scripts": {
     "rollup": "rollup -c",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "pre-deploy": "build-storybook",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
