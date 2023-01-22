@@ -24,6 +24,21 @@ const stitches = createStitches({
       tooltipForeground: "#dcddde",
       transparentBlack: "rgba(0, 0, 0, 0.6)",
     },
+    fontSizes: {
+      xs: "10px",
+      s: "12px",
+      m: "14px",
+      l: "16px",
+    },
+    space: {
+      xxs: "1px",
+      xs: "2px",
+      small: "4px",
+      medium: "6px",
+      large: "8px",
+      xl: "12px",
+      xxl: "16px",
+    },
   },
 });
 

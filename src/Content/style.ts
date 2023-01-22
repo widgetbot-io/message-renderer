@@ -6,11 +6,11 @@ export const Base = styled(
   css({
     color: theme.colors.primaryOpacity20,
     whiteSpace: "break-spaces",
-    fontSize: 16,
+    fontSize: theme.fontSizes.l,
     variants: {
       isReplyContent: {
         true: {
-          fontSize: 14,
+          fontSize: theme.fontSizes.m,
           opacity: 0.64,
           cursor: "pointer",
           whiteSpace: "nowrap",
@@ -57,8 +57,8 @@ export const ContentContainer = styled(
           // todo: use stitches class!
           ".codeblock": {
             display: "inline",
-            padding: 2,
-            fontSize: 12,
+            padding: theme.space.xs,
+            fontSize: theme.fontSizes.s,
           },
         },
       },
@@ -79,10 +79,10 @@ export const MessageAccessories = styled(
   "message-accessories",
   css({
     display: "grid",
-    paddingTop: 4,
-    paddingBottom: 4,
+    paddingTop: theme.space.small,
+    paddingBottom: theme.space.small,
     gridAutoFlow: "row",
-    gridRowGap: 4,
+    gridRowGap: theme.space.small,
     gridTemplateColumns: "repeat(auto-fill, minmax(100%, 1fr))",
   })
 );
@@ -91,7 +91,7 @@ export const DeferredContent = styled(
   "div",
   "deferred-content",
   css({
-    fontSize: 14,
+    fontSize: theme.fontSizes.m,
   })
 );
 
@@ -99,8 +99,8 @@ export const Edited = styled(
   "span",
   "edited",
   css({
-    fontSize: 10,
-    marginLeft: 4,
+    fontSize: theme.fontSizes.xs,
+    marginLeft: theme.space.small,
     whiteSpace: "nowrap",
     color: theme.colors.textMuted,
   })

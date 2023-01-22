@@ -8,8 +8,8 @@ export const SmallTimestamp = styled(
     left: 0,
     width: 56,
     textAlign: "right",
-    fontSize: "0.6875rem",
-    marginTop: "4px",
+    fontSize: theme.fontSizes.s,
+    marginTop: theme.space.small,
     userSelect: "none",
     color: theme.colors.primaryOpacity50,
   })
@@ -19,8 +19,8 @@ export const LargeTimestamp = styled(
   "time",
   "large-timestamp",
   css({
-    fontSize: "0.75rem",
-    marginLeft: 8,
+    fontSize: theme.fontSizes.s,
+    marginLeft: theme.space.large,
     cursor: "default",
     height: "fit-content",
     whiteSpace: "nowrap",
@@ -118,7 +118,7 @@ export namespace MessageContainerStyle {
     css({
       border: "none",
       display: "flex",
-      padding: 6,
+      padding: theme.space.medium,
       opacity: 0.7,
       backgroundColor: "transparent",
 

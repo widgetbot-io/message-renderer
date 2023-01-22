@@ -7,7 +7,7 @@ export const Reactions = styled(
   css({
     display: "flex",
     flexWrap: "wrap",
-    gap: 4,
+    gap: theme.space.small,
     userSelect: "none",
   })
 );
@@ -18,7 +18,7 @@ export const ReactionTooltip = styled(
   css({
     display: "flex",
     alignItems: "center",
-    gap: 8,
+    gap: theme.space.large,
   })
 );
 
@@ -38,7 +38,7 @@ export const Reaction = styled(
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    padding: "4px 6px",
+    padding: `${theme.space.small} ${theme.space.medium}`,
     borderRadius: 8,
     cursor: "not-allowed",
     backgroundColor: theme.colors.backgroundSecondary,
@@ -49,10 +49,10 @@ export const ReactionCount = styled(
   "span",
   "reaction-count",
   css({
-    marginLeft: 6,
+    marginLeft: theme.space.medium,
     minWidth: 9,
     fontWeight: 500,
-    fontSize: 14,
+    fontSize: theme.fontSizes.m,
     color: theme.colors.primaryOpacity80,
   })
 );

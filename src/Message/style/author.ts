@@ -14,7 +14,7 @@ export const Username = styled(
   css("span", {
     color: theme.colors.primaryOpacity100,
     fontWeight: 500,
-    fontSize: 16,
+    fontSize: theme.fontSizes.l,
     display: "inline",
     verticalAlign: "baseline",
     whiteSpace: "nowrap",
@@ -26,7 +26,7 @@ export const Avatar = styled(
   "message-author-avatar",
   css({
     position: "absolute",
-    left: 16,
+    left: theme.space.xxl,
     marginTop: 1,
     borderRadius: "100%",
     width: 40,

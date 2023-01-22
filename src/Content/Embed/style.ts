@@ -5,15 +5,15 @@ export const Embed = styled(
   "article",
   "embed",
   css({
-    padding: 16,
-    paddingLeft: 12,
+    padding: theme.space.xxl,
+    paddingLeft: theme.space.xl,
     borderLeftWidth: 4,
     borderLeftStyle: "solid",
     borderLeftColor: theme.colors.backgroundTertiary,
     borderRadius: 3,
     backgroundColor: theme.colors.backgroundSecondary,
     width: "fit-content",
-    gap: 8,
+    gap: theme.space.large,
     display: "flex",
     flexDirection: "column",
     maxWidth: 520,
@@ -33,7 +33,7 @@ export const ContentAndThumbnail = styled(
   "embed-content-and-thumbnail",
   css({
     display: "flex",
-    gap: 16,
+    gap: theme.space.xxl,
 
     variants: {
       hasLargeThumbnail: {
@@ -51,7 +51,7 @@ export const Content = styled(
   "embed-content",
   css({
     display: "grid",
-    gap: 8,
+    gap: theme.space.large,
   })
 );
 
@@ -59,7 +59,7 @@ export const Provider = styled(
   "div",
   "embed-provider",
   css({
-    fontSize: 12,
+    fontSize: theme.fontSizes.s,
     color: theme.colors.interactiveNormal,
   })
 );
@@ -68,12 +68,12 @@ export const Author = styled(
   "div",
   "embed-author",
   css({
-    fontSize: 14,
+    fontSize: theme.fontSizes.m,
     fontWeight: 600,
     display: "inline-grid",
     gridTemplateColumns: "auto 1fr",
     alignItems: "center",
-    gap: 8,
+    gap: theme.space.large,
     color: theme.colors.primaryOpacity100,
   })
 );
@@ -109,7 +109,7 @@ export const Title = styled(
   "div",
   "embed-title",
   css({
-    fontSize: 16,
+    fontSize: theme.fontSizes.l,
     fontWeight: 600,
 
     color: theme.colors.link,
@@ -132,7 +132,7 @@ export const Description = styled(
   "div",
   "embed-description",
   css({
-    fontSize: 14,
+    fontSize: theme.fontSizes.m,
     whiteSpace: "pre-wrap",
     color: theme.colors.interactiveNormal,
   })
@@ -145,8 +145,8 @@ export const Fields = styled(
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 4,
-    gap: 8,
+    marginTop: theme.space.small,
+    gap: theme.space.large,
   })
 );
 
@@ -172,8 +172,8 @@ export const FieldName = styled(
   "div",
   "embed-field-name",
   css({
-    fontSize: 14,
-    marginBottom: 4,
+    fontSize: theme.fontSizes.m,
+    marginBottom: theme.space.small,
     fontWeight: 600,
     color: theme.colors.primaryOpacity100,
   })
@@ -183,7 +183,7 @@ export const FieldValue = styled(
   "div",
   "embed-field-value",
   css({
-    fontSize: 14,
+    fontSize: theme.fontSizes.m,
     fontWeight: 400,
     whiteSpace: "pre-wrap",
     color: theme.colors.interactiveNormal,
@@ -200,7 +200,7 @@ export const Image = styled(
     variants: {
       withMargin: {
         true: {
-          marginTop: 8,
+          marginTop: theme.space.large,
         },
       },
     },
@@ -212,7 +212,7 @@ export const Images = styled(
   "embed-field-images",
   css({
     display: "grid",
-    gap: 4,
+    gap: theme.space.small,
     borderRadius: 3,
     overflow: "hidden",
 
@@ -259,7 +259,7 @@ export const Footer = styled(
   "div",
   "embed-footer",
   css({
-    fontSize: 12,
+    fontSize: theme.fontSizes.s,
     display: "flex",
     alignItems: "center",
     color: theme.colors.interactiveNormal,
@@ -273,7 +273,7 @@ export const FooterIcon = styled(
     borderRadius: "100%",
     width: 20,
     height: 20,
-    marginRight: 8,
+    marginRight: theme.space.large,
   })
 );
 

@@ -22,7 +22,7 @@ export const QuoteBar = styled(
   "div",
   "md-quote-bar",
   css({
-    margin: "8px 0",
+    margin: `${theme.space.large} 0`,
     width: 4,
     borderRadius: 4,
     backgroundColor: theme.colors.primaryOpacity10,
@@ -33,10 +33,10 @@ export const Quote = styled(
   "blockquote",
   "md-quote",
   css({
-    padding: "0 8px 0 12px",
+    padding: `0 ${theme.space.large} 0 ${theme.space.xl}`,
     boxSizing: "border-box",
     textIndent: 0,
-    margin: "8px 0",
+    margin: `${theme.space.large} 0`,
     maxWidth: "90%",
   })
 );
