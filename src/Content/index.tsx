@@ -10,7 +10,6 @@ import StickerIcon from "@images/discordAssets/sticker-icon.svg";
 import Danger from "@images/discordAssets/danger.svg";
 import AttachmentIcon from "@images/discordAssets/attachment-icon.svg";
 import CommandIcon from "@images/discordAssets/command-icon.svg";
-import { ReplyIconBase } from "@root/Content/elements";
 import Sticker from "@root/Content/Sticker";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
 import Message from "../Message";
@@ -39,13 +38,13 @@ interface ReplyIconProps {
 
 function ReplyIcon({ message }: ReplyIconProps) {
   if (message.interaction)
-    return <ReplyIconBase src={CommandIcon} alt="command" />;
+    return <Styles.ReplyIcon src={CommandIcon} alt="command" />;
 
   if (message.stickers.length > 0)
-    return <ReplyIconBase src={StickerIcon} alt="sticker" />;
+    return <Styles.ReplyIcon src={StickerIcon} alt="sticker" />;
 
   if (message.attachments.length > 0 || message.embeds.length > 0)
-    return <ReplyIconBase src={AttachmentIcon} alt="attachment" />;
+    return <Styles.ReplyIcon src={AttachmentIcon} alt="attachment" />;
 
   return null;
 }

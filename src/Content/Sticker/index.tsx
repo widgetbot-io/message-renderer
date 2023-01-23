@@ -1,12 +1,8 @@
 import Tooltip from "@root/Tooltip";
 import StickerIcon from "@images/discordAssets/sticker-icon.svg";
-import {
-  LottieStickerWrapper,
-  StickerTooltipBase,
-  StickerTooltipIconBase,
-} from "@root/Content/elements";
 import Lottie from "@root/Content/Sticker/Lottie";
 import webpCheck from "@utils/webpCheck";
+import * as Styles from "../style";
 import * as React from "react";
 import { Message_stickers } from "@types";
 
@@ -18,24 +14,24 @@ function Sticker(props: StickerProps) {
   return (
     <Tooltip
       overlay={
-        <StickerTooltipBase>
-          <StickerTooltipIconBase src={StickerIcon} alt="" />{" "}
+        <Styles.StickerTooltip>
+          <Styles.StickerTooltipIcon src={StickerIcon} alt="" />{" "}
           {props.sticker.name}
-        </StickerTooltipBase>
+        </Styles.StickerTooltip>
       }
       placement="top"
     >
       {props.sticker.formatType === "LOTTIE" ? (
-        <LottieStickerWrapper>
+        <Styles.LottieStickerWrapper>
           <Lottie data={props.sticker.lottieData} width={160} height={160} />
-        </LottieStickerWrapper>
+        </Styles.LottieStickerWrapper>
       ) : (
-        <img
+        <Styles.Sticker
           height={160}
           width={160}
-          style={{ objectFit: "contain" }}
           alt={props.sticker.name + " Sticker"}
           src={
+            // todo: allow proper custom urls instead of relying on Discord's CDN
             props.sticker.formatType === "APNG"
               ? `https://cdn.discordapp.com/stickers/${props.sticker.id}.png`
               : webpCheck(

@@ -16,7 +16,7 @@ interface MessageContainerProps {
 
 function MessageContainer(props: MessageContainerProps) {
   return (
-    <MessageContainerStyle.Base>
+    <MessageContainerStyle.MessageContainer>
       <MessageContainerStyle.Buttons>
         {props.buttons.map((option) => (
           <Tooltip
@@ -35,7 +35,7 @@ function MessageContainer(props: MessageContainerProps) {
         ))}
       </MessageContainerStyle.Buttons>
       {props.children}
-    </MessageContainerStyle.Base>
+    </MessageContainerStyle.MessageContainer>
   );
 }
 

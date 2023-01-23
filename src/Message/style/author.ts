@@ -26,7 +26,8 @@ export const Avatar = styled(
   "message-author-avatar",
   css({
     position: "absolute",
-    left: theme.space.xxl,
+    left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
+    transform: "translateX(-50%)",
     marginTop: 1,
     borderRadius: "100%",
     width: 40,

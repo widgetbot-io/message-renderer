@@ -11,8 +11,6 @@ import checkmark from "@images/discordAssets/86b5987e685f72352730d56690393fc8.sv
 import threadNameChanged from "@images/discordAssets/1688a01d0e6f27bead9ae6ca9e51dd32.svg";
 import threadCreated from "@images/discordAssets/thread-created.svg";
 import boost from "@images/discordAssets/boost.svg";
-import { MessageType } from "@root/types/globalTypes";
-import { ThreadButtonHeight } from "@root/Content/elements";
 
 /*
 ==============================================================
@@ -107,56 +105,6 @@ export const SystemMessageLinkBase = memo(styled(
   }
 `);
 
-interface ThreadSpineBaseProps {
-  messageType: MessageType;
-  hasReply: boolean;
-}
-
-export const ThreadSpineBase = memo(styled("div")<ThreadSpineBaseProps>`
-  position: absolute;
-  left: calc(72px / 2);
-  border-left: 2px solid #4f545c;
-  border-bottom: 2px solid #4f545c;
-  border-bottom-left-radius: 6px;
-  width: calc(72px / 2 - 4px);
-
-  ${({ messageType, hasReply }) =>
-    messageType === MessageType.ThreadCreated
-      ? css`
-          top: ${
-            6 /* thread icon padding */ +
-            16 /* icon height */ +
-            4 /* some extra padding */
-          }px;
-          bottom: ${ThreadButtonHeight / 2}px;
-        `
-      : css`
-          ${hasReply
-            ? css`
-                // check ReplySpineBase for specifics on the 12 and 9 values
-                top: ${48 + 12 + 9 + 4}px;
-              `
-            : css`
-                top: 48px;
-              `}
-          bottom: ${(ThreadButtonHeight +
-            6 +
-            4) /* the padding from the thread button */ /
-          2}px;
-        `}
-`);
-
-export const ReplySpineBase = memo(styled("div")`
-  position: absolute;
-  width: 33px;
-  height: 12px;
-  top: 9px;
-  left: 34px;
-  border-left: 2px solid #4f545c;
-  border-top: 2px solid #4f545c;
-  border-top-left-radius: 6px;
-`);
-
 export namespace SlashCommandBase {
   export const Base = styled("span")<Record<string, unknown>>`
     color: ${({ theme }) => theme.colors._primary.fade(1 - 0.64).string()};
@@ -168,23 +116,6 @@ export namespace SlashCommandBase {
     color: #00aff4;
   `;
 }
-
-export const ReplyInfoBase = styled("div")<Record<string, unknown>>`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 4px;
-`;
-
-export const ReplyUserBase = styled("span")<Record<string, unknown>>`
-  display: flex;
-  align-items: center;
-`;
-
-export const MiniUserAvatarBase = styled("img")<Record<string, unknown>>`
-  border-radius: 100%;
-  width: 16px;
-  height: 16px;
-`;
 
 export const UnknownReplyIcon = styled("div")<Record<string, unknown>>`
   background-color: #202225;
@@ -201,26 +132,6 @@ export const UnknownReplyText = styled(SlashCommandBase.Base)<
   Record<string, unknown>
 >`
   font-style: italic;
-`;
-
-interface MiniUserNameBaseProps {
-  color: string;
-}
-export const MiniUserNameBase = styled("span")<
-  MiniUserNameBaseProps & Record<string, unknown>
->`
-  margin-right: 4px;
-  margin-left: 4px;
-  font-size: 14px;
-  opacity: 0.64;
-  font-weight: 500;
-  white-space: nowrap;
-
-  overflow: hidden;
-  max-width: 25vw;
-  text-overflow: ellipsis;
-
-  color: ${({ color }) => color};
 `;
 
 export namespace IconsBase {

@@ -5,11 +5,6 @@ import {
   Message_referencedMessage,
 } from "@types";
 import {
-  MiniUserAvatarBase,
-  MiniUserNameBase,
-  ReplyInfoBase,
-  ReplySpineBase,
-  ReplyUserBase,
   SlashCommandBase,
   UnknownReplyIcon,
   UnknownReplyText,
@@ -94,8 +89,8 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
   const unknownReply = !props.referencedMessage && !props.interaction;
 
   return (
-    <ReplyInfoBase>
-      <ReplySpineBase />
+    <Styles.ReplyInfo>
+      <Styles.ReplySpine />
       {unknownReply ? (
         <>
           <UnknownReplyIcon />
@@ -104,8 +99,8 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
           </UnknownReplyText>
         </>
       ) : (
-        <ReplyUserBase>
-          <MiniUserAvatarBase src={miniAvatarUrl} />
+        <Styles.ReplyUser>
+          <Styles.MiniUserAvatar src={miniAvatarUrl} />
           {props.referencedMessage && (
             <ChatTag
               author={props.referencedMessage.author}
@@ -113,11 +108,11 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
               referenceGuild={props.referencedMessage.messageReference?.guildId}
             />
           )}
-          <MiniUserNameBase color={miniUserNameColorHex}>
+          <Styles.MiniUserName style={{ color: miniUserNameColorHex }}>
             {props.mentioned && "@"}
             {miniUserName}
-          </MiniUserNameBase>
-        </ReplyUserBase>
+          </Styles.MiniUserName>
+        </Styles.ReplyUser>
       )}
       {props.referencedMessage ? (
         <Content message={props.referencedMessage} isReplyContent={true} />
@@ -132,7 +127,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
           </SlashCommandBase.Base>
         )
       )}
-    </ReplyInfoBase>
+    </Styles.ReplyInfo>
   );
 });
 
@@ -173,7 +168,7 @@ function NormalMessage(props: MessageProps) {
 
   if (props.isFirstMessage)
     return (
-      <Styles.MessageBase data-is-mentioned={isUserMentioned}>
+      <Styles.Message stitchesProps={{ mentioned: isUserMentioned }}>
         {shouldShowReply && (
           <ReplyInfo
             referencedMessage={props.message.referencedMessage ?? null}
@@ -199,11 +194,11 @@ function NormalMessage(props: MessageProps) {
           message={props.message}
           noThreadButton={props.noThreadButton}
         />
-      </Styles.MessageBase>
+      </Styles.Message>
     );
 
   return (
-    <Styles.MessageBase data-is-mentioned={isUserMentioned}>
+    <Styles.Message stitchesProps={{ mentioned: isUserMentioned }}>
       <Tooltip
         placement="top"
         overlay={Moment(props.message.createdAt).format("LLLL")}
@@ -214,7 +209,7 @@ function NormalMessage(props: MessageProps) {
         </Styles.SmallTimestamp>
       </Tooltip>
       <Content message={props.message} noThreadButton={props.noThreadButton} />
-    </Styles.MessageBase>
+    </Styles.Message>
   );
 }
 

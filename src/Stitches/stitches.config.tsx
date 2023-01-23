@@ -20,9 +20,11 @@ const stitches = createStitches({
       link: "#00b0f4",
       mentioned: "rgba(250, 166, 26, 0.1)",
       mentionedHover: "rgba(250, 168, 26, 0.08)",
+      mentionedBorder: "#faa81a",
       tooltipBackground: "#18191c",
       tooltipForeground: "#dcddde",
       transparentBlack: "rgba(0, 0, 0, 0.6)",
+      spines: "#4f545c",
     },
     fontSizes: {
       xs: "10px",
@@ -38,6 +40,14 @@ const stitches = createStitches({
       large: "8px",
       xl: "12px",
       xxl: "16px",
+    },
+    sizes: {
+      messageLeftPadding: "72px",
+      threadButton: "34px",
+      messageTypeIcon: "16px",
+    },
+    borderWidths: {
+      spines: "2px",
     },
   },
 });
