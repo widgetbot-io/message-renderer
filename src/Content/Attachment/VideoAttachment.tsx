@@ -1,8 +1,3 @@
-import {
-  VideoAttachmentBase,
-  VideoAttachmentContainerBase,
-  VideoAttachmentOverlay,
-} from "@root/Content/Attachment/elements";
 import React, {
   useCallback,
   useEffect,
@@ -13,6 +8,8 @@ import React, {
 import { filesize } from "filesize";
 import useSize from "@root/Content/Attachment/useSize";
 import { Message_attachments, Message_embeds } from "@types";
+import * as Styles from "./style";
+import Tooltip from "@root/Tooltip";
 
 interface VideoAttachmentProps {
   attachmentOrEmbed:
@@ -65,7 +62,7 @@ function VideoAttachment(props: VideoAttachmentProps) {
     setShowPlayOrPauseAnimation(true);
     setTimeout(
       () => setShowPlayOrPauseAnimation(false),
-      VideoAttachmentOverlay.PlayOrPauseAnimationDuration
+      Styles.PlayOrPauseAnimationDuration
     );
   }, []);
 
@@ -105,13 +102,11 @@ function VideoAttachment(props: VideoAttachmentProps) {
   }, []);
 
   return (
-    <div
-      className={VideoAttachmentContainerBase}
+    <Styles.VideoAttachmentContainer
       style={{ width, height }}
       ref={attachmentRef}
     >
-      <video
-        className={VideoAttachmentBase}
+      <Styles.VideoAttachment
         preload="metadata"
         src={props.attachmentOrEmbed.url}
         height={height}
@@ -124,45 +119,44 @@ function VideoAttachment(props: VideoAttachmentProps) {
         }}
         onTimeUpdate={({ timeStamp }) => setDurationPlayed(timeStamp)}
       />
-      <VideoAttachmentOverlay.Base
+      <Styles.VideoAttachmentOverlay
         data-paused={paused}
         data-played-once={hasPlayedOnceBefore}
       >
         {(showPlayOrPauseAnimation || !hasPlayedOnceBefore) && (
-          <VideoAttachmentOverlay.PlayOrPauseButtonAnimation
+          <Styles.PlayOrPauseButtonAnimation
             data-paused={paused}
             data-has-played-before={hasPlayedOnceBefore}
           />
         )}
         {"filename" in props.attachmentOrEmbed && (
-          <VideoAttachmentOverlay.MetadataBase>
-            <VideoAttachmentOverlay.MetadataTitleBase>
+          <Styles.VideoMetadata>
+            <Styles.VideoMetadataTitle>
               {props.attachmentOrEmbed.filename}
-            </VideoAttachmentOverlay.MetadataTitleBase>
-            <VideoAttachmentOverlay.MetadataFilesizeBase>
+            </Styles.VideoMetadataTitle>
+            <Styles.VideoMetadataFilesize>
               {filesize(props.attachmentOrEmbed.size, { base: 2 }) as string}
-            </VideoAttachmentOverlay.MetadataFilesizeBase>
-          </VideoAttachmentOverlay.MetadataBase>
+            </Styles.VideoMetadataFilesize>
+          </Styles.VideoMetadata>
         )}
-        <VideoAttachmentOverlay.Control onClick={playVideo} />
-        <VideoAttachmentOverlay.VideoControlsBase>
-          <VideoAttachmentOverlay.PlayOrPauseButtonBase
-            data-paused={paused}
+        <Styles.VideoAttachmentOverlayControl onClick={playVideo} />
+        <Styles.VideoControls>
+          <Styles.VideoControlButton
+            stitchesProps={{ type: paused ? "playButton" : "pauseButton" }}
             onClick={playVideo}
           />
           {width > 200 && (
-            <VideoAttachmentOverlay.VideoControlsTimeBase>
+            <Styles.VideoControlsTime>
               {durationPlayedHumanized}
-            </VideoAttachmentOverlay.VideoControlsTimeBase>
+            </Styles.VideoControlsTime>
           )}
-          <VideoAttachmentOverlay.ProgressBarBase
+          <Styles.ProgressBar
             onMouseMove={seekVideo}
             onClick={(e) => seekVideo(e, true)}
             onMouseDown={() => setIsSeeking(true)}
             onMouseUp={() => setIsSeeking(false)}
           >
-            <VideoAttachmentOverlay.ProgressBarFillBase
-              className="progress-bar-fill"
+            <Styles.ProgressBarFill
               style={{
                 width:
                   (videoRef.current?.currentTime / videoRef.current?.duration) *
@@ -170,17 +164,20 @@ function VideoAttachment(props: VideoAttachmentProps) {
                   "%",
               }}
             />
-          </VideoAttachmentOverlay.ProgressBarBase>
-          <VideoAttachmentOverlay.FullscreenButtonBase
-            onClick={() => {
-              if (document.fullscreenElement === null)
-                attachmentRef.current?.requestFullscreen();
-              else document.exitFullscreen();
-            }}
-          />
-        </VideoAttachmentOverlay.VideoControlsBase>
-      </VideoAttachmentOverlay.Base>
-    </div>
+          </Styles.ProgressBar>
+          <Tooltip placement="top" overlay="Full Screen">
+            <Styles.VideoControlButton
+              stitchesProps={{ type: "fullscreen" }}
+              onClick={() => {
+                if (document.fullscreenElement === null)
+                  attachmentRef.current?.requestFullscreen();
+                else document.exitFullscreen();
+              }}
+            />
+          </Tooltip>
+        </Styles.VideoControls>
+      </Styles.VideoAttachmentOverlay>
+    </Styles.VideoAttachmentContainer>
   );
 }
 

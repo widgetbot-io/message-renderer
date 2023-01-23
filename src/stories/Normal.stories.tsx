@@ -380,16 +380,7 @@ Sticker.args = {
       editedAt: null,
       isGuest: false,
       author: testUser,
-      attachments: [
-        {
-          url: "https://cdn.discordapp.com/attachments/995987494615121991/996737867860680724/VirtualBoxVM_edSVtI2r8v.png",
-          height: 864,
-          width: 1152,
-          filename: "VirtualBoxVM_edSVtI2r8v.png",
-          size: 98228,
-          __typename: "Attachment",
-        },
-      ],
+      attachments: [],
       stickers: [
         {
           id: "903238292470898688",
@@ -412,6 +403,42 @@ Sticker.args = {
         messageCount: 1,
         __typename: "Thread",
       },
+      __typename: "Message",
+      referencedMessage: null,
+    },
+  ],
+};
+
+export const VideoAttachment = Template.bind({});
+VideoAttachment.args = {
+  messages: [
+    {
+      id: "1012998078908866611",
+      channelId: "993210446096105522",
+      content: "",
+      type: "Default",
+      flags: 0,
+      createdAt: 1661587962606,
+      editedAt: null,
+      isGuest: false,
+      author: testUser,
+      attachments: [
+        {
+          url: "https://cdn.discordapp.com/attachments/993210446096105522/1012998077021425684/h4FVswKNh9WqC4Du.mp4",
+          height: 288,
+          width: 360,
+          filename: "h4FVswKNh9WqC4Du.mp4",
+          size: 204160,
+          __typename: "Attachment",
+        },
+      ],
+      stickers: [],
+      reactions: null,
+      messageReference: null,
+      embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
       __typename: "Message",
       referencedMessage: null,
     },

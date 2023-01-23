@@ -19,6 +19,7 @@ const getChannel = (id: string) => undefined;
 const Channel = ({ id, children, className, data }: Props) => (
   <Tooltip
     placement="top"
+    // todo: emoji? what?
     overlay={<Emoji>{getChannel(id)?.category?.name}</Emoji>}
     mouseLeaveDelay={0}
     trigger={getChannel(id)?.category ? ["hover"] : []}
