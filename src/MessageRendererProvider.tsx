@@ -1,40 +1,16 @@
 import React, { ReactNode } from "react";
+import { globalCss, css, theme } from "@root/Stitches/stitches.config";
 import {
-  globalCss,
-  keyframes,
-  css,
-  theme,
-} from "@root/Stitches/stitches.config";
-import { tooltipPrefix } from "@root/Tooltip";
+  tooltipAnimDurationMs,
+  tooltipAnimPrefix,
+  tooltipPrefix,
+} from "@root/Tooltip";
 import { hljsTheme } from "@root/markdown/render/elements/code/hljs";
 
 type MessageRendererProviderProps = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;
 };
 
-const rcToolTipZoomIn = keyframes({
-  from: {
-    opacity: 0,
-    scale: 0,
-  },
-  to: {
-    opacity: 1,
-    scale: 1,
-  },
-});
-
-const rcToolTipZoomOut = keyframes({
-  from: {
-    opacity: 1,
-    scale: 1,
-  },
-  to: {
-    opacity: 0,
-    scale: 0,
-  },
-});
-
-// todo: finish
 const globalStyles = globalCss({
   // emotion snitch
   [`[class^="css-"]`]: {
@@ -43,17 +19,13 @@ const globalStyles = globalCss({
   },
 
   [`.${tooltipPrefix}`]: {
-    position: "absolute",
+    width: "fit-content",
     zIndex: 1070,
     display: "block",
     pointerEvents: "none",
     transformOrigin: "50% 50%",
-  },
-  [`.${tooltipPrefix}-zoom-enter, .${tooltipPrefix}-zoom-leave`]: {
-    display: "block",
-  },
-  [`.${tooltipPrefix}-hidden`]: {
-    display: "none",
+    fontFamily: theme.fonts.main,
+    transition: `scale ${tooltipAnimDurationMs}ms ease-out, opacity ${tooltipAnimDurationMs}ms ease-out`,
   },
   [`.${tooltipPrefix}-arrow`]: {
     marginBottom: -5,
@@ -74,27 +46,21 @@ const globalStyles = globalCss({
     fontWeight: 500,
     marginBottom: -5,
   },
-  [`.${tooltipPrefix}-zoom-enter, .${tooltipPrefix}-zoom-appear`]: {
+  [`.${tooltipAnimPrefix}-enter, .${tooltipAnimPrefix}-appear`]: {
+    scale: 0.9,
     opacity: 0,
-    animationDuration: "0.3s",
-    animationFillMode: "both",
-    animationTimingFunction: "cubic-bezier(0.18, 0.89, 0.32, 1.28)",
-    animationPlayState: "paused",
   },
-  [`.${tooltipPrefix}-zoom-enter-active, .${tooltipPrefix}-zoom-appear-active`]:
-    {
-      animationName: rcToolTipZoomIn.toString(),
-      animationPlayState: "running",
-    },
-  [`.${tooltipPrefix}-zoom-leave`]: {
-    animationDuration: "0.3s",
-    animationFillMode: "both",
-    animationTimingFunction: "cubic-bezier(0.6, -0.3, 0.74, 0.05)",
-    animationPlayState: "paused",
+  [`.${tooltipAnimPrefix}-enter-active, .${tooltipAnimPrefix}-appear-active`]: {
+    scale: 1,
+    opacity: 1,
   },
-  [`.${tooltipPrefix}-zoom-leave-active`]: {
-    animationName: rcToolTipZoomOut.toString(),
-    animationPlayState: "running",
+  [`.${tooltipAnimPrefix}-leave`]: {
+    scale: 1,
+    opacity: 1,
+  },
+  [`.${tooltipAnimPrefix}-leave-active`]: {
+    scale: 0.9,
+    opacity: 0,
   },
   [`.${tooltipPrefix}-placement-top`]: {
     padding: "5px 0 9px 0",
@@ -116,15 +82,40 @@ const globalStyles = globalCss({
       borderBottomColor: theme.colors.tooltipBackground,
     },
   },
+  [`.${tooltipPrefix}-placement-right`]: {
+    padding: "0 5px 0 9px",
+
+    [`.${tooltipPrefix}-arrow`]: {
+      left: 4,
+      marginTop: -5,
+      borderWidth: "5px 5px 5px 0",
+      borderRightColor: theme.colors.tooltipBackground,
+    },
+  },
+  [`.${tooltipPrefix}-placement-left`]: {
+    padding: "0 9px 0 5px",
+
+    [`.${tooltipPrefix}-arrow`]: {
+      right: 4,
+      marginTop: -5,
+      borderWidth: "5px 0 5px 5px",
+      borderLeftColor: theme.colors.tooltipBackground,
+    },
+  },
   [`.${tooltipPrefix}-placement-top, .${tooltipPrefix}-placement-bottom`]: {
     [`.${tooltipPrefix}-arrow`]: {
       left: "50%",
     },
   },
+  [`.${tooltipPrefix}-placement-right, .${tooltipPrefix}-placement-left`]: {
+    [`.${tooltipPrefix}-arrow`]: {
+      top: "50%",
+    },
+  },
 });
 
 const extraCss = css({
-  fontFamily: "Open Sans, sans-serif",
+  fontFamily: theme.fonts.main,
   backgroundColor: theme.colors.background, // todo: this is only for testing!
 });
 

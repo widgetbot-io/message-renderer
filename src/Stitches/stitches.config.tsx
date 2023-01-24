@@ -32,6 +32,9 @@ const stitches = createStitches({
       spines: "#4f545c",
       attachmentBorder: "rgba(27, 29, 32, 0.5)",
     },
+    fonts: {
+      main: "Open Sans, sans-serif",
+    },
     fontSizes: {
       xs: "10px",
       s: "12px",

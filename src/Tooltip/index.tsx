@@ -2,6 +2,8 @@ import RcTooltip from "rc-tooltip";
 import React, { ReactNode } from "react";
 
 export const tooltipPrefix = "message-renderer-rc-tooltip";
+export const tooltipAnimPrefix = "tooltip-anim";
+export const tooltipAnimDurationMs = 100;
 
 type TooltipProps = {
   children: ReactNode;
@@ -25,7 +27,18 @@ type TooltipProps = {
 
 function Tooltip({ children, ...props }: TooltipProps) {
   return (
-    <RcTooltip {...props} prefixCls={tooltipPrefix}>
+    <RcTooltip
+      {...props}
+      prefixCls={tooltipPrefix}
+      transitionName={tooltipAnimPrefix}
+      transitionAppear
+      transitionAppearTimeout={tooltipAnimDurationMs}
+      transitionEnter
+      transitionEnterTimeout={tooltipAnimDurationMs}
+      transitionLeave
+      transitionLeaveTimeout={tooltipAnimDurationMs}
+      destroyTooltipOnHide
+    >
       {children}
     </RcTooltip>
   );

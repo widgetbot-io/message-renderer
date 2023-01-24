@@ -18,13 +18,16 @@ function MessageContainer(props: MessageContainerProps) {
   return (
     <MessageContainerStyle.MessageContainer>
       <MessageContainerStyle.Buttons>
-        {props.buttons.map((option) => (
+        {props.buttons.map((option, index) => (
           <Tooltip
             overlay={option.actionDescription}
             placement="top"
             key={option.actionDescription}
           >
-            <MessageContainerStyle.Button onClick={option.onClick}>
+            <MessageContainerStyle.Button
+              onClick={option.onClick}
+              key={`button-${index}`}
+            >
               <img
                 src={option.icon}
                 alt={option.actionDescription}
