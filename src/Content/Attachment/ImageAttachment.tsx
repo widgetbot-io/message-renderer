@@ -1,7 +1,7 @@
 import { Message_attachments } from "@types";
 import useSize from "@root/Content/Attachment/useSize";
-import { ImageAttachmentBase } from "@root/Content/Attachment/elements";
 import React from "react";
+import * as Styles from "./style";
 
 interface ImageAttachmentProps {
   attachment: Message_attachments;
@@ -14,11 +14,10 @@ function ImageAttachment(props: ImageAttachmentProps) {
   );
 
   return (
-    <img
+    <Styles.ImageAttachment
       src={props.attachment.url}
       width={width}
       height={height}
-      className={ImageAttachmentBase}
     />
   );
 }

@@ -1,4 +1,5 @@
 import { css, styled, theme } from "@root/Stitches/stitches.config";
+import { Link } from "@root/markdown/render/elements";
 
 export const SmallTimestamp = styled(
   "time",
@@ -34,7 +35,7 @@ export const Message = styled(
   css({
     position: "relative",
     padding: `2px 48px 2px ${theme.sizes.messageLeftPadding}`,
-    "& a": {
+    [`& ${Link}`]: {
       color: theme.colors.link,
       textDecoration: "none",
       "&:hover": {

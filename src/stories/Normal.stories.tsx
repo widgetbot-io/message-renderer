@@ -332,8 +332,8 @@ YouTubeEmbed.args = {
   ],
 };
 
-export const Attachment = Template.bind({});
-Attachment.args = {
+export const ImageAttachment = Template.bind({});
+ImageAttachment.args = {
   messages: [
     {
       id: "1042882684902453278",
@@ -347,16 +347,89 @@ Attachment.args = {
       author: testUser,
       attachments: [
         {
-          url: "https://via.placeholder.com/1000x591.webp",
-          height: 591,
-          width: 1000,
-          filename: "SPOILER_flowchart-for-new-permissions.png",
+          url: "https://cdn.discordapp.com/attachments/993210446096105522/1013006253422813224/SPOILER_DALLE_2022-08-12_16.25.29_-_photo_of_a_chicken_in_a_pot_floating_on_the_ocean.png",
+          height: 973,
+          width: 973,
+          filename:
+            "SPOILER_DALLE_2022-08-12_16.25.29_-_photo_of_a_chicken_in_a_pot_floating_on_the_ocean.png",
           size: 981134,
           __typename: "Attachment",
         },
       ],
       stickers: [],
       reactions: null,
+      embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
+      __typename: "Message",
+      referencedMessage: null,
+    },
+  ],
+};
+
+export const ZipAttachment = Template.bind({});
+ZipAttachment.args = {
+  messages: [
+    {
+      id: "1067379014899089468",
+      channelId: "993210446096105522",
+      content: "",
+      type: "Default",
+      flags: 0,
+      createdAt: 1674553388095,
+      editedAt: null,
+      isGuest: false,
+      author: testUser,
+      attachments: [
+        {
+          url: "https://cdn.discordapp.com/attachments/859164806593118273/1067379522158207006/Emulicious.zip",
+          height: null,
+          width: null,
+          filename: "Emulicious.zip",
+          size: 2666805,
+          __typename: "Attachment",
+        },
+      ],
+      stickers: [],
+      reactions: null,
+      messageReference: null,
+      embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
+      __typename: "Message",
+      referencedMessage: null,
+    },
+  ],
+};
+
+export const AudioAttachment = Template.bind({});
+AudioAttachment.args = {
+  messages: [
+    {
+      id: "997827348554596382",
+      channelId: "993210446096105522",
+      content: "",
+      type: "Default",
+      flags: 0,
+      createdAt: 1657970978631,
+      editedAt: null,
+      isGuest: false,
+      author: testUser,
+      attachments: [
+        {
+          url: "https://cdn.discordapp.com/attachments/859164806593118273/1067395837027688469/bruh-sound-effect-2.mp3",
+          height: null,
+          width: null,
+          filename: "bruh-sound-effect-2.mp3",
+          size: 39008,
+          __typename: "Attachment",
+        },
+      ],
+      stickers: [],
+      reactions: null,
+      messageReference: null,
       embeds: [],
       mentions: [],
       interaction: null,

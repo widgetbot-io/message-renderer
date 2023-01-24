@@ -3,6 +3,14 @@ import SvgPause from "@images/discordAssets/pause.svg";
 import SvgPlay from "@images/discordAssets/play.svg";
 import SvgFullscreen from "@images/discordAssets/fullscreen.svg";
 
+export const ImageAttachment = styled(
+  "img",
+  "image-attachment",
+  css({
+    cursor: "pointer",
+  })
+);
+
 export const VideoAttachmentContainer = styled(
   "div",
   "video-attachment-container",
@@ -264,5 +272,148 @@ export const ProgressBar = styled(
       translate: "50% -50%",
       backgroundColor: theme.colors.accent,
     },
+  })
+);
+
+export const Spoiler = styled(
+  "div",
+  "spoiler",
+  css({
+    overflow: "hidden",
+    position: "relative",
+    width: "fit-content",
+    height: "fit-content",
+    borderRadius: 3,
+
+    "& > *": {
+      transition: "filter 0.2s ease-in-out",
+      filter: "blur(44px)",
+    },
+
+    "&[data-show='true'] > *": {
+      filter: "blur(0)",
+    },
+
+    "&[data-show='false']": {
+      cursor: "pointer",
+
+      "& > *": {
+        pointerEvents: "none",
+      },
+
+      "&:after": {
+        content: "SPOILER",
+        backgroundColor: theme.colors.transparentBlack,
+        color: theme.colors.primaryOpacity100,
+        borderRadius: 100,
+        padding: `${theme.space.large} ${theme.space.xl}`,
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        translate: "-50% -50%",
+        fontWeight: 600,
+        fontSize: theme.fontSizes.l,
+        letterSpacing: 0.5,
+      },
+
+      "&:hover:after": {
+        backgroundColor: theme.colors.blackSpoilerHover,
+      },
+    },
+  })
+);
+
+export const AttachmentContainer = styled(
+  "div",
+  "attachment-container",
+  css({
+    display: "flex",
+    backgroundColor: theme.colors.backgroundSecondary,
+    padding: 10,
+    border: `1px solid ${theme.colors.attachmentBorder}`,
+    borderRadius: 3,
+    width: "fit-content",
+    flexWrap: "wrap",
+
+    variants: {
+      withoutChildren: {
+        true: {
+          alignItems: "center",
+        },
+      },
+    },
+  })
+);
+
+export const AttachmentMetadata = styled(
+  "div",
+  "attachment-metadata",
+  css({
+    margin: `0 ${theme.space.large}`,
+    display: "flex",
+    flexDirection: "column",
+  })
+);
+
+export const AttachmentFileName = styled(
+  "a",
+  "attachment-file-name",
+  css({
+    color: theme.colors.link,
+    maxWidth: "40vw",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    textDecoration: "none",
+
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  })
+);
+
+export const AttachmentFileSize = styled(
+  "span",
+  "attachment-file-size",
+  css({
+    fontSize: theme.fontSizes.s,
+    color: theme.colors.primaryDark,
+  })
+);
+
+export const DownloadIcon = styled(
+  "a",
+  "attachment-download-icon",
+  css({
+    opacity: 0.8,
+    marginLeft: "auto",
+    color: theme.colors.primaryOpacity100,
+    display: "flex",
+
+    "&:hover": {
+      opacity: 1,
+    },
+  })
+);
+
+export const ExtraUserInterface = styled(
+  "div",
+  "attachment-extra-ui",
+  css({
+    flexBasis: "100%",
+    marginTop: theme.space.large,
+    display: "flex",
+  })
+);
+
+export const AttachmentAudioControls = styled(
+  "audio",
+  "attachment-audio-controls",
+  css({
+    flex: 1,
+    height: 32,
+    outline: "none",
+    borderRadius: 3,
+    maxWidth: "70vw",
   })
 );
