@@ -1,5 +1,5 @@
 import { css, styled, theme } from "@root/Stitches/stitches.config";
-import play from "@images/discordAssets/play.svg";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 export const Embed = styled(
   "article",
@@ -303,22 +303,35 @@ export const VideoThumbnail = styled(
     backgroundSize: "cover",
     position: "relative",
     cursor: "pointer",
+  })
+);
 
-    "&::after": {
-      content: "",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      width: 40,
-      height: 40,
-      transform: "translate(-50%, -50%)",
-      backgroundImage: `url(${play})`,
-      backgroundSize: "12px 12px",
-      backgroundPosition: "center",
-      backgroundColor: theme.colors.transparentBlack,
-      backgroundRepeat: "no-repeat",
-      pointerEvents: "none",
-      borderRadius: "100%",
+export const VideoThumbnailPlayButtonContainer = styled(
+  "div",
+  "video-thumbnail-play-button-container",
+  css({
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    width: 40,
+    height: 40,
+    translate: "-50% -50%",
+    borderRadius: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: theme.colors.transparentBlack,
+  })
+);
+
+export const VideoThumbnailPlayButton = styled(
+  SvgFromUrl,
+  "video-thumbnail-play-button",
+  css({
+    opacity: 0.6,
+
+    "&:hover": {
+      opacity: 1,
     },
   })
 );

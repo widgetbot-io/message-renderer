@@ -1,9 +1,9 @@
 import { Message_author } from "@types";
-import { IconsBase, SystemMessageContentBase } from "@root/Message/elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface UserPremiumGuildSubscriptionProps {
   createdAt: number;
@@ -15,9 +15,13 @@ function UserPremiumGuildSubscription(
   props: UserPremiumGuildSubscriptionProps
 ) {
   return (
-    <SystemMessageBase>
-      <IconsBase.Boost />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconBoost"
+      />
+      <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> just
         boosted the server
         {props.content !== "" && (
@@ -27,9 +31,9 @@ function UserPremiumGuildSubscription(
           </>
         )}
         !
-      </SystemMessageContentBase>
+      </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
-    </SystemMessageBase>
+    </Styles.SystemMessage>
   );
 }
 

@@ -1,4 +1,5 @@
 import { css, styled, theme } from "@root/Stitches/stitches.config";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 export const Base = styled(
   "span",
@@ -166,7 +167,7 @@ export const SeeThreadButton = styled(
 );
 
 export const ReplyIcon = styled(
-  "img",
+  SvgFromUrl,
   "reply-icon",
   css({
     marginLeft: theme.space.small,
@@ -176,7 +177,7 @@ export const ReplyIcon = styled(
 );
 
 export const StickerTooltipIcon = styled(
-  "img",
+  SvgFromUrl,
   "sticker-tooltip-icon",
   css({
     marginRight: theme.space.small,

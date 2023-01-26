@@ -10,6 +10,7 @@ import useSize from "@root/Content/Attachment/useSize";
 import { Message_attachments, Message_embeds } from "@types";
 import * as Styles from "./style";
 import Tooltip from "@root/Tooltip";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 interface VideoAttachmentProps {
   attachmentOrEmbed:
@@ -127,7 +128,13 @@ function VideoAttachment(props: VideoAttachmentProps) {
           <Styles.PlayOrPauseButtonAnimation
             data-paused={paused}
             data-has-played-before={hasPlayedOnceBefore}
-          />
+          >
+            <SvgFromUrl
+              width={12}
+              height={12}
+              svg={paused ? "IconPlay" : "IconPause"}
+            />
+          </Styles.PlayOrPauseButtonAnimation>
         )}
         {"filename" in props.attachmentOrEmbed && (
           <Styles.VideoMetadata>
@@ -142,7 +149,9 @@ function VideoAttachment(props: VideoAttachmentProps) {
         <Styles.VideoAttachmentOverlayControl onClick={playVideo} />
         <Styles.VideoControls>
           <Styles.VideoControlButton
-            stitchesProps={{ type: paused ? "playButton" : "pauseButton" }}
+            width={14}
+            height={14}
+            svg={paused ? "IconPlay" : "IconPause"}
             onClick={playVideo}
           />
           {width > 200 && (
@@ -167,11 +176,13 @@ function VideoAttachment(props: VideoAttachmentProps) {
           </Styles.ProgressBar>
           <Tooltip placement="top" overlay="Full Screen">
             <Styles.VideoControlButton
-              stitchesProps={{ type: "fullscreen" }}
+              width={14}
+              height={14}
+              svg="IconFullscreen"
               onClick={() => {
                 if (document.fullscreenElement === null)
                   attachmentRef.current?.requestFullscreen();
-                else document.exitFullscreen();
+                else void document.exitFullscreen();
               }}
             />
           </Tooltip>

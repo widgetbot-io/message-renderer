@@ -3,7 +3,7 @@ import * as Styles from "./style";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
 import React, { ReactNode, useState } from "react";
 import useSize from "@root/Content/Attachment/useSize";
-import DiscordImageFailure from "@images/discordAssets/discord-image-failure.svg";
+import { getSvgUrl } from "@root/core/SvgContext";
 
 interface ThumbnailWrapperProps {
   thumbnail?: Embed_thumbnail["url"];
@@ -19,7 +19,7 @@ function ThumbnailWrapper({
   children,
 }: ThumbnailWrapperProps) {
   const [hideThumbnail, setHideThumbnail] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(true);
 
   const { width: adjustedWidth, height: adjustedHeight } = useSize(
     width,
@@ -28,6 +28,8 @@ function ThumbnailWrapper({
 
   if (!thumbnail || hideThumbnail) return <>{children}</>;
 
+  const discordImageFailure = getSvgUrl("MiscDiscordImageFailure");
+
   return (
     <Styles.VideoThumbnail
       onClick={() => setHideThumbnail(true)}
@@ -35,9 +37,17 @@ function ThumbnailWrapper({
       style={{
         width: adjustedWidth,
         height: adjustedHeight,
-        backgroundImage: `url(${error ? DiscordImageFailure : thumbnail})`,
+        backgroundImage: `url(${error ? discordImageFailure : thumbnail})`,
       }}
-    />
+    >
+      <Styles.VideoThumbnailPlayButtonContainer>
+        <Styles.VideoThumbnailPlayButton
+          width={12}
+          height={12}
+          svg="IconPlay"
+        />
+      </Styles.VideoThumbnailPlayButtonContainer>
+    </Styles.VideoThumbnail>
   );
 }
 

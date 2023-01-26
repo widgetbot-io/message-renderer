@@ -1,7 +1,5 @@
 import { css, keyframes, styled, theme } from "@root/Stitches/stitches.config";
-import SvgPause from "@images/discordAssets/pause.svg";
-import SvgPlay from "@images/discordAssets/play.svg";
-import SvgFullscreen from "@images/discordAssets/fullscreen.svg";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 export const ImageAttachment = styled(
   "img",
@@ -114,10 +112,9 @@ export const PlayOrPauseButtonAnimation = styled(
     padding: theme.space.xl,
     pointerEvents: "none",
     boxSizing: "border-box",
-
-    backgroundPosition: "center",
-    backgroundSize: 12,
-    backgroundRepeat: "no-repeat",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
 
     "&[data-has-played-before='true']": {
       animation: `${stateChange} ${PlayOrPauseAnimationDuration}ms ease-in-out`,
@@ -125,14 +122,6 @@ export const PlayOrPauseButtonAnimation = styled(
 
     "&[data-has-played-before='false']": {
       backgroundColor: theme.colors.transparentBlack,
-    },
-
-    "&[data-has-played-before='false'], &[data-paused='false']": {
-      backgroundImage: `url(${SvgPlay})`,
-    },
-
-    "&[data-has-played-before='true'][data-paused='true']": {
-      backgroundImage: `url(${SvgPause})`,
     },
   })
 );
@@ -203,13 +192,9 @@ export const VideoControlsTime = styled(
 );
 
 export const VideoControlButton = styled(
-  "button",
+  SvgFromUrl,
   "video-control-button",
   css({
-    $$size: "14px",
-
-    width: "$$size",
-    height: "$$size",
     border: "none",
     background: "none",
     backgroundSize: "$$size $$size",
@@ -219,20 +204,6 @@ export const VideoControlButton = styled(
 
     "&:hover": {
       opacity: 1,
-    },
-
-    variants: {
-      type: {
-        playButton: {
-          backgroundImage: `url(${SvgPlay})`,
-        },
-        pauseButton: {
-          backgroundImage: `url(${SvgPause})`,
-        },
-        fullscreen: {
-          backgroundImage: `url(${SvgFullscreen})`,
-        },
-      },
     },
   })
 );

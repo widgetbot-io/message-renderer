@@ -1,13 +1,10 @@
 import { Message_author } from "@types";
-import {
-  IconsBase,
-  SystemMessageLinkBase,
-  SystemMessageContentBase,
-} from "../elements";
+import { SystemMessageLinkBase } from "../elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface ChannelFollowAddProps {
   content: string;
@@ -17,9 +14,13 @@ interface ChannelFollowAddProps {
 
 function ChannelFollowAdd(props: ChannelFollowAddProps) {
   return (
-    <SystemMessageBase>
-      <IconsBase.Add />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconAdd"
+      />
+      <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> has
         added{" "}
         <SystemMessageLinkBase cursor="not-allowed">
@@ -27,8 +28,8 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
         </SystemMessageLinkBase>{" "}
         to this channel. It's most important updates will show up here.
         <LargeTimestamp timestamp={props.createdAt} />
-      </SystemMessageContentBase>
-    </SystemMessageBase>
+      </Styles.SystemMessageContent>
+    </Styles.SystemMessage>
   );
 }
 

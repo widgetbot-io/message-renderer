@@ -2,10 +2,12 @@ import { ReactNode } from "react";
 import Tooltip from "@root/Tooltip";
 import React from "react";
 import { MessageContainerStyle } from "@root/Message/style/message";
+import { Svg } from "@root/core/SvgContext";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 export interface MessageButtonListOption {
   onClick: () => void;
-  icon: string;
+  icon: Svg;
   actionDescription: string;
 }
 
@@ -28,11 +30,7 @@ function MessageContainer(props: MessageContainerProps) {
               onClick={option.onClick}
               key={`button-${index}`}
             >
-              <img
-                src={option.icon}
-                alt={option.actionDescription}
-                width={20}
-              />
+              <SvgFromUrl width={20} height={20} svg={option.icon} />
             </MessageContainerStyle.Button>
           </Tooltip>
         ))}

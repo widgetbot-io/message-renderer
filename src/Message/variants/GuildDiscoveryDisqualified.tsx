@@ -1,7 +1,7 @@
-import { IconsBase, SystemMessageContentBase } from "../elements";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface GuildDiscoveryDisqualifiedProps {
   createdAt: number;
@@ -9,14 +9,18 @@ interface GuildDiscoveryDisqualifiedProps {
 
 function GuildDiscoveryDisqualified(props: GuildDiscoveryDisqualifiedProps) {
   return (
-    <SystemMessageBase>
-      <IconsBase.Cross />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconCross"
+      />
+      <Styles.SystemMessageContent>
         This server has been removed from Server Discovery because it no longer
         passes all the requirements.
-      </SystemMessageContentBase>
+      </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
-    </SystemMessageBase>
+    </Styles.SystemMessage>
   );
 }
 

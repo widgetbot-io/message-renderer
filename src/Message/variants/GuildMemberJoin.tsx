@@ -1,9 +1,9 @@
 import { Message_author } from "@types";
-import { IconsBase, SystemMessageContentBase } from "@root/Message/elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface GuildMemberJoinProps {
   createdAt: number;
@@ -34,13 +34,17 @@ function joinMessage(createdAt: number, author: Message_author): JSX.Element {
 
 function GuildMemberJoin(props: GuildMemberJoinProps) {
   return (
-    <SystemMessageBase>
-      <IconsBase.Add />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconAdd"
+      />
+      <Styles.SystemMessageContent>
         {joinMessage(props.createdAt, props.author)}
         <LargeTimestamp timestamp={props.createdAt} />
-      </SystemMessageContentBase>
-    </SystemMessageBase>
+      </Styles.SystemMessageContent>
+    </Styles.SystemMessage>
   );
 }
 

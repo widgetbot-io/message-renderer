@@ -1,7 +1,7 @@
-import { IconsBase, SystemMessageContentBase } from "@root/Message/elements";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface GuildDiscoveryRequalifiedProps {
   createdAt: number;
@@ -9,14 +9,18 @@ interface GuildDiscoveryRequalifiedProps {
 
 function GuildDiscoveryRequalified(props: GuildDiscoveryRequalifiedProps) {
   return (
-    <SystemMessageBase>
-      <IconsBase.Checkmark />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconCheckmark"
+      />
+      <Styles.SystemMessageContent>
         This server is eligible for Server Discovery again and has been
         automatically relisted!
-      </SystemMessageContentBase>
+      </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
-    </SystemMessageBase>
+    </Styles.SystemMessage>
   );
 }
 

@@ -14,6 +14,7 @@ const stitches = createStitches({
       primaryOpacity80: "rgba(255, 255, 255, 0.8)",
       primaryOpacity100: "rgba(255, 255, 255, 1.0)",
       primaryDark: "#72767d",
+      systemMessageDark: "#999999",
       textMuted: "rgb(163, 166, 170)",
       interactiveNormal: "#dcddde",
       accent: "#5865f2",

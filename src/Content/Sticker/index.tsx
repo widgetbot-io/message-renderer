@@ -1,5 +1,4 @@
 import Tooltip from "@root/Tooltip";
-import StickerIcon from "@images/discordAssets/sticker-icon.svg";
 import Lottie from "@root/Content/Sticker/Lottie";
 import webpCheck from "@utils/webpCheck";
 import * as Styles from "../style";
@@ -15,7 +14,7 @@ function Sticker(props: StickerProps) {
     <Tooltip
       overlay={
         <Styles.StickerTooltip>
-          <Styles.StickerTooltipIcon src={StickerIcon} alt="" />{" "}
+          <Styles.StickerTooltipIcon width={16} height={16} svg="IconSticker" />{" "}
           {props.sticker.name}
         </Styles.StickerTooltip>
       }

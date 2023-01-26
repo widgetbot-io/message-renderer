@@ -1,13 +1,10 @@
-import {
-  IconsBase,
-  SystemMessageLinkBase,
-  SystemMessageContentBase,
-} from "../elements";
+import { SystemMessageLinkBase } from "../elements";
 import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import React, { useCallback } from "react";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface ChannelPinnedMessageProps {
   author: Message_author;
@@ -22,9 +19,13 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
   );
 
   return (
-    <SystemMessageBase>
-      <IconsBase.Pinned />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconPin"
+      />
+      <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> pinned a
         message to this channel. See all{" "}
         <SystemMessageLinkBase onClick={openPinnedMessage}>
@@ -32,8 +33,8 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
         </SystemMessageLinkBase>
         .
         <LargeTimestamp timestamp={props.createdAt} />
-      </SystemMessageContentBase>
-    </SystemMessageBase>
+      </Styles.SystemMessageContent>
+    </Styles.SystemMessage>
   );
 }
 

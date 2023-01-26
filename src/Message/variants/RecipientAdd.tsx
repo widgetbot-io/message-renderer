@@ -1,10 +1,10 @@
-import { IconsBase, SystemMessageContentBase } from "../elements";
 import * as AuthorStyles from "../style/author";
 import { Message_author, Message_mentions } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface RecipientAddProps {
   createdAt: number;
@@ -15,15 +15,19 @@ interface RecipientAddProps {
 // todo: check if this also applies to group chats, and support those as well.
 function RecipientAdd(props: RecipientAddProps) {
   return (
-    <SystemMessageBase>
-      <IconsBase.Add />
-      <SystemMessageContentBase>
+    <Styles.SystemMessage>
+      <Styles.SystemMessageIcon
+        width={SystemMessageIconSize}
+        height={SystemMessageIconSize}
+        svg="IconAdd"
+      />
+      <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> added{" "}
         <AuthorStyles.Username>{props.target.name}</AuthorStyles.Username> to
         the thread.
-      </SystemMessageContentBase>
+      </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
-    </SystemMessageBase>
+    </Styles.SystemMessage>
   );
 }
 

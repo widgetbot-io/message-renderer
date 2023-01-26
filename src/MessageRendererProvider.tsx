@@ -6,9 +6,13 @@ import {
   tooltipPrefix,
 } from "@root/Tooltip";
 import { hljsTheme } from "@root/markdown/render/elements/code/hljs";
+import { Svg, SvgContext } from "@root/core/SvgContext";
 
 type MessageRendererProviderProps = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;
+  svgUrls?: {
+    [svg in Svg]?: string;
+  };
 };
 
 const globalStyles = globalCss({
@@ -119,11 +123,18 @@ const extraCss = css({
   backgroundColor: theme.colors.background, // todo: this is only for testing!
 });
 
-function MessageRendererProvider({ children }: MessageRendererProviderProps) {
+function MessageRendererProvider({
+  children,
+  svgUrls,
+}: MessageRendererProviderProps) {
   globalStyles();
   hljsTheme();
 
-  return <>{children({ themeClass: `${theme} ${extraCss}` })}</>;
+  return (
+    <SvgContext.Provider value={svgUrls}>
+      {children({ themeClass: `${theme} ${extraCss}` })}
+    </SvgContext.Provider>
+  );
 }
 
 export default MessageRendererProvider;

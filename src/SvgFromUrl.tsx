@@ -1,15 +1,29 @@
-import React from "react";
+import React, { ComponentProps } from "react";
+import { getSvgUrl, Svg } from "@root/core/SvgContext";
 
 type SvgFromUrlProps = {
-  href: string;
   width: number;
   height: number;
+  svg: Svg;
 };
 
-function SvgFromUrl({ href, width, height }: SvgFromUrlProps) {
+function SvgFromUrl({
+  svg,
+  width,
+  height,
+  ...props
+}: SvgFromUrlProps & ComponentProps<"svg">) {
+  const svgUrl = getSvgUrl(svg);
+
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <use href={`${href}#svg`} width={width} height={height} />
+    <svg
+      {...props}
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="none"
+    >
+      <use href={`${svgUrl}#svg`} width={width} height={height} />
     </svg>
   );
 }

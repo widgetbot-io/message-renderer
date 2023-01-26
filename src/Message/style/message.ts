@@ -1,5 +1,6 @@
 import { css, styled, theme } from "@root/Stitches/stitches.config";
 import { Link } from "@root/markdown/render/elements";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 export const SmallTimestamp = styled(
   "time",
@@ -85,16 +86,6 @@ export const MessageHeaderBase = styled(
   css({
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-  })
-);
-
-export const SystemMessageBase = styled(
-  Message,
-  "system-message",
-  css({
-    display: "flex",
-    flexWrap: "wrap",
     alignItems: "center",
   })
 );
@@ -253,5 +244,56 @@ export const MiniUserName = styled(
     overflow: "hidden",
     maxWidth: "25vw",
     textOverflow: "ellipsis",
+  })
+);
+
+export const SystemMessage = styled(
+  Message,
+  "system-message",
+  css({
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+  })
+);
+
+export const SystemMessageIconSize = 18;
+
+export const SystemMessageIcon = styled(
+  SvgFromUrl,
+  "system-message-icon",
+  css({
+    position: "absolute",
+    top: "50%",
+    left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
+    translate: "-50% -50%",
+  })
+);
+
+export const ThreadCreatedIcon = styled(
+  SvgFromUrl,
+  "thread-created-icon",
+  css({
+    position: "absolute",
+    left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
+    marginTop: theme.space.medium,
+    top: 0,
+    translate: "-50% 0",
+  })
+);
+
+export const SystemMessageContent = styled(
+  "span",
+  "system-message-content",
+  css({
+    color: theme.colors.systemMessageDark,
+
+    variants: {
+      fullColor: {
+        true: {
+          color: theme.colors.primaryOpacity100,
+        },
+      },
+    },
   })
 );

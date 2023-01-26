@@ -1,16 +1,13 @@
 import { Message_thread } from "@types";
-import {
-  IconsBase,
-  SystemMessageContentBase,
-  SystemMessageLinkBase,
-} from "@root/Message/elements";
+import { SystemMessageLinkBase } from "@root/Message/elements";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
 import { Message_author, Message_messageReference } from "@types";
 import React from "react";
 import { MessageType } from "@root/types/globalTypes";
-import { SystemMessageBase } from "@root/Message/style/message";
+import * as Styles from "@root/Message/style/message";
+import { SystemMessageIconSize } from "@root/Message/style/message";
 
 interface ThreadCreatedProps {
   createdAt: number;
@@ -33,29 +30,37 @@ function ThreadCreated(props: ThreadCreatedProps) {
 
   if (props.thread === null)
     return (
-      <SystemMessageBase>
-        <SystemMessageContentBase>
-          <IconsBase.ThreadCreated centerVertically={false} />
+      <Styles.SystemMessage>
+        <Styles.SystemMessageContent>
+          <Styles.ThreadCreatedIcon
+            width={SystemMessageIconSize}
+            height={SystemMessageIconSize}
+            svg="IconThreadCreated"
+          />
           <MessageAuthor author={props.author} onlyShowUsername={true} />{" "}
           started a thread:{" "}
           <SystemMessageLinkBase /* onClick={openThread} */>
             {props.messageContent}
           </SystemMessageLinkBase>
-        </SystemMessageContentBase>
+        </Styles.SystemMessageContent>
         <LargeTimestamp timestamp={props.createdAt} />
-      </SystemMessageBase>
+      </Styles.SystemMessage>
     );
 
   return (
-    <SystemMessageBase>
-      <SystemMessageContentBase>
-        <IconsBase.ThreadCreated centerVertically={false} />
+    <Styles.SystemMessage>
+      <Styles.SystemMessageContent>
+        <Styles.ThreadCreatedIcon
+          width={SystemMessageIconSize}
+          height={SystemMessageIconSize}
+          svg="IconThreadCreated"
+        />
         <MessageAuthor author={props.author} onlyShowUsername={true} /> started
         a thread:{" "}
         <SystemMessageLinkBase /* onClick={openThread} */>
           {props.thread.name}
         </SystemMessageLinkBase>
-      </SystemMessageContentBase>
+      </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
       <ThreadButton
         thread={props.thread}
@@ -64,7 +69,7 @@ function ThreadCreated(props: ThreadCreatedProps) {
         messageType={MessageType.ThreadCreated}
         hasReply={false}
       />
-    </SystemMessageBase>
+    </Styles.SystemMessage>
   );
 }
 

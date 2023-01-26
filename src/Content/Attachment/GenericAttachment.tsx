@@ -1,23 +1,11 @@
 import { AttachmentProps } from "@root/Content/Attachment/index";
 
-import downloadIcon from "@images/discordAssets/download-icon.svg";
 import { filesize } from "filesize";
 import * as Styles from "./style";
 import * as React from "react";
 import { useMemo } from "react";
 import SvgFromUrl from "@root/SvgFromUrl";
-
-import SvgFileAudio from "@images/discordAssets/file-audio.svg";
-import SvgSketch from "@images/discordAssets/file-sketch.svg";
-import SvgFileArchive from "@images/discordAssets/file-archive.svg";
-import SvgFileUnknown from "@images/discordAssets/file-unknown.svg";
-import SvgAe from "@images/discordAssets/file-ae.svg";
-import SvgAi from "@images/discordAssets/file-ai.svg";
-import SvgAcrobat from "@images/discordAssets/file-acrobat.svg";
-import SvgCode from "@images/discordAssets/file-code.svg";
-import SvgDocument from "@images/discordAssets/file-document.svg";
-import SvgSpreadsheet from "@images/discordAssets/file-spreadsheet.svg";
-import SvgWebCode from "@images/discordAssets/file-webcode.svg";
+import { Svg } from "@root/core/SvgContext";
 
 interface GenericAttachmentProps extends AttachmentProps {
   // If undefined, we will fall back to the unknown icon
@@ -37,30 +25,30 @@ interface GenericAttachmentProps extends AttachmentProps {
 }
 
 function GenericAttachment(props: GenericAttachmentProps) {
-  const icon = useMemo(() => {
+  const icon: Svg = useMemo(() => {
     switch (props.icon ?? "unknown") {
       case "archive":
-        return SvgFileArchive;
+        return "FileArchive";
       case "audio":
-        return SvgFileAudio;
+        return "FileAudio";
       case "sketch":
-        return SvgSketch;
+        return "FileSketch";
       case "acrobat":
-        return SvgAcrobat;
+        return "FileAcrobat";
       case "ae":
-        return SvgAe;
+        return "FileAe";
       case "ai":
-        return SvgAi;
+        return "FileAi";
       case "code":
-        return SvgCode;
+        return "FileCode";
       case "document":
-        return SvgDocument;
+        return "FileDocument";
       case "spreadsheet":
-        return SvgSpreadsheet;
+        return "FileSpreadsheet";
       case "webcode":
-        return SvgWebCode;
+        return "FileWebCode";
       default:
-        return SvgFileUnknown;
+        return "FileUnknown";
     }
   }, [props.icon]);
 
@@ -70,7 +58,7 @@ function GenericAttachment(props: GenericAttachmentProps) {
         withoutChildren: props.children === undefined,
       }}
     >
-      <SvgFromUrl href={icon} width={30} height={40} />
+      <SvgFromUrl svg={icon} width={30} height={40} />
       <Styles.AttachmentMetadata>
         <Styles.AttachmentFileName
           rel="noreferrer noopener"
@@ -88,7 +76,7 @@ function GenericAttachment(props: GenericAttachmentProps) {
         target="_blank"
         href={props.attachment.url}
       >
-        <SvgFromUrl href={downloadIcon} width={24} height={24} />
+        <SvgFromUrl svg="IconDownload" width={24} height={24} />
       </Styles.DownloadIcon>
       {props.children && (
         <Styles.ExtraUserInterface>{props.children}</Styles.ExtraUserInterface>

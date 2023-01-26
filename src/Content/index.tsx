@@ -6,15 +6,12 @@ import Tooltip from "@root/Tooltip";
 import Moment from "moment/moment";
 import Reactions from "@root/Message/Reactions";
 import Attachment from "@root/Content/Attachment";
-import StickerIcon from "@images/discordAssets/sticker-icon.svg";
-import Danger from "@images/discordAssets/danger.svg";
-import AttachmentIcon from "@images/discordAssets/attachment-icon.svg";
-import CommandIcon from "@images/discordAssets/command-icon.svg";
 import Sticker from "@root/Content/Sticker";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
 import Message from "../Message";
 import Embed from "@root/Content/Embed";
 import * as Styles from "./style";
+import SvgFromUrl from "@root/SvgFromUrl";
 
 interface EditedProps {
   editedAt: number;
@@ -38,13 +35,13 @@ interface ReplyIconProps {
 
 function ReplyIcon({ message }: ReplyIconProps) {
   if (message.interaction)
-    return <Styles.ReplyIcon src={CommandIcon} alt="command" />;
+    return <Styles.ReplyIcon width={20} height={20} svg="IconCommand" />;
 
   if (message.stickers.length > 0)
-    return <Styles.ReplyIcon src={StickerIcon} alt="sticker" />;
+    return <Styles.ReplyIcon width={20} height={20} svg="IconSticker" />;
 
   if (message.attachments.length > 0 || message.embeds.length > 0)
-    return <Styles.ReplyIcon src={AttachmentIcon} alt="attachment" />;
+    return <Styles.ReplyIcon width={20} height={20} svg="IconAttachment" />;
 
   return null;
 }
@@ -127,8 +124,8 @@ function Content(props: ContentProps) {
     if (Date.now() - props.message.createdAt > fifteenMinutes)
       return (
         <FailedInteraction>
-          <img src={Danger} alt="" width={16} height={16} /> The application did
-          not respond
+          <SvgFromUrl width={16} height={16} svg="IconDanger" /> The application
+          did not respond
         </FailedInteraction>
       );
 
