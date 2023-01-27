@@ -101,6 +101,11 @@ export const AuthorName = styled(
 
     a: {
       color: theme.colors.primaryOpacity100,
+      textDecoration: "none",
+
+      "&:hover": {
+        textDecoration: "underline",
+      },
     },
   })
 );
