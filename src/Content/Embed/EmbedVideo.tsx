@@ -19,7 +19,7 @@ function ThumbnailWrapper({
   children,
 }: ThumbnailWrapperProps) {
   const [hideThumbnail, setHideThumbnail] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
   const { width: adjustedWidth, height: adjustedHeight } = useSize(
     width,
