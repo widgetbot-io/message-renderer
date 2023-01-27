@@ -1,7 +1,6 @@
 import React, { Children, memo, ReactNode, useMemo } from "react";
 import Markdown, { LinkMarkdown } from "@root/markdown/render";
 import { Message as MessageData, Message_referencedMessage } from "@types";
-import { FailedInteraction, TypingIndicator } from "@root/Message/elements";
 import Tooltip from "@root/Tooltip";
 import Moment from "moment/moment";
 import Reactions from "@root/Message/Reactions";
@@ -123,39 +122,41 @@ function Content(props: ContentProps) {
 
     if (Date.now() - props.message.createdAt > fifteenMinutes)
       return (
-        <FailedInteraction>
-          <SvgFromUrl width={16} height={16} svg="IconDanger" /> The application
-          did not respond
-        </FailedInteraction>
+        <Styles.FailedInteraction>
+          <SvgFromUrl width={16} height={16} svg="IconDanger" />
+          <span>The application did not respond</span>
+        </Styles.FailedInteraction>
       );
 
     return (
       <Styles.DeferredContent>
-        <TypingIndicator width={25.5} height={7} style={{ marginRight: 5 }}>
+        {/* todo: extract svg into something the lib user can change */}
+        <Styles.TypingIndicator
+          width={25.5}
+          height={7}
+          style={{ marginRight: 5 }}
+        >
           <g>
-            <circle
+            <Styles.TypingIndicatorCircle1
               cx="3.5"
               cy="3.5"
               r="3.5"
-              className="typing-1"
               fill="currentColor"
             />
-            <circle
+            <Styles.TypingIndicatorCircle2
               cx="12.25"
               cy="3.5"
               r="3.5"
-              className="typing-2"
               fill="currentColor"
             />
-            <circle
+            <Styles.TypingIndicatorCircle3
               cx="21"
               cy="3.5"
               r="3.5"
-              className="typing-3"
               fill="currentColor"
             />
           </g>
-        </TypingIndicator>
+        </Styles.TypingIndicator>
         {props.message.author.name} is thinking...
       </Styles.DeferredContent>
     );

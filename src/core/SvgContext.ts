@@ -31,6 +31,7 @@ import SvgIconDanger from "@images/discordAssets/icon-danger.svg";
 import SvgIconPause from "@images/discordAssets/icon-pause.svg";
 import SvgIconFullscreen from "@images/discordAssets/icon-fullscreen.svg";
 import SvgIconPlay from "@images/discordAssets/icon-play.svg";
+import SvgIconUnknownReply from "@images/discordAssets/icon-unknown-reply.svg";
 
 import SvgMiscDiscordImageFailure from "@images/discordAssets/misc-discord-image-failure.svg";
 
@@ -64,8 +65,8 @@ export type Svg =
   | "IconFullscreen"
   | "IconPlay"
   | "IconCross"
-  | "MiscDiscordImageFailure"
-  | `Custom${string}`;
+  | "IconUnknownReply"
+  | "MiscDiscordImageFailure";
 
 export const SvgContext = createContext({});
 
@@ -100,6 +101,7 @@ const defaultSvgUrls: Record<Svg, string> = {
   IconPause: SvgIconPause,
   IconFullscreen: SvgIconFullscreen,
   IconPlay: SvgIconPlay,
+  IconUnknownReply: SvgIconUnknownReply,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
 };
 

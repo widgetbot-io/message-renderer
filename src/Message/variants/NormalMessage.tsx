@@ -4,11 +4,6 @@ import {
   Message_interaction,
   Message_referencedMessage,
 } from "@types";
-import {
-  SlashCommandBase,
-  UnknownReplyIcon,
-  UnknownReplyText,
-} from "@root/Message/elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import Content from "@root/Content";
 import Moment from "moment";
@@ -93,10 +88,14 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       <Styles.ReplySpine />
       {unknownReply ? (
         <>
-          <UnknownReplyIcon />
-          <UnknownReplyText>
+          <Styles.UnknownReplyIcon
+            width={12}
+            height={12}
+            svg="IconUnknownReply"
+          />
+          <Styles.UnknownReply>
             Original message was deleted or is unknown.
-          </UnknownReplyText>
+          </Styles.UnknownReply>
         </>
       ) : (
         <Styles.ReplyUser>
@@ -118,13 +117,13 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
         <Content message={props.referencedMessage} isReplyContent={true} />
       ) : (
         props.interaction && (
-          <SlashCommandBase.Base>
+          <Styles.SlashCommand>
             used{" "}
-            <SlashCommandBase.Command>
+            <Styles.SlashCommandText>
               {!props.isContextMenuInteraction ? "/" : ""}
               {props.interaction.name}
-            </SlashCommandBase.Command>
-          </SlashCommandBase.Base>
+            </Styles.SlashCommandText>
+          </Styles.SlashCommand>
         )
       )}
     </Styles.ReplyInfo>

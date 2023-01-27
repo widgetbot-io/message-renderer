@@ -1,7 +1,7 @@
-import styled from "react-emotion";
 import Moment from "moment";
 import Tooltip from "@root/Tooltip";
 import React from "react";
+import { css, styled, theme } from "@root/Stitches/stitches.config";
 
 enum TimestampStyle {
   ShortTime = "t",
@@ -53,8 +53,12 @@ export const Timestamp: React.FC<Props> = ({ data: { timestamp, style } }) => {
   );
 };
 
-const TSSpan = styled("span")<Record<string, unknown>>`
-  background-color: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
-  padding: 0 2px;
-`;
+const TSSpan = styled(
+  "span",
+  "timestamp-span",
+  css({
+    backgroundColor: theme.colors.primaryOpacity10,
+    borderRadius: 3,
+    padding: `0 ${theme.space.xs}`,
+  })
+);

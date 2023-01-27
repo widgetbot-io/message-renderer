@@ -1,4 +1,3 @@
-import EmojiParser from ".";
 import { css, styled } from "@root/Stitches/stitches.config";
 
 export const emojiCss = css({
@@ -22,5 +21,3 @@ export const emojiCss = css({
 });
 
 export const Emoji = styled("img", "emoji", emojiCss);
-
-export const Twemoji = styled(EmojiParser, "twemoji", emojiCss);

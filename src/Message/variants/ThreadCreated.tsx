@@ -1,5 +1,4 @@
 import { Message_thread } from "@types";
-import { SystemMessageLinkBase } from "@root/Message/elements";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
@@ -39,9 +38,9 @@ function ThreadCreated(props: ThreadCreatedProps) {
           />
           <MessageAuthor author={props.author} onlyShowUsername={true} />{" "}
           started a thread:{" "}
-          <SystemMessageLinkBase /* onClick={openThread} */>
+          <Styles.SystemMessageLink /* onClick={openThread} */>
             {props.messageContent}
-          </SystemMessageLinkBase>
+          </Styles.SystemMessageLink>
         </Styles.SystemMessageContent>
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessage>
@@ -57,9 +56,9 @@ function ThreadCreated(props: ThreadCreatedProps) {
         />
         <MessageAuthor author={props.author} onlyShowUsername={true} /> started
         a thread:{" "}
-        <SystemMessageLinkBase /* onClick={openThread} */>
+        <Styles.SystemMessageLink /* onClick={openThread} */>
           {props.thread.name}
-        </SystemMessageLinkBase>
+        </Styles.SystemMessageLink>
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
       <ThreadButton

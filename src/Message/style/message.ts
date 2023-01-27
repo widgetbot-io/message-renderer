@@ -297,3 +297,67 @@ export const SystemMessageContent = styled(
     },
   })
 );
+
+// todo: once we allow library user to specify onClicks, we should based on whether one is set set the cursor to not-allowed (if there is no onClick)
+export const SystemMessageLink = styled(
+  "span",
+  "system-message-link",
+  css({
+    color: theme.colors.primaryOpacity100,
+
+    "&:hover": {
+      cursor: "pointer",
+      textDecoration: "underline",
+    },
+  })
+);
+
+export const SlashCommand = styled(
+  "span",
+  "slash-command",
+  css({
+    color: theme.colors.primaryOpacity60,
+    fontSize: theme.fontSizes.m,
+    userSelect: "none",
+  })
+);
+
+export const UnknownReply = styled(
+  "span",
+  "unknown-reply",
+  css({
+    color: theme.colors.primaryOpacity60,
+    fontSize: theme.fontSizes.m,
+    userSelect: "none",
+    fontStyle: "italic",
+  })
+);
+
+export const UnknownReplyIcon = styled(
+  SvgFromUrl,
+  "unknown-reply-icon",
+  css({
+    backgroundColor: theme.colors.backgroundTertiary,
+    borderRadius: "50%",
+    marginRight: theme.space.small,
+    padding: 4, // 16 - size of svg (12), aka do not tie up to theme
+  })
+);
+
+export const SlashCommandText = styled(
+  "span",
+  "slash-command-text",
+  css({
+    color: theme.colors.link,
+  })
+);
+
+export const RoleIcon = styled(
+  "img",
+  "role-icon",
+  css({
+    marginLeft: theme.space.small,
+    width: 20,
+    height: 20,
+  })
+);

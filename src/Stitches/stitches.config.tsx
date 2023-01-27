@@ -11,6 +11,7 @@ const stitches = createStitches({
       primaryOpacity20: "rgba(255, 255, 255, 0.2)",
       primaryOpacity30: "rgba(255, 255, 255, 0.3)",
       primaryOpacity50: "rgba(255, 255, 255, 0.5)",
+      primaryOpacity60: "rgba(255, 255, 255, 0.6)",
       primaryOpacity80: "rgba(255, 255, 255, 0.8)",
       primaryOpacity100: "rgba(255, 255, 255, 1.0)",
       primaryDark: "#72767d",
@@ -32,6 +33,7 @@ const stitches = createStitches({
       blackSpoilerHover: "rgba(0, 0, 0, 0.9)",
       spines: "#4f545c",
       attachmentBorder: "rgba(27, 29, 32, 0.5)",
+      danger: "#ed4245",
     },
     fonts: {
       main: "Open Sans, sans-serif",

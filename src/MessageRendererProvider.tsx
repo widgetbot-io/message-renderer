@@ -16,12 +16,6 @@ type MessageRendererProviderProps = {
 };
 
 const globalStyles = globalCss({
-  // emotion snitch
-  [`[class^="css-"]`]: {
-    backgroundColor: "red",
-    outline: "2px solid red",
-  },
-
   [`.${tooltipPrefix}`]: {
     width: "fit-content",
     zIndex: 1070,

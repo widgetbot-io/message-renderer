@@ -1,4 +1,3 @@
-import { cx } from "emotion";
 import { Message_mentions } from "@types";
 import React from "react";
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 }
 
 const Role = ({ id, children, className, data }: Props) => (
-  <span id={id} className={cx("role-link", className)}>
+  <span id={id} className={className}>
     {children({
       __typename: "Member",
       displayName:

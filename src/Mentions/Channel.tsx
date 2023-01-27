@@ -1,4 +1,3 @@
-import { cx } from "emotion";
 import Tooltip from "@root/Tooltip";
 import Emoji from "@root/Emoji";
 
@@ -24,7 +23,7 @@ const Channel = ({ id, children, className, data }: Props) => (
     mouseLeaveDelay={0}
     trigger={getChannel(id)?.category ? ["hover"] : []}
   >
-    <span id={id} className={cx("channel-link", className)}>
+    <span id={id} className={className}>
       {children({
         name: data?.name || getChannel(id)?.name || "deleted-channel",
         id: id,

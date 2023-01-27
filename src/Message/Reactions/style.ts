@@ -1,5 +1,5 @@
-import { Twemoji } from "@root/Emoji/style";
 import { css, styled, theme } from "@root/Stitches/stitches.config";
+import { Twemoji } from "@root/Emoji";
 
 export const Reactions = styled(
   "div",

@@ -1,5 +1,4 @@
 import { Message_author } from "@types";
-import { SystemMessageLinkBase } from "../elements";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
@@ -23,10 +22,8 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
       <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> has
         added{" "}
-        <SystemMessageLinkBase cursor="not-allowed">
-          {props.content}
-        </SystemMessageLinkBase>{" "}
-        to this channel. It's most important updates will show up here.
+        <Styles.SystemMessageLink>{props.content}</Styles.SystemMessageLink> to
+        this channel. It's most important updates will show up here.
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

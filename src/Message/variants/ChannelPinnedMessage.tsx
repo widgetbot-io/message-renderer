@@ -1,4 +1,3 @@
-import { SystemMessageLinkBase } from "../elements";
 import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import React, { useCallback } from "react";
@@ -28,9 +27,9 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
       <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> pinned a
         message to this channel. See all{" "}
-        <SystemMessageLinkBase onClick={openPinnedMessage}>
+        <Styles.SystemMessageLink onClick={openPinnedMessage}>
           pinned messages
-        </SystemMessageLinkBase>
+        </Styles.SystemMessageLink>
         .
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>

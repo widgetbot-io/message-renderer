@@ -1,10 +1,11 @@
 import { PureComponent } from "react";
 import { GuildInfo_guild_roles } from "@types";
-import { RoleIconBase, UnicodeEmojiBase } from "@root/Message/elements";
+import * as Styles from "./style/message";
 import Tooltip from "@root/Tooltip";
 import webpCheck from "@utils/webpCheck";
 import { memoize } from "lodash";
 import * as React from "react";
+import { Twemoji } from "@root/Emoji";
 
 interface RoleIconProps {
   role: GuildInfo_guild_roles;
@@ -26,9 +27,12 @@ class RoleIcon extends PureComponent<RoleIconProps> {
       return (
         <Tooltip overlay={this.props.role.name} placement="top">
           <span>
-            <UnicodeEmojiBase disableTooltip={true}>
+            <Styles.RoleIcon
+              stitchesProps={{ as: Twemoji }}
+              disableTooltip={true}
+            >
               {this.props.role.unicodeEmoji}
-            </UnicodeEmojiBase>
+            </Styles.RoleIcon>
           </span>
         </Tooltip>
       );
@@ -37,7 +41,7 @@ class RoleIcon extends PureComponent<RoleIconProps> {
 
     return (
       <Tooltip overlay={this.props.role.name} placement="top">
-        <RoleIconBase src={iconUrl} />
+        <Styles.RoleIcon src={iconUrl} />
       </Tooltip>
     );
   }

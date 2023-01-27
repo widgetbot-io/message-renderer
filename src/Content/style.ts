@@ -1,4 +1,4 @@
-import { css, styled, theme } from "@root/Stitches/stitches.config";
+import { css, keyframes, styled, theme } from "@root/Stitches/stitches.config";
 import SvgFromUrl from "@root/SvgFromUrl";
 
 export const Base = styled(
@@ -93,6 +93,7 @@ export const DeferredContent = styled(
   "deferred-content",
   css({
     fontSize: theme.fontSizes.m,
+    color: theme.colors.primaryOpacity80,
   })
 );
 
@@ -207,5 +208,76 @@ export const Sticker = styled(
   "",
   css({
     objectFit: "contain",
+  })
+);
+
+export const FailedInteraction = styled(
+  "div",
+  "failed-interaction",
+  css({
+    fontSize: theme.fontSizes.m,
+    color: theme.colors.danger,
+    display: "flex",
+    alignItems: "center",
+    gap: theme.space.large,
+  })
+);
+
+export const TypingIndicator = styled(
+  "svg",
+  "typing-indicator",
+  css({
+    color: theme.colors.primaryOpacity100,
+  })
+);
+
+const typingIndicatorKeyframes = keyframes({
+  "0%": {
+    scale: 0.9,
+    opacity: 0.3,
+  },
+  "25%": {
+    scale: 1,
+    opacity: 1,
+  },
+  "50%, 100%": {
+    scale: 0.9,
+    opacity: 0.3,
+  },
+});
+
+const typingIndicatorCircleCommon = {
+  animationName: typingIndicatorKeyframes.toString(),
+  animationIterationCount: "infinite",
+  animationDuration: "1.2s",
+};
+
+export const TypingIndicatorCircle1 = styled(
+  "circle",
+  "typing-indicator-circle-1",
+  css({
+    ...typingIndicatorCircleCommon,
+    transformOrigin: "3.5px center",
+    animationDelay: "0.1s",
+  })
+);
+
+export const TypingIndicatorCircle2 = styled(
+  "circle",
+  "typing-indicator-circle-2",
+  css({
+    ...typingIndicatorCircleCommon,
+    transformOrigin: "12.25px center",
+    animationDelay: "0.2s",
+  })
+);
+
+export const TypingIndicatorCircle3 = styled(
+  "circle",
+  "typing-indicator-circle-3",
+  css({
+    ...typingIndicatorCircleCommon,
+    transformOrigin: "21px center",
+    animationDelay: "0.3s",
   })
 );

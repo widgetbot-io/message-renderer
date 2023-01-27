@@ -3,6 +3,8 @@ import React, { ReactNode, useMemo } from "react";
 import { findDefaultEmojiByUnicode } from "@root/emoji";
 import emoji from "react-easy-emoji";
 import Tooltip from "@root/Tooltip";
+import { styled } from "@root/Stitches/stitches.config";
+import { emojiCss } from "./style";
 
 type EmojiTooltipProps = {
   key?: number;
@@ -81,5 +83,7 @@ function Emoji({
     </EmojiTooltip>
   ));
 }
+
+export const Twemoji = styled(Emoji, "twemoji", emojiCss);
 
 export default Emoji;

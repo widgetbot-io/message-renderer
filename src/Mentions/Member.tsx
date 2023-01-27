@@ -1,4 +1,3 @@
-import { cx } from "emotion";
 import { Message_author, Message_mentions } from "@types";
 import React from "react";
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
   data?: Message_mentions;
 }
 const Member = ({ id, children, className, data }: Props) => (
-  <span id={id} className={cx("member-link", className)}>
+  <span id={id} className={className}>
     {children({
       __typename: "User",
       name: data?.name || id,

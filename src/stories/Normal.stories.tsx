@@ -561,20 +561,7 @@ Reply.args = {
         createdAt: 1657721832315,
         editedAt: null,
         isGuest: false,
-        author: {
-          avatarUrl:
-            "https://cdn.discordapp.com/avatars/132819036282159104/62adc3a5beed3193edc6a08b58a645cc.webp",
-          bot: false,
-          discrim: "0001",
-          id: "132819036282159104",
-          flags: 4457220,
-          name: "JohnyTheCarrot",
-          roles: ["859803268372758550"],
-          system: false,
-          isWebhook: false,
-          __typename: "User",
-          color: 0,
-        },
+        author: testUser,
         attachments: [
           {
             url: "https://cdn.discordapp.com/attachments/995987494615121991/996782352594386944/msedge_Manr2DB334.png",
@@ -594,6 +581,33 @@ Reply.args = {
         thread: null,
         __typename: "Message",
       },
+    },
+  ],
+};
+
+export const UnknownReply = Template.bind({});
+UnknownReply.args = {
+  messages: [
+    {
+      id: "1001570097229475912",
+      channelId: "995987494615121991",
+      content: "amogus",
+      type: "Reply",
+      flags: 32,
+      createdAt: 1658863319452,
+      editedAt: null,
+      isGuest: false,
+      author: testUser,
+      attachments: [],
+      stickers: [],
+      reactions: null,
+      messageReference: null,
+      embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
+      __typename: "Message",
+      referencedMessage: null,
     },
   ],
 };
