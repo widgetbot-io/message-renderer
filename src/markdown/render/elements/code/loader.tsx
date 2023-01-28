@@ -58,12 +58,9 @@ class Highlighter extends React.Component<Props> {
     const initialCode = this.props.children;
 
     return highlightedCode ? (
-      <Styles.CodeBlock
-        dangerouslySetInnerHTML={{ __html: highlightedCode }}
-        className="highlighted codeblock"
-      />
+      <Styles.CodeBlock dangerouslySetInnerHTML={{ __html: highlightedCode }} />
     ) : (
-      <Styles.CodeBlock className="codeblock">{initialCode}</Styles.CodeBlock>
+      <Styles.CodeBlock>{initialCode}</Styles.CodeBlock>
     );
   }
 }

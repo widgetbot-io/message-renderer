@@ -27,7 +27,7 @@ export const CodeBlock = styled(
     marginTop: theme.space.medium,
     padding: ".5em",
     fontFamily: fonts,
-  })()
+  })
 );
 
 export const InlineCode = styled(

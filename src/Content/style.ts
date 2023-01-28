@@ -1,5 +1,6 @@
 import { css, keyframes, styled, theme } from "@root/Stitches/stitches.config";
 import SvgFromUrl from "@root/SvgFromUrl";
+import { CodeBlock } from "@root/markdown/render/elements/code/style";
 
 export const Base = styled(
   "span",
@@ -54,12 +55,13 @@ export const ContentContainer = styled(
           whiteSpace: "nowrap",
           flex: "0 1 auto",
           pointerEvents: "none",
+          maxWidth: "25vw",
 
-          // todo: use stitches class!
-          ".codeblock": {
+          [`${CodeBlock}`]: {
             display: "inline",
             padding: theme.space.xs,
             fontSize: theme.fontSizes.s,
+            whiteSpace: "nowrap",
           },
         },
       },

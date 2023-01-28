@@ -120,7 +120,7 @@ Basic.args = {
         },
       ],
       messageReference: {
-        guildId: "613425648685547541",
+        guildId: "1",
         channelId: "697138785317814292",
         messageId: "1042878163170119741",
         __typename: "MessageReference",
@@ -136,13 +136,31 @@ Basic.args = {
 };
 
 export const CodeBlock = Template.bind({});
+const codeBlockContent =
+  "```ts\nexport const CodeBlock = styled(\n" +
+  '  "code",\n' +
+  '  "md-code-block",\n' +
+  "  css({\n" +
+  '    display: "block",\n' +
+  '    overflowX: "auto",\n' +
+  "    borderRadius: 4,\n" +
+  "    fontSize: theme.fontSizes.m,\n" +
+  '    lineHeight: "1.125rem",\n' +
+  "    textIndent: 0,\n" +
+  '    whiteSpace: "pre-wrap",\n' +
+  "    backgroundColor: theme.colors.backgroundSecondary,\n" +
+  "    border: `1px solid ${theme.colors.backgroundTertiary}`,\n" +
+  "    marginTop: theme.space.medium,\n" +
+  '    padding: ".5em",\n' +
+  "    fontFamily: fonts,\n" +
+  "  })\n" +
+  ");```";
 CodeBlock.args = {
   messages: [
     {
       id: "1060885271480115241",
       channelId: "993105555042357268",
-      content:
-        '```ts\nexport const CodeBlock = styled("code", {\n  display: "block",\n  overflowX: "auto",\n  borderRadius: 4,\n  fontSize: "0.875rem",\n  lineHeight: "1.125rem",\n  textIndent: 0,\n  whiteSpace: "pre-wrap",\n  backgroundColor: theme.colors.backgroundSecondary,\n  border: `1px solid ${theme.colors.backgroundTertiary}`,\n  marginTop: 6,\n  padding: ".5em",\n  fontFamily: fonts,\n});\n```',
+      content: codeBlockContent,
       type: "Default",
       flags: 0,
       createdAt: 1673005159016,
@@ -535,7 +553,7 @@ Reply.args = {
       stickers: [],
       reactions: null,
       messageReference: {
-        guildId: "859206873349881947",
+        guildId: "1",
         channelId: "995987494615121991",
         messageId: "996782353164804097",
         __typename: "MessageReference",
@@ -608,6 +626,66 @@ UnknownReply.args = {
       thread: null,
       __typename: "Message",
       referencedMessage: null,
+    },
+  ],
+};
+
+export const CodeBlockReply = Template.bind({});
+CodeBlockReply.args = {
+  messages: [
+    {
+      id: "1001570097229475912",
+      channelId: "995987494615121991",
+      content: "amogus",
+      type: "Reply",
+      flags: 32,
+      createdAt: 1658863319452,
+      editedAt: null,
+      isGuest: false,
+      author: testUser,
+      attachments: [],
+      stickers: [],
+      reactions: null,
+      messageReference: {
+        guildId: "1",
+        channelId: "995987494615121991",
+        messageId: "996782353164804097",
+        __typename: "MessageReference",
+      },
+      embeds: [],
+      mentions: [],
+      interaction: null,
+      thread: null,
+      __typename: "Message",
+      referencedMessage: {
+        id: "996782353164804097",
+        channelId: "995987494615121991",
+        content: codeBlockContent,
+        type: "Default",
+        flags: 0,
+        createdAt: 1657721832315,
+        editedAt: null,
+        isGuest: false,
+        author: testUser,
+        attachments: [
+          {
+            url: "https://cdn.discordapp.com/attachments/995987494615121991/996782352594386944/msedge_Manr2DB334.png",
+            height: 320,
+            width: 663,
+            filename: "msedge_Manr2DB334.png",
+            size: 35384,
+            __typename: "Attachment",
+          },
+        ],
+        stickers: [],
+        reactions: null,
+        messageReference: null,
+        embeds: [],
+        mentions: [],
+        interaction: null,
+        thread: null,
+        __typename: "Message",
+      },
     },
   ],
 };
