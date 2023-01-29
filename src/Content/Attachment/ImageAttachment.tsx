@@ -1,10 +1,10 @@
-import { Message_attachments } from "@types";
 import useSize from "@root/Content/Attachment/useSize";
 import React from "react";
 import * as Styles from "./style";
+import { APIAttachment } from "discord-api-types/v10";
 
 interface ImageAttachmentProps {
-  attachment: Message_attachments;
+  attachment: APIAttachment;
 }
 
 function ImageAttachment(props: ImageAttachmentProps) {

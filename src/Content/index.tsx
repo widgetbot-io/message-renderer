@@ -1,19 +1,19 @@
 import React, { Children, memo, ReactNode, useMemo } from "react";
 import Markdown, { LinkMarkdown } from "@root/markdown/render";
-import { Message as MessageData, Message_referencedMessage } from "@types";
 import Tooltip from "@root/Tooltip";
 import Moment from "moment/moment";
 import Reactions from "@root/Message/Reactions";
-import Attachment from "@root/Content/Attachment";
-import Sticker from "@root/Content/Sticker";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
 import Message from "../Message";
-import Embed from "@root/Content/Embed";
 import * as Styles from "./style";
 import SvgFromUrl from "@root/SvgFromUrl";
+import { APIMessage, MessageFlags } from "discord-api-types/v10";
+import Sticker from "@root/Content/Sticker";
+import Embed from "@root/Content/Embed";
+import Attachment from "@root/Content/Attachment";
 
 interface EditedProps {
-  editedAt: number;
+  editedAt: string;
 }
 
 const Edited = memo((props: EditedProps) => {
@@ -36,7 +36,7 @@ function ReplyIcon({ message }: ReplyIconProps) {
   if (message.interaction)
     return <Styles.ReplyIcon width={20} height={20} svg="IconCommand" />;
 
-  if (message.stickers.length > 0)
+  if (message.sticker_items?.length > 0)
     return <Styles.ReplyIcon width={20} height={20} svg="IconSticker" />;
 
   if (message.attachments.length > 0 || message.embeds.length > 0)
@@ -59,7 +59,7 @@ function MessageAccessories({ children, active }: MessageAccessoriesProps) {
 interface ContentCoreProps {
   children: ReactNode;
   showTooltip: boolean;
-  referencedMessage: Message_referencedMessage | null;
+  referencedMessage: APIMessage | null;
 }
 
 function ContentCore(props: ContentCoreProps) {
@@ -81,7 +81,7 @@ function ContentCore(props: ContentCoreProps) {
 }
 
 interface ContentProps {
-  message: Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
+  message: APIMessage;
   isReplyContent?: boolean;
   noThreadButton?: boolean;
 }
@@ -92,7 +92,7 @@ function Content(props: ContentProps) {
 
     if (props.message.interaction) return "Click to see command";
 
-    if (props.message.stickers.length > 0) return "Click to see sticker";
+    if (props.message.sticker_items?.length > 0) return "Click to see sticker";
 
     if (props.message.attachments.length > 0 || props.message.embeds.length > 0)
       return "Click to see attachment";
@@ -117,10 +117,13 @@ function Content(props: ContentProps) {
     return images;
   }, [props.message.embeds]);
 
-  if (props.message.flags & (1 << 7)) {
+  if (props.message.flags & MessageFlags.Loading) {
     const fifteenMinutes = 15 * 60 * 1000;
 
-    if (Date.now() - props.message.createdAt > fifteenMinutes)
+    if (
+      Date.now() - new Date(props.message.timestamp).getTime() >
+      fifteenMinutes
+    )
       return (
         <Styles.FailedInteraction>
           <SvgFromUrl width={16} height={16} svg="IconDanger" />
@@ -157,7 +160,7 @@ function Content(props: ContentProps) {
             />
           </g>
         </Styles.TypingIndicator>
-        {props.message.author.name} is thinking...
+        {props.message.author.username} is thinking...
       </Styles.DeferredContent>
     );
   }
@@ -174,7 +177,7 @@ function Content(props: ContentProps) {
           >
             {props.message.content.length > 0 ? (
               <>
-                {props.message.author.isWebhook ? (
+                {props.message.webhook_id !== undefined ? (
                   <LinkMarkdown mentions={props.message.mentions}>
                     {props.message.content}
                   </LinkMarkdown>
@@ -183,8 +186,8 @@ function Content(props: ContentProps) {
                     {props.message.content}
                   </Markdown>
                 )}
-                {props.message.editedAt && (
-                  <Edited editedAt={props.message.editedAt} />
+                {props.message.edited_timestamp && (
+                  <Edited editedAt={props.message.edited_timestamp} />
                 )}
               </>
             ) : (
@@ -201,7 +204,7 @@ function Content(props: ContentProps) {
           active={
             props.message.reactions !== null ||
             props.message.attachments.length > 0 ||
-            props.message.stickers.length > 0 ||
+            props.message.sticker_items?.length > 0 ||
             props.message.thread !== null ||
             (props.message.embeds !== null && props.message.embeds.length > 0)
           }
@@ -209,7 +212,7 @@ function Content(props: ContentProps) {
           {props.message.attachments.map((attachment) => (
             <Attachment key={attachment.url} attachment={attachment} />
           ))}
-          {props.message.stickers.map((sticker) => (
+          {props.message.sticker_items?.map((sticker) => (
             <Sticker key={sticker.id} sticker={sticker} />
           ))}
           {props.message.embeds !== null && embedImages.length > 0 ? (
@@ -228,8 +231,9 @@ function Content(props: ContentProps) {
           )}
           {!props.noThreadButton && props.message.thread && (
             <ThreadButton
-              hasReply={props.message.referencedMessage !== null}
+              hasReply={props.message.referenced_message !== undefined}
               thread={props.message.thread}
+              // todo: should be message.id
               messageId={props.message.thread.id}
               messageContent={props.message.content}
               messageType={props.message.type}

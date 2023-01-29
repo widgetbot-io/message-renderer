@@ -1,12 +1,11 @@
 import Tooltip from "@root/Tooltip";
-import Lottie from "@root/Content/Sticker/Lottie";
 import webpCheck from "@utils/webpCheck";
 import * as Styles from "../style";
 import * as React from "react";
-import { Message_stickers } from "@types";
+import { APIStickerItem, StickerFormatType } from "discord-api-types/v10";
 
 interface StickerProps {
-  sticker: Message_stickers;
+  sticker: APIStickerItem;
 }
 
 function Sticker(props: StickerProps) {
@@ -20,9 +19,10 @@ function Sticker(props: StickerProps) {
       }
       placement="top"
     >
-      {props.sticker.formatType === "LOTTIE" ? (
+      {props.sticker.format_type === StickerFormatType.Lottie ? (
         <Styles.LottieStickerWrapper>
-          <Lottie data={props.sticker.lottieData} width={160} height={160} />
+          {/* todo: support lottie */}
+          {/*<Lottie data={props.sticker.lottieData} width={160} height={160} />*/}
         </Styles.LottieStickerWrapper>
       ) : (
         <Styles.Sticker
@@ -31,7 +31,7 @@ function Sticker(props: StickerProps) {
           alt={props.sticker.name + " Sticker"}
           src={
             // todo: allow proper custom urls instead of relying on Discord's CDN
-            props.sticker.formatType === "APNG"
+            props.sticker.format_type === StickerFormatType.APNG
               ? `https://cdn.discordapp.com/stickers/${props.sticker.id}.png`
               : webpCheck(
                   `https://media.discordapp.net/stickers/${props.sticker.id}.webp?size=240`

@@ -1,7 +1,4 @@
-import { Message_author } from "@types";
-
-type User = Pick<Message_author, "avatarUrl"> &
-  Partial<Pick<Message_author, "discrim">>;
+import { APIUser } from "discord-api-types/v10";
 
 type AvatarSize =
   | 16
@@ -41,14 +38,13 @@ function gifCheck(url: string) {
 }
 
 function getAvatarProperty(
-  user: User,
+  user: APIUser,
   avatarSize: AvatarSize = 80
 ): string | null {
-  if (!user.avatarUrl) return null;
+  if (!user.avatar) return null;
 
-  return user.avatarUrl.includes("cdn.discordapp.com")
-    ? `${user.avatarUrl}?size=${avatarSize}`
-    : user.avatarUrl;
+  // todo: allow custom CDN
+  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=${avatarSize}`;
 }
 
 export interface GetAvatarOptions {
@@ -57,7 +53,7 @@ export interface GetAvatarOptions {
 }
 
 function getAvatar(
-  user: User,
+  user: APIUser,
   { animated, size }: GetAvatarOptions = {}
 ): string {
   // assign default values
@@ -70,7 +66,7 @@ function getAvatar(
   return avatarUrl
     ? potentialGif.replace("webp", "png")
     : `https://cdn.discordapp.com/embed/avatars/${
-        Number(user.discrim ?? 0) % 5
+        Number(user.discriminator ?? 0) % 5
       }.png`;
 }
 

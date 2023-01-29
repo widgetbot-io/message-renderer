@@ -1,16 +1,19 @@
-import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage } from "discord-api-types/v10";
 
 interface GuildMemberJoinProps {
-  createdAt: number;
-  author: Message_author;
+  createdAt: APIMessage["timestamp"];
+  author: APIMessage["author"];
 }
 
-function joinMessage(createdAt: number, author: Message_author): JSX.Element {
+function joinMessage(
+  createdAt: APIMessage["timestamp"],
+  author: APIMessage["author"]
+): JSX.Element {
   const member = <MessageAuthor author={author} onlyShowUsername={true} />;
 
   const messages = [

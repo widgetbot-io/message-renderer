@@ -1,14 +1,14 @@
-import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage } from "discord-api-types/v10";
 
 interface ChannelFollowAddProps {
   content: string;
-  author: Message_author;
-  createdAt: number;
+  author: APIMessage["author"];
+  createdAt: APIMessage["timestamp"];
 }
 
 function ChannelFollowAdd(props: ChannelFollowAddProps) {

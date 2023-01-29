@@ -1,19 +1,17 @@
-import { Message_thread } from "@types";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import ThreadButton from "@root/Content/Thread/ThreadButton";
-import { Message_author, Message_messageReference } from "@types";
 import React from "react";
-import { MessageType } from "@root/types/globalTypes";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage, MessageType } from "discord-api-types/v10";
 
 interface ThreadCreatedProps {
-  createdAt: number;
-  thread: Message_thread;
-  author: Message_author;
-  messageReference: Message_messageReference;
-  messageId: string;
+  createdAt: APIMessage["timestamp"];
+  thread: APIMessage["thread"];
+  author: APIMessage["author"];
+  messageReference: APIMessage["message_reference"];
+  messageId: APIMessage["id"];
   messageContent: string;
 }
 

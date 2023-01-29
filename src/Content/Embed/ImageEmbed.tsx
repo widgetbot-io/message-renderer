@@ -1,10 +1,10 @@
 import useSize from "@root/Content/Attachment/useSize";
-import { Message_embeds } from "@types";
 import * as Styles from "./style";
 import React from "react";
+import { APIEmbed } from "discord-api-types/v10";
 
 export interface GifVEmbedProps {
-  embed: Message_embeds;
+  embed: APIEmbed;
 }
 
 function ImageEmbed({ embed }: GifVEmbedProps) {
@@ -12,7 +12,7 @@ function ImageEmbed({ embed }: GifVEmbedProps) {
 
   return (
     <Styles.MediaEmbed
-      src={embed.thumbnail.proxyUrl}
+      src={embed.thumbnail.proxy_url}
       // originalUrl={embed.thumbnail.url}
       width={size.width}
       height={size.height}

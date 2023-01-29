@@ -4,11 +4,11 @@ import { memoize } from "lodash";
 import ChatTag from "@root/ChatTag";
 import RoleIcon from "@root/Message/RoleIcon";
 import getAvatar from "@utils/getAvatar";
-import { Message_author, GuildInfo_guild_roles } from "@types";
 import * as Styles from "@root/Message/style/author";
+import { APIMessage, APIRole } from "discord-api-types/v10";
 
 interface MessageAuthorProps {
-  author: Message_author;
+  author: APIMessage["author"];
   avatarAnimated?: boolean;
   onlyShowUsername?: boolean;
   crosspost?: boolean;
@@ -38,7 +38,7 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
   );
 
   private getDominantRoleIconRole = memoize(
-    (roleIds: string[] | null): GuildInfo_guild_roles | null => {
+    (roleIds: string[] | null): APIRole | null => {
       return null;
 
       if (roleIds === null) return null;
@@ -71,8 +71,8 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
     if (this.props.onlyShowUsername)
       return (
         <Styles.MessageAuthor>
-          <Styles.Username css={{ color }}>
-            {this.props.author.name}
+          <Styles.Username style={{ color }}>
+            {this.props.author.username}
           </Styles.Username>
         </Styles.MessageAuthor>
       );
@@ -85,8 +85,8 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
           })}
           draggable={false}
         />
-        <Styles.Username css={{ color }}>
-          {this.props.author.name}
+        <Styles.Username style={{ color }}>
+          {this.props.author.username}
         </Styles.Username>
         {dominantRoleIconRole !== null && (
           <RoleIcon role={dominantRoleIconRole} />

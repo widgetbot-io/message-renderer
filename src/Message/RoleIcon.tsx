@@ -1,14 +1,14 @@
 import { PureComponent } from "react";
-import { GuildInfo_guild_roles } from "@types";
 import * as Styles from "./style/message";
 import Tooltip from "@root/Tooltip";
 import webpCheck from "@utils/webpCheck";
 import { memoize } from "lodash";
 import * as React from "react";
 import { Twemoji } from "@root/Emoji";
+import { APIRole } from "discord-api-types/v10";
 
 interface RoleIconProps {
-  role: GuildInfo_guild_roles;
+  role: APIRole;
 }
 
 class RoleIcon extends PureComponent<RoleIconProps> {
@@ -19,11 +19,11 @@ class RoleIcon extends PureComponent<RoleIconProps> {
   render() {
     if (
       this.props.role === null ||
-      (this.props.role.icon === null && this.props.role.unicodeEmoji === null)
+      (this.props.role.icon === null && this.props.role.unicode_emoji === null)
     )
       return null;
 
-    if (this.props.role.unicodeEmoji !== null)
+    if (this.props.role.unicode_emoji !== null)
       return (
         <Tooltip overlay={this.props.role.name} placement="top">
           <span>
@@ -31,7 +31,7 @@ class RoleIcon extends PureComponent<RoleIconProps> {
               stitchesProps={{ as: Twemoji }}
               disableTooltip={true}
             >
-              {this.props.role.unicodeEmoji}
+              {this.props.role.unicode_emoji}
             </Styles.RoleIcon>
           </span>
         </Tooltip>

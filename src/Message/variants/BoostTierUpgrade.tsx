@@ -1,26 +1,25 @@
-import { Message_author } from "@types";
-import { MessageType } from "@root/types/globalTypes";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import React, { useMemo } from "react";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage, MessageType } from "discord-api-types/v10";
 
-interface UserPremiumGuildTier2Props {
-  createdAt: number;
+interface BoostTierUpgradeProps {
+  createdAt: APIMessage["timestamp"];
   content: string;
   type: MessageType;
-  author: Message_author;
+  author: APIMessage["author"];
 }
 
-function UserPremiumGuildTierUpgrade(props: UserPremiumGuildTier2Props) {
+function BoostTierUpgrade(props: BoostTierUpgradeProps) {
   const newLevel = useMemo(() => {
     switch (props.type) {
-      case MessageType.UserPremiumGuildTier1:
+      case MessageType.GuildBoostTier1:
         return 1;
-      case MessageType.UserPremiumGuildTier2:
+      case MessageType.GuildBoostTier2:
         return 2;
-      case MessageType.UserPremiumGuildTier3:
+      case MessageType.GuildBoostTier3:
         return 3;
       default:
         return -1;
@@ -40,10 +39,11 @@ function UserPremiumGuildTierUpgrade(props: UserPremiumGuildTier2Props) {
         boosted the server <strong>{props.content}</strong> time
         {props.content === "1" ? "" : "s"}! guildNameHere has achieved{" "}
         <strong>Level {newLevel}!</strong>
+        {/* todo: load guild name */}
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>
   );
 }
 
-export default UserPremiumGuildTierUpgrade;
+export default BoostTierUpgrade;

@@ -1,10 +1,10 @@
 import useSize from "@root/Content/Attachment/useSize";
-import { Message_embeds } from "@types";
 import * as Styles from "./style";
 import React from "react";
+import { APIEmbed } from "discord-api-types/v10";
 
 export interface GifVEmbedProps {
-  embed: Message_embeds;
+  embed: APIEmbed;
 }
 
 function GifVEmbed({ embed }: GifVEmbedProps) {
@@ -13,7 +13,7 @@ function GifVEmbed({ embed }: GifVEmbedProps) {
   return (
     <Styles.MediaEmbed
       stitchesProps={{ as: "video" }}
-      src={embed.video.proxyUrl ?? embed.video.url}
+      src={embed.video.proxy_url ?? embed.video.url}
       width={size.width}
       height={size.height}
       autoPlay

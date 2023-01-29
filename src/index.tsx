@@ -1,10 +1,10 @@
 import React, { CSSProperties, useState } from "react";
 import * as Styles from "./style";
 import Message from "@root/Message";
-import { Message as MessageData } from "@types";
+import { APIMessage } from "discord-api-types/v10";
 
 interface MessageProps {
-  messages: MessageData[];
+  messages: APIMessage[];
   style?: CSSProperties;
   showButtons?: boolean;
   thread: boolean;

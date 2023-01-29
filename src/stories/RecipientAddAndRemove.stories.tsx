@@ -1,9 +1,9 @@
 import MessageGroup from "../index";
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MentionType, MessageType } from "../types/globalTypes";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
+import { MessageType } from "discord-api-types/v10";
 
 export default {
   title: "Message Types/Recipient Add or Remove",
@@ -24,14 +24,19 @@ Add.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.RecipientAdd,
       author: testUser,
       mentions: [
         {
-          id: "2",
-          type: MentionType.Member,
-          name: "Gort",
+          id: "543225764036870167",
+          username: "WidgetBot",
+          display_name: null,
+          avatar: "0459349547dc5b988b0ad1cd8583a05f",
+          avatar_decoration: null,
+          discriminator: "0142",
+          public_flags: 65536,
+          bot: true,
         },
       ],
     },
@@ -43,14 +48,19 @@ Remove.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.RecipientRemove,
       author: testUser,
       mentions: [
         {
-          id: "2",
-          type: MentionType.Member,
-          name: "Gort",
+          id: "543225764036870167",
+          username: "WidgetBot",
+          display_name: null,
+          avatar: "0459349547dc5b988b0ad1cd8583a05f",
+          avatar_decoration: null,
+          discriminator: "0142",
+          public_flags: 65536,
+          bot: true,
         },
       ],
     },

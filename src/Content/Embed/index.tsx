@@ -1,4 +1,3 @@
-import { Embed_image, Message_embeds } from "@types";
 import GifVEmbed from "@root/Content/Embed/GifVEmbed";
 import ImageEmbed from "@root/Content/Embed/ImageEmbed";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
@@ -9,18 +8,48 @@ import { LinkMarkdown, parseEmbedTitle } from "@root/markdown/render";
 import useSize from "@root/Content/Embed/useSize";
 import EmbedVideo from "@root/Content/Embed/EmbedVideo";
 import React, { useMemo } from "react";
+import { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
+
+// todo: proper license notice
+// excerpt from https://github.com/discordjs/discord-api-types
+enum EmbedType {
+  /**
+   * Generic embed rendered from embed attributes
+   */
+  Rich = "rich",
+  /**
+   * Image embed
+   */
+  Image = "image",
+  /**
+   * Video embed
+   */
+  Video = "video",
+  /**
+   * Animated gif image embed rendered as a video embed
+   */
+  GIFV = "gifv",
+  /**
+   * Article embed
+   */
+  Article = "article",
+  /**
+   * Link embed
+   */
+  Link = "link",
+}
 
 export interface EmbedProps {
-  embed: Message_embeds;
-  images: Embed_image[] | undefined;
+  embed: APIEmbed & { type?: EmbedType };
+  images: APIEmbedImage[] | undefined;
 }
 
 function Embed({ embed, images }: EmbedProps) {
-  if (embed.type.toLowerCase() === "gifv") return <GifVEmbed embed={embed} />;
+  if (embed.type === EmbedType.GIFV) return <GifVEmbed embed={embed} />;
 
-  if (embed.type.toLowerCase() === "image") return <ImageEmbed embed={embed} />;
+  if (embed.type === EmbedType.Image) return <ImageEmbed embed={embed} />;
 
-  if (embed.type.toLowerCase() === "video" && !embed.thumbnail)
+  if (embed.type === EmbedType.Video && !embed.thumbnail)
     return <VideoAttachment attachmentOrEmbed={embed} />;
 
   const embedColor =
@@ -31,6 +60,7 @@ function Embed({ embed, images }: EmbedProps) {
   const { width: widthImage, height: heightImage } = useSize(
     embed.type,
     embed.image,
+    "EmbedImage",
     images?.length > 0
   );
 
@@ -38,12 +68,12 @@ function Embed({ embed, images }: EmbedProps) {
     width: widthThumbnail,
     height: heightThumbnail,
     isLarge: isThumbnailLarge,
-  } = useSize(embed.type, embed.thumbnail, undefined);
+  } = useSize(embed.type, embed.thumbnail, "EmbedThumbnail", undefined);
 
   const isEmbedThin = useMemo(
     () =>
       widthImage !== null ||
-      (embed.type.toLowerCase() === "video" && embed.thumbnail !== null),
+      (embed.type === EmbedType.Video && embed.thumbnail !== null),
     [widthImage, embed.type, embed.thumbnail]
   );
 
@@ -61,8 +91,8 @@ function Embed({ embed, images }: EmbedProps) {
           )}
           {embed.author && (
             <Styles.Author>
-              {embed.author.proxyIconUrl && (
-                <Styles.AuthorIcon src={embed.author.proxyIconUrl} />
+              {embed.author.proxy_icon_url && (
+                <Styles.AuthorIcon src={embed.author.proxy_icon_url} />
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
@@ -87,13 +117,13 @@ function Embed({ embed, images }: EmbedProps) {
             ) : (
               <Styles.Title>{parseEmbedTitle(embed.title)}</Styles.Title>
             ))}
-          {embed.type.toLowerCase() === "video" ? (
+          {embed.type === EmbedType.Video ? (
             <EmbedVideo
               url={embed.video.url}
-              proxyUrl={embed.video.proxyUrl}
+              proxyUrl={embed.video.proxy_url}
               width={embed.video.width}
               height={embed.video.height}
-              thumbnail={embed.thumbnail.proxyUrl}
+              thumbnail={embed.thumbnail.proxy_url}
             />
           ) : (
             embed.description && (
@@ -120,9 +150,9 @@ function Embed({ embed, images }: EmbedProps) {
             </Styles.Fields>
           )}
         </Styles.Content>
-        {embed.thumbnail && embed.type.toLowerCase() !== "video" && (
+        {embed.thumbnail && embed.type !== EmbedType.Video && (
           <Styles.Image
-            src={embed.thumbnail.proxyUrl}
+            src={embed.thumbnail.proxy_url}
             // originalUrl={embed.thumbnail.url}
             width={widthThumbnail}
             height={heightThumbnail}
@@ -131,7 +161,7 @@ function Embed({ embed, images }: EmbedProps) {
       </Styles.ContentAndThumbnail>
       {(images === undefined || images?.length === 0) && embed.image && (
         <Styles.Image
-          src={embed.image.proxyUrl}
+          src={embed.image.proxy_url}
           // originalUrl={embed.image.url}
           width={widthImage}
           height={heightImage}
@@ -144,7 +174,7 @@ function Embed({ embed, images }: EmbedProps) {
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>
               <Styles.Image
-                src={image.proxyUrl}
+                src={image.proxy_url}
                 // originalUrl={image.url}
                 stitchesProps={{ withMargin: true }}
               />
@@ -155,8 +185,8 @@ function Embed({ embed, images }: EmbedProps) {
 
       {(embed.footer || embed.timestamp) && (
         <Styles.Footer>
-          {embed.footer?.proxyIconUrl && (
-            <Styles.FooterIcon src={embed.footer.proxyIconUrl} />
+          {embed.footer?.proxy_icon_url && (
+            <Styles.FooterIcon src={embed.footer.proxy_icon_url} />
           )}
           {embed.footer?.text}
           {embed.timestamp && (

@@ -1,8 +1,8 @@
 import MessageGroup from "../index";
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MessageType } from "../types/globalTypes";
 import Wrapper from "./Wrapper";
+import { MessageType } from "discord-api-types/v10";
 
 export default {
   title: "Message Types/Discovery Notices",
@@ -23,7 +23,7 @@ Requalified.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryRequalified,
       author: null,
     },
@@ -35,7 +35,7 @@ InitialWarning.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryGracePeriodInitialWarning,
       author: null,
     },
@@ -47,7 +47,7 @@ FinalWarning.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryGracePeriodFinalWarning,
       author: null,
     },
@@ -59,7 +59,7 @@ Disqualified.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryDisqualified,
       author: null,
     },

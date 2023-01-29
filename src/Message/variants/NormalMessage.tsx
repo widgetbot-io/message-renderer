@@ -1,9 +1,4 @@
 import React, { memo, useMemo } from "react";
-import {
-  Message as MessageData,
-  Message_interaction,
-  Message_referencedMessage,
-} from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import Content from "@root/Content";
 import Moment from "moment";
@@ -11,47 +6,49 @@ import Tooltip from "@root/Tooltip";
 import getAvatar, { GetAvatarOptions } from "@utils/getAvatar";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import ChatTag from "@root/ChatTag";
-import { MessageType } from "@root/types/globalTypes";
 import * as Styles from "@root/Message/style/message";
+import {
+  APIMessage,
+  APIMessageInteraction,
+  MessageType,
+} from "discord-api-types/v10";
 
 interface ReplyInfoProps {
-  referencedMessage: Message_referencedMessage | null;
+  referencedMessage: APIMessage["referenced_message"];
   mentioned?: boolean;
-  interaction: Message_interaction | null;
+  interaction: APIMessageInteraction | undefined;
   isContextMenuInteraction?: boolean;
 }
 
 function getMiniAvatarUrl(
-  referencedMessage: Message_referencedMessage | null,
-  interaction: Message_interaction | null
+  referencedMessage: APIMessage["referenced_message"],
+  interaction: APIMessage["interaction"]
 ) {
   const getAvatarSettings: GetAvatarOptions = {
     size: 16,
     animated: false,
   };
 
-  if (interaction !== null)
+  if (interaction !== undefined)
     return getAvatar(interaction.user, getAvatarSettings);
 
-  if (referencedMessage !== null)
+  if (referencedMessage !== undefined && referencedMessage !== null)
     return getAvatar(referencedMessage.author, getAvatarSettings);
 
   return null;
 }
 
 function getMiniUserName(
-  referencedMessage: Message_referencedMessage | null,
-  interaction: Message_interaction | null
+  referencedMessage: APIMessage["referenced_message"],
+  interaction: APIMessage["interaction"]
 ) {
-  if (interaction !== null) return interaction.user.username;
+  if (interaction !== undefined) return interaction.user.username;
 
-  if (referencedMessage !== null) return referencedMessage.author.name;
-
-  return null;
+  return referencedMessage?.author?.username ?? null;
 }
 
 function getDominantRoleColor(
-  referencedMessage: Message_referencedMessage | null
+  referencedMessage: APIMessage["referenced_message"]
 ) {
   // todo: make work
   // if (referencedMessage !== null) {
@@ -104,7 +101,9 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
             <ChatTag
               author={props.referencedMessage.author}
               crosspost={!!(props.referencedMessage.flags & (1 << 1))}
-              referenceGuild={props.referencedMessage.messageReference?.guildId}
+              referenceGuild={
+                props.referencedMessage.message_reference?.guild_id
+              }
             />
           )}
           <Styles.MiniUserName style={{ color: miniUserNameColorHex }}>
@@ -130,11 +129,11 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
   );
 });
 
-type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
+// type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
 
 interface MessageProps {
   isFirstMessage?: boolean;
-  message: Message;
+  message: APIMessage;
   isHovered?: boolean;
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;
@@ -170,9 +169,9 @@ function NormalMessage(props: MessageProps) {
       <Styles.Message stitchesProps={{ mentioned: isUserMentioned }}>
         {shouldShowReply && (
           <ReplyInfo
-            referencedMessage={props.message.referencedMessage ?? null}
+            referencedMessage={props.message.referenced_message}
             mentioned={props.message.mentions.some(
-              (m) => m.id === props.message.referencedMessage?.author.id
+              (m) => m.id === props.message.referenced_message?.author.id
             )}
             interaction={props.message.interaction}
             isContextMenuInteraction={props.isContextMenuInteraction}
@@ -183,10 +182,10 @@ function NormalMessage(props: MessageProps) {
             author={props.message.author}
             avatarAnimated={props.isHovered ?? false}
             crosspost={!!(props.message.flags & (1 << 1))}
-            referenceGuild={props.message.messageReference?.guildId}
+            referenceGuild={props.message.message_reference?.guild_id}
           />
           {props.hideTimestamp || (
-            <LargeTimestamp timestamp={props.message.createdAt} />
+            <LargeTimestamp timestamp={props.message.timestamp} />
           )}
         </Styles.MessageHeaderBase>
         <Content
@@ -200,11 +199,11 @@ function NormalMessage(props: MessageProps) {
     <Styles.Message stitchesProps={{ mentioned: isUserMentioned }}>
       <Tooltip
         placement="top"
-        overlay={Moment(props.message.createdAt).format("LLLL")}
+        overlay={Moment(props.message.timestamp).format("LLLL")}
         mouseEnterDelay={1}
       >
-        <Styles.SmallTimestamp dateTime={props.message.createdAt}>
-          {Moment(props.message.createdAt).format("h:mm A")}
+        <Styles.SmallTimestamp dateTime={props.message.timestamp}>
+          {Moment(props.message.timestamp).format("h:mm A")}
         </Styles.SmallTimestamp>
       </Tooltip>
       <Content message={props.message} noThreadButton={props.noThreadButton} />

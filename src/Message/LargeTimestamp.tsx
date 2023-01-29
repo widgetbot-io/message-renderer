@@ -3,7 +3,7 @@ import * as Styles from "./style/message";
 import Tooltip from "@root/Tooltip";
 import React, { memo } from "react";
 
-function LargeTimestamp({ timestamp }: { timestamp: number }) {
+function LargeTimestamp({ timestamp }: { timestamp: string }) {
   return (
     <Tooltip
       placement="top"

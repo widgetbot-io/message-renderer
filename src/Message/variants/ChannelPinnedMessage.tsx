@@ -1,13 +1,13 @@
-import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import React, { useCallback } from "react";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage } from "discord-api-types/v10";
 
 interface ChannelPinnedMessageProps {
-  author: Message_author;
-  createdAt: number;
+  author: APIMessage["author"];
+  createdAt: APIMessage["timestamp"];
 }
 
 function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {

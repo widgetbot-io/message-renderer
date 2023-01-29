@@ -1,15 +1,15 @@
 import * as AuthorStyles from "../style/author";
-import { Message_author, Message_mentions } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage } from "discord-api-types/v10";
 
 interface RecipientRemoveProps {
-  createdAt: number;
-  author: Message_author;
-  target: Message_mentions;
+  createdAt: APIMessage["timestamp"];
+  author: APIMessage["author"];
+  target: APIMessage["mentions"][0];
 }
 
 function RecipientRemove(props: RecipientRemoveProps) {
@@ -22,8 +22,8 @@ function RecipientRemove(props: RecipientRemoveProps) {
       />
       <Styles.SystemMessageContent>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> removed{" "}
-        <AuthorStyles.Username>{props.target.name}</AuthorStyles.Username> from
-        the thread.
+        <AuthorStyles.Username>{props.target.username}</AuthorStyles.Username>{" "}
+        from the thread.
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

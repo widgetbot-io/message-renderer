@@ -1,14 +1,9 @@
 export const testUser = {
-  avatarUrl:
-    "https://github.com/widgetbot-io/message-renderer/blob/master/src/stories/assets/demo-pfp.png?raw=true",
-  bot: false,
-  discrim: "0001",
   id: "132819036282159104",
-  flags: 4457220,
-  name: "JohnyTheCarrot",
-  roles: ["859803268372758550"],
-  system: false,
-  isWebhook: false,
-  __typename: "User",
-  color: 0,
+  username: "JohnyTheCarrot",
+  display_name: null,
+  avatar: "62adc3a5beed3193edc6a08b58a645cc",
+  avatar_decoration: null,
+  discriminator: "0001",
+  public_flags: 4457220,
 };

@@ -1,34 +1,32 @@
 import * as Styles from "./style";
 import React, { useCallback, useMemo } from "react";
 import Tooltip from "@root/Tooltip";
-import { Message_reactions } from "@types";
 import { findDefaultEmojiByUnicode } from "@root/emoji";
+import { APIReaction } from "discord-api-types/v10";
 
 interface ReactionProps {
-  reaction: Message_reactions;
+  reaction: APIReaction;
 }
 
 function Reaction(props: ReactionProps) {
   const emojiUrl = useMemo(() => {
-    if (props.reaction.emojiId === null) {
-      return null;
-    }
+    if (props.reaction.emoji.id === null) return null;
 
-    return `https://cdn.discordapp.com/emojis/${props.reaction.emojiId}.${
-      props.reaction.animated ? "gif" : "webp"
+    return `https://cdn.discordapp.com/emojis/${props.reaction.emoji.id}.${
+      props.reaction.emoji.animated ? "gif" : "webp"
     }?v=1&size=32&quality=lossless`;
-  }, [props.reaction.emojiId, props.reaction.animated]);
+  }, [props.reaction.emoji.id, props.reaction.emoji.animated]);
 
   const Emoji = useCallback(() => {
-    const url = `https://cdn.discordapp.com/emojis/${props.reaction.emojiId}.${
-      props.reaction.animated ? "gif" : "webp"
+    const url = `https://cdn.discordapp.com/emojis/${props.reaction.emoji.id}.${
+      props.reaction.emoji.animated ? "gif" : "webp"
     }?v=1&size=64&quality=lossless`;
 
     return (
       <Styles.ReactionTooltip>
-        {props.reaction.emojiId !== null ? (
+        {props.reaction.emoji.id !== null ? (
           <Styles.ReactionEmoji
-            emojiName={props.reaction.emojiName}
+            emojiName={props.reaction.emoji.name}
             stitchesProps={{ enlarged: true }}
             src={url}
             disableTooltip
@@ -36,24 +34,24 @@ function Reaction(props: ReactionProps) {
           />
         ) : (
           <Styles.ReactionEmoji
-            emojiName={props.reaction.emojiName}
+            emojiName={props.reaction.emoji.name}
             stitchesProps={{ enlarged: true }}
             disableTooltip
             enlarged
           />
         )}
         :
-        {props.reaction.emojiId !== null
-          ? props.reaction.emojiName
-          : findDefaultEmojiByUnicode(props.reaction.emojiName)
+        {props.reaction.emoji.id !== null
+          ? props.reaction.emoji.name
+          : findDefaultEmojiByUnicode(props.reaction.emoji.name)
               ?.keywords?.[0] ?? "unknown emoji"}
         :
       </Styles.ReactionTooltip>
     );
   }, [
-    props.reaction.animated,
-    props.reaction.emojiId,
-    props.reaction.emojiName,
+    props.reaction.emoji.animated,
+    props.reaction.emoji.id,
+    props.reaction.emoji.name,
   ]);
 
   return (
@@ -62,12 +60,12 @@ function Reaction(props: ReactionProps) {
         {emojiUrl ? (
           <Styles.ReactionEmoji
             src={emojiUrl}
-            emojiName={props.reaction.emojiName}
+            emojiName={props.reaction.emoji.name}
             disableTooltip
           />
         ) : (
           <Styles.ReactionEmoji
-            emojiName={props.reaction.emojiName}
+            emojiName={props.reaction.emoji.name}
             disableTooltip
           />
         )}

@@ -1,4 +1,3 @@
-import { channel, mention, role } from "@root/markdown/render/ast/mention";
 import text from "@root/markdown/render/ast/text";
 import { defaultRules, inlineRegex } from "simple-markdown";
 
@@ -65,9 +64,10 @@ const baseRules = {
     ),
   },
 
-  mention,
-  channel,
-  role,
+  // todo: mentions
+  // mention,
+  // channel,
+  // role,
 
   s: {
     order: defaultRules.u.order,

@@ -6,10 +6,10 @@ import * as Styles from "./elements";
 import { astToString, flattenAst, recurse } from "@root/markdown/render/util";
 import SimpleMarkdown from "simple-markdown";
 import TextSpoiler from "@root/markdown/render/elements/TextSpoiler";
-import { Message_author, Message_mentions } from "@types";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
 import { InlineCode } from "@root/markdown/render/elements/code/style";
+import { APIMessage, APIUser } from "discord-api-types/v10";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {
   const parser = SimpleMarkdown.parserFor(rules);
@@ -147,8 +147,8 @@ function Markdown({
   users,
 }: {
   children: string;
-  mentions?: Message_mentions[];
-  users?: Map<string, Message_author>;
+  mentions?: APIMessage["mentions"];
+  users?: Map<string, APIUser>;
 }) {
   return content ? parse(content, undefined, { mentions, users }) : null;
 }
@@ -170,8 +170,8 @@ export function LinkMarkdown({
   users,
 }: {
   children: string;
-  mentions?: Message_mentions[];
-  users?: Map<string, Message_author>;
+  mentions?: APIMessage["mentions"];
+  users?: Map<string, APIUser>;
 }) {
   return content
     ? parseAllowLinks(content, undefined, { mentions, users })

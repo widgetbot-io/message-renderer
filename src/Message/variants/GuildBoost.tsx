@@ -1,19 +1,17 @@
-import { Message_author } from "@types";
 import MessageAuthor from "@root/Message/MessageAuthor";
 import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage } from "discord-api-types/v10";
 
-interface UserPremiumGuildSubscriptionProps {
-  createdAt: number;
-  author: Message_author;
+interface GuildBoostProps {
+  createdAt: APIMessage["timestamp"];
+  author: APIMessage["author"];
   content: string;
 }
 
-function UserPremiumGuildSubscription(
-  props: UserPremiumGuildSubscriptionProps
-) {
+function GuildBoost(props: GuildBoostProps) {
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -37,4 +35,4 @@ function UserPremiumGuildSubscription(
   );
 }
 
-export default UserPremiumGuildSubscription;
+export default GuildBoost;

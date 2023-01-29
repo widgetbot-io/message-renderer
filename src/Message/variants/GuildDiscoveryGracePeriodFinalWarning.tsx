@@ -2,9 +2,10 @@ import LargeTimestamp from "@root/Message/LargeTimestamp";
 import React from "react";
 import * as Styles from "@root/Message/style/message";
 import { SystemMessageIconSize } from "@root/Message/style/message";
+import { APIMessage } from "discord-api-types/v10";
 
 interface GuildDiscoveryGracePeriodFinalWarningProps {
-  createdAt: number;
+  createdAt: APIMessage["timestamp"];
 }
 
 function GuildDiscoveryGracePeriodFinalWarning(

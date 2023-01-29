@@ -1,30 +1,26 @@
 import NormalMessage from "@root/Message/variants/NormalMessage";
 import React, { memo } from "react";
-import { Message as MessageData } from "@types";
-import { MessageType } from "@root/types/globalTypes";
-import ChannelPinnedMessage from "@root/Message/variants/ChannelPinnedMessage";
-import GuildMemberJoin from "@root/Message/variants/GuildMemberJoin";
-import GuildDiscoveryRequalified from "@root/Message/variants/GuildDiscoveryRequalified";
 import MessageContainer, {
   MessageButtonListOption,
 } from "@root/Message/MessageContainer";
-import RecipientRemove from "@root/Message/variants/RecipientRemove";
-import RecipientAdd from "@root/Message/variants/RecipientAdd";
-import UserPremiumGuildTierUpgrade from "@root/Message/variants/UserPremiumGuildTierUpgrade";
-import UserPremiumGuildSubscription from "@root/Message/variants/UserPremiumGuildSubscription";
+import { APIMessage, MessageType } from "discord-api-types/v10";
+import GuildMemberJoin from "@root/Message/variants/GuildMemberJoin";
+import GuildDiscoveryRequalified from "@root/Message/variants/GuildDiscoveryRequalified";
 import GuildDiscoveryGracePeriodInitialWarning from "@root/Message/variants/GuildDiscoveryGracePeriodInitialWarning";
 import GuildDiscoveryGracePeriodFinalWarning from "@root/Message/variants/GuildDiscoveryGracePeriodFinalWarning";
 import GuildDiscoveryDisqualified from "@root/Message/variants/GuildDiscoveryDisqualified";
 import ChannelFollowAdd from "@root/Message/variants/ChannelFollowAdd";
 import ChannelNameChange from "@root/Message/variants/ChannelNameChange";
+import GuildBoost from "@root/Message/variants/GuildBoost";
+import BoostTierUpgrade from "@root/Message/variants/BoostTierUpgrade";
+import ChannelPinnedMessage from "@root/Message/variants/ChannelPinnedMessage";
+import RecipientAdd from "@root/Message/variants/RecipientAdd";
+import RecipientRemove from "@root/Message/variants/RecipientRemove";
 import ThreadCreated from "@root/Message/variants/ThreadCreated";
-
-export type MessageDataModified = Omit<MessageData, "referencedMessage"> &
-  Partial<MessageData>;
 
 export interface MessageProps {
   isFirstMessage?: boolean;
-  message: MessageDataModified;
+  message: APIMessage;
   isHovered?: boolean;
   showButtons?: boolean;
   thread?: boolean;
@@ -36,34 +32,34 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.ChannelPinnedMessage:
       return (
         <ChannelPinnedMessage
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
         />
       );
-    case MessageType.GuildMemberJoin:
+    case MessageType.UserJoin:
       return (
         <GuildMemberJoin
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
         />
       );
     case MessageType.GuildDiscoveryRequalified:
-      return <GuildDiscoveryRequalified createdAt={props.message.createdAt} />;
-    case MessageType.UserPremiumGuildTier1:
-    case MessageType.UserPremiumGuildTier2:
-    case MessageType.UserPremiumGuildTier3:
+      return <GuildDiscoveryRequalified createdAt={props.message.timestamp} />;
+    case MessageType.GuildBoostTier1:
+    case MessageType.GuildBoostTier2:
+    case MessageType.GuildBoostTier3:
       return (
-        <UserPremiumGuildTierUpgrade
+        <BoostTierUpgrade
           content={props.message.content}
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
           type={props.message.type}
         />
       );
-    case MessageType.UserPremiumGuildSubscription:
+    case MessageType.GuildBoost:
       return (
-        <UserPremiumGuildSubscription
-          createdAt={props.message.createdAt}
+        <GuildBoost
+          createdAt={props.message.timestamp}
           author={props.message.author}
           content={props.message.content}
         />
@@ -71,7 +67,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.RecipientAdd:
       return (
         <RecipientAdd
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
           target={props.message.mentions[0]}
         />
@@ -79,7 +75,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.RecipientRemove:
       return (
         <RecipientRemove
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
           target={props.message.mentions[0]}
         />
@@ -87,7 +83,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.ChannelNameChange:
       return (
         <ChannelNameChange
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
           content={props.message.content}
         />
@@ -95,11 +91,11 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.ThreadCreated:
       return (
         <ThreadCreated
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           thread={props.message.thread}
           author={props.message.author}
           messageId={props.message.id}
-          messageReference={props.message.messageReference}
+          messageReference={props.message.message_reference}
           messageContent={props.message.content}
         />
       );
@@ -110,7 +106,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.ChannelFollowAdd:
       return (
         <ChannelFollowAdd
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
           author={props.message.author}
           content={props.message.content}
         />
@@ -118,30 +114,30 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.GuildDiscoveryGracePeriodInitialWarning:
       return (
         <GuildDiscoveryGracePeriodInitialWarning
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
         />
       );
     case MessageType.GuildDiscoveryGracePeriodFinalWarning:
       return (
         <GuildDiscoveryGracePeriodFinalWarning
-          createdAt={props.message.createdAt}
+          createdAt={props.message.timestamp}
         />
       );
     case MessageType.GuildDiscoveryDisqualified:
-      return <GuildDiscoveryDisqualified createdAt={props.message.createdAt} />;
+      return <GuildDiscoveryDisqualified createdAt={props.message.timestamp} />;
     case MessageType.ContextMenuCommand:
       return <NormalMessage {...props} isContextMenuInteraction={true} />;
     case MessageType.ThreadStarterMessage:
       return (
         <NormalMessage
           {...props}
-          message={props.message.referencedMessage}
+          message={props.message.referenced_message}
           noThreadButton={true}
         />
       );
     default: {
       // todo: lock behind a debug mode
-      const errorMessage: MessageDataModified = {
+      const errorMessage: APIMessage = {
         ...props.message,
         type: MessageType.Default,
         content: `Unknown message type \`${

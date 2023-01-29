@@ -4,11 +4,10 @@ import ImageAttachment from "@root/Content/Attachment/ImageAttachment";
 import GenericAttachment from "@root/Content/Attachment/GenericAttachment";
 import * as Styles from "./style";
 
-// attachment icons
-import { Message_attachments } from "@types";
+import { APIAttachment } from "discord-api-types/v10";
 
 export interface AttachmentProps {
-  attachment: Message_attachments;
+  attachment: APIAttachment;
 }
 
 function AttachmentBase(props: AttachmentProps) {

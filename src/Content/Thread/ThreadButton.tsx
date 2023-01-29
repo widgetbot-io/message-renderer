@@ -1,15 +1,14 @@
-import { Message_thread } from "@types";
-import { MessageType } from "@root/types/globalTypes";
 import * as Styles from "@root/Content/style";
 import * as MessageStyles from "@root/Message/style/message";
 import React from "react";
+import { APIChannel, MessageType } from "discord-api-types/v10";
 
 interface ThreadButtonProps {
   messageType: MessageType;
   messageId: string;
   messageContent: string;
   hasReply: boolean;
-  thread: Message_thread;
+  thread: APIChannel;
 }
 
 function ThreadButton(props: ThreadButtonProps) {

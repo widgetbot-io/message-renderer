@@ -7,15 +7,15 @@ import React, {
 } from "react";
 import { filesize } from "filesize";
 import useSize from "@root/Content/Attachment/useSize";
-import { Message_attachments, Message_embeds } from "@types";
 import * as Styles from "./style";
 import Tooltip from "@root/Tooltip";
 import SvgFromUrl from "@root/SvgFromUrl";
+import { APIAttachment, APIEmbed } from "discord-api-types/v10";
 
 interface VideoAttachmentProps {
   attachmentOrEmbed:
-    | Message_attachments
-    | Message_embeds
+    | APIAttachment
+    | APIEmbed
     | {
         url: string;
         width: number;
@@ -68,9 +68,9 @@ function VideoAttachment(props: VideoAttachmentProps) {
   }, []);
 
   const { width: extractedWidth, height: extractedHeight } =
-    "width" in props.attachmentOrEmbed
-      ? props.attachmentOrEmbed
-      : props.attachmentOrEmbed.video;
+    "video" in props.attachmentOrEmbed
+      ? props.attachmentOrEmbed.video
+      : (props.attachmentOrEmbed as APIAttachment);
 
   const { width, height } = useSize(
     extractedWidth,

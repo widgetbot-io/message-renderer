@@ -1,9 +1,9 @@
 import MessageGroup from "../index";
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MessageType } from "../types/globalTypes";
 import Wrapper from "./Wrapper";
 import { testUser } from "./commonTestData";
+import { MessageType } from "discord-api-types/v10";
 
 export default {
   title: "Message Types/Boosts",
@@ -24,8 +24,8 @@ Boost.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
-      type: MessageType.UserPremiumGuildSubscription,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
+      type: MessageType.GuildBoost,
       author: testUser,
       content: "",
     },
@@ -37,10 +37,10 @@ BoostToTier1.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
-      type: MessageType.UserPremiumGuildTier1,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
+      type: MessageType.GuildBoostTier1,
       author: testUser,
-      content: "2",
+      content: "",
     },
   ],
 };
@@ -50,10 +50,10 @@ BoostToTier2.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
-      type: MessageType.UserPremiumGuildTier2,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
+      type: MessageType.GuildBoostTier2,
       author: testUser,
-      content: "2",
+      content: "",
     },
   ],
 };
@@ -63,10 +63,10 @@ BoostToTier3.args = {
   messages: [
     {
       id: "1",
-      createdAt: 1668713007904,
-      type: MessageType.UserPremiumGuildTier3,
+      timestamp: "2023-01-29T13:19:13.365000+00:00",
+      type: MessageType.GuildBoostTier3,
       author: testUser,
-      content: "2",
+      content: "",
     },
   ],
 };

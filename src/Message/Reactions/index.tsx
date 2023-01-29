@@ -1,10 +1,10 @@
 import * as Styles from "./style";
 import Reaction from "@root/Message/Reactions/Reaction";
-import { Message_reactions } from "@types";
 import React from "react";
+import { APIReaction } from "discord-api-types/v10";
 
 interface ReactionsProps {
-  reactions: Message_reactions[];
+  reactions: APIReaction[];
 }
 
 function Reactions(props: ReactionsProps) {
@@ -12,7 +12,9 @@ function Reactions(props: ReactionsProps) {
     <Styles.Reactions>
       {props.reactions.map((reaction) => (
         <Reaction
-          key={reaction.animated + reaction.emojiId + reaction.emojiName}
+          key={
+            reaction.emoji.animated + reaction.emoji.id + reaction.emoji.name
+          }
           reaction={reaction}
         />
       ))}

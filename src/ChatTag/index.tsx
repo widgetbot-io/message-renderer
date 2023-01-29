@@ -1,7 +1,7 @@
 import Tooltip from "@root/Tooltip";
-import { Message_author } from "@types";
 import React from "react";
 import * as Styles from "./style";
+import { APIUser } from "discord-api-types/v10";
 
 const verified = (
   <Tooltip placement="top" overlay="Verified Bot">
@@ -21,7 +21,7 @@ const verified = (
 );
 
 interface TagProps {
-  author: Message_author;
+  author: APIUser;
   crosspost: boolean;
   referenceGuild: string;
 }

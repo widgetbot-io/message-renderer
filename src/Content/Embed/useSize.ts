@@ -1,18 +1,21 @@
 import { useMemo } from "react";
-import { Message_embeds_image, Message_embeds_thumbnail } from "@types";
+import { APIEmbedImage } from "discord-api-types/v10";
 
-function useSize(
+function useSize<Image extends APIEmbedImage>(
   type: string,
-  image: Message_embeds_image | Message_embeds_thumbnail,
+  image: APIEmbedImage | undefined,
+  internalType: "EmbedImage" | "EmbedThumbnail",
   cancel?: boolean
 ) {
   const { width, height, isLarge } = useMemo(() => {
     if (cancel) return { width: null, height: null, isLarge: false };
 
-    if (image === null) return { width: null, height: null, isLarge: false };
+    if (image === undefined)
+      return { width: null, height: null, isLarge: false };
 
-    if (image.__typename === "EmbedImage" || /^article|image$/i.test(type)) {
+    if (internalType === "EmbedImage" || /^article|image$/i.test(type)) {
       const proposedWidth = 400;
+      console.log("image", image);
       const proposedHeight = (proposedWidth / image.width) * image.height;
 
       const { width, height } =

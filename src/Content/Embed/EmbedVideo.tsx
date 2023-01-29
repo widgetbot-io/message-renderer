@@ -1,12 +1,12 @@
-import { Embed_thumbnail, Embed_video } from "@types";
 import * as Styles from "./style";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
 import React, { ReactNode, useState } from "react";
 import useSize from "@root/Content/Attachment/useSize";
 import { getSvgUrl } from "@root/core/SvgContext";
+import { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
 
 interface ThumbnailWrapperProps {
-  thumbnail?: Embed_thumbnail["url"];
+  thumbnail?: APIEmbedThumbnail["url"];
   children: ReactNode;
   width: number;
   height: number;
@@ -51,14 +51,14 @@ function ThumbnailWrapper({
   );
 }
 
-interface EmbedVideoProps extends Pick<Embed_video, "width" | "height"> {
-  thumbnail?: Embed_thumbnail["url"];
-  url: Embed_video["url"] | null;
-  proxyUrl: Embed_video["proxyUrl"] | null;
+interface EmbedVideoProps extends Pick<APIEmbedVideo, "width" | "height"> {
+  thumbnail?: APIEmbedThumbnail["url"];
+  url: APIEmbedVideo["url"] | undefined;
+  proxyUrl: APIEmbedVideo["proxy_url"] | undefined;
 }
 
 function EmbedVideo(props: EmbedVideoProps) {
-  if (props.proxyUrl !== null)
+  if (props.proxyUrl !== undefined)
     return (
       <ThumbnailWrapper
         thumbnail={props.thumbnail}
