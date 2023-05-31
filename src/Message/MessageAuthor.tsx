@@ -58,15 +58,19 @@ class MessageAuthor extends PureComponent<MessageAuthorProps> {
 
   render() {
     // Gets the dominant role color
-    const dominantRoleColor = this.getDominantRoleColor(
-      this.props.author.roles
-    );
-    const color = this.convertColor(dominantRoleColor ?? 0);
-
+    // const dominantRoleColor = this.getDominantRoleColor(
+    //   this.props.author.roles
+    // );
+    // const color = this.convertColor(dominantRoleColor ?? 0);
+    //
     // Gets the dominant role icon
-    const dominantRoleIconRole = this.getDominantRoleIconRole(
-      this.props.author.roles
-    );
+    // const dominantRoleIconRole = this.getDominantRoleIconRole(
+    //   this.props.author.roles
+    // );
+
+    const color = this.convertColor(0);
+
+    const dominantRoleIconRole = null;
 
     if (this.props.onlyShowUsername)
       return (

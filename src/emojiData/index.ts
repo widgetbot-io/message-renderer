@@ -1,5 +1,12 @@
 import * as categoryMap from "./emojis.json";
-import { Emoji } from "@root/types/Emoji";
+
+interface Emoji {
+  category: string;
+  emoji: string;
+  keywords: string[];
+  animated: boolean;
+  available: boolean;
+}
 
 const emojisArray = Object.entries(categoryMap).map(([category, emojisObj]) => {
   // todo: refactor

@@ -1,6 +1,6 @@
 import * as Styles from "./style";
 import React, { ReactNode, useMemo } from "react";
-import { findDefaultEmojiByUnicode } from "@root/emoji";
+import { findDefaultEmojiByUnicode } from "@root/emojiData";
 import emoji from "react-easy-emoji";
 import Tooltip from "@root/Tooltip";
 import { styled } from "@root/Stitches/stitches.config";
