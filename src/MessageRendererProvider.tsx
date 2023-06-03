@@ -114,7 +114,7 @@ const globalStyles = globalCss({
 
 const extraCss = css({
   fontFamily: theme.fonts.main,
-  backgroundColor: theme.colors.background, // todo: this is only for testing!
+  // backgroundColor: theme.colors.background, // todo: this is only for testing!
 });
 
 function MessageRendererProvider({

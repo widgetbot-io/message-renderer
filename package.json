@@ -1,13 +1,14 @@
 {
   "name": "@widgetbot/message-renderer",
-  "version": "1.0.0",
+  "version": "v1.0.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/cjs/index.js",
   "files": [
     "dist"
   ],
-  "types": "dist/types.d.ts",
+  "private": false,
+  "types": "dist/index.d.ts",
   "scripts": {
     "rollup": "rollup -c",
     "storybook": "start-storybook -p 6006",
@@ -31,7 +32,7 @@
     "color": "^4.2.3",
     "discord-api-types": "^0.37.30",
     "filesize": "^10.0.6",
-    "highlight.js": "^10.4.1",
+    "highlight.js": "^11.7.0",
     "lodash": "^4.17.21",
     "lottie-web": "^5.10.1",
     "memoizee": "^0.4.15",

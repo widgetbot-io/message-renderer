@@ -1,38 +1,51 @@
-import { globalCss } from "@root/Stitches/stitches.config";
+import {globalCss} from "@root/Stitches/stitches.config";
 
 export const hljsTheme = globalCss({
-  ".hljs-comment, .hljs-quote": {
-    color: "#586e75",
-  },
-  ".hljs-addition, .hljs-keyword, .hljs-selector-tag": {
-    color: "#859900",
-  },
-  ".hljs-doctag, .hljs-literal, .hljs-meta .hljs-meta-string, .hljs-number, .hljs-regexp, .hljs-string":
-    {
-      color: "#2aa198",
+    '.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_': {
+        color: '#ff7b72'
     },
-  ".hljs-name, .hljs-section, .hljs-selector-class, .hljs-selector-id, .hljs-title":
-    {
-      color: "#268bd2",
+    '.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_': {
+        color: '#d2a8ff'
     },
-  ".hljs-attr, .hljs-attribute, .hljs-class .hljs-title, .hljs-template-variable, .hljs-type, .hljs-variable":
-    {
-      color: "#b58900",
+    '.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable': {
+        color: '#79c0ff'
     },
-  ".hljs-bullet, .hljs-link, .hljs-meta, hljs-meta .hljs-keyword, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-subst, .hljs-symbol":
-    {
-      color: "#cb4b16",
+    '.hljs-meta .hljs-string,.hljs-regexp,.hljs-string': {
+        color: '#a5d6ff'
     },
-  ".hljs-built_in, .hljs-deletion": {
-    color: "#dc322f",
-  },
-  ".hljs-formula": {
-    background: "#073642",
-  },
-  ".hljs-emphasis": {
-    fontStyle: "italic",
-  },
-  ".hljs-strong": {
-    fontWeight: 500,
-  },
+    '.hljs-built_in,.hljs-symbol': {
+        color: '#ffa657'
+    },
+    '.hljs-code,.hljs-comment,.hljs-formula': {
+        color: '#8b949e'
+    },
+    '.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag': {
+        color: '#7ee787'
+    },
+    '.hljs-subst': {
+        color: '#c9d1d9'
+    },
+    '.hljs-section': {
+        color: '#1f6feb',
+        fontWeight: '700',
+    },
+    '.hljs-bullet': {
+        color: '#f2cc60'
+    },
+    '.hljs-emphasis': {
+        color: '#c9d1d9',
+        fontStyle: 'italic',
+    },
+    '.hljs-strong': {
+        color: '#c9d1d9',
+        fontWeight: '700',
+    },
+    '.hljs-addition': {
+        color: '#aff5b4',
+        backgroundColor: '#033a16',
+    },
+    '.hljs-deletion': {
+        color: '#ffdcd7',
+        backgroundColor: '#67060c',
+    }
 });

@@ -5,7 +5,10 @@ function Wrapper(Story) {
   return (
     <MessageRendererProvider>
       {({ themeClass }) => (
-        <div className={themeClass} style={{ padding: 20 }}>
+        <div
+            className={themeClass}
+            // style={{ padding: 20 }}
+        >
           {Story()}
         </div>
       )}
