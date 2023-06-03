@@ -1,9 +1,9 @@
 {
   "name": "@widgetbot/message-renderer",
-  "version": "v1.0.0-SNAPSHOT",
+  "version": "v1.0.0",
   "description": "",
-  "main": "dist/esm/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/cjs/index.js",
   "files": [
     "dist"
   ],
@@ -12,7 +12,8 @@
   "scripts": {
     "rollup": "rollup -c",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "pnpm rollup"
   },
   "repository": {
     "type": "git",
