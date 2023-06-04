@@ -1,7 +1,7 @@
 import Moment from "moment";
 import Tooltip from "@root/Tooltip";
 import React from "react";
-import { css, styled, theme } from "@root/Stitches/stitches.config";
+import {commonComponentId, css, styled, theme} from "@root/Stitches/stitches.config";
 
 enum TimestampStyle {
   ShortTime = "t",
@@ -53,9 +53,7 @@ export const Timestamp: React.FC<Props> = ({ data: { timestamp, style } }) => {
   );
 };
 
-const TSSpan = styled(
-  "span",
-  "timestamp-span",
+const TSSpan = styled.withConfig({ displayName: "timestamp-span", componentId: commonComponentId })("span",
   css({
     backgroundColor: theme.colors.primaryOpacity10,
     borderRadius: 3,

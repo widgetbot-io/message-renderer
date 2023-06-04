@@ -8,39 +8,10 @@ import { LinkMarkdown, parseEmbedTitle } from "@root/markdown/render";
 import useSize from "@root/Content/Embed/useSize";
 import EmbedVideo from "@root/Content/Embed/EmbedVideo";
 import React, { useMemo } from "react";
-import { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
-
-// todo: proper license notice
-// excerpt from https://github.com/discordjs/discord-api-types
-enum EmbedType {
-  /**
-   * Generic embed rendered from embed attributes
-   */
-  Rich = "rich",
-  /**
-   * Image embed
-   */
-  Image = "image",
-  /**
-   * Video embed
-   */
-  Video = "video",
-  /**
-   * Animated gif image embed rendered as a video embed
-   */
-  GIFV = "gifv",
-  /**
-   * Article embed
-   */
-  Article = "article",
-  /**
-   * Link embed
-   */
-  Link = "link",
-}
+import {APIEmbed, APIEmbedImage, EmbedType} from "discord-api-types/v10";
 
 export interface EmbedProps {
-  embed: APIEmbed & { type?: EmbedType };
+  embed: APIEmbed;
   images: APIEmbedImage[] | undefined;
 }
 
@@ -80,10 +51,10 @@ function Embed({ embed, images }: EmbedProps) {
   return (
     <Styles.Embed
       style={{ borderLeftColor: embedColor }}
-      stitchesProps={{ thin: isEmbedThin }}
+      thin={isEmbedThin}
     >
       <Styles.ContentAndThumbnail
-        stitchesProps={{ hasLargeThumbnail: isThumbnailLarge }}
+        hasLargeThumbnail={isThumbnailLarge}
       >
         <Styles.Content>
           {embed.provider && (
@@ -108,7 +79,8 @@ function Embed({ embed, images }: EmbedProps) {
           {embed.title &&
             (embed.url !== null ? (
               <Styles.Title
-                stitchesProps={{ as: "a", link: true }}
+                as="a"
+                link
                 href={embed.url}
                 target="_blank"
               >
@@ -137,7 +109,7 @@ function Embed({ embed, images }: EmbedProps) {
               {embed.fields.map((field) => (
                 <Styles.Field
                   key={field.name + field.value}
-                  stitchesProps={{ inline: field.inline }}
+                  inline={field.inline}
                 >
                   <Styles.FieldName>
                     {parseEmbedTitle(field.name)}
@@ -169,14 +141,14 @@ function Embed({ embed, images }: EmbedProps) {
       )}
       {images?.length > 0 && (
         <Styles.Images
-          stitchesProps={{ nImages: images.length as 1 | 2 | 3 | 4 }}
+          nImages={images.length as 1 | 2 | 3 | 4}
         >
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>
               <Styles.Image
                 src={image.proxy_url}
                 // originalUrl={image.url}
-                stitchesProps={{ withMargin: true }}
+                withMargin
               />
             </Styles.ImageGridImageContainer>
           ))}

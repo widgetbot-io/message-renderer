@@ -53,11 +53,7 @@ function GenericAttachment(props: GenericAttachmentProps) {
   }, [props.icon]);
 
   return (
-    <Styles.AttachmentContainer
-      stitchesProps={{
-        withoutChildren: props.children === undefined,
-      }}
-    >
+    <Styles.AttachmentContainer withoutChildren={props.children === undefined}>
       <SvgFromUrl svg={icon} width={30} height={40} />
       <Styles.AttachmentMetadata>
         <Styles.AttachmentFileName

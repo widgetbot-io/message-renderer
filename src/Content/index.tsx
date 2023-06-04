@@ -167,13 +167,13 @@ function Content(props: ContentProps) {
 
   return (
     <>
-      <Styles.Base stitchesProps={{ isReplyContent: props.isReplyContent }}>
+      <Styles.Base isReplyContent={props.isReplyContent}>
         <ContentCore
           referencedMessage={props.message}
           showTooltip={props.isReplyContent}
         >
           <Styles.ContentContainer
-            stitchesProps={{ isReplyContent: props.isReplyContent }}
+            isReplyContent={props.isReplyContent}
           >
             {props.message.content.length > 0 ? (
               <>

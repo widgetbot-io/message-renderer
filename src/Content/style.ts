@@ -1,11 +1,18 @@
-import { css, keyframes, styled, theme } from "@root/Stitches/stitches.config";
+import {
+  commonComponentId,
+  keyframes,
+  styled,
+  theme,
+} from "@root/Stitches/stitches.config";
 import SvgFromUrl from "@root/SvgFromUrl";
 import { CodeBlock } from "@root/markdown/render/elements/code/style";
 
-export const Base = styled(
+export const Base = styled.withConfig({
+  displayName: "message-content",
+  componentId: commonComponentId,
+})(
   "span",
-  "message-content",
-  css({
+  {
     color: theme.colors.primaryOpacity20,
     whiteSpace: "break-spaces",
     fontSize: theme.fontSizes.l,
@@ -28,21 +35,25 @@ export const Base = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const ContentMessageTooltip = styled(
+export const ContentMessageTooltip = styled.withConfig({
+  displayName: "content-message-tooltip",
+  componentId: commonComponentId,
+})(
   "div",
-  "content-message-tooltip",
-  css({
+  {
     maxWidth: "60vw",
-  })
+  }
 );
 
-export const ContentContainer = styled(
+export const ContentContainer = styled.withConfig({
+  displayName: "content-container",
+  componentId: commonComponentId,
+})(
   "div",
-  "content-container",
-  css({
+  {
     color: theme.colors.primaryOpacity80,
     fontWeight: 400,
     lineHeight: "1.375rem",
@@ -66,98 +77,116 @@ export const ContentContainer = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const ReplyAccessoryText = styled(
+export const ReplyAccessoryText = styled.withConfig({
+  displayName: "content-reply-acessory-text",
+  componentId: commonComponentId,
+})(
   "span",
-  "content-reply-acessory-text",
-  css("span", {
+  "span", {
     fontStyle: "italic",
-  })
+  }
 );
 
-export const MessageAccessories = styled(
+export const MessageAccessories = styled.withConfig({
+  displayName: "message-accessories",
+  componentId: commonComponentId,
+})(
   "div",
-  "message-accessories",
-  css({
+  {
     display: "grid",
     paddingTop: theme.space.small,
     paddingBottom: theme.space.small,
     gridAutoFlow: "row",
-    gridRowGap: theme.space.small,
+    gridRowGap: `${theme.space.small}`,
     gridTemplateColumns: "repeat(auto-fill, minmax(100%, 1fr))",
-  })
+  }
 );
 
-export const DeferredContent = styled(
+export const DeferredContent = styled.withConfig({
+  displayName: "deferred-content",
+  componentId: commonComponentId,
+})(
   "div",
-  "deferred-content",
-  css({
+  {
     fontSize: theme.fontSizes.m,
     color: theme.colors.primaryOpacity80,
-  })
+  }
 );
 
-export const Edited = styled(
+export const Edited = styled.withConfig({
+  displayName: "edited",
+  componentId: commonComponentId,
+})(
   "span",
-  "edited",
-  css({
+  {
     fontSize: theme.fontSizes.xs,
     marginLeft: theme.space.small,
     whiteSpace: "nowrap",
     color: theme.colors.textMuted,
-  })
+  }
 );
 
-export const ThreadButtonContainer = styled(
+export const ThreadButtonContainer = styled.withConfig({
+  displayName: "thread-button-container",
+  componentId: commonComponentId,
+})(
   "div",
-  "thread-button-container",
-  css({
+  {
     marginTop: theme.space.small,
     width: "100%",
     display: "block",
-  })
+  }
 );
 
-export const ThreadButton = styled(
+export const ThreadButton = styled.withConfig({
+  displayName: "thread-button",
+  componentId: commonComponentId,
+})(
   "div",
-  "thread-button",
-  css({
+  {
     boxSizing: "border-box",
     width: "fit-content",
     padding: theme.space.large,
     height: theme.sizes.threadButton,
     borderRadius: 4,
     backgroundColor: theme.colors.backgroundSecondary,
-  })
+  }
 );
 
-export const ThreadButtonTopLine = styled(
+export const ThreadButtonTopLine = styled.withConfig({
+  displayName: "thread-button-top-line",
+  componentId: commonComponentId,
+})(
   "div",
-  "thread-button-top-line",
-  css({
+  {
     display: "flex",
     fontSize: theme.fontSizes.m,
     fontWeight: 600,
-  })
+  }
 );
 
-export const ThreadButtonName = styled(
+export const ThreadButtonName = styled.withConfig({
+  displayName: "thread-button-name",
+  componentId: commonComponentId,
+})(
   "span",
-  "thread-button-name",
-  css({
+  {
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
     color: theme.colors.primaryOpacity100,
-  })
+  }
 );
 
-export const SeeThreadButton = styled(
+export const SeeThreadButton = styled.withConfig({
+  displayName: "see-thread-button",
+  componentId: commonComponentId,
+})(
   "div",
-  "see-thread-button",
-  css({
+  {
     marginLeft: theme.space.large,
     color: theme.colors.link,
     whiteSpace: "nowrap",
@@ -166,71 +195,85 @@ export const SeeThreadButton = styled(
     "&:hover": {
       textDecoration: "underline",
     },
-  })
+  }
 );
 
-export const ReplyIcon = styled(
+export const ReplyIcon = styled.withConfig({
+  displayName: "reply-icon",
+  componentId: commonComponentId,
+})(
   SvgFromUrl,
-  "reply-icon",
-  css({
+  {
     marginLeft: theme.space.small,
     width: 20,
     height: 20,
-  })
+  }
 );
 
-export const StickerTooltipIcon = styled(
+export const StickerTooltipIcon = styled.withConfig({
+  displayName: "sticker-tooltip-icon",
+  componentId: commonComponentId,
+})(
   SvgFromUrl,
-  "sticker-tooltip-icon",
-  css({
+  {
     marginRight: theme.space.small,
-  })
+  }
 );
 
-export const LottieStickerWrapper = styled(
+export const LottieStickerWrapper = styled.withConfig({
+  displayName: "lottie-sticker-wrapper",
+  componentId: commonComponentId,
+})(
   "span",
-  "lottie-sticker-wrapper",
-  css({
+  {
     width: "fit-content",
-  })
+  }
 );
 
-export const StickerTooltip = styled(
+export const StickerTooltip = styled.withConfig({
+  displayName: "sticker-tooltip",
+  componentId: commonComponentId,
+})(
   "span",
-  "sticker-tooltip",
-  css({
+  {
     display: "flex",
     alignItems: "center",
     whiteSpace: "break-spaces",
-  })
+  }
 );
 
-export const Sticker = styled(
+export const Sticker = styled.withConfig({
+  displayName: "sticker",
+  componentId: commonComponentId,
+})(
   "img",
-  "",
-  css({
+  {
     objectFit: "contain",
-  })
+  }
 );
 
-export const FailedInteraction = styled(
+export const FailedInteraction = styled.withConfig({
+  displayName: "failed-interaction",
+  componentId: commonComponentId,
+})(
   "div",
-  "failed-interaction",
-  css({
+  {
     fontSize: theme.fontSizes.m,
     color: theme.colors.danger,
     display: "flex",
     alignItems: "center",
     gap: theme.space.large,
-  })
+  }
 );
 
-export const TypingIndicator = styled(
+export const TypingIndicator = styled.withConfig({
+  displayName: "typing-indicator",
+  componentId: commonComponentId,
+})(
   "svg",
-  "typing-indicator",
-  css({
+  {
     color: theme.colors.primaryOpacity100,
-  })
+  }
 );
 
 const typingIndicatorKeyframes = keyframes({
@@ -254,32 +297,38 @@ const typingIndicatorCircleCommon = {
   animationDuration: "1.2s",
 };
 
-export const TypingIndicatorCircle1 = styled(
+export const TypingIndicatorCircle1 = styled.withConfig({
+  displayName: "typing-indicator-circle-1",
+  componentId: commonComponentId,
+})(
   "circle",
-  "typing-indicator-circle-1",
-  css({
+  {
     ...typingIndicatorCircleCommon,
     transformOrigin: "3.5px center",
     animationDelay: "0.1s",
-  })
+  }
 );
 
-export const TypingIndicatorCircle2 = styled(
+export const TypingIndicatorCircle2 = styled.withConfig({
+  displayName: "typing-indicator-circle-2",
+  componentId: commonComponentId,
+})(
   "circle",
-  "typing-indicator-circle-2",
-  css({
+  {
     ...typingIndicatorCircleCommon,
     transformOrigin: "12.25px center",
     animationDelay: "0.2s",
-  })
+  }
 );
 
-export const TypingIndicatorCircle3 = styled(
+export const TypingIndicatorCircle3 = styled.withConfig({
+  displayName: "typing-indicator-circle-3",
+  componentId: commonComponentId,
+})(
   "circle",
-  "typing-indicator-circle-3",
-  css({
+  {
     ...typingIndicatorCircleCommon,
     transformOrigin: "21px center",
     animationDelay: "0.3s",
-  })
+  }
 );

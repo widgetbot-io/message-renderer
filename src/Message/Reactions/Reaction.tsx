@@ -27,7 +27,6 @@ function Reaction(props: ReactionProps) {
         {props.reaction.emoji.id !== null ? (
           <Styles.ReactionEmoji
             emojiName={props.reaction.emoji.name}
-            stitchesProps={{ enlarged: true }}
             src={url}
             disableTooltip
             enlarged
@@ -35,7 +34,6 @@ function Reaction(props: ReactionProps) {
         ) : (
           <Styles.ReactionEmoji
             emojiName={props.reaction.emoji.name}
-            stitchesProps={{ enlarged: true }}
             disableTooltip
             enlarged
           />

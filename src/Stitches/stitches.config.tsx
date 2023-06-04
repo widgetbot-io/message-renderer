@@ -1,8 +1,5 @@
 import { createStitches } from "@stitches/react";
-import React, { ForwardedRef, forwardRef } from "react";
-import OverridableStyledComponent, {
-  Element,
-} from "@root/Stitches/OverridableStyledComponent";
+import React from "react";
 
 const stitches = createStitches({
   theme: {
@@ -64,49 +61,6 @@ const stitches = createStitches({
   },
 });
 
-export function styled<
-  Comp extends Element,
-  Css extends
-    | string
-    | ((args: { as?: Element } & Record<string, unknown>) => string)
->(component: Comp, overrideClassName: string, cssClass: Css) {
-  type ToReturnProps<TStitchesProps extends { as?: Element }> =
-    React.ComponentProps<
-      TStitchesProps extends { as: Element } ? TStitchesProps["as"] : Comp
-    > & {
-      stitchesProps?: TStitchesProps &
-        (Css extends (arg: infer P) => string ? P : {}) &
-        (React.ComponentProps<Comp> extends { stitchesProps: infer P }
-          ? P
-          : {});
-    };
+export const commonComponentId = "wb";
 
-  function ComponentToReturn<TStitchesProps extends { as?: Element }>(
-    props: ToReturnProps<TStitchesProps>,
-    ref: ForwardedRef<Comp>
-  ) {
-    const { stitchesProps, ...restOfProps } = props;
-
-    const actualClassName =
-      cssClass instanceof Function ? cssClass(stitchesProps) : cssClass;
-
-    return (
-      // @ts-expect-error TS2322
-      <OverridableStyledComponent
-        {...restOfProps}
-        component={component}
-        className={actualClassName}
-        overrideClassName={overrideClassName}
-        innerRef={ref}
-      />
-    );
-  }
-
-  const refForwarded = forwardRef(ComponentToReturn);
-
-  refForwarded.toString = () => `.${overrideClassName}`;
-
-  return refForwarded;
-}
-
-export const { theme, globalCss, keyframes, css } = stitches;
+export const { styled, theme, globalCss, keyframes, css } = stitches;

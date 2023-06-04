@@ -1,40 +1,49 @@
-import { css, styled, theme } from "@root/Stitches/stitches.config";
+import {
+  commonComponentId,
+  styled,
+  theme,
+} from "@root/Stitches/stitches.config";
 import { Twemoji } from "@root/Emoji";
 
-export const Reactions = styled(
+export const Reactions = styled.withConfig({
+  displayName: "reactions",
+  componentId: commonComponentId,
+})(
   "div",
-  "reactions",
-  css({
+  {
     display: "flex",
     flexWrap: "wrap",
     gap: theme.space.small,
     userSelect: "none",
-  })
+  }
 );
 
-export const ReactionTooltip = styled(
+export const ReactionTooltip = styled.withConfig({
+  displayName: "emoji-tooltip",
+  componentId: commonComponentId,
+})(
   "div",
-  "emoji-tooltip",
-  css({
+  {
     display: "flex",
     alignItems: "center",
     gap: theme.space.large,
-  })
+  }
 );
 
-export const ReactionEmoji = styled(
-  Twemoji,
-  "reaction-emoji",
-  css({
-    width: 16,
-    height: 16,
-  })
-);
+export const ReactionEmoji = styled.withConfig({
+  displayName: "reaction-emoji",
+  componentId: commonComponentId,
+})(Twemoji, {
+  width: 16,
+  height: 16,
+});
 
-export const Reaction = styled(
+export const Reaction = styled.withConfig({
+  displayName: "reaction",
+  componentId: commonComponentId,
+})(
   "span",
-  "reaction",
-  css({
+  {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -42,17 +51,19 @@ export const Reaction = styled(
     borderRadius: 8,
     cursor: "not-allowed",
     backgroundColor: theme.colors.backgroundSecondary,
-  })
+  }
 );
 
-export const ReactionCount = styled(
+export const ReactionCount = styled.withConfig({
+  displayName: "reaction-count",
+  componentId: commonComponentId,
+})(
   "span",
-  "reaction-count",
-  css({
+  {
     marginLeft: theme.space.medium,
     minWidth: 9,
     fontWeight: 500,
     fontSize: theme.fontSizes.m,
     color: theme.colors.primaryOpacity80,
-  })
+  }
 );

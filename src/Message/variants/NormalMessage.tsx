@@ -166,7 +166,7 @@ function NormalMessage(props: MessageProps) {
 
   if (props.isFirstMessage)
     return (
-      <Styles.Message stitchesProps={{ mentioned: isUserMentioned }}>
+      <Styles.Message mentioned={isUserMentioned}>
         {shouldShowReply && (
           <ReplyInfo
             referencedMessage={props.message.referenced_message}
@@ -196,7 +196,7 @@ function NormalMessage(props: MessageProps) {
     );
 
   return (
-    <Styles.Message stitchesProps={{ mentioned: isUserMentioned }}>
+    <Styles.Message mentioned={isUserMentioned}>
       <Tooltip
         placement="top"
         overlay={Moment(props.message.timestamp).format("LLLL")}

@@ -1,9 +1,11 @@
-import { css, styled } from "@root/Stitches/stitches.config";
+import {commonComponentId, styled} from "@root/Stitches/stitches.config";
 
-export const MessageGroup = styled(
+export const MessageGroup = styled.withConfig({
+  displayName: "message-group",
+  componentId: commonComponentId,
+})(
   "div",
-  "message-group",
-  css({
+  {
     marginTop: 17,
-  })
+  }
 );

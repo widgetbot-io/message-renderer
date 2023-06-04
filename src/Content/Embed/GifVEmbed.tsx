@@ -12,7 +12,7 @@ function GifVEmbed({ embed }: GifVEmbedProps) {
 
   return (
     <Styles.MediaEmbed
-      stitchesProps={{ as: "video" }}
+      as="video"
       src={embed.video.proxy_url ?? embed.video.url}
       width={size.width}
       height={size.height}

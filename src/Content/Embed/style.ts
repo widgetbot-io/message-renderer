@@ -1,37 +1,42 @@
-import { css, styled, theme } from "@root/Stitches/stitches.config";
+import {
+  commonComponentId,
+  styled,
+  theme,
+} from "@root/Stitches/stitches.config";
 import SvgFromUrl from "@root/SvgFromUrl";
 
-export const Embed = styled(
-  "article",
-  "embed",
-  css({
-    padding: theme.space.xxl,
-    paddingLeft: theme.space.xl,
-    borderLeftWidth: 4,
-    borderLeftStyle: "solid",
-    borderLeftColor: theme.colors.backgroundTertiary,
-    borderRadius: 3,
-    backgroundColor: theme.colors.backgroundSecondary,
-    width: "fit-content",
-    gap: theme.space.large,
-    display: "flex",
-    flexDirection: "column",
-    maxWidth: 520,
+export const Embed = styled.withConfig({
+  displayName: "embed",
+  componentId: commonComponentId,
+})("article", {
+  padding: theme.space.xxl,
+  paddingLeft: theme.space.xl,
+  borderLeftWidth: 4,
+  borderLeftStyle: "solid",
+  borderLeftColor: theme.colors.backgroundTertiary,
+  borderRadius: 3,
+  backgroundColor: theme.colors.backgroundSecondary,
+  width: "fit-content",
+  gap: theme.space.large,
+  display: "flex",
+  flexDirection: "column",
+  maxWidth: 520,
 
-    variants: {
-      thin: {
-        true: {
-          maxWidth: 432,
-        },
+  variants: {
+    thin: {
+      true: {
+        maxWidth: 432,
       },
     },
-  })
-);
+  },
+});
 
-export const ContentAndThumbnail = styled(
+export const ContentAndThumbnail = styled.withConfig({
+  displayName: "embed-content-and-thumbnail",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-content-and-thumbnail",
-  css({
+  {
     display: "flex",
     gap: theme.space.xxl,
 
@@ -43,31 +48,37 @@ export const ContentAndThumbnail = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const Content = styled(
+export const Content = styled.withConfig({
+  displayName: "embed-content",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-content",
-  css({
+  {
     display: "grid",
     gap: theme.space.large,
-  })
+  }
 );
 
-export const Provider = styled(
+export const Provider = styled.withConfig({
+  displayName: "embed-provider",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-provider",
-  css({
+  {
     fontSize: theme.fontSizes.s,
     color: theme.colors.interactiveNormal,
-  })
+  }
 );
 
-export const Author = styled(
+export const Author = styled.withConfig({
+  displayName: "embed-author",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-author",
-  css({
+  {
     fontSize: theme.fontSizes.m,
     fontWeight: 600,
     display: "inline-grid",
@@ -75,23 +86,27 @@ export const Author = styled(
     alignItems: "center",
     gap: theme.space.large,
     color: theme.colors.primaryOpacity100,
-  })
+  }
 );
 
-export const AuthorIcon = styled(
+export const AuthorIcon = styled.withConfig({
+  displayName: "embed-author-icon",
+  componentId: commonComponentId,
+})(
   "img",
-  "embed-author-icon",
-  css({
+  {
     width: 24,
     height: 24,
     borderRadius: "100%",
-  })
+  }
 );
 
-export const AuthorName = styled(
+export const AuthorName = styled.withConfig({
+  displayName: "embed-author-name",
+  componentId: commonComponentId,
+})(
   "span",
-  "embed-author-name",
-  css({
+  {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -107,13 +122,15 @@ export const AuthorName = styled(
         textDecoration: "underline",
       },
     },
-  })
+  }
 );
 
-export const Title = styled(
+export const Title = styled.withConfig({
+  displayName: "embed-title",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-title",
-  css({
+  {
     fontSize: theme.fontSizes.l,
     fontWeight: 600,
 
@@ -130,35 +147,41 @@ export const Title = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const Description = styled(
+export const Description = styled.withConfig({
+  displayName: "embed-description",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-description",
-  css({
+  {
     fontSize: theme.fontSizes.m,
     whiteSpace: "pre-wrap",
     color: theme.colors.interactiveNormal,
-  })
+  }
 );
 
-export const Fields = styled(
+export const Fields = styled.withConfig({
+  displayName: "embed-fields",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-fields",
-  css({
+  {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     marginTop: theme.space.small,
     gap: theme.space.large,
-  })
+  }
 );
 
-export const Field = styled(
+export const Field = styled.withConfig({
+  displayName: "embed-field",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-field",
-  css({
+  {
     flex: 0,
     maxWidth: 506,
     flexBasis: "100%",
@@ -170,35 +193,41 @@ export const Field = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const FieldName = styled(
+export const FieldName = styled.withConfig({
+  displayName: "embed-field-name",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-field-name",
-  css({
+  {
     fontSize: theme.fontSizes.m,
     marginBottom: theme.space.small,
     fontWeight: 600,
     color: theme.colors.primaryOpacity100,
-  })
+  }
 );
 
-export const FieldValue = styled(
+export const FieldValue = styled.withConfig({
+  displayName: "embed-field-value",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-field-value",
-  css({
+  {
     fontSize: theme.fontSizes.m,
     fontWeight: 400,
     whiteSpace: "pre-wrap",
     color: theme.colors.interactiveNormal,
-  })
+  }
 );
 
-export const Image = styled(
+export const Image = styled.withConfig({
+  displayName: "embed-field-image",
+  componentId: commonComponentId,
+})(
   "img",
-  "embed-field-image",
-  css({
+  {
     borderRadius: 3,
     cursor: "pointer",
 
@@ -209,13 +238,15 @@ export const Image = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const Images = styled(
+export const Images = styled.withConfig({
+  displayName: "embed-field-images",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-field-images",
-  css({
+  {
     display: "grid",
     gap: theme.space.small,
     borderRadius: 3,
@@ -246,75 +277,89 @@ export const Images = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const ImageGridImageContainer = styled(
+export const ImageGridImageContainer = styled.withConfig({
+  displayName: "embed-image-grid-image-container",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-image-grid-image-container",
-  css({
+  {
     overflow: "hidden",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  })
+  }
 );
 
-export const Footer = styled(
+export const Footer = styled.withConfig({
+  displayName: "embed-footer",
+  componentId: commonComponentId,
+})(
   "div",
-  "embed-footer",
-  css({
+  {
     fontSize: theme.fontSizes.s,
     display: "flex",
     alignItems: "center",
     color: theme.colors.interactiveNormal,
-  })
+  }
 );
 
-export const FooterIcon = styled(
+export const FooterIcon = styled.withConfig({
+  displayName: "embed-footer-icon",
+  componentId: commonComponentId,
+})(
   "img",
-  "embed-footer-icon",
-  css({
+  {
     borderRadius: "100%",
     width: 20,
     height: 20,
     marginRight: theme.space.large,
-  })
+  }
 );
 
-export const MediaEmbed = styled(
+export const MediaEmbed = styled.withConfig({
+  displayName: "media-embed",
+  componentId: commonComponentId,
+})(
   "img",
-  "media-embed",
-  css({
+  {
     borderRadius: 3,
     cursor: "pointer",
-  })
+  }
 );
 
-export const VideoIframe = styled(
+export const VideoIframe = styled.withConfig({
+  displayName: "video-iframe",
+  componentId: commonComponentId,
+})(
   "iframe",
-  "video-iframe",
-  css({
+  {
     border: "none",
     borderRadius: 3,
-  })
+  }
 );
 
-export const VideoThumbnail = styled(
+export const VideoThumbnail = styled.withConfig({
+  displayName: "video-thumbnail",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-thumbnail",
-  css({
+  {
     borderRadius: 3,
     backgroundSize: "cover",
     position: "relative",
     cursor: "pointer",
-  })
+  }
 );
 
-export const VideoThumbnailPlayButtonContainer = styled(
+export const VideoThumbnailPlayButtonContainer = styled.withConfig({
+  displayName: "video-thumbnail-play-button-container",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-thumbnail-play-button-container",
-  css({
+  {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -326,17 +371,18 @@ export const VideoThumbnailPlayButtonContainer = styled(
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.colors.transparentBlack,
-  })
+  }
 );
 
-export const VideoThumbnailPlayButton = styled(
-  SvgFromUrl,
-  "video-thumbnail-play-button",
-  css({
+export const VideoThumbnailPlayButton = styled.withConfig({
+  displayName: "video-thumbnail-play-button",
+  componentId: commonComponentId
+})(SvgFromUrl,
+  {
     opacity: 0.6,
 
     "&:hover": {
       opacity: 1,
     },
-  })
+  }
 );

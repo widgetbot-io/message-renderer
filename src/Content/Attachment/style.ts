@@ -1,18 +1,27 @@
-import { css, keyframes, styled, theme } from "@root/Stitches/stitches.config";
+import {
+  commonComponentId,
+  keyframes,
+  styled,
+  theme,
+} from "@root/Stitches/stitches.config";
 import SvgFromUrl from "@root/SvgFromUrl";
 
-export const ImageAttachment = styled(
+export const ImageAttachment = styled.withConfig({
+  displayName: "image-attachment",
+  componentId: commonComponentId,
+})(
   "img",
-  "image-attachment",
-  css({
+  {
     cursor: "pointer",
-  })
+  }
 );
 
-export const VideoAttachmentContainer = styled(
+export const VideoAttachmentContainer = styled.withConfig({
+  displayName: "video-attachment-container",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-attachment-container",
-  css({
+  {
     borderRadius: 3,
     overflow: "hidden",
     maxWidth: "min(400px, 100%)",
@@ -20,13 +29,15 @@ export const VideoAttachmentContainer = styled(
     cursor: "pointer",
     position: "relative",
     display: "flex",
-  })
+  }
 );
 
-export const VideoAttachment = styled(
+export const VideoAttachment = styled.withConfig({
+  displayName: "video-attachment",
+  componentId: commonComponentId,
+})(
   "video",
-  "video-attachment",
-  css({
+  {
     outline: "none",
     cursor: "pointer",
 
@@ -39,13 +50,15 @@ export const VideoAttachment = styled(
       width: "100%",
       height: "100%",
     },
-  })
+  }
 );
 
-export const VideoAttachmentOverlay = styled(
+export const VideoAttachmentOverlay = styled.withConfig({
+  displayName: "video-attachment-overlay",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-attachment-overlay",
-  css({
+  {
     position: "absolute",
     top: 0,
     width: "100%",
@@ -75,15 +88,17 @@ export const VideoAttachmentOverlay = styled(
     "&[data-played-once='false']": {
       $$overlayControlsTranslateY: "100%",
     },
-  })
+  }
 );
 
-export const VideoAttachmentOverlayControl = styled(
+export const VideoAttachmentOverlayControl = styled.withConfig({
+  displayName: "video-attachment-overlay-control",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-attachment-overlay-control",
-  css({
+  {
     flex: "1 0",
-  })
+  }
 );
 
 const stateChange = keyframes({
@@ -98,10 +113,12 @@ const stateChange = keyframes({
 
 export const PlayOrPauseAnimationDuration = 400;
 
-export const PlayOrPauseButtonAnimation = styled(
+export const PlayOrPauseButtonAnimation = styled.withConfig({
+  displayName: "play-or-pause-button-animation",
+  componentId: commonComponentId,
+})(
   "div",
-  "play-or-pause-button-animation",
-  css({
+  {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -123,47 +140,55 @@ export const PlayOrPauseButtonAnimation = styled(
     "&[data-has-played-before='false']": {
       backgroundColor: theme.colors.transparentBlack,
     },
-  })
+  }
 );
 
-export const VideoMetadata = styled(
+export const VideoMetadata = styled.withConfig({
+  displayName: "video-metadata",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-metadata",
-  css({
+  {
     padding: theme.space.xl,
     transition: "translate 0.1s ease-in-out",
     translate: "0 $$overlayMetaDataTranslateY",
 
     backgroundImage: `linear-gradient(0deg, transparent, ${theme.colors.transparentBlack})`,
-  })
+  }
 );
 
-export const VideoMetadataTitle = styled(
+export const VideoMetadataTitle = styled.withConfig({
+  displayName: "video-metadata-title",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-metadata-title",
-  css({
+  {
     fontSize: theme.fontSizes.l,
     fontWeight: 500,
     textOverflow: "ellipsis",
     overflow: "hidden",
     whiteSpace: "nowrap",
-  })
+  }
 );
 
-export const VideoMetadataFilesize = styled(
+export const VideoMetadataFilesize = styled.withConfig({
+  displayName: "video-metadata-filesize",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-metadata-filesize",
-  css({
+  {
     fontWeight: 500,
     fontSize: theme.fontSizes.s,
     opacity: 0.7,
-  })
+  }
 );
 
-export const VideoControls = styled(
+export const VideoControls = styled.withConfig({
+  displayName: "video-controls",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-controls",
-  css({
+  {
     position: "absolute",
     display: "flex",
     bottom: 0,
@@ -178,23 +203,27 @@ export const VideoControls = styled(
 
     transition: "translate 0.1s ease-in-out",
     translate: "0 $$overlayControlsTranslateY",
-  })
+  }
 );
 
-export const VideoControlsTime = styled(
+export const VideoControlsTime = styled.withConfig({
+  displayName: "video-controls-time",
+  componentId: commonComponentId,
+})(
   "div",
-  "video-controls-time",
-  css({
+  {
     fontSize: theme.fontSizes.s,
     fontFamily: "Consolas, monospace",
     userSelect: "none",
-  })
+  }
 );
 
-export const VideoControlButton = styled(
+export const VideoControlButton = styled.withConfig({
+  displayName: "video-control-button",
+  componentId: commonComponentId,
+})(
   SvgFromUrl,
-  "video-control-button",
-  css({
+  {
     border: "none",
     background: "none",
     backgroundSize: "$$size $$size",
@@ -205,25 +234,29 @@ export const VideoControlButton = styled(
     "&:hover": {
       opacity: 1,
     },
-  })
+  }
 );
 
-export const ProgressBarFill = styled(
+export const ProgressBarFill = styled.withConfig({
+  displayName: "progress-bar-fill",
+  componentId: commonComponentId,
+})(
   "div",
-  "progress-bar-fill",
-  css({
+  {
     height: "100%",
     position: "relative",
     borderRadius: "$$borderRadius",
     pointerEvents: "none",
     backgroundColor: theme.colors.accent,
-  })
+  }
 );
 
-export const ProgressBar = styled(
+export const ProgressBar = styled.withConfig({
+  displayName: "progress-bar",
+  componentId: commonComponentId,
+})(
   "div",
-  "progress-bar",
-  css({
+  {
     $$borderRadius: "80px",
 
     height: 6,
@@ -243,13 +276,15 @@ export const ProgressBar = styled(
       translate: "50% -50%",
       backgroundColor: theme.colors.accent,
     },
-  })
+  }
 );
 
-export const Spoiler = styled(
+export const Spoiler = styled.withConfig({
+  displayName: "spoiler",
+  componentId: commonComponentId,
+})(
   "div",
-  "spoiler",
-  css({
+  {
     overflow: "hidden",
     position: "relative",
     width: "fit-content",
@@ -291,13 +326,15 @@ export const Spoiler = styled(
         backgroundColor: theme.colors.blackSpoilerHover,
       },
     },
-  })
+  }
 );
 
-export const AttachmentContainer = styled(
+export const AttachmentContainer = styled.withConfig({
+  displayName: "attachment-container",
+  componentId: commonComponentId,
+})(
   "div",
-  "attachment-container",
-  css({
+  {
     display: "flex",
     backgroundColor: theme.colors.backgroundSecondary,
     padding: 10,
@@ -313,23 +350,27 @@ export const AttachmentContainer = styled(
         },
       },
     },
-  })
+  }
 );
 
-export const AttachmentMetadata = styled(
+export const AttachmentMetadata = styled.withConfig({
+  displayName: "attachment-metadata",
+  componentId: commonComponentId,
+})(
   "div",
-  "attachment-metadata",
-  css({
+  {
     margin: `0 ${theme.space.large}`,
     display: "flex",
     flexDirection: "column",
-  })
+  }
 );
 
-export const AttachmentFileName = styled(
+export const AttachmentFileName = styled.withConfig({
+  displayName: "attachment-file-name",
+  componentId: commonComponentId,
+})(
   "a",
-  "attachment-file-name",
-  css({
+  {
     color: theme.colors.link,
     maxWidth: "40vw",
     overflow: "hidden",
@@ -340,22 +381,26 @@ export const AttachmentFileName = styled(
     "&:hover": {
       textDecoration: "underline",
     },
-  })
+  }
 );
 
-export const AttachmentFileSize = styled(
+export const AttachmentFileSize = styled.withConfig({
+  displayName: "attachment-file-size",
+  componentId: commonComponentId,
+})(
   "span",
-  "attachment-file-size",
-  css({
+  {
     fontSize: theme.fontSizes.s,
     color: theme.colors.primaryDark,
-  })
+  }
 );
 
-export const DownloadIcon = styled(
+export const DownloadIcon = styled.withConfig({
+  displayName: "attachment-download-icon",
+  componentId: commonComponentId,
+})(
   "a",
-  "attachment-download-icon",
-  css({
+  {
     opacity: 0.8,
     marginLeft: "auto",
     color: theme.colors.primaryOpacity100,
@@ -364,27 +409,30 @@ export const DownloadIcon = styled(
     "&:hover": {
       opacity: 1,
     },
-  })
+  }
 );
 
-export const ExtraUserInterface = styled(
+export const ExtraUserInterface = styled.withConfig({
+  displayName: "attachment-extra-ui",
+  componentId: commonComponentId,
+})(
   "div",
-  "attachment-extra-ui",
-  css({
+  {
     flexBasis: "100%",
     marginTop: theme.space.large,
     display: "flex",
-  })
+  }
 );
 
-export const AttachmentAudioControls = styled(
-  "audio",
-  "attachment-audio-controls",
-  css({
+export const AttachmentAudioControls = styled.withConfig({
+  displayName: "attachment-audio-controls",
+  componentId: commonComponentId
+})("audio",
+  {
     flex: 1,
     height: 32,
     outline: "none",
     borderRadius: 3,
     maxWidth: "70vw",
-  })
+  }
 );

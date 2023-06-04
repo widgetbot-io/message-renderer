@@ -1,6 +1,6 @@
-import { css, styled } from "@root/Stitches/stitches.config";
+import {commonComponentId, styled} from "@root/Stitches/stitches.config";
 
-export const emojiCss = css({
+export const emojiCss = {
   objectFit: "contain",
   "-webkit-user-drag": "none",
   width: 22,
@@ -18,6 +18,9 @@ export const emojiCss = css({
       },
     },
   },
-});
+};
 
-export const Emoji = styled("img", "emoji", emojiCss);
+export const Emoji = styled.withConfig({ displayName: "emoji", componentId: commonComponentId })(
+  "img",
+  emojiCss
+);

@@ -42,7 +42,7 @@ class Highlighter extends React.Component<Props> {
 
       if (!language) return;
 
-      const hljs = await import(
+      const {default: hljs} = await import(
         /* webpackChunkName: "highlight.js" */ "highlight.js"
       );
 

@@ -3,7 +3,7 @@ import React, { ReactNode, useMemo } from "react";
 import { findDefaultEmojiByUnicode } from "@root/emojiData";
 import emoji from "react-easy-emoji";
 import Tooltip from "@root/Tooltip";
-import { styled } from "@root/Stitches/stitches.config";
+import { commonComponentId, styled } from "@root/Stitches/stitches.config";
 import { emojiCss } from "./style";
 
 type EmojiTooltipProps = {
@@ -59,14 +59,14 @@ function Emoji({
       <EmojiTooltip tooltipContent={emojiName} disabled={disableTooltip}>
         <Styles.Emoji
           {...props}
-          stitchesProps={{ enlarged }}
+          enlarged={enlarged}
           src={src}
           alt={emojiName}
         />
       </EmojiTooltip>
     );
 
-  if (defaultEmoji === undefined) return emojiName;
+  if (defaultEmoji === undefined) return <>{emojiName}</>;
 
   return emoji(defaultEmoji.emoji, (code, string, key) => (
     <EmojiTooltip
@@ -76,7 +76,7 @@ function Emoji({
     >
       <Styles.Emoji
         {...props}
-        stitchesProps={{ enlarged }}
+        enlarged={enlarged}
         src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
         alt={string}
       />
@@ -84,6 +84,9 @@ function Emoji({
   ));
 }
 
-export const Twemoji = styled(Emoji, "twemoji", emojiCss);
+export const Twemoji = styled.withConfig({
+  displayName: "twemoji",
+  componentId: commonComponentId,
+})(Emoji, emojiCss);
 
 export default Emoji;

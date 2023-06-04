@@ -28,8 +28,9 @@ class RoleIcon extends PureComponent<RoleIconProps> {
         <Tooltip overlay={this.props.role.name} placement="top">
           <span>
             <Styles.RoleIcon
-              stitchesProps={{ as: Twemoji }}
+              as={Twemoji}
               disableTooltip={true}
+              emojiName={this.props.role.unicode_emoji}
             >
               {this.props.role.unicode_emoji}
             </Styles.RoleIcon>

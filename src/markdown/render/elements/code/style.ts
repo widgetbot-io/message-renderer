@@ -1,4 +1,8 @@
-import { css, styled, theme } from "@root/Stitches/stitches.config";
+import {
+  commonComponentId,
+  styled,
+  theme,
+} from "@root/Stitches/stitches.config";
 
 const fonts = `'${[
   "Consolas",
@@ -11,10 +15,12 @@ const fonts = `'${[
   "monospace",
 ].join(`','`)}'`;
 
-export const CodeBlock = styled(
+export const CodeBlock = styled.withConfig({
+  displayName: "md-code-block",
+  componentId: commonComponentId,
+})(
   "code",
-  "md-code-block",
-  css({
+  {
     display: "block",
     overflowX: "auto",
     borderRadius: 4,
@@ -27,13 +33,15 @@ export const CodeBlock = styled(
     marginTop: theme.space.medium,
     padding: ".5em",
     fontFamily: fonts,
-  })
+  }
 );
 
-export const InlineCode = styled(
+export const InlineCode = styled.withConfig({
+  displayName: "md-inline-code",
+  componentId: commonComponentId,
+})(
   "code",
-  "md-inline-code",
-  css({
+  {
     padding: ".2em",
     margin: "-.2em 0",
     textIndent: 0,
@@ -42,5 +50,5 @@ export const InlineCode = styled(
     whiteSpace: "pre-wrap",
     backgroundColor: theme.colors.backgroundSecondary,
     fontFamily: fonts,
-  })
+  }
 );

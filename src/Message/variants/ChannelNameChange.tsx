@@ -19,7 +19,7 @@ function ChannelNameChange(props: ChannelNameChangeProps) {
         height={SystemMessageIconSize}
         svg="IconPencil"
       />
-      <Styles.SystemMessageContent stitchesProps={{ fullColor: true }}>
+      <Styles.SystemMessageContent fullColor>
         <MessageAuthor author={props.author} onlyShowUsername={true} /> changed
         the channel name: <strong>{props.content}</strong>
       </Styles.SystemMessageContent>

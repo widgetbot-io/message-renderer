@@ -85,7 +85,7 @@ CodeBlock.args = {
       id: "1069241535809454201",
       type: 0,
       content:
-        '```ts\nexport const CodeBlock = styled(\n  "code",\n  "md-code-block",\n  css({\n    display: "block",\n    overflowX: "auto",\n    borderRadius: 4,\n    fontSize: theme.fontSizes.m,\n    lineHeight: "1.125rem",\n    textIndent: 0,\n    whiteSpace: "pre-wrap",\n    backgroundColor: theme.colors.backgroundSecondary,\n    border: `1px solid ${theme.colors.backgroundTertiary}`,\n    marginTop: theme.space.medium,\n    padding: ".5em",\n    fontFamily: fonts,\n  })\n);\n```',
+        '```tsx\nexport const CodeBlock = styled.withConfig({ displayName: "code" })(\n  "md-code-block",\n  css({\n    display: "block",\n    overflowX: "auto",\n    borderRadius: 4,\n    fontSize: theme.fontSizes.m,\n    lineHeight: "1.125rem",\n    textIndent: 0,\n    whiteSpace: "pre-wrap",\n    backgroundColor: theme.colors.backgroundSecondary,\n    border: `1px solid ${theme.colors.backgroundTertiary}`,\n    marginTop: theme.space.medium,\n    padding: ".5em",\n    fontFamily: fonts,\n  })\n });\n```',
       channel_id: "993105555042357268",
       author: {
         id: "132819036282159104",
@@ -602,7 +602,7 @@ CodeBlockReply.args = {
         id: "1069241535809454201",
         type: 0,
         content:
-          '```ts\nexport const CodeBlock = styled(\n  "code",\n  "md-code-block",\n  css({\n    display: "block",\n    overflowX: "auto",\n    borderRadius: 4,\n    fontSize: theme.fontSizes.m,\n    lineHeight: "1.125rem",\n    textIndent: 0,\n    whiteSpace: "pre-wrap",\n    backgroundColor: theme.colors.backgroundSecondary,\n    border: `1px solid ${theme.colors.backgroundTertiary}`,\n    marginTop: theme.space.medium,\n    padding: ".5em",\n    fontFamily: fonts,\n  })\n);\n```',
+          '```tsx\nexport const CodeBlock = styled.withConfig({ displayName: \n  "code")(\n  "md-code-block",\n  css({\n    display: "block",\n    overflowX: "auto",\n    borderRadius: 4,\n    fontSize: theme.fontSizes.m,\n    lineHeight: "1.125rem",\n    textIndent: 0,\n    whiteSpace: "pre-wrap",\n    backgroundColor: theme.colors.backgroundSecondary,\n    border: `1px solid ${theme.colors.backgroundTertiary}`,\n    marginTop: theme.space.medium,\n    padding: ".5em",\n    fontFamily: fonts,\n  })\n });\n```',
         channel_id: "993105555042357268",
         author: {
           id: "132819036282159104",

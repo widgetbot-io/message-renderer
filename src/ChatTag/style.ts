@@ -1,4 +1,8 @@
-import { css, styled, theme } from "@root/Stitches/stitches.config";
+import {
+  commonComponentId,
+  styled,
+  theme,
+} from "@root/Stitches/stitches.config";
 
 // export const VerifiedBot = styledOverridable(
 //   "svg",
@@ -8,24 +12,28 @@ import { css, styled, theme } from "@root/Stitches/stitches.config";
 //     width: 15,
 //     height: 15,
 //     marginLeft: "-.25rem",
-//   })
+//   }
 // );
 
-export const VerifiedBot = styled(
+export const VerifiedBot = styled.withConfig({
+  displayName: "chat-tag-verified-bot-svg",
+  componentId: commonComponentId,
+})(
   "svg",
-  "chat-tag-verified-bot-svg",
-  css({
+  {
     verticalAlign: "top",
     width: 15,
     height: 15,
     marginLeft: "-.25rem",
-  })
+  }
 );
 
-export const Tag = styled(
+export const Tag = styled.withConfig({
+  displayName: "chat-tag",
+  componentId: commonComponentId,
+})(
   "span",
-  "chat-tag",
-  css({
+  {
     marginLeft: theme.space.small,
     fontSize: theme.fontSizes.xs,
     textTransform: "uppercase",
@@ -38,5 +46,5 @@ export const Tag = styled(
     alignItems: "center",
     backgroundColor: theme.colors.accent,
     color: theme.colors.primaryOpacity100,
-  })
+  }
 );

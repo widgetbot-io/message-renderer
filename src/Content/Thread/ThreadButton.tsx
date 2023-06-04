@@ -17,11 +17,8 @@ function ThreadButton(props: ThreadButtonProps) {
   return (
     <Styles.ThreadButtonContainer>
       <MessageStyles.ThreadSpine
-        stitchesProps={{
-          hasReply: props.hasReply,
-          fromThreadCreatedType:
-            props.messageType === MessageType.ThreadCreated,
-        }}
+        hasReply={props.hasReply}
+        fromThreadCreatedType={props.messageType === MessageType.ThreadCreated}
       />
       <Styles.ThreadButton>
         <Styles.ThreadButtonTopLine>
