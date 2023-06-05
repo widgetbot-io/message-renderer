@@ -3,13 +3,10 @@ import Tooltip from "@root/Tooltip";
 import React from "react";
 import { MessageContainerStyle } from "@root/Message/style/message";
 import SvgFromUrl from "@root/SvgFromUrl";
-import { PartialSvgConfig } from "@root/core/ConfigContext";
-
-export interface MessageButtonListOption<SC extends PartialSvgConfig> {
-  onClick: () => void;
-  icon: keyof SC
-  actionDescription: string;
-}
+import {
+  MessageButtonListOption,
+  PartialSvgConfig,
+} from "@root/core/ConfigContext";
 
 interface MessageContainerProps {
   buttons: MessageButtonListOption<PartialSvgConfig>[];

@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import "./svg.d";
 
 import SvgMissingAsset from "@images/missing-asset.svg";
 

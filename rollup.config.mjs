@@ -44,6 +44,7 @@ export default [
   {
     input: "dist/cjs/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
+    external: [/\.svg/],
     plugins: [dts()],
   },
 ];
