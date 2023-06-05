@@ -6,14 +6,15 @@ import {
   tooltipPrefix,
 } from "@root/Tooltip";
 import { hljsTheme } from "@root/markdown/render/elements/code/hljs";
-import { Svg, SvgContext } from "@root/core/SvgContext";
+import {
+  Config,
+  ConfigContext,
+  PartialSvgConfig,
+} from "@root/core/ConfigContext";
 
-type MessageRendererProviderProps = {
+type MessageRendererProviderProps<SvgConfig extends PartialSvgConfig> = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;
-  svgUrls?: {
-    [svg in Svg]?: string;
-  };
-};
+} & Config<SvgConfig>;
 
 const globalStyles = globalCss({
   [`.${tooltipPrefix}`]: {
@@ -117,17 +118,19 @@ const extraCss = css({
   // backgroundColor: theme.colors.background, // todo: this is only for testing!
 });
 
-function MessageRendererProvider({
+function MessageRendererProvider<TConfig extends PartialSvgConfig>({
   children,
-  svgUrls,
-}: MessageRendererProviderProps) {
+  ...config
+}: MessageRendererProviderProps<TConfig>) {
   globalStyles();
   hljsTheme();
 
   return (
-    <SvgContext.Provider value={svgUrls}>
+    <ConfigContext.Provider
+      value={config as unknown as Config<PartialSvgConfig>}
+    >
       {children({ themeClass: `${theme} ${extraCss}` })}
-    </SvgContext.Provider>
+    </ConfigContext.Provider>
   );
 }
 

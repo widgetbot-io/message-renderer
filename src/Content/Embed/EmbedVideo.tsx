@@ -2,7 +2,7 @@ import * as Styles from "./style";
 import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
 import React, { ReactNode, useState } from "react";
 import useSize from "@root/Content/Attachment/useSize";
-import { getSvgUrl } from "@root/core/SvgContext";
+import { getSvgUrl } from "@root/core/svgs";
 import { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
 
 interface ThumbnailWrapperProps {

@@ -2,17 +2,17 @@ import { ReactNode } from "react";
 import Tooltip from "@root/Tooltip";
 import React from "react";
 import { MessageContainerStyle } from "@root/Message/style/message";
-import { Svg } from "@root/core/SvgContext";
 import SvgFromUrl from "@root/SvgFromUrl";
+import { PartialSvgConfig } from "@root/core/ConfigContext";
 
-export interface MessageButtonListOption {
+export interface MessageButtonListOption<SC extends PartialSvgConfig> {
   onClick: () => void;
-  icon: Svg;
+  icon: keyof SC
   actionDescription: string;
 }
 
 interface MessageContainerProps {
-  buttons: MessageButtonListOption[];
+  buttons: MessageButtonListOption<PartialSvgConfig>[];
   children: ReactNode;
 }
 

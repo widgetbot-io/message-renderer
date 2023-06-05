@@ -5,7 +5,7 @@ import * as Styles from "./style";
 import * as React from "react";
 import { useMemo } from "react";
 import SvgFromUrl from "@root/SvgFromUrl";
-import { Svg } from "@root/core/SvgContext";
+import { Svg } from "@root/core/svgs";
 
 interface GenericAttachmentProps extends AttachmentProps {
   // If undefined, we will fall back to the unknown icon

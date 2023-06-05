@@ -1,8 +1,6 @@
 import NormalMessage from "@root/Message/variants/NormalMessage";
 import React, { memo } from "react";
-import MessageContainer, {
-  MessageButtonListOption,
-} from "@root/Message/MessageContainer";
+import MessageContainer from "@root/Message/MessageContainer";
 import { APIMessage, MessageType } from "discord-api-types/v10";
 import GuildMemberJoin from "@root/Message/variants/GuildMemberJoin";
 import GuildDiscoveryRequalified from "@root/Message/variants/GuildDiscoveryRequalified";
@@ -17,6 +15,7 @@ import ChannelPinnedMessage from "@root/Message/variants/ChannelPinnedMessage";
 import RecipientAdd from "@root/Message/variants/RecipientAdd";
 import RecipientRemove from "@root/Message/variants/RecipientRemove";
 import ThreadCreated from "@root/Message/variants/ThreadCreated";
+import { useConfig } from "@root/core/ConfigContext";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
@@ -157,13 +156,9 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
 }
 
 function Message(props: MessageProps) {
-  const buttonOptions: MessageButtonListOption[] = [
-    {
-      icon: "IconId",
-      onClick: () => navigator.clipboard.writeText(props.message.id),
-      actionDescription: "Copy Message ID",
-    },
-  ];
+  const { messageButtons } = useConfig();
+
+  const buttonOptions = messageButtons?.(props.message) ?? [];
 
   if (props.showButtons)
     return (
