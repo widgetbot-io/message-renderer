@@ -1,12 +1,11 @@
 {
   "name": "@widgetbot/message-renderer",
-  "version": "v1.0.1",
+  "version": "v1.0.2",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/cjs/index.js",
-  "files": [
-    "dist"
-  ],
+  "type": "module",
+  "files": ["dist"],
   "private": false,
   "types": "dist/index.d.ts",
   "scripts": {
