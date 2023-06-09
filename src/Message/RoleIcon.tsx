@@ -1,10 +1,10 @@
 import { PureComponent } from "react";
 import * as Styles from "./style/message";
-import Tooltip from "@root/Tooltip";
-import webpCheck from "@utils/webpCheck";
+import Tooltip from "../Tooltip";
+import webpCheck from "../utils/webpCheck";
 import { memoize } from "lodash";
 import * as React from "react";
-import { Twemoji } from "@root/Emoji";
+import { Twemoji } from "../Emoji";
 import { APIRole } from "discord-api-types/v10";
 
 interface RoleIconProps {

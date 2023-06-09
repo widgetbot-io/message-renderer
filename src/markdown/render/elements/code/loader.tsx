@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Styles from "@root/markdown/render/elements/code/style";
+import * as Styles from "../../../../markdown/render/elements/code/style";
 
 interface Props {
   children: string;

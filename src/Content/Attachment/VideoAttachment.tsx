@@ -6,10 +6,10 @@ import React, {
   useState,
 } from "react";
 import { filesize } from "filesize";
-import useSize from "@root/Content/Attachment/useSize";
+import useSize from "./useSize";
 import * as Styles from "./style";
-import Tooltip from "@root/Tooltip";
-import SvgFromUrl from "@root/SvgFromUrl";
+import Tooltip from "../../Tooltip";
+import SvgFromUrl from "../../SvgFromUrl";
 import { APIAttachment, APIEmbed } from "discord-api-types/v10";
 
 interface VideoAttachmentProps {

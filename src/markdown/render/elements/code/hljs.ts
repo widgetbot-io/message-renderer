@@ -1,4 +1,4 @@
-import {globalCss} from "@root/Stitches/stitches.config";
+import {globalCss} from "../../../../Stitches/stitches.config";
 
 export const hljsTheme = globalCss({
     '.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_': {

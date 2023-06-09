@@ -1,5 +1,5 @@
 import * as Styles from "./style";
-import Reaction from "@root/Message/Reactions/Reaction";
+import Reaction from "../Reactions/Reaction";
 import React from "react";
 import { APIReaction } from "discord-api-types/v10";
 

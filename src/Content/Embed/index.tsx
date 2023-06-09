@@ -1,12 +1,12 @@
-import GifVEmbed from "@root/Content/Embed/GifVEmbed";
-import ImageEmbed from "@root/Content/Embed/ImageEmbed";
-import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
+import GifVEmbed from "./GifVEmbed";
+import ImageEmbed from "./ImageEmbed";
+import VideoAttachment from "../Attachment/VideoAttachment";
 import * as Styles from "./style";
-import numberToRgb from "@utils/numberToRgb";
+import numberToRgb from "../../utils/numberToRgb";
 import moment from "moment";
-import { LinkMarkdown, parseEmbedTitle } from "@root/markdown/render";
-import useSize from "@root/Content/Embed/useSize";
-import EmbedVideo from "@root/Content/Embed/EmbedVideo";
+import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
+import useSize from "./useSize";
+import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
 import {APIEmbed, APIEmbedImage, EmbedType} from "discord-api-types/v10";
 

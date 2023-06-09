@@ -1,16 +1,16 @@
 import React, { ReactNode } from "react";
-import { globalCss, css, theme } from "@root/Stitches/stitches.config";
+import { globalCss, css, theme } from "./Stitches/stitches.config";
 import {
   tooltipAnimDurationMs,
   tooltipAnimPrefix,
   tooltipPrefix,
-} from "@root/Tooltip";
-import { hljsTheme } from "@root/markdown/render/elements/code/hljs";
+} from "./Tooltip";
+import { hljsTheme } from "./markdown/render/elements/code/hljs";
 import {
   Config,
   ConfigContext,
   PartialSvgConfig,
-} from "@root/core/ConfigContext";
+} from "./core/ConfigContext";
 
 type MessageRendererProviderProps<SvgConfig extends PartialSvgConfig> = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;

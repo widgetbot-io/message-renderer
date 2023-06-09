@@ -1,4 +1,4 @@
-import Tooltip from "@root/Tooltip";
+import Tooltip from "../Tooltip";
 import React from "react";
 import * as Styles from "./style";
 import { APIUser } from "discord-api-types/v10";

@@ -1,8 +1,8 @@
-import MessageAuthor from "@root/Message/MessageAuthor";
+import MessageAuthor from "../MessageAuthor";
 import React, { useMemo } from "react";
-import LargeTimestamp from "@root/Message/LargeTimestamp";
-import * as Styles from "@root/Message/style/message";
-import { SystemMessageIconSize } from "@root/Message/style/message";
+import LargeTimestamp from "../LargeTimestamp";
+import * as Styles from "../style/message";
+import { SystemMessageIconSize } from "../style/message";
 import { APIMessage, MessageType } from "discord-api-types/v10";
 
 interface BoostTierUpgradeProps {

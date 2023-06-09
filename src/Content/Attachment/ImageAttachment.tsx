@@ -1,4 +1,4 @@
-import useSize from "@root/Content/Attachment/useSize";
+import useSize from "./useSize";
 import React from "react";
 import * as Styles from "./style";
 import { APIAttachment } from "discord-api-types/v10";

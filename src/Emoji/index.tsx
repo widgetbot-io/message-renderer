@@ -1,10 +1,10 @@
 import * as Styles from "./style";
 import React, { ReactNode, useMemo } from "react";
-import { findDefaultEmojiByUnicode } from "@root/emojiData";
 import emoji from "react-easy-emoji";
-import Tooltip from "@root/Tooltip";
-import { commonComponentId, styled } from "@root/Stitches/stitches.config";
 import { emojiCss } from "./style";
+import Tooltip from "../Tooltip";
+import {findDefaultEmojiByUnicode} from "../emojiData";
+import {commonComponentId, styled} from "../Stitches/stitches.config";
 
 type EmojiTooltipProps = {
   key?: number;

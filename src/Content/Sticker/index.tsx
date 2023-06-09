@@ -1,8 +1,8 @@
-import Tooltip from "@root/Tooltip";
-import webpCheck from "@utils/webpCheck";
 import * as Styles from "../style";
 import * as React from "react";
 import { APIStickerItem, StickerFormatType } from "discord-api-types/v10";
+import Tooltip from "../../Tooltip";
+import webpCheck from "../../utils/webpCheck";
 
 interface StickerProps {
   sticker: APIStickerItem;

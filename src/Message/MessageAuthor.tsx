@@ -1,10 +1,10 @@
 import * as React from "react";
 import { PureComponent } from "react";
 import { memoize } from "lodash";
-import ChatTag from "@root/ChatTag";
-import RoleIcon from "@root/Message/RoleIcon";
-import getAvatar from "@utils/getAvatar";
-import * as Styles from "@root/Message/style/author";
+import ChatTag from "../ChatTag";
+import RoleIcon from "./RoleIcon";
+import getAvatar from "../utils/getAvatar";
+import * as Styles from "./style/author";
 import { APIMessage, APIRole } from "discord-api-types/v10";
 
 interface MessageAuthorProps {

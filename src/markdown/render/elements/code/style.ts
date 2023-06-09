@@ -2,7 +2,7 @@ import {
   commonComponentId,
   styled,
   theme,
-} from "@root/Stitches/stitches.config";
+} from "../../../../Stitches/stitches.config";
 
 const fonts = `'${[
   "Consolas",

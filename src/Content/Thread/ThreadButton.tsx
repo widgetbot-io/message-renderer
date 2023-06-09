@@ -1,5 +1,5 @@
-import * as Styles from "@root/Content/style";
-import * as MessageStyles from "@root/Message/style/message";
+import * as Styles from "../../Content/style";
+import * as MessageStyles from "../../Message/style/message";
 import React from "react";
 import { APIChannel, MessageType } from "discord-api-types/v10";
 

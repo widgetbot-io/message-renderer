@@ -1,6 +1,6 @@
-import Emoji from "@root/Emoji";
 import SimpleMarkdown from "simple-markdown";
 import React from "react";
+import Emoji from "../../../Emoji";
 
 export const customEmoji = {
   order: SimpleMarkdown.defaultRules.text.order,

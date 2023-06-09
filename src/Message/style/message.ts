@@ -2,9 +2,9 @@ import {
   commonComponentId,
   styled,
   theme,
-} from "@root/Stitches/stitches.config";
-import { Link } from "@root/markdown/render/elements";
-import SvgFromUrl from "@root/SvgFromUrl";
+} from "../../Stitches/stitches.config";
+import { Link } from "../../markdown/render/elements";
+import SvgFromUrl from "../../SvgFromUrl";
 
 export const SmallTimestamp = styled.withConfig({
   displayName: "small-timestamp",

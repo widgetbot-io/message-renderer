@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import Tooltip from "@root/Tooltip";
+import Tooltip from "../Tooltip";
 import React from "react";
-import { MessageContainerStyle } from "@root/Message/style/message";
-import SvgFromUrl from "@root/SvgFromUrl";
+import { MessageContainerStyle } from "./style/message";
+import SvgFromUrl from "../SvgFromUrl";
 import {
   MessageButtonListOption,
   PartialSvgConfig,
-} from "@root/core/ConfigContext";
+} from "../core/ConfigContext";
 
 interface MessageContainerProps {
   buttons: MessageButtonListOption<PartialSvgConfig>[];

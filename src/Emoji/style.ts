@@ -1,4 +1,4 @@
-import {commonComponentId, styled} from "@root/Stitches/stitches.config";
+import { commonComponentId, styled } from "../Stitches/stitches.config";
 
 export const emojiCss = {
   objectFit: "contain",
@@ -20,7 +20,7 @@ export const emojiCss = {
   },
 };
 
-export const Emoji = styled.withConfig({ displayName: "emoji", componentId: commonComponentId })(
-  "img",
-  emojiCss
-);
+export const Emoji = styled.withConfig({
+  displayName: "emoji",
+  componentId: commonComponentId,
+})("img", emojiCss);

@@ -1,8 +1,8 @@
-import text from "@root/markdown/render/ast/text";
+import text from "./text";
 import { defaultRules, inlineRegex } from "simple-markdown";
 
 import { customEmoji } from "./customEmoji";
-import Emoji from "@root/Emoji";
+import Emoji from "../../../Emoji";
 import React from "react";
 
 const baseRules = {

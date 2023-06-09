@@ -1,16 +1,16 @@
 import React, { Children, memo, ReactNode, useMemo } from "react";
-import Markdown, { LinkMarkdown } from "@root/markdown/render";
-import Tooltip from "@root/Tooltip";
 import Moment from "moment/moment";
-import Reactions from "@root/Message/Reactions";
-import ThreadButton from "@root/Content/Thread/ThreadButton";
 import Message from "../Message";
 import * as Styles from "./style";
-import SvgFromUrl from "@root/SvgFromUrl";
 import { APIMessage, MessageFlags } from "discord-api-types/v10";
-import Sticker from "@root/Content/Sticker";
-import Embed from "@root/Content/Embed";
-import Attachment from "@root/Content/Attachment";
+import Tooltip from "../Tooltip";
+import SvgFromUrl from "../SvgFromUrl";
+import Markdown, { LinkMarkdown } from "../markdown/render";
+import Attachment from "./Attachment";
+import Sticker from "./Sticker";
+import Embed from "./Embed";
+import Reactions from "../Message/Reactions";
+import ThreadButton from "./Thread/ThreadButton";
 
 interface EditedProps {
   editedAt: string;
@@ -172,9 +172,7 @@ function Content(props: ContentProps) {
           referencedMessage={props.message}
           showTooltip={props.isReplyContent}
         >
-          <Styles.ContentContainer
-            isReplyContent={props.isReplyContent}
-          >
+          <Styles.ContentContainer isReplyContent={props.isReplyContent}>
             {props.message.content.length > 0 ? (
               <>
                 {props.message.webhook_id !== undefined ? (

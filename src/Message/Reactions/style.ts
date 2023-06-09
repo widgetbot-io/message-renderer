@@ -2,8 +2,8 @@ import {
   commonComponentId,
   styled,
   theme,
-} from "@root/Stitches/stitches.config";
-import { Twemoji } from "@root/Emoji";
+} from "../../Stitches/stitches.config";
+import { Twemoji } from "../../Emoji";
 
 export const Reactions = styled.withConfig({
   displayName: "reactions",

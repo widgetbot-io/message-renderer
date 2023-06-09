@@ -3,8 +3,8 @@ import {
   keyframes,
   styled,
   theme,
-} from "@root/Stitches/stitches.config";
-import SvgFromUrl from "@root/SvgFromUrl";
+} from "../../Stitches/stitches.config";
+import SvgFromUrl from "../../SvgFromUrl";
 
 export const ImageAttachment = styled.withConfig({
   displayName: "image-attachment",

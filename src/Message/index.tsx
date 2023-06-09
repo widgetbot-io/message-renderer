@@ -1,21 +1,21 @@
-import NormalMessage from "@root/Message/variants/NormalMessage";
+import NormalMessage from "./variants/NormalMessage";
 import React, { memo } from "react";
-import MessageContainer from "@root/Message/MessageContainer";
+import MessageContainer from "./MessageContainer";
 import { APIMessage, MessageType } from "discord-api-types/v10";
-import GuildMemberJoin from "@root/Message/variants/GuildMemberJoin";
-import GuildDiscoveryRequalified from "@root/Message/variants/GuildDiscoveryRequalified";
-import GuildDiscoveryGracePeriodInitialWarning from "@root/Message/variants/GuildDiscoveryGracePeriodInitialWarning";
-import GuildDiscoveryGracePeriodFinalWarning from "@root/Message/variants/GuildDiscoveryGracePeriodFinalWarning";
-import GuildDiscoveryDisqualified from "@root/Message/variants/GuildDiscoveryDisqualified";
-import ChannelFollowAdd from "@root/Message/variants/ChannelFollowAdd";
-import ChannelNameChange from "@root/Message/variants/ChannelNameChange";
-import GuildBoost from "@root/Message/variants/GuildBoost";
-import BoostTierUpgrade from "@root/Message/variants/BoostTierUpgrade";
-import ChannelPinnedMessage from "@root/Message/variants/ChannelPinnedMessage";
-import RecipientAdd from "@root/Message/variants/RecipientAdd";
-import RecipientRemove from "@root/Message/variants/RecipientRemove";
-import ThreadCreated from "@root/Message/variants/ThreadCreated";
-import { useConfig } from "@root/core/ConfigContext";
+import GuildMemberJoin from "./variants/GuildMemberJoin";
+import GuildDiscoveryRequalified from "./variants/GuildDiscoveryRequalified";
+import GuildDiscoveryGracePeriodInitialWarning from "./variants/GuildDiscoveryGracePeriodInitialWarning";
+import GuildDiscoveryGracePeriodFinalWarning from "./variants/GuildDiscoveryGracePeriodFinalWarning";
+import GuildDiscoveryDisqualified from "./variants/GuildDiscoveryDisqualified";
+import ChannelFollowAdd from "./variants/ChannelFollowAdd";
+import ChannelNameChange from "./variants/ChannelNameChange";
+import GuildBoost from "./variants/GuildBoost";
+import BoostTierUpgrade from "./variants/BoostTierUpgrade";
+import ChannelPinnedMessage from "./variants/ChannelPinnedMessage";
+import RecipientAdd from "./variants/RecipientAdd";
+import RecipientRemove from "./variants/RecipientRemove";
+import ThreadCreated from "./variants/ThreadCreated";
+import { useConfig } from "../core/ConfigContext";
 
 export interface MessageProps {
   isFirstMessage?: boolean;

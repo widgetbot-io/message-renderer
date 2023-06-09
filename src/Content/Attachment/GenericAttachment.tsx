@@ -1,11 +1,11 @@
-import { AttachmentProps } from "@root/Content/Attachment/index";
+import type { AttachmentProps } from "./index";
 
 import { filesize } from "filesize";
 import * as Styles from "./style";
 import * as React from "react";
 import { useMemo } from "react";
-import SvgFromUrl from "@root/SvgFromUrl";
-import { Svg } from "@root/core/svgs";
+import SvgFromUrl from "../../SvgFromUrl";
+import type { Svg } from "../../core/svgs";
 
 interface GenericAttachmentProps extends AttachmentProps {
   // If undefined, we will fall back to the unknown icon

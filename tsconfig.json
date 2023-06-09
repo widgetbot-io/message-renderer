@@ -18,12 +18,7 @@
     "jsx": "react",
     "rootDir": "src",
     "baseUrl": ".",
-    "paths": {
-      "@root/*": ["src/*"],
-      "@images/*": ["src/assets/images/*"],
-      "@svg/*": ["src/assets/svg/*"],
-      "@utils/*": ["src/utils/*"]
-    }
   },
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "src/stories"]
 }

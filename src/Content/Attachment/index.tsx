@@ -1,7 +1,7 @@
-import VideoAttachment from "@root/Content/Attachment/VideoAttachment";
+import VideoAttachment from "./VideoAttachment";
 import React, { memo, useState } from "react";
-import ImageAttachment from "@root/Content/Attachment/ImageAttachment";
-import GenericAttachment from "@root/Content/Attachment/GenericAttachment";
+import ImageAttachment from "./ImageAttachment";
+import GenericAttachment from "./GenericAttachment";
 import * as Styles from "./style";
 
 import { APIAttachment } from "discord-api-types/v10";

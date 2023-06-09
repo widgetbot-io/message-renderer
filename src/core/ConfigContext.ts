@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
-import { SvgConfig } from "@root/core/svgs";
 import { APIMessage } from "discord-api-types/v10";
+import type { SvgConfig } from "./svgs";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 
 export interface MessageButtonListOption<SC extends PartialSvgConfig> {
   onClick: () => void;
-  icon: keyof SC
+  icon: keyof SC;
   actionDescription: string;
 }
 

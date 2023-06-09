@@ -1,9 +1,9 @@
-import LargeTimestamp from "@root/Message/LargeTimestamp";
-import MessageAuthor from "@root/Message/MessageAuthor";
-import ThreadButton from "@root/Content/Thread/ThreadButton";
+import LargeTimestamp from "../LargeTimestamp";
+import MessageAuthor from "../MessageAuthor";
+import ThreadButton from "../../Content/Thread/ThreadButton";
 import React from "react";
-import * as Styles from "@root/Message/style/message";
-import { SystemMessageIconSize } from "@root/Message/style/message";
+import * as Styles from "../style/message";
+import { SystemMessageIconSize } from "../style/message";
 import { APIMessage, MessageType } from "discord-api-types/v10";
 
 interface ThreadCreatedProps {

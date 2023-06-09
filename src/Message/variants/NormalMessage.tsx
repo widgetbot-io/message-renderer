@@ -1,12 +1,12 @@
 import React, { memo, useMemo } from "react";
-import MessageAuthor from "@root/Message/MessageAuthor";
-import Content from "@root/Content";
+import MessageAuthor from "../MessageAuthor";
+import Content from "../../Content";
 import Moment from "moment";
-import Tooltip from "@root/Tooltip";
-import getAvatar, { GetAvatarOptions } from "@utils/getAvatar";
-import LargeTimestamp from "@root/Message/LargeTimestamp";
-import ChatTag from "@root/ChatTag";
-import * as Styles from "@root/Message/style/message";
+import Tooltip from "../../Tooltip";
+import getAvatar, { GetAvatarOptions } from "../../utils/getAvatar";
+import LargeTimestamp from "../LargeTimestamp";
+import ChatTag from "../../ChatTag";
+import * as Styles from "../style/message";
 import {
   APIMessage,
   APIMessageInteraction,

@@ -1,14 +1,14 @@
 import memoize from "memoizee";
 import * as R from "ramda";
-import baseRules from "@root/markdown/render/ast";
-import { Highlighter } from "@root/markdown/render/elements";
+import baseRules from "./ast";
+import { Highlighter } from "./elements";
 import * as Styles from "./elements";
-import { astToString, flattenAst, recurse } from "@root/markdown/render/util";
+import { astToString, flattenAst, recurse } from "./util";
 import SimpleMarkdown from "simple-markdown";
-import TextSpoiler from "@root/markdown/render/elements/TextSpoiler";
+import TextSpoiler from "./elements/TextSpoiler";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
-import { InlineCode } from "@root/markdown/render/elements/code/style";
+import { InlineCode } from "./elements/code/style";
 import { APIMessage, APIUser } from "discord-api-types/v10";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {

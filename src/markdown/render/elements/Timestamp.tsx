@@ -1,7 +1,7 @@
 import Moment from "moment";
-import Tooltip from "@root/Tooltip";
+import Tooltip from "../../../Tooltip";
 import React from "react";
-import {commonComponentId, css, styled, theme} from "@root/Stitches/stitches.config";
+import {commonComponentId, css, styled, theme} from "../../../Stitches/stitches.config";
 
 enum TimestampStyle {
   ShortTime = "t",
