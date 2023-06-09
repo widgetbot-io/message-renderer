@@ -1,18 +1,17 @@
 {
   "name": "@widgetbot/message-renderer",
-  "version": "v1.0.2",
+  "version": "v1.0.3",
   "description": "",
-  "main": "dist/cjs/index.js",
-  "module": "dist/cjs/index.js",
-  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "files": ["dist"],
   "private": false,
-  "types": "dist/index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
-    "rollup": "rollup -c",
+    "build": "tsc",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepublishOnly": "pnpm rollup"
+    "prepublishOnly": "pnpm build"
   },
   "repository": {
     "type": "git",
@@ -44,12 +43,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
-    "@rollup/plugin-alias": "^4.0.2",
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^10.0.1",
-    "@rollup/plugin-url": "^8.0.1",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-info": "^5.3.21",
@@ -69,12 +62,6 @@
     "prettier": "^2.8.1",
     "react": "^18.2.0",
     "react-docgen-typescript-loader": "^3.7.2",
-    "rollup": "^3.9.1",
-    "rollup-plugin-dts": "^5.1.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-svg": "^2.0.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-uglify": "^6.0.4",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
   }

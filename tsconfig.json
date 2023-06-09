@@ -2,7 +2,7 @@
   "compilerOptions": {
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "target": "es5",
+    "target": "es6",
     "module": "ESNext",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "outDir": "dist",
     "declarationDir": "types",
     "allowSyntheticDefaultImports": true,
