@@ -11,7 +11,7 @@
   "private": false,
   "types": "types/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles .\\src\\assets\\libAssets\\**\\* .\\dist -u 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepublishOnly": "pnpm build"
@@ -64,6 +64,7 @@
     "@typescript-eslint/parser": "^5.59.9",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.3.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.42.0",
     "eslint-plugin-react": "^7.32.2",
     "gh-pages": "^5.0.0",

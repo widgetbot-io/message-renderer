@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import SvgMissingAsset from "@images/missing-asset.svg";
+import SvgMissingAsset from "../assets/libAssets/missing-asset.svg";
 import { ConfigContext } from "./ConfigContext";
 
 export type SvgConfig = Record<Svg, string>;
