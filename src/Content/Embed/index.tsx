@@ -62,7 +62,7 @@ function Embed({ embed, images }: EmbedProps) {
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
-                  <a href={embed.author.url} target="_blank">
+                  <a href={embed.author.url} target="_blank" rel="noreferrer noopener">
                     {embed.author.name}
                   </a>
                 ) : (

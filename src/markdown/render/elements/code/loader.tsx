@@ -32,7 +32,7 @@ class Highlighter extends React.Component<Props> {
     // If the children changed highlightedCode will be null
     if (this.state.highlightedCode) return;
 
-    this.highlightCode();
+    void this.highlightCode();
   }
 
   async highlightCode() {

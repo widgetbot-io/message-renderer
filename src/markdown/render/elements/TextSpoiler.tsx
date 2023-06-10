@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { CSSProperties, PureComponent } from "react";
 
 interface Props {
   content: string;
@@ -42,7 +42,7 @@ export default class TextSpoiler extends PureComponent<Props, State> {
     return { background: "rgba(0, 0, 0, 41%)", borderRadius: "3px" };
   }
 
-  computeInnerStyle() {
+  computeInnerStyle(): CSSProperties {
     if (this.state.showing) return { opacity: 1 };
     return { opacity: 0, pointerEvents: "none" };
   }
@@ -56,7 +56,6 @@ export default class TextSpoiler extends PureComponent<Props, State> {
         onMouseEnter={this.onHover}
         onMouseLeave={this.onHover}
       >
-        {/* @ts-expect-error */}
         <span style={this.computeInnerStyle()}>{this.props.content}</span>
       </span>
     );

@@ -44,7 +44,6 @@ export type EmojiProps = {
 function Emoji({
   src,
   disableTooltip,
-  resolveNames = false,
   emojiName,
   enlarged,
   ...props

@@ -25,7 +25,7 @@ interface Props {
   };
 }
 
-export const Timestamp: React.FC<Props> = ({ data: { timestamp, style } }) => {
+export function Timestamp({ data: { timestamp, style } }: Props) {
   const time = Moment(parseInt(timestamp) * 1000);
 
   // https://momentjs.com/docs/#/displaying/format/
@@ -41,7 +41,9 @@ export const Timestamp: React.FC<Props> = ({ data: { timestamp, style } }) => {
     F: "LLLL",
   };
 
-  const displayTime = (style: TimestampStyle) => time.format(formats[style]);
+  function displayTime(style: TimestampStyle) {
+    return time.format(formats[style]);
+  }
 
   return (
     <Tooltip
@@ -56,7 +58,7 @@ export const Timestamp: React.FC<Props> = ({ data: { timestamp, style } }) => {
       </TSSpan>
     </Tooltip>
   );
-};
+}
 
 const TSSpan = styled.withConfig({
   displayName: "timestamp-span",

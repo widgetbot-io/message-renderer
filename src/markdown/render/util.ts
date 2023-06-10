@@ -7,11 +7,14 @@ export function flattenAst(node, parent?) {
     return node;
   }
 
-  if (node.content != null) {
+  if (!node || !parent)
+    return node;
+
+  if (node.content) {
     node.content = flattenAst(node.content, node);
   }
 
-  if (parent != null && node.type === parent.type) {
+  if (node.type === parent.type) {
     return node.content;
   }
 
@@ -24,7 +27,7 @@ export function astToString(node) {
       node.forEach((subNode) => astToString(subNode));
     } else if (typeof node.content === "string") {
       result.push(node.content);
-    } else if (node.content != null) {
+    } else if (node.content !== null) {
       astToString(node.content);
     }
 
@@ -34,10 +37,11 @@ export function astToString(node) {
   return inner(node).join("");
 }
 
-export const recurse = (node, recurseOutput, state) =>
-  typeof node.content === "string"
+export function recurse(node, recurseOutput, state) {
+  return typeof node.content === "string"
     ? node.content
     : recurseOutput(node.content, state);
+}
 
 export function jumboify(ast) {
   const nonEmojiNodes = ast.some(
