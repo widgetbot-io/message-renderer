@@ -1,4 +1,8 @@
-import { styled, theme, commonComponentId } from "../../Stitches/stitches.config";
+import {
+  styled,
+  theme,
+  commonComponentId,
+} from "../../Stitches/stitches.config";
 import SvgFromUrl from "../../SvgFromUrl";
 
 export const Embed = styled.withConfig({

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { APIEmbedImage } from "discord-api-types/v10";
 
-function useSize<Image extends APIEmbedImage>(
+function useSize(
   type: string,
   image: APIEmbedImage | undefined,
   internalType: "EmbedImage" | "EmbedThumbnail",

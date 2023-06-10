@@ -153,17 +153,6 @@ function Markdown({
   return content ? parse(content, undefined, { mentions, users }) : null;
 }
 
-namespace Markdown {
-  export const withComponent =
-    (Component) =>
-    ({ children, ...props }) =>
-      (
-        <Component {...props}>
-          <Markdown>{children}</Markdown>
-        </Component>
-      );
-}
-
 export function LinkMarkdown({
   children: content,
   mentions,
@@ -176,17 +165,6 @@ export function LinkMarkdown({
   return content
     ? parseAllowLinks(content, undefined, { mentions, users })
     : null;
-}
-
-export namespace LinkMarkdown {
-  export const withComponent =
-    (Component) =>
-    ({ children, ...props }) =>
-      (
-        <Component {...props}>
-          <LinkMarkdown>{children}</LinkMarkdown>
-        </Component>
-      );
 }
 
 export default Markdown;

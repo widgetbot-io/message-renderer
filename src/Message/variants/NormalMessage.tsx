@@ -48,7 +48,7 @@ function getMiniUserName(
 }
 
 function getDominantRoleColor(
-  referencedMessage: APIMessage["referenced_message"]
+  // referencedMessage: APIMessage["referenced_message"]
 ) {
   // todo: make work
   // if (referencedMessage !== null) {
@@ -76,7 +76,8 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
     [props.referencedMessage, props.interaction]
   );
 
-  const miniUserNameColorHex = getDominantRoleColor(props.referencedMessage);
+  // const miniUserNameColorHex = getDominantRoleColor(props.referencedMessage);
+  const miniUserNameColorHex = getDominantRoleColor();
 
   const unknownReply = !props.referencedMessage && !props.interaction;
 

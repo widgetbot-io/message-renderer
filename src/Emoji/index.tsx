@@ -3,8 +3,8 @@ import React, { ReactNode, useMemo } from "react";
 import emoji from "react-easy-emoji";
 import { emojiCss } from "./style";
 import Tooltip from "../Tooltip";
-import {findDefaultEmojiByUnicode} from "../emojiData";
-import {commonComponentId, styled} from "../Stitches/stitches.config";
+import { findDefaultEmojiByUnicode } from "../emojiData";
+import { commonComponentId, styled } from "../Stitches/stitches.config";
 
 type EmojiTooltipProps = {
   key?: number;
@@ -44,7 +44,6 @@ export type EmojiProps = {
 function Emoji({
   src,
   disableTooltip,
-  resolveNames = false,
   emojiName,
   enlarged,
   ...props

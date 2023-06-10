@@ -1,5 +1,4 @@
 import { createStitches } from "@stitches/react";
-import React from "react";
 
 const stitches = createStitches({
   theme: {
