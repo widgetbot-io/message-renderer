@@ -1,5 +1,5 @@
 const customEmojis = (message: string) => {
-  let result = message
+  let result = message;
 
   // TODO: Fix emojis
   // controller.state.emojis
@@ -9,7 +9,7 @@ const customEmojis = (message: string) => {
   //       result = result.split(`:${keyword}:`).join(`<:${keyword}:${emoji}>`)
   //   })
 
-  return result
-}
+  return result;
+};
 
-export default customEmojis
+export default customEmojis;

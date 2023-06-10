@@ -26,16 +26,13 @@ export const Username = styled.withConfig({
 export const Avatar = styled.withConfig({
   displayName: "message-author-avatar",
   componentId: commonComponentId,
-})(
-  "img",
-  {
-    position: "absolute",
-    left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
-    transform: "translateX(-50%)",
-    marginTop: 1,
-    borderRadius: "100%",
-    width: 40,
-    height: 40,
-    zIndex: 1,
-  }
-);
+})("img", {
+  position: "absolute",
+  left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
+  transform: "translateX(-50%)",
+  marginTop: 1,
+  borderRadius: "100%",
+  width: 40,
+  height: 40,
+  zIndex: 1,
+});

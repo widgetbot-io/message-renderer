@@ -88,11 +88,7 @@ function getButtons(
 function Wrapper(Story) {
   return (
     <MessageRendererProvider svgUrls={svgUrls} messageButtons={getButtons}>
-      {({ themeClass }) => (
-        <div className={themeClass}>
-          {Story()}
-        </div>
-      )}
+      {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
     </MessageRendererProvider>
   );
 }
