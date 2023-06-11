@@ -1,16 +1,17 @@
 {
   "name": "@widgetbot/message-renderer",
-  "version": "v1.0.4",
+  "version": "v1.1.4",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "private": false,
   "types": "types/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles .\\src\\assets\\libAssets\\**\\* .\\dist -u 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepublishOnly": "pnpm build"
@@ -41,6 +42,7 @@
     "rc-tooltip": "^3.7.3",
     "react-dom": "^18.2.0",
     "react-easy-emoji": "^1.8.0",
+    "react-lazy-load-image-component": "^1.6.0",
     "simple-markdown": "^0.7.3"
   },
   "devDependencies": {
@@ -62,6 +64,7 @@
     "@typescript-eslint/parser": "^5.59.9",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.3.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.42.0",
     "eslint-plugin-react": "^7.32.2",
     "gh-pages": "^5.0.0",

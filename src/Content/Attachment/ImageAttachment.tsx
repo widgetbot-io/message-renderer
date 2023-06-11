@@ -18,6 +18,11 @@ function ImageAttachment(props: ImageAttachmentProps) {
       src={props.attachment.url}
       width={width}
       height={height}
+      placeholder={
+        <Styles.LazyImagePlaceholder style={{ width, height }}>
+          Loading...
+        </Styles.LazyImagePlaceholder>
+      }
     />
   );
 }

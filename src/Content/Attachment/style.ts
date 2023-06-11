@@ -5,12 +5,24 @@ import {
   theme,
 } from "../../Stitches/stitches.config";
 import SvgFromUrl from "../../SvgFromUrl";
+import { LazyLoadImage  } from 'react-lazy-load-image-component';
 
 export const ImageAttachment = styled.withConfig({
   displayName: "image-attachment",
   componentId: commonComponentId,
-})("img", {
+})(LazyLoadImage , {
   cursor: "pointer",
+});
+
+export const LazyImagePlaceholder = styled.withConfig({
+  displayName: "lazy-image-placeholder",
+  componentId: commonComponentId,
+})("div", {
+  backgroundColor: theme.colors.lazyImageBackground,
+  color: theme.colors.primaryOpacity100,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 export const VideoAttachmentContainer = styled.withConfig({
