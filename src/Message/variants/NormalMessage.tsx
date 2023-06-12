@@ -12,6 +12,7 @@ import {
   APIMessageInteraction,
   MessageType,
 } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface ReplyInfoProps {
   referencedMessage: APIMessage["referenced_message"];
@@ -38,46 +39,61 @@ function getMiniAvatarUrl(
   return null;
 }
 
-function getMiniUserName(
-  referencedMessage: APIMessage["referenced_message"],
-  interaction: APIMessage["interaction"]
-) {
-  if (interaction !== undefined) return interaction.user.username;
-
-  return referencedMessage?.author?.username ?? null;
-}
-
-function getDominantRoleColor(
-  // referencedMessage: APIMessage["referenced_message"]
-) {
-  // todo: make work
-  // if (referencedMessage !== null) {
-  //   const roleIds = referencedMessage.author.roles ?? [];
-  //   const [role] = roleIds
-  //     .map((id) => generalStore.guild?.roles.find((r) => r.id === id))
-  //     .filter((r) => r !== undefined && r.color !== 0)
-  //     .sort((a, b) => b.position - a.position);
-  //
-  //   const colorHex = role?.color ?? null;
-  //   return colorHex > 0 ? `#${colorHex.toString(16).padStart(6, "0")}` : "#fff";
-  // }
-
-  return null;
-}
-
 const ReplyInfo = memo((props: ReplyInfoProps) => {
   const miniAvatarUrl = useMemo(
     () => getMiniAvatarUrl(props.referencedMessage, props.interaction),
     [props.referencedMessage, props.interaction]
   );
+  const { resolveRole, resolveChannel, resolveMember } = useConfig();
 
   const miniUserName = useMemo(
-    () => getMiniUserName(props.referencedMessage, props.interaction),
-    [props.referencedMessage, props.interaction]
+    () => {
+      if (!props.interaction && !props.referencedMessage)
+        return null;
+
+      const user = props.interaction !== undefined ? props.interaction.user : props.referencedMessage.author;
+
+      if (!resolveChannel)
+        return user.username;
+
+      const channel = resolveChannel(props.referencedMessage.channel_id);
+      if (!channel || !("guild_id" in channel))
+        return user.username;
+
+
+      const guildMember = resolveMember(props.referencedMessage.author.id, channel.guild_id);
+
+      if (!guildMember) return user.username;
+
+      return guildMember.nick ?? guildMember.user.username;
+    },
+    [props.referencedMessage, props.interaction, resolveChannel]
   );
 
   // const miniUserNameColorHex = getDominantRoleColor(props.referencedMessage);
-  const miniUserNameColorHex = getDominantRoleColor();
+  const miniUserNameColorHex = useMemo(() => {
+    if (!props.referencedMessage)
+      return null;
+
+    const channel = resolveChannel(props.referencedMessage.channel_id);
+    if (!channel || !("guild_id" in channel))
+      return null;
+    
+    const guildMember = resolveMember(props.referencedMessage.author.id, channel.guild_id);
+
+    if (!guildMember || !resolveRole) return null;
+
+    const [role] = guildMember.roles
+      .map((id) => resolveRole(id))
+      .filter((r) => r !== undefined && r.color !== 0)
+      .sort((a, b) => b.position - a.position);
+
+    const color = role?.color;
+    if (!color)
+      return null;
+
+    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined
+  }, [resolveRole]);
 
   const unknownReply = !props.referencedMessage && !props.interaction;
 
@@ -148,6 +164,19 @@ function NormalMessage(props: MessageProps) {
   const shouldShowReply =
     props.message.type === MessageType.Reply ||
     Boolean(props.message.interaction);
+  const { resolveChannel, resolveMember } = useConfig();
+
+  const member = useMemo(() => {
+    if (!resolveMember || !resolveChannel)
+      return null;
+
+    const channel = resolveChannel(props.message.channel_id);
+
+    if (!channel || !('guild_id' in channel))
+      return null;
+
+    return resolveMember(props.message.author.id, channel.guild_id);
+  }, [resolveChannel, resolveMember])
 
   const isUserMentioned = useMemo(() => {
     // todo: make work
@@ -180,9 +209,9 @@ function NormalMessage(props: MessageProps) {
         )}
         <Styles.MessageHeaderBase>
           <MessageAuthor
-            author={props.message.author}
+            author={member ?? props.message.author}
             avatarAnimated={props.isHovered ?? false}
-            crosspost={!!(props.message.flags & (1 << 1))}
+            crossPost={Boolean(props.message.flags & (1 << 1))}
             referenceGuild={props.message.message_reference?.guild_id}
           />
           {props.hideTimestamp || (

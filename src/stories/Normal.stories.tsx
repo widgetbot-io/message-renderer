@@ -24,63 +24,64 @@ export const Basic = Template.bind({});
 Basic.args = {
   messages: [
     {
-      "id": "1101622366137749574",
-      "type": 0,
-      "content": "Small update on expanded markdown <:Kermit:865566651017068554>\nWe had to roll it back yesterday to patch some issues. We will most likely be bringing it back ~~sometime next week.~~ soon <:KermitTPose:814341617234083871> \n\nHave a good, markdown-less weekend! <:KermitCloutGlasses:874106679321571428>\n\nAnimal fact of the week: a group of rhino is called a \"crash\" 🦏",
-      "channel_id": "697138785317814292",
-      "author": {
-        "id": "933123872641921044",
-        "username": "therealjethro",
-        "global_name": "Jeff",
-        "avatar": "e4d8c186d8900eed2ace6aed5cefe1c0",
-        "discriminator": "0",
-        "public_flags": 4604871,
-        "avatar_decoration": "0f19f304614f253d56257ce1bbfcf357"
+      id: "1101622366137749574",
+      type: 0,
+      content:
+        'Small update on expanded markdown <:Kermit:865566651017068554>\nWe had to roll it back yesterday to patch some issues. We will most likely be bringing it back ~~sometime next week.~~ soon <:KermitTPose:814341617234083871> \n\nHave a good, markdown-less weekend! <:KermitCloutGlasses:874106679321571428>\n\nAnimal fact of the week: a group of rhino is called a "crash" 🦏',
+      channel_id: "697138785317814292",
+      author: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+        avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
       },
-      "attachments": [],
-      "embeds": [],
-      "mentions": [],
-      "mention_roles": [],
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
-      "timestamp": "2023-04-28T21:33:59.241000+00:00",
-      "edited_timestamp": "2023-05-04T16:50:42.356000+00:00",
-      "flags": 1,
-      "components": [],
-      "reactions": [
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [
         {
-          "emoji": {
-            "id": "1100159330264813638",
-            "name": "frog_nae_nae",
-            "animated": true
+          emoji: {
+            id: "1100159330264813638",
+            name: "frog_nae_nae",
+            animated: true,
           },
-          "count": 241,
-          "count_details": {
-            "burst": 0,
-            "normal": 241
+          count: 241,
+          count_details: {
+            burst: 0,
+            normal: 241,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": null,
-            "name": "🦏"
+          emoji: {
+            id: null,
+            name: "🦏",
           },
-          "count": 272,
-          "count_details": {
-            "burst": 0,
-            "normal": 272
+          count: 272,
+          count_details: {
+            burst: 0,
+            normal: 272,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": true,
-          "burst_count": 0
-        }
-      ]
+          burst_colors: [],
+          me_burst: false,
+          me: true,
+          burst_count: 0,
+        },
+      ],
     },
   ],
 };
@@ -489,11 +490,20 @@ export const Reply = Template.bind({});
 Reply.args = {
   messages: [
     {
-      id: "1069244022939472024",
+      id: "1101275906716213339",
       type: 19,
-      content: "Wow that sure is a cool GameBoy ROM!",
-      channel_id: "993210446096105522",
-      author: testUser,
+      content:
+        "Small update: We needed to roll this back ~~for 24 hours~~ to patch some security issues. It'll be back real soon. Update: we don't want to re-roll it out on a friday afternoon, so thisll be back next week.",
+      channel_id: "697138785317814292",
+      author: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+        avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
+      },
       attachments: [],
       embeds: [],
       mentions: [],
@@ -501,44 +511,72 @@ Reply.args = {
       pinned: false,
       mention_everyone: false,
       tts: false,
-      timestamp: "2023-01-29T13:14:00.662000+00:00",
-      edited_timestamp: null,
+      timestamp: "2023-04-27T22:37:16.878000+00:00",
+      edited_timestamp: "2023-04-28T21:00:43.827000+00:00",
       flags: 0,
       components: [],
-      nonce: "1069244022062579712",
       message_reference: {
-        channel_id: "993210446096105522",
-        guild_id: "1",
-        message_id: "1069243404887806074",
+        channel_id: "697138785317814292",
+        guild_id: "613425648685547541",
+        message_id: "1101188115344920607",
       },
-      referenced_message: {
-        id: "1069243404887806074",
-        type: 0,
-        content: "",
-        channel_id: "993210446096105522",
-        author: testUser,
-        attachments: [
-          {
-            id: "1069243404585799680",
-            filename: "bgb64_SkdwI3got6.mp4",
-            size: 772258,
-            url: "https://cdn.discordapp.com/attachments/993210446096105522/1069243404585799680/bgb64_SkdwI3got6.mp4",
-            proxy_url:
-              "https://media.discordapp.net/attachments/993210446096105522/1069243404585799680/bgb64_SkdwI3got6.mp4",
-            width: 960,
-            height: 864,
-            content_type: "video/mp4",
+      reactions: [
+        {
+          emoji: {
+            id: null,
+            name: "👍",
           },
-        ],
+          count: 234,
+          count_details: {
+            burst: 0,
+            normal: 234,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+        {
+          emoji: {
+            id: "1085363933579329656",
+            name: "App_Broom",
+          },
+          count: 185,
+          count_details: {
+            burst: 0,
+            normal: 185,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+      ],
+      referenced_message: {
+        id: "1101188115344920607",
+        type: 0,
+        content:
+          "# Hey DDevs! <:KermitSmile:798808491590156349> \n\nToday we are launching 🚀  **expanded markdown** (lists, headers, and masked links) to 100% of all guilds and users.\n\nYou can read more about it here [Support Article](https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)\n\nNot just users but also Apps/Bots/Webhooks 🤖  can take advantage of this new functionality!\n\nAs always, everything we do is a work in progress. We are still open to feedback and bug info, and we welcome you to provide both. <:KermitDab:803138503935524864>",
+        channel_id: "697138785317814292",
+        author: {
+          id: "933123872641921044",
+          username: "therealjethro",
+          global_name: "Jeff",
+          avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+          discriminator: "0",
+          public_flags: 4604871,
+          avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
+        },
+        attachments: [],
         embeds: [],
         mentions: [],
         mention_roles: [],
         pinned: false,
         mention_everyone: false,
         tts: false,
-        timestamp: "2023-01-29T13:11:33.307000+00:00",
+        timestamp: "2023-04-27T16:48:25.784000+00:00",
         edited_timestamp: null,
-        flags: 0,
+        flags: 5,
         components: [],
       },
     },

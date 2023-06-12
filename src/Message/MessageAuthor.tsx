@@ -1,108 +1,91 @@
 import * as React from "react";
-import { PureComponent } from "react";
-import { memoize } from "lodash";
+import { useMemo } from "react";
 import ChatTag from "../ChatTag";
 import RoleIcon from "./RoleIcon";
 import getAvatar from "../utils/getAvatar";
 import * as Styles from "./style/author";
-import { APIMessage, APIRole } from "discord-api-types/v10";
+import type { APIGuildMember, APIUser } from "discord-api-types/v10";
+import { useConfig } from "../core/ConfigContext";
 
 interface MessageAuthorProps {
-  author: APIMessage["author"];
+  author: APIUser | APIGuildMember;
   avatarAnimated?: boolean;
   onlyShowUsername?: boolean;
-  crosspost?: boolean;
+  crossPost?: boolean;
   referenceGuild?: string;
 }
 
-// todo: make functional
-class MessageAuthor extends PureComponent<MessageAuthorProps> {
-  private convertColor = memoize((color: number) =>
-    color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined
-  );
+function MessageAuthor({
+  onlyShowUsername,
+  author,
+  avatarAnimated,
+  crossPost,
+  referenceGuild,
+}: MessageAuthorProps) {
+  const { resolveRole } = useConfig();
+  const isGuildMember = "joined_at" in author;
+  const user = isGuildMember ? author.user : author;
+  const displayName = isGuildMember ? author.nick : author.username;
 
-  private getDominantRoleColor = memoize(
-    (roleIds: string[] | null): number | null => {
+  const dominantRoleIconRole = useMemo(() => {
+    if (!isGuildMember || !resolveRole) return null;
+
+    const [role] = author.roles
+      .map((id) => resolveRole(id))
+      .filter(
+        (role) =>
+          role !== null && (role.icon !== null || role.unicode_emoji !== null)
+      )
+      .sort((a, b) => b.position - a.position);
+
+    if (!role)
       return null;
 
-      if (roleIds === null) return null;
+    return role;
+  }, [isGuildMember, resolveRole, author]);
+  
+  const dominantRoleColor = useMemo(() => {
+    if (!isGuildMember || !resolveRole) return null;
 
-      // todo: make work
-      // const [role] = roleIds
-      //   .map(id => generalStore.guild?.roles.find(r => r.id === id))
-      //   .filter(r => r !== undefined && r.color !== 0)
-      //   .sort((a, b) => b.position - a.position);
-      //
-      // return role?.color ?? null;
-    }
-  );
+    const [role] = author.roles
+      .map((id) => resolveRole(id))
+      .filter((r) => r !== undefined && r.color !== 0)
+      .sort((a, b) => b.position - a.position);
 
-  private getDominantRoleIconRole = memoize(
-    (roleIds: string[] | null): APIRole | null => {
+    const color = role?.color;
+    if (!color)
       return null;
 
-      if (roleIds === null) return null;
+    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined
+  }, [isGuildMember, resolveRole, author]);
 
-      // todo: make work
-      // const [role] = roleIds
-      //   .map(id => generalStore.guild?.roles.find(r => r.id === id))
-      //   .filter(r => r !== undefined && (r.icon !== null || r.unicodeEmoji !== null))
-      //   .sort((a, b) => b.position - a.position);
-      //
-      // // Fall back to null if the role is undefined.
-      // // This can happen if the role wasn't provided with the guild, but was on the user
-      // // or no role the user has had an icon or unicode emoji.
-      // return role ?? null;
-    }
-  );
-
-  render() {
-    // Gets the dominant role color
-    // const dominantRoleColor = this.getDominantRoleColor(
-    //   this.props.author.roles
-    // );
-    // const color = this.convertColor(dominantRoleColor ?? 0);
-    //
-    // Gets the dominant role icon
-    // const dominantRoleIconRole = this.getDominantRoleIconRole(
-    //   this.props.author.roles
-    // );
-
-    const color = this.convertColor(0);
-
-    const dominantRoleIconRole = null;
-
-    if (this.props.onlyShowUsername)
-      return (
-        <Styles.MessageAuthor>
-          <Styles.Username style={{ color }}>
-            {this.props.author.username}
-          </Styles.Username>
-        </Styles.MessageAuthor>
-      );
-
+  if (onlyShowUsername) {
     return (
       <Styles.MessageAuthor>
-        <Styles.Avatar
-          src={getAvatar(this.props.author, {
-            animated: this.props.avatarAnimated ?? false,
-          })}
-          draggable={false}
-        />
-        <Styles.Username style={{ color }}>
-          {this.props.author.username}
-        </Styles.Username>
-        {dominantRoleIconRole !== null && (
-          <RoleIcon role={dominantRoleIconRole} />
-        )}
-        <ChatTag
-          author={this.props.author}
-          crosspost={this.props.crosspost}
-          referenceGuild={this.props.referenceGuild}
-        />
+        <Styles.Username style={{ color: dominantRoleColor }}>{user.username}</Styles.Username>
       </Styles.MessageAuthor>
     );
   }
+
+  return (
+    <Styles.MessageAuthor>
+      <Styles.Avatar
+        src={getAvatar(user, {
+          animated: avatarAnimated ?? false,
+        })}
+        draggable={false}
+      />
+      <Styles.Username style={{ color: dominantRoleColor }}>{displayName}</Styles.Username>
+      {dominantRoleIconRole !== null && (
+        <RoleIcon role={dominantRoleIconRole} />
+      )}
+      <ChatTag
+        author={user}
+        crosspost={crossPost}
+        referenceGuild={referenceGuild}
+      />
+    </Styles.MessageAuthor>
+  );
 }
 
 export default MessageAuthor;
