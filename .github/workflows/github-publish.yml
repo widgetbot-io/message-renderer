@@ -1,9 +1,7 @@
-name: NPM Package
+name: Github Package
 
 on:
-  pr:
-    branches:
-      - master
+  pull_request:
 
 jobs:
   install-and-build:
