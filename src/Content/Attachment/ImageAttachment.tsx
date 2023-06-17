@@ -17,7 +17,7 @@ function ImageAttachment(props: ImageAttachmentProps) {
     <Styles.ImageAttachment
       src={props.attachment.url}
       width={width}
-      height={height}
+      // height={height}
     />
   );
 }

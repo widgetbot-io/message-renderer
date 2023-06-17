@@ -13,6 +13,7 @@ export const ImageAttachment = styled.withConfig({
   "img",
   {
     cursor: "pointer",
+    maxWidth: "100%",
   }
 );
 
