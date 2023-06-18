@@ -3,10 +3,11 @@ name: Github Package
 on:
   pull_request:
 
+permissions: write-all
+
 jobs:
   install-and-build:
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
       - uses: actions/checkout@v3
       - name: Install Node.js
