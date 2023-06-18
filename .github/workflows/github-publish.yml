@@ -7,8 +7,7 @@ jobs:
   install-and-build:
     runs-on: ubuntu-latest
     permissions:
-      packages: write-all
-      contents: read
+       permissions: write-all
     steps:
       - uses: actions/checkout@v3
       - name: Install Node.js
