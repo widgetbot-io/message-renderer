@@ -6,6 +6,9 @@ on:
 jobs:
   install-and-build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
       - name: Install Node.js
@@ -13,6 +16,7 @@ jobs:
         with:
           node-version: 16
           registry-url: 'https://npm.pkg.github.com'
+          scope: '@widgetbot'
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
