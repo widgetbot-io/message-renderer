@@ -27,7 +27,7 @@ interface TagProps {
 }
 
 // todo: support custom
-const ChatTag = ({ author, crosspost, referenceGuild }: TagProps) => {
+function ChatTag({ author, crosspost, referenceGuild }: TagProps) {
   if (!author.bot) return null;
 
   if (author.system || referenceGuild === "667560445975986187")
@@ -41,6 +41,6 @@ const ChatTag = ({ author, crosspost, referenceGuild }: TagProps) => {
     return <Styles.Tag className="verified bot">{verified} bot</Styles.Tag>;
 
   return <Styles.Tag className="bot">bot</Styles.Tag>;
-};
+}
 
 export default ChatTag;

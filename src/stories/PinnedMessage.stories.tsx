@@ -15,6 +15,7 @@ export default {
   decorators: [Wrapper],
 } as ComponentMeta<typeof MessageGroup>;
 
+// eslint-disable-next-line func-style
 const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );

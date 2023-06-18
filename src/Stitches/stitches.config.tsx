@@ -1,5 +1,4 @@
 import { createStitches } from "@stitches/react";
-import React from "react";
 
 const stitches = createStitches({
   theme: {
@@ -19,6 +18,7 @@ const stitches = createStitches({
       background: "#36393f",
       backgroundSecondary: "#2f3136",
       backgroundTertiary: "#202225",
+      lazyImageBackground: "#2c2e32",
       messageHover: "rgba(0, 0, 0, .05)",
       link: "#00b0f4",
       mentioned: "rgba(250, 166, 26, 0.1)",

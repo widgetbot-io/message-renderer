@@ -6,24 +6,22 @@ function useSize(width: number, height: number, disabled?: boolean) {
     return {
       width: undefined,
       height: undefined,
-    }
+    };
   }
 
   const resultingWidth = Math.min(
-    Math.floor(
-      Math.min(height, MaxAttachmentHeight) / height * width
-    ),
+    Math.floor((Math.min(height, MaxAttachmentHeight) / height) * width),
     MaxAttachmentWidth
   );
   const resultingHeight = Math.min(
     height,
     MaxAttachmentHeight,
-    resultingWidth / width * height
+    (resultingWidth / width) * height
   );
 
   return {
-      width: resultingWidth,
-      height: resultingHeight,
+    width: resultingWidth,
+    height: resultingHeight,
   };
 }
 

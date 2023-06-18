@@ -1,5 +1,4 @@
 import SimpleMarkdown from "simple-markdown";
-import React from "react";
 
 const text = {
   ...SimpleMarkdown.defaultRules.text,

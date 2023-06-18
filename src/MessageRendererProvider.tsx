@@ -6,11 +6,7 @@ import {
   tooltipPrefix,
 } from "./Tooltip";
 import { hljsTheme } from "./markdown/render/elements/code/hljs";
-import {
-  Config,
-  ConfigContext,
-  PartialSvgConfig,
-} from "./core/ConfigContext";
+import { Config, ConfigContext, PartialSvgConfig } from "./core/ConfigContext";
 
 type MessageRendererProviderProps<SvgConfig extends PartialSvgConfig> = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;

@@ -27,7 +27,9 @@ function joinMessage(
     <>Welcome {member}. Say hi!</>,
     <>{member} hopped into the server.</>,
     <>Everyone welcome {member}!</>,
-    <>Glad you're here, {member}.</>,
+    <>
+      Glad you{"'"}re here, {member}.
+    </>,
     <>Good to see you, {member}.</>,
     <>Yay you made it, {member}!</>,
   ];

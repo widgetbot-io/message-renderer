@@ -32,7 +32,7 @@ class Highlighter extends React.Component<Props> {
     // If the children changed highlightedCode will be null
     if (this.state.highlightedCode) return;
 
-    this.highlightCode();
+    void this.highlightCode();
   }
 
   async highlightCode() {
@@ -42,7 +42,7 @@ class Highlighter extends React.Component<Props> {
 
       if (!language) return;
 
-      const {default: hljs} = await import(
+      const { default: hljs } = await import(
         /* webpackChunkName: "highlight.js" */ "highlight.js"
       );
 

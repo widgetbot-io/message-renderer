@@ -23,7 +23,7 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
         <MessageAuthor author={props.author} onlyShowUsername={true} /> has
         added{" "}
         <Styles.SystemMessageLink>{props.content}</Styles.SystemMessageLink> to
-        this channel. It's most important updates will show up here.
+        this channel. It{"'"}s most important updates will show up here.
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

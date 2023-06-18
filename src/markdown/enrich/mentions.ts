@@ -1,5 +1,5 @@
-const mentions = (message: string) => {
-  let result = message
+function mentions(message: string) {
+  // let result = message;
 
   // TODO: Fix mentions
 
@@ -15,7 +15,7 @@ const mentions = (message: string) => {
   //     ([id, { tag }]) => (result = result.split(`@${tag}`).join(`<@${id}>`))
   //   )
 
-  return result
+  return message;
 }
 
-export default mentions
+export default mentions;

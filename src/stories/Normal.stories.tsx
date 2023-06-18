@@ -15,6 +15,7 @@ export default {
   decorators: [Wrapper],
 } as ComponentMeta<typeof MessageGroup>;
 
+// eslint-disable-next-line func-style
 const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
@@ -23,57 +24,63 @@ export const Basic = Template.bind({});
 Basic.args = {
   messages: [
     {
-      id: "1042882684902453278",
-      type: 0,
-      content:
-        '🔓 **__Upcoming Change for Command Permissions__** 🔐 \n\nBased on feedback, we\'re making some updates to permissions for application commands to simplify permission management and to make command permissions more closely resemble other permissions systems in Discord. Server admins can begin to opt-in to the command permission changes outlined in the change log on a per-server basis **starting on December 16, 2022**. However, changes will not be applied to all servers **until late January or early February**.\n\n> **📰 Change log: <http://discord.com/developers/docs/change-log#upcoming-application-command-permission-changes>**. This includes many more context and details about whether you\'ll be affected + how to update your app accordingly.\n\n> <:SystemMessageWarn:842172192401915971>﻿ Most apps will be unaffected by this change, but **if your app uses the `PUT /applications/<application_id>/guilds/<guild_id>/commands/<command_id>/permissions` endpoint, you may need to make updates.**\n\nThere are two main changes included:\n\n**1️⃣ The logic used to apply permission configurations to a user in a given context within Discord clients.**\nThe new command permissions configuration behavior allows command-level permissions, app-level permissions, and `default_member_permissions` to work together rather than independently.\n   - `default_member_permissions` acts as a “default” that a developer can set when creating or updating a command\n   - App-level permission configurations (typically set by admins) now act as the "base" configuration\n   - Command-level permission configurations (typically set by admins) now act as an “override” of the app-level\n\n**2️⃣ A new `APPLICATION_COMMAND_PERMISSIONS_V2` guild feature flag to indicate whether that guild is using the old permissions logic or the new (upcoming) logic.**\n\nAnd now....a flowchart to help understand and visualize *how* permissions configurations are used by Discord clients *(it\'s huge, so you might want to click "Open Original" to see all of it)*',
-      channel_id: "998637045327081502",
-      author: {
-        bot: true,
-        id: "998882498719273090",
-        username: "Discord Developers #api-announcements",
-        avatar: "0ad0ccf2bc8dffbaddcf39825c4b5706",
-        discriminator: "0000",
+      "id": "1101622366137749574",
+      "type": 0,
+      "content": "Small update on expanded markdown <:Kermit:865566651017068554>\nWe had to roll it back yesterday to patch some issues. We will most likely be bringing it back ~~sometime next week.~~ soon <:KermitTPose:814341617234083871> \n\nHave a good, markdown-less weekend! <:KermitCloutGlasses:874106679321571428>\n\nAnimal fact of the week: a group of rhino is called a \"crash\" 🦏",
+      "channel_id": "697138785317814292",
+      "author": {
+        "id": "933123872641921044",
+        "username": "therealjethro",
+        "global_name": "Jeff",
+        "avatar": "e4d8c186d8900eed2ace6aed5cefe1c0",
+        "discriminator": "0",
+        "public_flags": 4604871,
+        "avatar_decoration": "0f19f304614f253d56257ce1bbfcf357"
       },
-      attachments: [
+      "attachments": [],
+      "embeds": [],
+      "mentions": [],
+      "mention_roles": [],
+      "pinned": false,
+      "mention_everyone": false,
+      "tts": false,
+      "timestamp": "2023-04-28T21:33:59.241000+00:00",
+      "edited_timestamp": "2023-05-04T16:50:42.356000+00:00",
+      "flags": 1,
+      "components": [],
+      "reactions": [
         {
-          id: "1042878162901672048",
-          filename: "flowchart-for-new-permissions.png",
-          size: 981134,
-          url: "https://cdn.discordapp.com/attachments/697138785317814292/1042878162901672048/flowchart-for-new-permissions.png",
-          proxy_url:
-            "https://media.discordapp.net/attachments/697138785317814292/1042878162901672048/flowchart-for-new-permissions.png",
-          width: 8576,
-          height: 5074,
-          content_type: "image/png",
-        },
-      ],
-      reactions: [
-        {
-          count: 5,
-          me: false,
-          emoji: {
-            id: null,
-            name: "✅",
+          "emoji": {
+            "id": "1100159330264813638",
+            "name": "frog_nae_nae",
+            "animated": true
           },
+          "count": 241,
+          "count_details": {
+            "burst": 0,
+            "normal": 241
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
         },
-      ],
-      embeds: [],
-      mentions: [],
-      mention_roles: [],
-      pinned: false,
-      mention_everyone: false,
-      tts: false,
-      timestamp: "2022-11-17T19:23:27.904000+00:00",
-      edited_timestamp: "2022-11-18T02:10:11.977000+00:00",
-      flags: 2,
-      components: [],
-      webhook_id: "998882498719273090",
-      message_reference: {
-        channel_id: "1",
-        guild_id: "2",
-        message_id: "1042878163170119741",
-      },
+        {
+          "emoji": {
+            "id": null,
+            "name": "🦏"
+          },
+          "count": 272,
+          "count_details": {
+            "burst": 0,
+            "normal": 272
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": true,
+          "burst_count": 0
+        }
+      ]
     },
   ],
 };
