@@ -33,6 +33,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Set version
+        run: |
+          sed -i "s/v0.0.1-SNAPSHOT/$(git rev-parse --short HEAD)/g" package.json
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{GITHUB_TOKEN}}
