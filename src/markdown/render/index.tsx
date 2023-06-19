@@ -110,12 +110,17 @@ function createRules(rule: { [key: string]: any }) {
     spoiler: {
       ...spoiler,
       react: (node, recurseOutput, state) => (
-        <TextSpoiler content={recurse(node, recurseOutput, state)} />
+        <TextSpoiler
+          content={recurse(node, recurseOutput, state)}
+          key={state.key}
+        />
       ),
     },
     timestamp: {
       ...timestamp,
-      react: (data) => <Timestamp data={data}></Timestamp>,
+      react: (data, recurseOutput, state) => (
+        <Timestamp data={data} key={state.key} />
+      ),
     },
     command: {
       ...command,

@@ -3,7 +3,7 @@ import { defaultRules, inlineRegex } from "simple-markdown";
 
 import { customEmoji } from "./customEmoji";
 import Emoji from "../../../Emoji";
-import React from "react";
+import React, { Fragment } from "react";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -56,11 +56,11 @@ const baseRules = {
       spacing: match[1],
       content: match[2],
     }),
-    react: ({ spacing, content }) => (
-      <>
+    react: ({ spacing, content }, recurseOutput, state) => (
+      <Fragment key={state.key}>
         {spacing}
         <Emoji emojiName={content} />
-      </>
+      </Fragment>
     ),
   },
 
