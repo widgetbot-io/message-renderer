@@ -12,7 +12,6 @@ export const Mention = styled.withConfig({
   color: theme.colors.mentionForeground,
   borderRadius: 3,
   padding: theme.space.xs,
-  display: "inline",
   fontWeight: 500,
 });
 
