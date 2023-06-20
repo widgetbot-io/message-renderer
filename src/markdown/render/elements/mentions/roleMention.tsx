@@ -9,7 +9,7 @@ interface RoleMentionProps {
 }
 
 function RoleMention({ roleId }: RoleMentionProps) {
-  const { resolveRole } = useConfig();
+  const { resolveRole, roleMentionOnClick } = useConfig();
 
   const role = resolveRole(roleId);
 
@@ -27,6 +27,8 @@ function RoleMention({ roleId }: RoleMentionProps) {
         color: `rgb(${red}, ${green}, ${blue})`,
         backgroundColor: `rgba(${red}, ${green}, ${blue}, 0.1)`,
       }}
+      onClick={() => roleMentionOnClick?.(role)}
+      canBeClicked={roleMentionOnClick !== undefined}
     >
       <Styles.MentionIcon>@</Styles.MentionIcon>
       {role.name}

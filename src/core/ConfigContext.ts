@@ -25,6 +25,10 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveMember(id: Snowflake, guildId: Snowflake): APIGuildMember | null;
   resolveUser(id: Snowflake): APIUser | null;
   currentUser(): APIUser | null;
+  seeThreadOnClick?(messageId: Snowflake, thread: APIChannel): void;
+  userMentionOnClick?(user: APIUser): void;
+  roleMentionOnClick?(role: APIRole): void;
+  channelMentionOnClick?(channel: APIChannel): void;
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({

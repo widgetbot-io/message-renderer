@@ -202,12 +202,24 @@ function Wrapper(Story) {
   return (
     <MessageRendererProvider
       svgUrls={svgUrls}
-      resolveRole={resolveRole}
       messageButtons={getButtons}
+      resolveRole={resolveRole}
       resolveChannel={resolveChannel}
       resolveMember={resolveMember}
       resolveUser={resolveUser}
       currentUser={() => resolveUser("132819036282159104")}
+      seeThreadOnClick={(messageId, thread) =>
+        alert(`See Thread "${thread.name}" clicked on message ${messageId}`)
+      }
+      userMentionOnClick={(user) =>
+        alert(`User "${user.username}" mention clicked!`)
+      }
+      roleMentionOnClick={(role) =>
+        alert(`Role "${role.name}" mention clicked!`)
+      }
+      channelMentionOnClick={(channel) =>
+        alert(`Channel "${channel.name}" mention clicked!`)
+      }
     >
       {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
     </MessageRendererProvider>

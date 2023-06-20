@@ -22,7 +22,7 @@ interface ChannelMentionProps {
 }
 
 function ChannelMention({ channelId }: ChannelMentionProps) {
-  const { resolveChannel } = useConfig();
+  const { resolveChannel, channelMentionOnClick } = useConfig();
 
   const channel = resolveChannel(channelId);
   if (!channel) {
@@ -42,7 +42,10 @@ function ChannelMention({ channelId }: ChannelMentionProps) {
   const icon = getChannelTypeSvg(channel.type);
 
   return (
-    <Styles.Mention>
+    <Styles.Mention
+      onClick={() => channelMentionOnClick?.(channel)}
+      canBeClicked={channelMentionOnClick !== undefined}
+    >
       <Styles.MentionIcon as={SvgFromUrl} width={16} height={16} svg={icon} />
       {channel.name}
     </Styles.Mention>

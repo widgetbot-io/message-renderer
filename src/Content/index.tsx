@@ -231,8 +231,7 @@ function Content(props: ContentProps) {
             <ThreadButton
               hasReply={props.message.referenced_message !== undefined}
               thread={props.message.thread}
-              // todo: should be message.id
-              messageId={props.message.thread.id}
+              messageId={props.message.id}
               messageContent={props.message.content}
               messageType={props.message.type}
             />
