@@ -11,7 +11,7 @@ export const customEmoji = {
     animated: !!animated,
     src: `https://cdn.discordapp.com/emojis/${id}.${animated ? "gif" : "png"}`,
   }),
-  react: (node) => (
-    <Emoji emojiName={node.name} enlarged={node.jumboable} src={node.src} />
+  react: (node, recurseOutput, state) => (
+    <Emoji emojiName={node.name} enlarged={node.jumboable} src={node.src} key={state.key} />
   ),
 };
