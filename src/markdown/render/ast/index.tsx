@@ -5,6 +5,7 @@ import { customEmoji } from "./customEmoji";
 import Emoji from "../../../Emoji";
 import React from "react";
 import { channelMention, userMention } from "../elements/mentions";
+import { roleMention } from "../elements/mentions/roleMention";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -68,7 +69,7 @@ const baseRules = {
   // todo: mentions
   mention: userMention,
   channelMention,
-  // role,
+  roleMention,
 
   s: {
     order: defaultRules.u.order,

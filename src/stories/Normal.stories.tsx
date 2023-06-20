@@ -1,6 +1,5 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-// import { Message, MessageRendererProvider } from "../../dist/esm/index.js";
 import MessageGroup from "../index";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
@@ -93,7 +92,7 @@ Mentions.args = {
       id: "1101622366137749574",
       type: 0,
       content:
-        "User ping: <@132819036282159104>\nText channel mention: <#697138785317814292>\nVoice channel mention: <#1234>\nStage channel mention: <#1337>\nUnknown channel mention: <#404>\nUnknown user mention: <@404>",
+        "User ping: <@132819036282159104>\nText channel mention: <#697138785317814292>\nVoice channel mention: <#1234>\nStage channel mention: <#1337>\nRole ping: <@&613426354628722689>\nUnknown channel mention: <#404>\nUnknown user mention: <@404>\nUnknown role mention: <@&404>",
       channel_id: "697138785317814292",
       author: testUser,
       attachments: [],
