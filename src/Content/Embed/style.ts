@@ -120,6 +120,7 @@ export const Title = styled.withConfig({
     link: {
       true: {
         cursor: "pointer",
+        textDecoration: "none",
 
         "&:hover": {
           textDecoration: "underline",
