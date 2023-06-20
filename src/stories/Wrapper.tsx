@@ -32,10 +32,21 @@ import SvgIconDanger from "../assets/storybookOnlyAssets/icon-danger.svg";
 import SvgIconPause from "../assets/storybookOnlyAssets/icon-pause.svg";
 import SvgIconFullscreen from "../assets/storybookOnlyAssets/icon-fullscreen.svg";
 import SvgIconPlay from "../assets/storybookOnlyAssets/icon-play.svg";
+import SvgIconTextChannel from "../assets/storybookOnlyAssets/icon-text-channel.svg";
+import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channel.svg";
+import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
 
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
-import { APIMessage } from "discord-api-types/v10";
+import type {
+  APIChannel,
+  APIGuildMember,
+  APIMessage,
+  APIRole,
+  APIUser,
+  Snowflake,
+} from "discord-api-types/v10";
+import { ChannelType } from "discord-api-types/v10";
 import { MessageButtonListOption } from "../Message/MessageContainer";
 
 const svgUrls = {
@@ -70,6 +81,9 @@ const svgUrls = {
   IconFullscreen: SvgIconFullscreen,
   IconPlay: SvgIconPlay,
   IconUnknownReply: SvgIconUnknownReply,
+  IconTextChannel: SvgIconTextChannel,
+  IconVoiceChannel: SvgIconVoiceChannel,
+  IconStageChannel: SvgIconStageChannel,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
 };
 
@@ -85,9 +99,116 @@ function getButtons(
   ];
 }
 
+function resolveRole(id: Snowflake): APIRole {
+  console.log("id", id);
+
+  if (id === "613426354628722689")
+    return {
+      id: "613426354628722689",
+      name: "Discord Staff",
+      permissions: "12635227553527",
+      mentionable: false,
+      position: 33,
+      color: 5793266,
+      hoist: false,
+      managed: false,
+      tags: {},
+      icon: null,
+      unicode_emoji: null,
+    };
+
+  console.log(`Unknown role ${id}`);
+  return null;
+}
+
+function resolveChannel(id: Snowflake): APIChannel {
+  if (id === "697138785317814292") {
+    return {
+      name: "api-announcements",
+      position: 8,
+      id: "697138785317814292",
+      guild_id: "613425648685547541",
+      type: ChannelType.GuildAnnouncement,
+    };
+  }
+
+  if (id === "1234") {
+    return {
+      name: "Voice Channel",
+      position: 8,
+      id: "1234",
+      guild_id: "4321",
+      type: ChannelType.GuildVoice,
+    };
+  }
+
+  if (id === "1337") {
+    return {
+      name: "Stage Channel",
+      position: 8,
+      id: "1337",
+      guild_id: "4321",
+      type: ChannelType.GuildStageVoice,
+    };
+  }
+
+  console.log(`Unknown channel ${id}`);
+  return null;
+}
+
+function resolveMember(id: Snowflake): APIGuildMember {
+  if (id === "933123872641921044") {
+    return {
+      avatar: null,
+      communication_disabled_until: null,
+      flags: 10,
+      joined_at: "2023-03-23T20:13:42.452000+00:00",
+      nick: "Jethro",
+      pending: false,
+      premium_since: null,
+      roles: ["613426354628722689"],
+      user: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+      },
+      mute: false,
+      deaf: false,
+    };
+  }
+
+  console.log(`Unknown member ${id}`);
+  return null;
+}
+
+function resolveUser(userId: Snowflake): APIUser | null {
+  if (userId === "132819036282159104") {
+    return {
+      id: "132819036282159104",
+      username: "JohnyTheCarrot",
+      avatar: "3a30ffeeeb354950804d77ded94162d3",
+      discriminator: "0001",
+      public_flags: 4457220,
+    };
+  }
+
+  console.log(`Unknown user ${userId}`);
+  return null;
+}
+
 function Wrapper(Story) {
   return (
-    <MessageRendererProvider svgUrls={svgUrls} messageButtons={getButtons}>
+    <MessageRendererProvider
+      svgUrls={svgUrls}
+      resolveRole={resolveRole}
+      messageButtons={getButtons}
+      resolveChannel={resolveChannel}
+      resolveMember={resolveMember}
+      resolveUser={resolveUser}
+      currentUser={() => resolveUser("132819036282159104")}
+    >
       {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
     </MessageRendererProvider>
   );

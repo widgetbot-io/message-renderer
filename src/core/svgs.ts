@@ -36,6 +36,10 @@ export type Svg =
   | "IconPlay"
   | "IconCross"
   | "IconUnknownReply"
+  | "IconTextChannel"
+  | "IconVoiceChannel"
+  | "IconStageChannel"
+  | "IconForumChannel"
   | "MiscDiscordImageFailure"
   | `Custom${string}`;
 
@@ -70,7 +74,11 @@ const defaultSvgUrls: Record<Svg, string> = {
   IconPause: SvgMissingAsset,
   IconFullscreen: SvgMissingAsset,
   IconPlay: SvgMissingAsset,
+  IconTextChannel: SvgMissingAsset,
+  IconVoiceChannel: SvgMissingAsset,
   IconUnknownReply: SvgMissingAsset,
+  IconStageChannel: SvgMissingAsset,
+  IconForumChannel: SvgMissingAsset,
   MiscDiscordImageFailure: SvgMissingAsset,
 };
 

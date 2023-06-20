@@ -200,11 +200,11 @@ function Content(props: ContentProps) {
       {!props.isReplyContent && (
         <MessageAccessories
           active={
-            props.message.reactions !== null ||
+            props.message.reactions?.length > 0 ||
             props.message.attachments.length > 0 ||
             props.message.sticker_items?.length > 0 ||
-            props.message.thread !== null ||
-            (props.message.embeds !== null && props.message.embeds.length > 0)
+            props.message.thread !== undefined ||
+            props.message.embeds?.length > 0
           }
         >
           {props.message.attachments.map((attachment) => (
@@ -224,7 +224,7 @@ function Content(props: ContentProps) {
               <Embed key={embed.url} embed={embed} images={undefined} />
             ))
           )}
-          {props.message.reactions && (
+          {props.message.reactions?.length > 0 && (
             <Reactions reactions={props.message.reactions} />
           )}
           {!props.noThreadButton && props.message.thread && (
