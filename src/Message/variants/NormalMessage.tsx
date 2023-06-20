@@ -46,40 +46,40 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
   );
   const { resolveRole, resolveChannel, resolveMember } = useConfig();
 
-  const miniUserName = useMemo(
-    () => {
-      if (!props.interaction && !props.referencedMessage)
-        return null;
+  const miniUserName = useMemo(() => {
+    if (!props.interaction && !props.referencedMessage) return null;
 
-      const user = props.interaction !== undefined ? props.interaction.user : props.referencedMessage.author;
+    const user =
+      props.interaction !== undefined
+        ? props.interaction.user
+        : props.referencedMessage.author;
 
-      if (!resolveChannel)
-        return user.username;
+    if (!resolveChannel) return user.username;
 
-      const channel = resolveChannel(props.referencedMessage.channel_id);
-      if (!channel || !("guild_id" in channel))
-        return user.username;
+    const channel = resolveChannel(props.referencedMessage.channel_id);
+    if (!channel || !("guild_id" in channel)) return user.username;
 
+    const guildMember = resolveMember(
+      props.referencedMessage.author.id,
+      channel.guild_id
+    );
 
-      const guildMember = resolveMember(props.referencedMessage.author.id, channel.guild_id);
+    if (!guildMember) return user.username;
 
-      if (!guildMember) return user.username;
-
-      return guildMember.nick ?? guildMember.user.username;
-    },
-    [props.referencedMessage, props.interaction, resolveChannel]
-  );
+    return guildMember.nick ?? guildMember.user.username;
+  }, [props.referencedMessage, props.interaction, resolveChannel]);
 
   // const miniUserNameColorHex = getDominantRoleColor(props.referencedMessage);
   const miniUserNameColorHex = useMemo(() => {
-    if (!props.referencedMessage)
-      return null;
+    if (!props.referencedMessage) return null;
 
     const channel = resolveChannel(props.referencedMessage.channel_id);
-    if (!channel || !("guild_id" in channel))
-      return null;
-    
-    const guildMember = resolveMember(props.referencedMessage.author.id, channel.guild_id);
+    if (!channel || !("guild_id" in channel)) return null;
+
+    const guildMember = resolveMember(
+      props.referencedMessage.author.id,
+      channel.guild_id
+    );
 
     if (!guildMember || !resolveRole) return null;
 
@@ -89,10 +89,9 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       .sort((a, b) => b.position - a.position);
 
     const color = role?.color;
-    if (!color)
-      return null;
+    if (!color) return null;
 
-    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined
+    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
   }, [resolveRole]);
 
   const unknownReply = !props.referencedMessage && !props.interaction;
@@ -164,35 +163,28 @@ function NormalMessage(props: MessageProps) {
   const shouldShowReply =
     props.message.type === MessageType.Reply ||
     Boolean(props.message.interaction);
-  const { resolveChannel, resolveMember } = useConfig();
+  const { resolveChannel, resolveMember, currentUser } = useConfig();
 
   const member = useMemo(() => {
-    if (!resolveMember || !resolveChannel)
-      return null;
-
     const channel = resolveChannel(props.message.channel_id);
 
-    if (!channel || !('guild_id' in channel))
-      return null;
+    if (!channel || !("guild_id" in channel)) return null;
 
     return resolveMember(props.message.author.id, channel.guild_id);
-  }, [resolveChannel, resolveMember])
+  }, [resolveChannel, resolveMember]);
 
   const isUserMentioned = useMemo(() => {
-    // todo: make work
-    return props.overrides?.userMentioned ?? false;
-    // const user = authStore.user;
-    //
-    // if (!user) return false;
-    //
-    // if (!("_id" in user)) return false;
-    //
-    // const userMentioned = props.message.mentions.find(
-    //   (mention) => mention.id === user._id
-    // );
-    //
-    // return Boolean(userMentioned);
-  }, [props.message.mentions, props.overrides?.userMentioned]);
+    const userMentionedOverride = props.overrides?.userMentioned ?? false;
+    if (userMentionedOverride) return true;
+
+    const user = currentUser();
+
+    if (!user) return false;
+
+    return (
+      props.message.mentions.find(({ id }) => id === user.id) !== undefined
+    );
+  }, [currentUser, props.message.mentions, props.overrides?.userMentioned]);
 
   if (props.isFirstMessage)
     return (

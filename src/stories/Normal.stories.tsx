@@ -86,6 +86,32 @@ Basic.args = {
   ],
 };
 
+export const Mentions = Template.bind({});
+Mentions.args = {
+  messages: [
+    {
+      id: "1101622366137749574",
+      type: 0,
+      content:
+        "User ping: <@132819036282159104>\nText channel mention: <#697138785317814292>\nVoice channel mention: <#1234>\nStage channel mention: <#1337>\nUnknown channel mention: <#404>\nUnknown user mention: <@404>",
+      channel_id: "697138785317814292",
+      author: testUser,
+      attachments: [],
+      embeds: [],
+      mentions: [testUser],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [],
+    },
+  ],
+};
+
 export const CodeBlock = Template.bind({});
 CodeBlock.args = {
   messages: [

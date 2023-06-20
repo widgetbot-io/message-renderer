@@ -31,6 +31,8 @@ const stitches = createStitches({
       spines: "#4f545c",
       attachmentBorder: "rgba(27, 29, 32, 0.5)",
       danger: "#ed4245",
+      mentionBackground: "rgba(88, 101, 242, 0.298)",
+      mentionForeground: "#c9cdfb",
     },
     fonts: {
       main: "Open Sans, sans-serif",

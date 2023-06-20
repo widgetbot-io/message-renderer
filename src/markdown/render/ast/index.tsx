@@ -4,6 +4,7 @@ import { defaultRules, inlineRegex } from "simple-markdown";
 import { customEmoji } from "./customEmoji";
 import Emoji from "../../../Emoji";
 import React from "react";
+import { channelMention, userMention } from "../elements/mentions";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -65,8 +66,8 @@ const baseRules = {
   },
 
   // todo: mentions
-  // mention,
-  // channel,
+  mention: userMention,
+  channelMention,
   // role,
 
   s: {

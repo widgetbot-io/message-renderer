@@ -32,14 +32,18 @@ import SvgIconDanger from "../assets/storybookOnlyAssets/icon-danger.svg";
 import SvgIconPause from "../assets/storybookOnlyAssets/icon-pause.svg";
 import SvgIconFullscreen from "../assets/storybookOnlyAssets/icon-fullscreen.svg";
 import SvgIconPlay from "../assets/storybookOnlyAssets/icon-play.svg";
+import SvgIconTextChannel from "../assets/storybookOnlyAssets/icon-text-channel.svg";
+import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channel.svg";
+import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
 
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
 import type {
-  APIGuildChannel,
+  APIChannel,
   APIGuildMember,
   APIMessage,
   APIRole,
+  APIUser,
   Snowflake,
 } from "discord-api-types/v10";
 import { ChannelType } from "discord-api-types/v10";
@@ -77,6 +81,9 @@ const svgUrls = {
   IconFullscreen: SvgIconFullscreen,
   IconPlay: SvgIconPlay,
   IconUnknownReply: SvgIconUnknownReply,
+  IconTextChannel: SvgIconTextChannel,
+  IconVoiceChannel: SvgIconVoiceChannel,
+  IconStageChannel: SvgIconStageChannel,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
 };
 
@@ -110,13 +117,11 @@ function resolveRole(id: Snowflake): APIRole {
       unicode_emoji: null,
     };
 
-  console.log(`Unknown role ${id}`)
+  console.log(`Unknown role ${id}`);
   return null;
 }
 
-function resolveChannel(
-  id: Snowflake
-): APIGuildChannel<ChannelType.GuildAnnouncement> {
+function resolveChannel(id: Snowflake): APIChannel {
   if (id === "697138785317814292") {
     return {
       name: "api-announcements",
@@ -127,7 +132,27 @@ function resolveChannel(
     };
   }
 
-  console.log(`Unknown channel ${id}`)
+  if (id === "1234") {
+    return {
+      name: "Voice Channel",
+      position: 8,
+      id: "1234",
+      guild_id: "4321",
+      type: ChannelType.GuildVoice,
+    };
+  }
+
+  if (id === "1337") {
+    return {
+      name: "Stage Channel",
+      position: 8,
+      id: "1337",
+      guild_id: "4321",
+      type: ChannelType.GuildStageVoice,
+    };
+  }
+
+  console.log(`Unknown channel ${id}`);
   return null;
 }
 
@@ -154,7 +179,22 @@ function resolveMember(id: Snowflake): APIGuildMember {
     };
   }
 
-  console.log(`Unknown member ${id}`)
+  console.log(`Unknown member ${id}`);
+  return null;
+}
+
+function resolveUser(userId: Snowflake): APIUser | null {
+  if (userId === "132819036282159104") {
+    return {
+      id: "132819036282159104",
+      username: "JohnyTheCarrot",
+      avatar: "3a30ffeeeb354950804d77ded94162d3",
+      discriminator: "0001",
+      public_flags: 4457220,
+    };
+  }
+
+  console.log(`Unknown user ${userId}`);
   return null;
 }
 
@@ -162,10 +202,12 @@ function Wrapper(Story) {
   return (
     <MessageRendererProvider
       svgUrls={svgUrls}
+      resolveRole={resolveRole}
       messageButtons={getButtons}
       resolveChannel={resolveChannel}
       resolveMember={resolveMember}
-      resolveRole={resolveRole}
+      resolveUser={resolveUser}
+      currentUser={() => resolveUser("132819036282159104")}
     >
       {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
     </MessageRendererProvider>
