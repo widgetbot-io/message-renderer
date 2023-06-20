@@ -15,7 +15,6 @@ function useSize(
 
     if (internalType === "EmbedImage" || /^article|image$/i.test(type)) {
       const proposedWidth = 400;
-      console.log("image", image);
       const proposedHeight = (proposedWidth / image.width) * image.height;
 
       const { width, height } =
