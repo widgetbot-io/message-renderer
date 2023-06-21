@@ -9,7 +9,6 @@ export const MessageAuthor = styled.withConfig({
   componentId: commonComponentId,
 })("span", {
   display: "inline-flex",
-  lineHeight: `1.375rem`,
 });
 
 export const Username = styled.withConfig({
@@ -22,6 +21,7 @@ export const Username = styled.withConfig({
   display: "inline",
   verticalAlign: "baseline",
   whiteSpace: "nowrap",
+  lineHeight: `1.375rem`,
 });
 
 export const Avatar = styled.withConfig({

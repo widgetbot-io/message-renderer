@@ -30,6 +30,7 @@ export const LargeTimestamp = styled.withConfig({
   height: "fit-content",
   whiteSpace: "nowrap",
   color: theme.colors.primaryOpacity50,
+  lineHeight: `1.375rem`,
 });
 
 export const Message = styled.withConfig({
