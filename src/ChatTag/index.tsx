@@ -4,7 +4,10 @@ import * as Styles from "./style";
 import { APIUser } from "discord-api-types/v10";
 
 const verified = (
-  <Tooltip placement="top" overlay="Verified Bot">
+  <Tooltip
+    placement="top"
+    overlay="Verified Bot"
+  >
     <Styles.VerifiedBot
       aria-label="Verified Bot"
       aria-hidden="false"
@@ -27,7 +30,7 @@ interface TagProps {
 }
 
 // todo: support custom
-const ChatTag = ({ author, crosspost, referenceGuild }: TagProps) => {
+function ChatTag({ author, crosspost, referenceGuild }: TagProps) {
   if (!author.bot) return null;
 
   if (author.system || referenceGuild === "667560445975986187")
@@ -41,6 +44,6 @@ const ChatTag = ({ author, crosspost, referenceGuild }: TagProps) => {
     return <Styles.Tag className="verified bot">{verified} bot</Styles.Tag>;
 
   return <Styles.Tag className="bot">bot</Styles.Tag>;
-};
+}
 
 export default ChatTag;

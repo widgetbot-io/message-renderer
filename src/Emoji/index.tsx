@@ -1,10 +1,10 @@
 import * as Styles from "./style";
-import React, { ReactNode, useMemo } from "react";
+import React, { Fragment, ReactNode, useMemo } from "react";
 import emoji from "react-easy-emoji";
 import { emojiCss } from "./style";
 import Tooltip from "../Tooltip";
-import {findDefaultEmojiByUnicode} from "../emojiData";
-import {commonComponentId, styled} from "../Stitches/stitches.config";
+import { findDefaultEmojiByUnicode } from "../emojiData";
+import { commonComponentId, styled } from "../Stitches/stitches.config";
 
 type EmojiTooltipProps = {
   key?: number;
@@ -44,7 +44,6 @@ export type EmojiProps = {
 function Emoji({
   src,
   disableTooltip,
-  resolveNames = false,
   emojiName,
   enlarged,
   ...props
@@ -69,18 +68,19 @@ function Emoji({
   if (defaultEmoji === undefined) return <>{emojiName}</>;
 
   return emoji(defaultEmoji.emoji, (code, string, key) => (
-    <EmojiTooltip
-      tooltipContent={defaultEmoji.keywords[0]}
-      disabled={disableTooltip}
-      key={key}
-    >
-      <Styles.Emoji
-        {...props}
-        enlarged={enlarged}
-        src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
-        alt={string}
-      />
-    </EmojiTooltip>
+    <Fragment key={key}>
+      <EmojiTooltip
+        tooltipContent={defaultEmoji.keywords[0]}
+        disabled={disableTooltip}
+      >
+        <Styles.Emoji
+          {...props}
+          enlarged={enlarged}
+          src={`https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/${code}.svg`}
+          alt={string}
+        />
+      </EmojiTooltip>
+    </Fragment>
   ));
 }
 

@@ -11,6 +11,8 @@ import Sticker from "./Sticker";
 import Embed from "./Embed";
 import Reactions from "../Message/Reactions";
 import ThreadButton from "./Thread/ThreadButton";
+import Components from "../Message/Components";
+import getDisplayName from "../utils/getDisplayName";
 
 interface EditedProps {
   editedAt: string;
@@ -101,10 +103,17 @@ function Content(props: ContentProps) {
   }, [props.message.attachments, props.message.stickers, props.isReplyContent]);
 
   const embedImages = useMemo(() => {
-    if (!props.message.embeds || props.message.embeds.length <= 1) return [];
+    if (
+      !props.message.embeds ||
+      props.message.embeds.length <= 1 ||
+      props.message.embeds[0].url === undefined
+    )
+      return [];
 
     if (
-      !props.message.embeds.every((e) => props.message.embeds[0].url === e.url)
+      !props.message.embeds.every(
+        (e) => e.url !== undefined && props.message.embeds[0].url === e.url
+      )
     )
       return [];
 
@@ -160,7 +169,7 @@ function Content(props: ContentProps) {
             />
           </g>
         </Styles.TypingIndicator>
-        {props.message.author.username} is thinking...
+        {getDisplayName(props.message.author)} is thinking...
       </Styles.DeferredContent>
     );
   }
@@ -200,11 +209,12 @@ function Content(props: ContentProps) {
       {!props.isReplyContent && (
         <MessageAccessories
           active={
-            props.message.reactions !== null ||
+            props.message.reactions?.length > 0 ||
             props.message.attachments.length > 0 ||
             props.message.sticker_items?.length > 0 ||
-            props.message.thread !== null ||
-            (props.message.embeds !== null && props.message.embeds.length > 0)
+            props.message.thread !== undefined ||
+            props.message.embeds?.length > 0 ||
+            props.message.components?.length > 0
           }
         >
           {props.message.attachments.map((attachment) => (
@@ -213,7 +223,7 @@ function Content(props: ContentProps) {
           {props.message.sticker_items?.map((sticker) => (
             <Sticker key={sticker.id} sticker={sticker} />
           ))}
-          {props.message.embeds !== null && embedImages.length > 0 ? (
+          {embedImages.length > 0 ? (
             <Embed
               key={props.message.embeds[0].url}
               embed={props.message.embeds[0]}
@@ -224,15 +234,20 @@ function Content(props: ContentProps) {
               <Embed key={embed.url} embed={embed} images={undefined} />
             ))
           )}
-          {props.message.reactions && (
+          {props.message.reactions?.length > 0 && (
             <Reactions reactions={props.message.reactions} />
+          )}
+          {props.message.components?.length > 0 && (
+            <Components
+              components={props.message.components}
+              message={props.message}
+            />
           )}
           {!props.noThreadButton && props.message.thread && (
             <ThreadButton
               hasReply={props.message.referenced_message !== undefined}
               thread={props.message.thread}
-              // todo: should be message.id
-              messageId={props.message.thread.id}
+              messageId={props.message.id}
               messageContent={props.message.content}
               messageType={props.message.type}
             />

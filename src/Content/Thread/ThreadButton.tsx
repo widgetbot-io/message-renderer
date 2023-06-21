@@ -1,7 +1,9 @@
 import * as Styles from "../../Content/style";
 import * as MessageStyles from "../../Message/style/message";
 import React from "react";
-import { APIChannel, MessageType } from "discord-api-types/v10";
+import type { APIChannel } from "discord-api-types/v10";
+import { MessageType } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface ThreadButtonProps {
   messageType: MessageType;
@@ -12,7 +14,7 @@ interface ThreadButtonProps {
 }
 
 function ThreadButton(props: ThreadButtonProps) {
-  // todo: open thread callback specified by lib user
+  const { seeThreadOnClick } = useConfig();
 
   return (
     <Styles.ThreadButtonContainer>
@@ -23,7 +25,10 @@ function ThreadButton(props: ThreadButtonProps) {
       <Styles.ThreadButton>
         <Styles.ThreadButtonTopLine>
           <Styles.ThreadButtonName>{props.thread.name}</Styles.ThreadButtonName>
-          <Styles.SeeThreadButton /* onClick={openThread} */>
+          <Styles.SeeThreadButton
+            onClick={() => seeThreadOnClick(props.messageId, props.thread)}
+            role="button"
+          >
             See Thread ›
           </Styles.SeeThreadButton>
         </Styles.ThreadButtonTopLine>

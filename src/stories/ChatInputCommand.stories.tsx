@@ -15,6 +15,7 @@ export default {
   decorators: [Wrapper],
 } as ComponentMeta<typeof MessageGroup>;
 
+// eslint-disable-next-line func-style
 const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
@@ -30,7 +31,7 @@ ChatInputCommand.args = {
       author: {
         id: "565479321247154186",
         username: "WidgetBot Staging",
-        display_name: null,
+        global_name: null,
         avatar: "06f657fdc0a5bcbac7776c461d60bdc7",
         avatar_decoration: null,
         discriminator: "1493",
@@ -71,7 +72,7 @@ FailedInteraction.args = {
       author: {
         id: "565479321247154186",
         username: "WidgetBot Staging",
-        display_name: null,
+        global_name: null,
         avatar: "06f657fdc0a5bcbac7776c461d60bdc7",
         avatar_decoration: null,
         discriminator: "1493",
@@ -112,7 +113,7 @@ PendingInteraction.args = {
       author: {
         id: "565479321247154186",
         username: "WidgetBot Staging",
-        display_name: null,
+        global_name: null,
         avatar: "06f657fdc0a5bcbac7776c461d60bdc7",
         avatar_decoration: null,
         discriminator: "1493",

@@ -5,6 +5,7 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { APIMessage } from "discord-api-types/v10";
+import getDisplayName from "../../utils/getDisplayName";
 
 interface RecipientAddProps {
   createdAt: APIMessage["timestamp"];
@@ -22,8 +23,10 @@ function RecipientAdd(props: RecipientAddProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> added{" "}
-        <AuthorStyles.Username>{props.target.username}</AuthorStyles.Username>{" "}
+        <MessageAuthor author={props.author} onlyShowUsername /> added{" "}
+        <AuthorStyles.Username>
+          {getDisplayName(props.target)}
+        </AuthorStyles.Username>{" "}
         to the thread.
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />

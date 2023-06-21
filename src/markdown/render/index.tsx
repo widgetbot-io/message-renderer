@@ -110,12 +110,17 @@ function createRules(rule: { [key: string]: any }) {
     spoiler: {
       ...spoiler,
       react: (node, recurseOutput, state) => (
-        <TextSpoiler content={recurse(node, recurseOutput, state)} />
+        <TextSpoiler
+          content={recurse(node, recurseOutput, state)}
+          key={state.key}
+        />
       ),
     },
     timestamp: {
       ...timestamp,
-      react: (data) => <Timestamp data={data}></Timestamp>,
+      react: (data, recurseOutput, state) => (
+        <Timestamp data={data} key={state.key} />
+      ),
     },
     command: {
       ...command,
@@ -136,7 +141,7 @@ const parse = parserFor(rulesWithoutMaskedLinks);
 export const parseAllowLinks = parserFor(createRules(baseRules));
 export const parseEmbedTitle = parserFor(
   R.omit(
-    ["codeBlock", "br", "mention", "channel", "roleMention"],
+    ["codeBlock", "br", "mention", "channelMention", "roleMention"],
     rulesWithoutMaskedLinks
   )
 );
@@ -153,17 +158,6 @@ function Markdown({
   return content ? parse(content, undefined, { mentions, users }) : null;
 }
 
-namespace Markdown {
-  export const withComponent =
-    (Component) =>
-    ({ children, ...props }) =>
-      (
-        <Component {...props}>
-          <Markdown>{children}</Markdown>
-        </Component>
-      );
-}
-
 export function LinkMarkdown({
   children: content,
   mentions,
@@ -176,17 +170,6 @@ export function LinkMarkdown({
   return content
     ? parseAllowLinks(content, undefined, { mentions, users })
     : null;
-}
-
-export namespace LinkMarkdown {
-  export const withComponent =
-    (Component) =>
-    ({ children, ...props }) =>
-      (
-        <Component {...props}>
-          <LinkMarkdown>{children}</LinkMarkdown>
-        </Component>
-      );
 }
 
 export default Markdown;

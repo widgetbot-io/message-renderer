@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { APIEmbedImage } from "discord-api-types/v10";
 
-function useSize<Image extends APIEmbedImage>(
+function useSize(
   type: string,
   image: APIEmbedImage | undefined,
   internalType: "EmbedImage" | "EmbedThumbnail",
@@ -15,7 +15,6 @@ function useSize<Image extends APIEmbedImage>(
 
     if (internalType === "EmbedImage" || /^article|image$/i.test(type)) {
       const proposedWidth = 400;
-      console.log("image", image);
       const proposedHeight = (proposedWidth / image.width) * image.height;
 
       const { width, height } =

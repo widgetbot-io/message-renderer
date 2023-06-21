@@ -49,14 +49,14 @@ function VideoAttachment(props: VideoAttachmentProps) {
     return `${minutesPassed}:${secondsPassed}/${minutesTotal}:${secondsTotal}`;
   }, [durationPlayed, videoRef.current]);
 
-  const playVideo = () => {
+  function playVideo() {
     const video = videoRef.current;
 
     if (video === null) return;
 
     if (video.paused) video.play();
     else video.pause();
-  };
+  }
 
   const updatePauseState = useCallback((pauseState: boolean) => {
     setPaused(pauseState);
@@ -78,11 +78,11 @@ function VideoAttachment(props: VideoAttachmentProps) {
     isFullscreen
   );
 
-  const fullScreenChange = () => {
+  function fullScreenChange() {
     setIsFullscreen(document.fullscreenElement !== null);
-  };
+  }
 
-  const seekVideo = (e, overrideSeeking?: boolean) => {
+  function seekVideo(e, overrideSeeking?: boolean) {
     if (videoRef.current === null || (!isSeeking && !overrideSeeking)) return;
 
     const rect = e.target.getBoundingClientRect();
@@ -92,7 +92,7 @@ function VideoAttachment(props: VideoAttachmentProps) {
     if (duration === undefined) return;
 
     videoRef.current.currentTime = (x / rect.width) * duration;
-  };
+  }
 
   useEffect(() => {
     document.addEventListener("fullscreenchange", fullScreenChange);

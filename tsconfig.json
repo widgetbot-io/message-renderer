@@ -19,6 +19,8 @@
     "rootDir": "src",
     "baseUrl": ".",
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*",
+    "src/assets/libAssets/missing-asset.svg"
+  ],
   "exclude": ["node_modules", "src/stories"]
 }

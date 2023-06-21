@@ -21,21 +21,19 @@ export const Username = styled.withConfig({
   display: "inline",
   verticalAlign: "baseline",
   whiteSpace: "nowrap",
+  lineHeight: `1.375rem`,
 });
 
 export const Avatar = styled.withConfig({
   displayName: "message-author-avatar",
   componentId: commonComponentId,
-})(
-  "img",
-  {
-    position: "absolute",
-    left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
-    transform: "translateX(-50%)",
-    marginTop: 1,
-    borderRadius: "100%",
-    width: 40,
-    height: 40,
-    zIndex: 1,
-  }
-);
+})("img", {
+  position: "absolute",
+  left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
+  transform: "translateX(-50%)",
+  marginTop: "calc(4px - .125rem)",
+  borderRadius: "100%",
+  width: 40,
+  height: 40,
+  zIndex: 1,
+});

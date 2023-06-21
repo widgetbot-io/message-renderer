@@ -34,8 +34,8 @@ function ThreadCreated(props: ThreadCreatedProps) {
             height={SystemMessageIconSize}
             svg="IconThreadCreated"
           />
-          <MessageAuthor author={props.author} onlyShowUsername={true} />{" "}
-          started a thread:{" "}
+          <MessageAuthor author={props.author} onlyShowUsername /> started a
+          thread:{" "}
           <Styles.SystemMessageLink /* onClick={openThread} */>
             {props.messageContent}
           </Styles.SystemMessageLink>
@@ -52,8 +52,8 @@ function ThreadCreated(props: ThreadCreatedProps) {
           height={SystemMessageIconSize}
           svg="IconThreadCreated"
         />
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> started
-        a thread:{" "}
+        <MessageAuthor author={props.author} onlyShowUsername /> started a
+        thread:{" "}
         <Styles.SystemMessageLink /* onClick={openThread} */>
           {props.thread.name}
         </Styles.SystemMessageLink>

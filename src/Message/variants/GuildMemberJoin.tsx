@@ -14,7 +14,7 @@ function joinMessage(
   createdAt: APIMessage["timestamp"],
   author: APIMessage["author"]
 ): JSX.Element {
-  const member = <MessageAuthor author={author} onlyShowUsername={true} />;
+  const member = <MessageAuthor author={author} onlyShowUsername />;
 
   const messages = [
     <>{member} joined the party.</>,
@@ -27,7 +27,9 @@ function joinMessage(
     <>Welcome {member}. Say hi!</>,
     <>{member} hopped into the server.</>,
     <>Everyone welcome {member}!</>,
-    <>Glad you're here, {member}.</>,
+    <>
+      Glad you{"'"}re here, {member}.
+    </>,
     <>Good to see you, {member}.</>,
     <>Yay you made it, {member}!</>,
   ];

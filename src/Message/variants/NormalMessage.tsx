@@ -11,9 +11,13 @@ import {
   APIMessage,
   APIMessageInteraction,
   MessageType,
+  Snowflake,
 } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
+import getDisplayName from "../../utils/getDisplayName";
 
 interface ReplyInfoProps {
+  channelId: Snowflake;
   referencedMessage: APIMessage["referenced_message"];
   mentioned?: boolean;
   interaction: APIMessageInteraction | undefined;
@@ -38,45 +42,59 @@ function getMiniAvatarUrl(
   return null;
 }
 
-function getMiniUserName(
-  referencedMessage: APIMessage["referenced_message"],
-  interaction: APIMessage["interaction"]
-) {
-  if (interaction !== undefined) return interaction.user.username;
-
-  return referencedMessage?.author?.username ?? null;
-}
-
-function getDominantRoleColor(
-  referencedMessage: APIMessage["referenced_message"]
-) {
-  // todo: make work
-  // if (referencedMessage !== null) {
-  //   const roleIds = referencedMessage.author.roles ?? [];
-  //   const [role] = roleIds
-  //     .map((id) => generalStore.guild?.roles.find((r) => r.id === id))
-  //     .filter((r) => r !== undefined && r.color !== 0)
-  //     .sort((a, b) => b.position - a.position);
-  //
-  //   const colorHex = role?.color ?? null;
-  //   return colorHex > 0 ? `#${colorHex.toString(16).padStart(6, "0")}` : "#fff";
-  // }
-
-  return null;
-}
-
 const ReplyInfo = memo((props: ReplyInfoProps) => {
   const miniAvatarUrl = useMemo(
     () => getMiniAvatarUrl(props.referencedMessage, props.interaction),
     [props.referencedMessage, props.interaction]
   );
+  const { resolveRole, resolveChannel, resolveMember } = useConfig();
 
-  const miniUserName = useMemo(
-    () => getMiniUserName(props.referencedMessage, props.interaction),
-    [props.referencedMessage, props.interaction]
-  );
+  const miniUserName = useMemo(() => {
+    if (!props.interaction && !props.referencedMessage) return null;
 
-  const miniUserNameColorHex = getDominantRoleColor(props.referencedMessage);
+    const user =
+      props.interaction !== undefined
+        ? props.interaction.user
+        : props.referencedMessage.author;
+
+    if (!resolveChannel) return getDisplayName(user);
+
+    const channel = resolveChannel(props.channelId);
+    if (!channel || !("guild_id" in channel)) return getDisplayName(user);
+
+    const guildMember = resolveMember(
+      props.referencedMessage.author.id,
+      channel.guild_id
+    );
+
+    if (!guildMember) return getDisplayName(user);
+
+    return guildMember.nick ?? getDisplayName(guildMember.user);
+  }, [props.referencedMessage, props.interaction, resolveChannel]);
+
+  const miniUserNameColorHex = useMemo(() => {
+    if (!props.referencedMessage) return null;
+
+    const channel = resolveChannel(props.referencedMessage.channel_id);
+    if (!channel || !("guild_id" in channel)) return null;
+
+    const guildMember = resolveMember(
+      props.referencedMessage.author.id,
+      channel.guild_id
+    );
+
+    if (!guildMember) return null;
+
+    const [role] = guildMember.roles
+      .map((id) => resolveRole(id))
+      .filter((r) => r !== undefined && r.color !== 0)
+      .sort((a, b) => b.position - a.position);
+
+    const color = role?.color;
+    if (!color) return null;
+
+    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
+  }, [resolveRole]);
 
   const unknownReply = !props.referencedMessage && !props.interaction;
 
@@ -147,28 +165,35 @@ function NormalMessage(props: MessageProps) {
   const shouldShowReply =
     props.message.type === MessageType.Reply ||
     Boolean(props.message.interaction);
+  const { resolveChannel, resolveMember, currentUser } = useConfig();
+
+  const member = useMemo(() => {
+    const channel = resolveChannel(props.message.channel_id);
+
+    if (!channel || !("guild_id" in channel)) return null;
+
+    return resolveMember(props.message.author.id, channel.guild_id);
+  }, [resolveChannel, resolveMember]);
 
   const isUserMentioned = useMemo(() => {
-    // todo: make work
-    return props.overrides?.userMentioned ?? false;
-    // const user = authStore.user;
-    //
-    // if (!user) return false;
-    //
-    // if (!("_id" in user)) return false;
-    //
-    // const userMentioned = props.message.mentions.find(
-    //   (mention) => mention.id === user._id
-    // );
-    //
-    // return Boolean(userMentioned);
-  }, [props.message.mentions, props.overrides?.userMentioned]);
+    const userMentionedOverride = props.overrides?.userMentioned ?? false;
+    if (userMentionedOverride) return true;
+
+    const user = currentUser();
+
+    if (!user) return false;
+
+    return (
+      props.message.mentions.find(({ id }) => id === user.id) !== undefined
+    );
+  }, [currentUser, props.message.mentions, props.overrides?.userMentioned]);
 
   if (props.isFirstMessage)
     return (
       <Styles.Message mentioned={isUserMentioned}>
         {shouldShowReply && (
           <ReplyInfo
+            channelId={props.message.channel_id}
             referencedMessage={props.message.referenced_message}
             mentioned={props.message.mentions.some(
               (m) => m.id === props.message.referenced_message?.author.id
@@ -179,9 +204,9 @@ function NormalMessage(props: MessageProps) {
         )}
         <Styles.MessageHeaderBase>
           <MessageAuthor
-            author={props.message.author}
+            author={member ?? props.message.author}
             avatarAnimated={props.isHovered ?? false}
-            crosspost={!!(props.message.flags & (1 << 1))}
+            crossPost={Boolean(props.message.flags & (1 << 1))}
             referenceGuild={props.message.message_reference?.guild_id}
           />
           {props.hideTimestamp || (

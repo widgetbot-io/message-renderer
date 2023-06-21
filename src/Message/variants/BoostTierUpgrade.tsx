@@ -3,16 +3,25 @@ import React, { useMemo } from "react";
 import LargeTimestamp from "../LargeTimestamp";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import { APIMessage, MessageType } from "discord-api-types/v10";
+import { APIMessage, MessageType, Snowflake } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface BoostTierUpgradeProps {
   createdAt: APIMessage["timestamp"];
   content: string;
+  channelId: Snowflake;
   type: MessageType;
   author: APIMessage["author"];
 }
 
 function BoostTierUpgrade(props: BoostTierUpgradeProps) {
+  const { resolveChannel, resolveGuild } = useConfig();
+  const channel = resolveChannel(props.channelId);
+  const guildName =
+    channel !== null && "guild_id" in channel
+      ? resolveGuild(channel.guild_id).name ?? "Unknown Guild"
+      : "Unknown Guild";
+
   const newLevel = useMemo(() => {
     switch (props.type) {
       case MessageType.GuildBoostTier1:
@@ -35,11 +44,10 @@ function BoostTierUpgrade(props: BoostTierUpgradeProps) {
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> just
-        boosted the server <strong>{props.content}</strong> time
-        {props.content === "1" ? "" : "s"}! guildNameHere has achieved{" "}
+        <MessageAuthor author={props.author} onlyShowUsername /> just boosted
+        the server <strong>{props.content}</strong> time
+        {props.content === "1" ? "" : "s"}! {guildName} has achieved{" "}
         <strong>Level {newLevel}!</strong>
-        {/* todo: load guild name */}
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

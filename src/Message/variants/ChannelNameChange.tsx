@@ -20,7 +20,7 @@ function ChannelNameChange(props: ChannelNameChangeProps) {
         svg="IconPencil"
       />
       <Styles.SystemMessageContent fullColor>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> changed
+        <MessageAuthor author={props.author} onlyShowUsername /> changed
         the channel name: <strong>{props.content}</strong>
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />

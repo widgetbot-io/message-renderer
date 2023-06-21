@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import SvgMissingAsset from "@images/missing-asset.svg";
-import {ConfigContext} from "./ConfigContext";
+import SvgMissingAsset from "../assets/libAssets/missing-asset.svg";
+import { ConfigContext } from "./ConfigContext";
 
 export type SvgConfig = Record<Svg, string>;
 
@@ -36,6 +36,11 @@ export type Svg =
   | "IconPlay"
   | "IconCross"
   | "IconUnknownReply"
+  | "IconTextChannel"
+  | "IconVoiceChannel"
+  | "IconStageChannel"
+  | "IconForumChannel"
+  | "IconLinkExternal"
   | "MiscDiscordImageFailure"
   | `Custom${string}`;
 
@@ -70,8 +75,13 @@ const defaultSvgUrls: Record<Svg, string> = {
   IconPause: SvgMissingAsset,
   IconFullscreen: SvgMissingAsset,
   IconPlay: SvgMissingAsset,
+  IconTextChannel: SvgMissingAsset,
+  IconVoiceChannel: SvgMissingAsset,
   IconUnknownReply: SvgMissingAsset,
+  IconStageChannel: SvgMissingAsset,
+  IconForumChannel: SvgMissingAsset,
   MiscDiscordImageFailure: SvgMissingAsset,
+  IconLinkExternal: SvgMissingAsset,
 };
 
 export function getSvgUrl(svg: Svg): string {

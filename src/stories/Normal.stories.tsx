@@ -1,6 +1,5 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-// import { Message, MessageRendererProvider } from "../../dist/esm/index.js";
 import MessageGroup from "../index";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
@@ -15,6 +14,7 @@ export default {
   decorators: [Wrapper],
 } as ComponentMeta<typeof MessageGroup>;
 
+// eslint-disable-next-line func-style
 const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
@@ -23,57 +23,90 @@ export const Basic = Template.bind({});
 Basic.args = {
   messages: [
     {
-      id: "1042882684902453278",
+      id: "1101622366137749574",
       type: 0,
       content:
-        '🔓 **__Upcoming Change for Command Permissions__** 🔐 \n\nBased on feedback, we\'re making some updates to permissions for application commands to simplify permission management and to make command permissions more closely resemble other permissions systems in Discord. Server admins can begin to opt-in to the command permission changes outlined in the change log on a per-server basis **starting on December 16, 2022**. However, changes will not be applied to all servers **until late January or early February**.\n\n> **📰 Change log: <http://discord.com/developers/docs/change-log#upcoming-application-command-permission-changes>**. This includes many more context and details about whether you\'ll be affected + how to update your app accordingly.\n\n> <:SystemMessageWarn:842172192401915971>﻿ Most apps will be unaffected by this change, but **if your app uses the `PUT /applications/<application_id>/guilds/<guild_id>/commands/<command_id>/permissions` endpoint, you may need to make updates.**\n\nThere are two main changes included:\n\n**1️⃣ The logic used to apply permission configurations to a user in a given context within Discord clients.**\nThe new command permissions configuration behavior allows command-level permissions, app-level permissions, and `default_member_permissions` to work together rather than independently.\n   - `default_member_permissions` acts as a “default” that a developer can set when creating or updating a command\n   - App-level permission configurations (typically set by admins) now act as the "base" configuration\n   - Command-level permission configurations (typically set by admins) now act as an “override” of the app-level\n\n**2️⃣ A new `APPLICATION_COMMAND_PERMISSIONS_V2` guild feature flag to indicate whether that guild is using the old permissions logic or the new (upcoming) logic.**\n\nAnd now....a flowchart to help understand and visualize *how* permissions configurations are used by Discord clients *(it\'s huge, so you might want to click "Open Original" to see all of it)*',
-      channel_id: "998637045327081502",
+        'Small update on expanded markdown <:Kermit:865566651017068554>\nWe had to roll it back yesterday to patch some issues. We will most likely be bringing it back ~~sometime next week.~~ soon <:KermitTPose:814341617234083871> \n\nHave a good, markdown-less weekend! <:KermitCloutGlasses:874106679321571428>\n\nAnimal fact of the week: a group of rhino is called a "crash" 🦏',
+      channel_id: "697138785317814292",
       author: {
-        bot: true,
-        id: "998882498719273090",
-        username: "Discord Developers #api-announcements",
-        avatar: "0ad0ccf2bc8dffbaddcf39825c4b5706",
-        discriminator: "0000",
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+        avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
       },
-      attachments: [
-        {
-          id: "1042878162901672048",
-          filename: "flowchart-for-new-permissions.png",
-          size: 981134,
-          url: "https://cdn.discordapp.com/attachments/697138785317814292/1042878162901672048/flowchart-for-new-permissions.png",
-          proxy_url:
-            "https://media.discordapp.net/attachments/697138785317814292/1042878162901672048/flowchart-for-new-permissions.png",
-          width: 8576,
-          height: 5074,
-          content_type: "image/png",
-        },
-      ],
-      reactions: [
-        {
-          count: 5,
-          me: false,
-          emoji: {
-            id: null,
-            name: "✅",
-          },
-        },
-      ],
+      attachments: [],
       embeds: [],
       mentions: [],
       mention_roles: [],
       pinned: false,
       mention_everyone: false,
       tts: false,
-      timestamp: "2022-11-17T19:23:27.904000+00:00",
-      edited_timestamp: "2022-11-18T02:10:11.977000+00:00",
-      flags: 2,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
       components: [],
-      webhook_id: "998882498719273090",
-      message_reference: {
-        channel_id: "1",
-        guild_id: "2",
-        message_id: "1042878163170119741",
-      },
+      reactions: [
+        {
+          emoji: {
+            id: "1100159330264813638",
+            name: "frog_nae_nae",
+            animated: true,
+          },
+          count: 241,
+          count_details: {
+            burst: 0,
+            normal: 241,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+        {
+          emoji: {
+            id: null,
+            name: "🦏",
+          },
+          count: 272,
+          count_details: {
+            burst: 0,
+            normal: 272,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: true,
+          burst_count: 0,
+        },
+      ],
+    },
+  ],
+};
+
+export const Mentions = Template.bind({});
+Mentions.args = {
+  messages: [
+    {
+      id: "1101622366137749574",
+      type: 0,
+      content:
+        "User ping: <@132819036282159104>\nText channel mention: <#697138785317814292>\nVoice channel mention: <#1234>\nStage channel mention: <#1337>\nRole ping: <@&613426354628722689>\nUnknown channel mention: <#404>\nUnknown user mention: <@404>\nUnknown role mention: <@&404>",
+      channel_id: "697138785317814292",
+      author: testUser,
+      attachments: [],
+      embeds: [],
+      mentions: [testUser],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [],
     },
   ],
 };
@@ -89,8 +122,8 @@ CodeBlock.args = {
       channel_id: "993105555042357268",
       author: {
         id: "132819036282159104",
-        username: "Mr. Quine",
-        display_name: null,
+        username: "mrquine",
+        global_name: "Mr. Quine",
         avatar: "3a30ffeeeb354950804d77ded94162d3",
         avatar_decoration: null,
         discriminator: "0001",
@@ -125,7 +158,7 @@ Embed.args = {
       author: {
         id: "398690824721924107",
         username: "AdvaithBot",
-        display_name: null,
+        global_name: null,
         avatar: "aa710e791ef95cec9bf23350cabfcd1f",
         avatar_decoration: null,
         discriminator: "2249",
@@ -208,6 +241,263 @@ Embed.args = {
       edited_timestamp: null,
       flags: 0,
       components: [],
+    },
+  ],
+};
+
+export const TwitterEmbed = Template.bind({});
+TwitterEmbed.args = {
+  messages: [
+    {
+      id: "1012082119129968660",
+      type: 0,
+      content: "https://twitter.com/advaithj1/status/1562328510605103104",
+      channel_id: "993210446096105522",
+      author: testUser,
+      attachments: [],
+      embeds: [
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          description: "Profile Themes",
+          color: 1942002,
+          timestamp: "2022-08-24T06:38:38.245000+00:00",
+          fields: [
+            {
+              name: "Likes",
+              value: "105",
+              inline: true,
+            },
+          ],
+          author: {
+            name: "advaith (@advaithj1)",
+            url: "https://twitter.com/advaithj1",
+            icon_url:
+              "https://pbs.twimg.com/profile_images/1488212832952860672/SchxNzvk_400x400.png",
+            proxy_icon_url:
+              "https://images-ext-2.discordapp.net/external/UfNOTOu9QvauHStfQYflM5eWeQCIddYVqxdbJ2hu3Z8/https/pbs.twimg.com/profile_images/1488212832952860672/SchxNzvk_400x400.png",
+          },
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BI4KVsAE44S6.jpg",
+            proxy_url:
+              "https://images-ext-1.discordapp.net/external/PVgGmJIfGcm5i_j25Lys24gOcJRu85rDjutVg3k55hs/https/pbs.twimg.com/media/Fa6BI4KVsAE44S6.jpg",
+            width: 1200,
+            height: 803,
+          },
+          footer: {
+            text: "Twitter",
+            icon_url:
+              "https://abs.twimg.com/icons/apple-touch-icon-192x192.png",
+            proxy_icon_url:
+              "https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png",
+          },
+        },
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BLnjVUAEF6pJ.jpg",
+            proxy_url:
+              "https://images-ext-2.discordapp.net/external/8U7wHZr0BHTpFBRny8S_FCR32WymkS9XbYYtz0eijMQ/https/pbs.twimg.com/media/Fa6BLnjVUAEF6pJ.jpg",
+            width: 1200,
+            height: 783,
+          },
+        },
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BORPUYAAf9_R.jpg",
+            proxy_url:
+              "https://images-ext-2.discordapp.net/external/wNNQNSNIWmMlV0y6tlxNLEM6khXiv3NvVSmgOnnbSW0/https/pbs.twimg.com/media/Fa6BORPUYAAf9_R.jpg",
+            width: 1199,
+            height: 791,
+          },
+        },
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BRZtUYAAgwnW.jpg",
+            proxy_url:
+              "https://images-ext-2.discordapp.net/external/kA2KdPReJxwMtreQlUIPrQTuwVDWk0CK08cYiJmzNH8/https/pbs.twimg.com/media/Fa6BRZtUYAAgwnW.jpg",
+            width: 1200,
+            height: 790,
+          },
+        },
+      ],
+      mentions: [],
+      mention_roles: [],
+      pinned: true,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2022-08-24T19:33:00.777000+00:00",
+      edited_timestamp: null,
+      flags: 0,
+      components: [],
+      application_id: "565479321247154186",
+      webhook_id: "993585352776364044",
+      hit: true,
+    },
+  ],
+};
+
+export const MultipleEmbeds = Template.bind({});
+MultipleEmbeds.args = {
+  messages: [
+    {
+      id: "1042934458803822693",
+      type: 0,
+      content: "",
+      channel_id: "838078338299461632",
+      author: {
+        id: "235088799074484224",
+        username: "Rythm",
+        global_name: null,
+        avatar: "9b29bfc497a70b6cc85bb2087936f8fd",
+        discriminator: "3722",
+        public_flags: 65536,
+        bot: true,
+        avatar_decoration: null,
+      },
+      attachments: [],
+      embeds: [
+        {
+          type: "rich",
+          title: "Rythm Newsletter #1 - The Return :rocket:",
+          description:
+            "🎙️ *tap tap*... Is this thing on?\n\nFirst off: This is an official newsletter from the Rythm team! If you’re receiving this, you subscribed to our newsletter a while back. Thanks for that! \n\nWe appreciate your support as this newsletter is the best way to stay up to date with what we’re doing (as well as our [Discord Server](https://widgetbot.io/)).",
+          color: 15780562,
+        },
+        {
+          type: "rich",
+          title: "We're coming back :tada:",
+          description:
+            "That’s right baby, this newsletter marks the beginning of the comeback of Rythm!",
+          color: 13865104,
+          fields: [
+            {
+              name: "Our mission",
+              value:
+                "Over the last year, we've been working incredibly hard with one goal in mind: connecting people through music. \n\nFrom late-night gaming sessions, to studying with friends, or even just something as simple as spicing up a normal hangout... Rythm existed to bring the experience of music to all of your gatherings. Now we're bringing that back, with a vision that will revolutionize how we listen to music.",
+              inline: false,
+            },
+            {
+              name: "Join us  <:DiscordLight:1042615683017605212>",
+              value:
+                "As we gear up to our big launch over the next couple of months, we've got a ton of events scheduled for you to join in on. We’re doing a ton of cool stuff, like showing off what it’s like to work at Rythm, giving you sneak peeks into what we've been working on, hosting AMAs with our team, doing some game nights with all of you, hosting giveaways, and more!\n\n:link: **[Cick here to join our Discord](https://widgetbot.io/)**",
+              inline: false,
+            },
+            {
+              name: "Our beta program <:verified:1042615858217893908>",
+              value:
+                "We're kicking off our beta early next year, and are looking for people to help us test the brand new Rythm! We're currently taking in applications and will slowly open things up as we get closer to our launch. [Click here to sign up!](https://widgetbot.io/)",
+              inline: false,
+            },
+            {
+              name: "Sneak Peek <:eyess:1042616171054235749>",
+              value:
+                "Here's a sneak peek into the brand new Rythm, we'll be posting more of these on our [Discord](https://widgetbot.io/) <:NepSmug:1042616153794678804>",
+              inline: false,
+            },
+          ],
+          image: {
+            url: "https://cdn.discordapp.com/attachments/268445232478027776/1041517082816286850/teaser_screenshot.png",
+            proxy_url:
+              "https://media.discordapp.net/attachments/268445232478027776/1041517082816286850/teaser_screenshot.png",
+            width: 1676,
+            height: 492,
+          },
+        },
+        {
+          type: "rich",
+          title: "A brand new way to discover music :musical_note:",
+          description:
+            "We've recently launched a new project: **a community themed around music discovery.**\n\nAs music lovers, we're constantly on the lookout for both new music and ways to find new music. We wanted to create a place where everyone can find something to listen to.\n\nIn our community, you can find new music on a daily basis from all genres, curated by our incredible discovery team. This includes new hits, underground bangers, and much more. We'll also be running a lot of fun events you can participate in such as guess the song, club battles, and artist AMAs. \n\n:link: **[Click here to join our music discovery community](https://widgetbot.io/)**",
+          color: 15301499,
+        },
+        {
+          type: "rich",
+          title: "More about us :wave:",
+          color: 14639487,
+          fields: [
+            {
+              name: "Once a hobby, now a full-time team",
+              value:
+                "That’s right, there’s a full-time team behind the bot that you know and love. We’ve grown a lot in the past year! We look forward to letting some of our newest additions take the spotlight in the coming months.",
+              inline: false,
+            },
+            {
+              name: "What's next?",
+              value:
+                "We hope this first newsletter gets you all excited for what's to come! Thanks a bunch for subscribing. We've got a **ton** of stuff we can't wait to share, so tune in for the next newsletter that'll go out around New Year's Day!",
+              inline: false,
+            },
+            {
+              name: "Thank you everyone for sticking with us, from the entire team here at Rythm :heart:",
+              value: "​",
+              inline: false,
+            },
+          ],
+          image: {
+            url: "https://cdn.discordapp.com/attachments/989565356957909022/1042513768699154543/team-gif.gif",
+            proxy_url:
+              "https://media.discordapp.net/attachments/989565356957909022/1042513768699154543/team-gif.gif",
+            width: 660,
+            height: 410,
+          },
+        },
+      ],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2022-11-17T22:49:11.764000+00:00",
+      edited_timestamp: null,
+      flags: 0,
+      components: [
+        {
+          type: 1,
+          components: [
+            {
+              type: 2,
+              style: 5,
+              label: "Join our Discord",
+              url: "https://widgetbot.io/",
+            },
+            {
+              type: 2,
+              style: 5,
+              label: "Signup to Beta",
+              url: "https://widgetbot.io/",
+            },
+            {
+              type: 2,
+              custom_id: "newsletter-unsubscribe",
+              style: 2,
+              label: "Unsubscribe 😔",
+            },
+          ],
+        },
+      ],
+      reactions: [
+        {
+          emoji: {
+            id: null,
+            name: "❤️",
+          },
+          count: 1,
+          count_details: {
+            burst: 0,
+            normal: 1,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+      ],
     },
   ],
 };
@@ -482,11 +772,20 @@ export const Reply = Template.bind({});
 Reply.args = {
   messages: [
     {
-      id: "1069244022939472024",
+      id: "1101275906716213339",
       type: 19,
-      content: "Wow that sure is a cool GameBoy ROM!",
-      channel_id: "993210446096105522",
-      author: testUser,
+      content:
+        "Small update: We needed to roll this back ~~for 24 hours~~ to patch some security issues. It'll be back real soon. Update: we don't want to re-roll it out on a friday afternoon, so thisll be back next week.",
+      channel_id: "697138785317814292",
+      author: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+        avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
+      },
       attachments: [],
       embeds: [],
       mentions: [],
@@ -494,44 +793,72 @@ Reply.args = {
       pinned: false,
       mention_everyone: false,
       tts: false,
-      timestamp: "2023-01-29T13:14:00.662000+00:00",
-      edited_timestamp: null,
+      timestamp: "2023-04-27T22:37:16.878000+00:00",
+      edited_timestamp: "2023-04-28T21:00:43.827000+00:00",
       flags: 0,
       components: [],
-      nonce: "1069244022062579712",
       message_reference: {
-        channel_id: "993210446096105522",
-        guild_id: "1",
-        message_id: "1069243404887806074",
+        channel_id: "697138785317814292",
+        guild_id: "613425648685547541",
+        message_id: "1101188115344920607",
       },
-      referenced_message: {
-        id: "1069243404887806074",
-        type: 0,
-        content: "",
-        channel_id: "993210446096105522",
-        author: testUser,
-        attachments: [
-          {
-            id: "1069243404585799680",
-            filename: "bgb64_SkdwI3got6.mp4",
-            size: 772258,
-            url: "https://cdn.discordapp.com/attachments/993210446096105522/1069243404585799680/bgb64_SkdwI3got6.mp4",
-            proxy_url:
-              "https://media.discordapp.net/attachments/993210446096105522/1069243404585799680/bgb64_SkdwI3got6.mp4",
-            width: 960,
-            height: 864,
-            content_type: "video/mp4",
+      reactions: [
+        {
+          emoji: {
+            id: null,
+            name: "👍",
           },
-        ],
+          count: 234,
+          count_details: {
+            burst: 0,
+            normal: 234,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+        {
+          emoji: {
+            id: "1085363933579329656",
+            name: "App_Broom",
+          },
+          count: 185,
+          count_details: {
+            burst: 0,
+            normal: 185,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+      ],
+      referenced_message: {
+        id: "1101188115344920607",
+        type: 0,
+        content:
+          "# Hey DDevs! <:KermitSmile:798808491590156349> \n\nToday we are launching 🚀  **expanded markdown** (lists, headers, and masked links) to 100% of all guilds and users.\n\nYou can read more about it here [Support Article](https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)\n\nNot just users but also Apps/Bots/Webhooks 🤖  can take advantage of this new functionality!\n\nAs always, everything we do is a work in progress. We are still open to feedback and bug info, and we welcome you to provide both. <:KermitDab:803138503935524864>",
+        channel_id: "697138785317814292",
+        author: {
+          id: "933123872641921044",
+          username: "therealjethro",
+          global_name: "Jeff",
+          avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+          discriminator: "0",
+          public_flags: 4604871,
+          avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
+        },
+        attachments: [],
         embeds: [],
         mentions: [],
         mention_roles: [],
         pinned: false,
         mention_everyone: false,
         tts: false,
-        timestamp: "2023-01-29T13:11:33.307000+00:00",
+        timestamp: "2023-04-27T16:48:25.784000+00:00",
         edited_timestamp: null,
-        flags: 0,
+        flags: 5,
         components: [],
       },
     },
@@ -574,10 +901,9 @@ CodeBlockReply.args = {
       channel_id: "993105555042357268",
       author: {
         id: "132819036282159104",
-        username: "JohnyTheCarrot",
-        display_name: null,
+        username: "johnythecarrot",
+        global_name: "JohnyTheCarrot",
         avatar: "3a30ffeeeb354950804d77ded94162d3",
-        avatar_decoration: null,
         discriminator: "0001",
         public_flags: 4457220,
       },
@@ -606,8 +932,8 @@ CodeBlockReply.args = {
         channel_id: "993105555042357268",
         author: {
           id: "132819036282159104",
-          username: "JohnyTheCarrot",
-          display_name: null,
+          username: "johnythecarrot",
+          global_name: "JohnyTheCarrot",
           avatar: "3a30ffeeeb354950804d77ded94162d3",
           avatar_decoration: null,
           discriminator: "0001",

@@ -3,7 +3,8 @@ import { defaultRules, inlineRegex } from "simple-markdown";
 
 import { customEmoji } from "./customEmoji";
 import Emoji from "../../../Emoji";
-import React from "react";
+import React, { Fragment } from "react";
+import { channelMention, roleMention, userMention } from "../elements/mentions";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -48,26 +49,37 @@ const baseRules = {
   },
   customEmoji,
   text,
+  defaultEmoji: {
+    order: defaultRules.text.order,
+    match: (source) => /^:([^\s:]+?):/gu.exec(source),
+    parse: (match) => ({
+      content: match[1],
+    }),
+    react: ({ content }, recurseOutput, state) => (
+      <Fragment key={state.key}>
+        <Emoji emojiName={content} />
+      </Fragment>
+    ),
+  },
   emojiUnicode: {
     order: defaultRules.text.order,
-    match: (source) =>
-      /^(\s*)(:([^\s:]+?):|\p{Extended_Pictographic})/gu.exec(source),
+    match: (source) => /^(\s*)(\p{Extended_Pictographic})/gu.exec(source),
     parse: (match) => ({
       spacing: match[1],
       content: match[2],
     }),
-    react: ({ spacing, content }) => (
-      <>
+    react: ({ spacing, content }, recurseOutput, state) => (
+      <Fragment key={state.key}>
         {spacing}
         <Emoji emojiName={content} />
-      </>
+      </Fragment>
     ),
   },
 
   // todo: mentions
-  // mention,
-  // channel,
-  // role,
+  mention: userMention,
+  channelMention,
+  roleMention,
 
   s: {
     order: defaultRules.u.order,

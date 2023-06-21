@@ -8,7 +8,7 @@ import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
 import useSize from "./useSize";
 import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
-import {APIEmbed, APIEmbedImage, EmbedType} from "discord-api-types/v10";
+import { APIEmbed, APIEmbedImage, EmbedType } from "discord-api-types/v10";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -24,7 +24,7 @@ function Embed({ embed, images }: EmbedProps) {
     return <VideoAttachment attachmentOrEmbed={embed} />;
 
   const embedColor =
-    embed.color !== 0 && embed.color !== null
+    embed.color !== 0 && embed.color !== undefined
       ? numberToRgb(embed.color)
       : undefined;
 
@@ -49,13 +49,8 @@ function Embed({ embed, images }: EmbedProps) {
   );
 
   return (
-    <Styles.Embed
-      style={{ borderLeftColor: embedColor }}
-      thin={isEmbedThin}
-    >
-      <Styles.ContentAndThumbnail
-        hasLargeThumbnail={isThumbnailLarge}
-      >
+    <Styles.Embed style={{ borderLeftColor: embedColor }} thin={isEmbedThin}>
+      <Styles.ContentAndThumbnail hasLargeThumbnail={isThumbnailLarge}>
         <Styles.Content>
           {embed.provider && (
             <Styles.Provider>{embed.provider.name}</Styles.Provider>
@@ -67,7 +62,7 @@ function Embed({ embed, images }: EmbedProps) {
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
-                  <a href={embed.author.url} target="_blank">
+                  <a href={embed.author.url} target="_blank" rel="noreferrer noopener">
                     {embed.author.name}
                   </a>
                 ) : (
@@ -77,13 +72,8 @@ function Embed({ embed, images }: EmbedProps) {
             </Styles.Author>
           )}
           {embed.title &&
-            (embed.url !== null ? (
-              <Styles.Title
-                as="a"
-                link
-                href={embed.url}
-                target="_blank"
-              >
+            (embed.url !== undefined ? (
+              <Styles.Title as="a" link href={embed.url} target="_blank">
                 {parseEmbedTitle(embed.title)}
               </Styles.Title>
             ) : (
@@ -140,9 +130,7 @@ function Embed({ embed, images }: EmbedProps) {
         />
       )}
       {images?.length > 0 && (
-        <Styles.Images
-          nImages={images.length as 1 | 2 | 3 | 4}
-        >
+        <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>
               <Styles.Image

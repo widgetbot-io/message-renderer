@@ -1,5 +1,4 @@
 import { createStitches } from "@stitches/react";
-import React from "react";
 
 const stitches = createStitches({
   theme: {
@@ -19,6 +18,7 @@ const stitches = createStitches({
       background: "#36393f",
       backgroundSecondary: "#2f3136",
       backgroundTertiary: "#202225",
+      lazyImageBackground: "#2c2e32",
       messageHover: "rgba(0, 0, 0, .05)",
       link: "#00b0f4",
       mentioned: "rgba(250, 166, 26, 0.1)",
@@ -31,6 +31,16 @@ const stitches = createStitches({
       spines: "#4f545c",
       attachmentBorder: "rgba(27, 29, 32, 0.5)",
       danger: "#ed4245",
+      mentionBackground: "rgba(88, 101, 242, 0.298)",
+      mentionForeground: "#c9cdfb",
+      buttonPrimaryBackground: "#5865f2",
+      buttonPrimaryHoverBackground: "#4752c4",
+      buttonSecondaryBackground: "#4e5058",
+      buttonSecondaryHoverBackground: "#6d6f78",
+      buttonDangerBackground: "#da373c",
+      buttonDangerHoverBackground: "#a12828",
+      buttonSuccessBackground: "#248046",
+      buttonSuccessHoverBackground: "#1a6334",
     },
     fonts: {
       main: "Open Sans, sans-serif",
@@ -61,6 +71,6 @@ const stitches = createStitches({
   },
 });
 
-export const commonComponentId = "wb";
+export const commonComponentId = 'wb';
 
 export const { styled, theme, globalCss, keyframes, css } = stitches;

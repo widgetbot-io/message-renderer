@@ -5,6 +5,7 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { APIMessage } from "discord-api-types/v10";
+import getDisplayName from "../../utils/getDisplayName";
 
 interface RecipientRemoveProps {
   createdAt: APIMessage["timestamp"];
@@ -21,8 +22,10 @@ function RecipientRemove(props: RecipientRemoveProps) {
         svg="IconRemove"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> removed{" "}
-        <AuthorStyles.Username>{props.target.username}</AuthorStyles.Username>{" "}
+        <MessageAuthor author={props.author} onlyShowUsername /> removed{" "}
+        <AuthorStyles.Username>
+          {getDisplayName(props.target)}
+        </AuthorStyles.Username>{" "}
         from the thread.
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
