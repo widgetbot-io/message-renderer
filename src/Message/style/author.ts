@@ -9,6 +9,7 @@ export const MessageAuthor = styled.withConfig({
   componentId: commonComponentId,
 })("span", {
   display: "inline-flex",
+  lineHeight: `1.375rem`,
 });
 
 export const Username = styled.withConfig({
