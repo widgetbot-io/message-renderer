@@ -85,6 +85,175 @@ Basic.args = {
   ],
 };
 
+export const Reactions = Template.bind({});
+Reactions.args = {
+  messages: [
+    {
+      "id": "1119332977688715364",
+      "type": 0,
+      "content": "Congrats to Town Hall for winning the DDevs vs. Town Hall Birthday Activities Tournament! We'll get them next time, DDevs! GGWP everyone. <:ddev_professional:1091569367340286032> \n\n*Shoutout to the Tourney Bot team for helping us run the tournament!* <:Poker_Heart:1037861714722562139> \n\nWe hope you enjoyed celebrating <:sparkle_blurple:1085312148818903150>**Discord's 8th Birthday**<:sparkle_blurple:1085312148818903150> with us! <:Birthday_MallowCelebrate:1107724424351846430>",
+      "channel_id": "613427779723067411",
+      "author": {
+        "id": "1025477315054030931",
+        "username": "emilieatwork",
+        "global_name": "emilie",
+        "avatar": "62be4e79009cf707711cb62a6c1365fb",
+        "discriminator": "0",
+        "public_flags": 4194561,
+        "avatar_decoration": "v3_a_898d52a79941712fd34b9218e0d80837"
+      },
+      "attachments": [],
+      "embeds": [],
+      "mentions": [],
+      "mention_roles": [],
+      "pinned": false,
+      "mention_everyone": false,
+      "tts": false,
+      "timestamp": "2023-06-16T18:29:38.082000+00:00",
+      "edited_timestamp": null,
+      "flags": 0,
+      "components": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "1107789264135139509",
+            "name": "controller"
+          },
+          "count": 55,
+          "count_details": {
+            "burst": 0,
+            "normal": 55
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1107789265645080716",
+            "name": "letter"
+          },
+          "count": 38,
+          "count_details": {
+            "burst": 0,
+            "normal": 38
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1091569367340286032",
+            "name": "ddev_professional"
+          },
+          "count": 42,
+          "count_details": {
+            "burst": 0,
+            "normal": 42
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1037861714722562139",
+            "name": "Poker_Heart"
+          },
+          "count": 36,
+          "count_details": {
+            "burst": 0,
+            "normal": 36
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1107724424351846430",
+            "name": "Birthday_MallowCelebrate"
+          },
+          "count": 37,
+          "count_details": {
+            "burst": 0,
+            "normal": 37
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1107724343397580900",
+            "name": "Birthday_CakeSmash"
+          },
+          "count": 34,
+          "count_details": {
+            "burst": 0,
+            "normal": 34
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1106993761948553287",
+            "name": "Birthday_Cake"
+          },
+          "count": 36,
+          "count_details": {
+            "burst": 0,
+            "normal": 36
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1107724391715979294",
+            "name": "Birthday_WumpusCake"
+          },
+          "count": 32,
+          "count_details": {
+            "burst": 0,
+            "normal": 32
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        },
+        {
+          "emoji": {
+            "id": "1106993985525923951",
+            "name": "Birthday_Star"
+          },
+          "count": 32,
+          "count_details": {
+            "burst": 0,
+            "normal": 32
+          },
+          "burst_colors": [],
+          "me_burst": false,
+          "me": false,
+          "burst_count": 0
+        }
+      ]
+    },
+  ],
+};
+
 export const Mentions = Template.bind({});
 Mentions.args = {
   messages: [
