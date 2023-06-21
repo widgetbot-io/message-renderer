@@ -10,6 +10,7 @@ import { Timestamp } from "./elements/Timestamp";
 import React from "react";
 import { InlineCode } from "./elements/code/style";
 import { APIMessage, APIUser } from "discord-api-types/v10";
+import { findDefaultEmojiByUnicode } from "../../emojiData";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {
   const parser = SimpleMarkdown.parserFor(rules);
@@ -146,6 +147,19 @@ export const parseEmbedTitle = parserFor(
   )
 );
 
+function handleUnicodeEmojis(content: string): string {
+  return content.replace(
+    /(\p{RI}\p{RI}|\p{Emoji}(?:\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(?:\u{200D}(?:\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*)/gu,
+    (match) => {
+      const emojiResult = findDefaultEmojiByUnicode(match);
+
+      if (!emojiResult) return match;
+
+      return `:${emojiResult.emoji}:`;
+    }
+  );
+}
+
 function Markdown({
   children: content,
   mentions,
@@ -155,7 +169,11 @@ function Markdown({
   mentions?: APIMessage["mentions"];
   users?: Map<string, APIUser>;
 }) {
-  return content ? parse(content, undefined, { mentions, users }) : null;
+  const unicodeEmojisHandled = handleUnicodeEmojis(content);
+
+  return content
+    ? parse(unicodeEmojisHandled, undefined, { mentions, users })
+    : null;
 }
 
 export function LinkMarkdown({
@@ -167,8 +185,10 @@ export function LinkMarkdown({
   mentions?: APIMessage["mentions"];
   users?: Map<string, APIUser>;
 }) {
+  const unicodeEmojisHandled = handleUnicodeEmojis(content);
+
   return content
-    ? parseAllowLinks(content, undefined, { mentions, users })
+    ? parseAllowLinks(unicodeEmojisHandled, undefined, { mentions, users })
     : null;
 }
 

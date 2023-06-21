@@ -51,26 +51,12 @@ const baseRules = {
   text,
   defaultEmoji: {
     order: defaultRules.text.order,
-    match: (source) => /^:([^\s:]+?):/gu.exec(source),
+    match: (source) => /^(?!<):([^\s:]+?):(?![0-9]+>)/gu.exec(source),
     parse: (match) => ({
       content: match[1],
     }),
     react: ({ content }, recurseOutput, state) => (
       <Fragment key={state.key}>
-        <Emoji emojiName={content} />
-      </Fragment>
-    ),
-  },
-  emojiUnicode: {
-    order: defaultRules.text.order,
-    match: (source) => /^(\s*)(\p{Extended_Pictographic})/gu.exec(source),
-    parse: (match) => ({
-      spacing: match[1],
-      content: match[2],
-    }),
-    react: ({ spacing, content }, recurseOutput, state) => (
-      <Fragment key={state.key}>
-        {spacing}
         <Emoji emojiName={content} />
       </Fragment>
     ),
