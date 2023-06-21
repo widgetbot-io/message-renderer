@@ -33,6 +33,14 @@ const stitches = createStitches({
       danger: "#ed4245",
       mentionBackground: "rgba(88, 101, 242, 0.298)",
       mentionForeground: "#c9cdfb",
+      buttonPrimaryBackground: "#5865f2",
+      buttonPrimaryHoverBackground: "#4752c4",
+      buttonSecondaryBackground: "#4e5058",
+      buttonSecondaryHoverBackground: "#6d6f78",
+      buttonDangerBackground: "#da373c",
+      buttonDangerHoverBackground: "#a12828",
+      buttonSuccessBackground: "#248046",
+      buttonSuccessHoverBackground: "#1a6334",
     },
     fonts: {
       main: "Open Sans, sans-serif",
@@ -63,6 +71,6 @@ const stitches = createStitches({
   },
 });
 
-export const commonComponentId = "wb";
+export const commonComponentId = undefined;
 
 export const { styled, theme, globalCss, keyframes, css } = stitches;

@@ -245,6 +245,269 @@ Embed.args = {
   ],
 };
 
+export const TwitterEmbed = Template.bind({});
+TwitterEmbed.args = {
+  messages: [
+    {
+      id: "1012082119129968660",
+      type: 0,
+      content: "https://twitter.com/advaithj1/status/1562328510605103104",
+      channel_id: "993210446096105522",
+      author: {
+        bot: true,
+        id: "993585352776364044",
+        username: "JohnyTheCarrot",
+        avatar: "eb7fd2f3911bd334234bca6bfc52f63d",
+        discriminator: "0000",
+      },
+      attachments: [],
+      embeds: [
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          description: "Profile Themes",
+          color: 1942002,
+          timestamp: "2022-08-24T06:38:38.245000+00:00",
+          fields: [
+            {
+              name: "Likes",
+              value: "105",
+              inline: true,
+            },
+          ],
+          author: {
+            name: "advaith (@advaithj1)",
+            url: "https://twitter.com/advaithj1",
+            icon_url:
+              "https://pbs.twimg.com/profile_images/1488212832952860672/SchxNzvk_400x400.png",
+            proxy_icon_url:
+              "https://images-ext-2.discordapp.net/external/UfNOTOu9QvauHStfQYflM5eWeQCIddYVqxdbJ2hu3Z8/https/pbs.twimg.com/profile_images/1488212832952860672/SchxNzvk_400x400.png",
+          },
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BI4KVsAE44S6.jpg",
+            proxy_url:
+              "https://images-ext-1.discordapp.net/external/PVgGmJIfGcm5i_j25Lys24gOcJRu85rDjutVg3k55hs/https/pbs.twimg.com/media/Fa6BI4KVsAE44S6.jpg",
+            width: 1200,
+            height: 803,
+          },
+          footer: {
+            text: "Twitter",
+            icon_url:
+              "https://abs.twimg.com/icons/apple-touch-icon-192x192.png",
+            proxy_icon_url:
+              "https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png",
+          },
+        },
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BLnjVUAEF6pJ.jpg",
+            proxy_url:
+              "https://images-ext-2.discordapp.net/external/8U7wHZr0BHTpFBRny8S_FCR32WymkS9XbYYtz0eijMQ/https/pbs.twimg.com/media/Fa6BLnjVUAEF6pJ.jpg",
+            width: 1200,
+            height: 783,
+          },
+        },
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BORPUYAAf9_R.jpg",
+            proxy_url:
+              "https://images-ext-2.discordapp.net/external/wNNQNSNIWmMlV0y6tlxNLEM6khXiv3NvVSmgOnnbSW0/https/pbs.twimg.com/media/Fa6BORPUYAAf9_R.jpg",
+            width: 1199,
+            height: 791,
+          },
+        },
+        {
+          type: "rich",
+          url: "https://twitter.com/advaithj1/status/1562328510605103104",
+          image: {
+            url: "https://pbs.twimg.com/media/Fa6BRZtUYAAgwnW.jpg",
+            proxy_url:
+              "https://images-ext-2.discordapp.net/external/kA2KdPReJxwMtreQlUIPrQTuwVDWk0CK08cYiJmzNH8/https/pbs.twimg.com/media/Fa6BRZtUYAAgwnW.jpg",
+            width: 1200,
+            height: 790,
+          },
+        },
+      ],
+      mentions: [],
+      mention_roles: [],
+      pinned: true,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2022-08-24T19:33:00.777000+00:00",
+      edited_timestamp: null,
+      flags: 0,
+      components: [],
+      application_id: "565479321247154186",
+      webhook_id: "993585352776364044",
+      hit: true,
+    },
+  ],
+};
+
+export const MultipleEmbeds = Template.bind({});
+MultipleEmbeds.args = {
+  messages: [
+    {
+      id: "1042934458803822693",
+      type: 0,
+      content: "",
+      channel_id: "838078338299461632",
+      author: {
+        id: "235088799074484224",
+        username: "Rythm",
+        global_name: null,
+        avatar: "9b29bfc497a70b6cc85bb2087936f8fd",
+        discriminator: "3722",
+        public_flags: 65536,
+        bot: true,
+        avatar_decoration: null,
+      },
+      attachments: [],
+      embeds: [
+        {
+          type: "rich",
+          title: "Rythm Newsletter #1 - The Return :rocket:",
+          description:
+            "🎙️ *tap tap*... Is this thing on?\n\nFirst off: This is an official newsletter from the Rythm team! If you’re receiving this, you subscribed to our newsletter a while back. Thanks for that! \n\nWe appreciate your support as this newsletter is the best way to stay up to date with what we’re doing (as well as our [Discord Server](https://links.rythm.fm/discord-1?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)).",
+          color: 15780562,
+        },
+        {
+          type: "rich",
+          title: "We're coming back :tada:",
+          description:
+            "That’s right baby, this newsletter marks the beginning of the comeback of Rythm!",
+          color: 13865104,
+          fields: [
+            {
+              name: "Our mission",
+              value:
+                "Over the last year, we've been working incredibly hard with one goal in mind: connecting people through music. \n\nFrom late-night gaming sessions, to studying with friends, or even just something as simple as spicing up a normal hangout... Rythm existed to bring the experience of music to all of your gatherings. Now we're bringing that back, with a vision that will revolutionize how we listen to music.",
+              inline: false,
+            },
+            {
+              name: "Join us  <:DiscordLight:1042615683017605212>",
+              value:
+                "As we gear up to our big launch over the next couple of months, we've got a ton of events scheduled for you to join in on. We’re doing a ton of cool stuff, like showing off what it’s like to work at Rythm, giving you sneak peeks into what we've been working on, hosting AMAs with our team, doing some game nights with all of you, hosting giveaways, and more!\n\n:link: **[Cick here to join our Discord](https://links.rythm.fm/discord-2?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)**",
+              inline: false,
+            },
+            {
+              name: "Our beta program <:verified:1042615858217893908>",
+              value:
+                "We're kicking off our beta early next year, and are looking for people to help us test the brand new Rythm! We're currently taking in applications and will slowly open things up as we get closer to our launch. [Click here to sign up!](https://links.rythm.fm/beta-signup?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)",
+              inline: false,
+            },
+            {
+              name: "Sneak Peek <:eyess:1042616171054235749>",
+              value:
+                "Here's a sneak peek into the brand new Rythm, we'll be posting more of these on our [Discord](https://links.rythm.fm/discord-3?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19) <:NepSmug:1042616153794678804>",
+              inline: false,
+            },
+          ],
+          image: {
+            url: "https://cdn.discordapp.com/attachments/268445232478027776/1041517082816286850/teaser_screenshot.png",
+            proxy_url:
+              "https://media.discordapp.net/attachments/268445232478027776/1041517082816286850/teaser_screenshot.png",
+            width: 1676,
+            height: 492,
+          },
+        },
+        {
+          type: "rich",
+          title: "A brand new way to discover music :musical_note:",
+          description:
+            "We've recently launched a new project: **a community themed around music discovery.**\n\nAs music lovers, we're constantly on the lookout for both new music and ways to find new music. We wanted to create a place where everyone can find something to listen to.\n\nIn our community, you can find new music on a daily basis from all genres, curated by our incredible discovery team. This includes new hits, underground bangers, and much more. We'll also be running a lot of fun events you can participate in such as guess the song, club battles, and artist AMAs. \n\n:link: **[Click here to join our music discovery community](https://links.rythm.fm/discord-discovery-community?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)**",
+          color: 15301499,
+        },
+        {
+          type: "rich",
+          title: "More about us :wave:",
+          color: 14639487,
+          fields: [
+            {
+              name: "Once a hobby, now a full-time team",
+              value:
+                "That’s right, there’s a full-time team behind the bot that you know and love. We’ve grown a lot in the past year! We look forward to letting some of our newest additions take the spotlight in the coming months.",
+              inline: false,
+            },
+            {
+              name: "What's next?",
+              value:
+                "We hope this first newsletter gets you all excited for what's to come! Thanks a bunch for subscribing. We've got a **ton** of stuff we can't wait to share, so tune in for the next newsletter that'll go out around New Year's Day!",
+              inline: false,
+            },
+            {
+              name: "Thank you everyone for sticking with us, from the entire team here at Rythm :heart:",
+              value: "​",
+              inline: false,
+            },
+          ],
+          image: {
+            url: "https://cdn.discordapp.com/attachments/989565356957909022/1042513768699154543/team-gif.gif",
+            proxy_url:
+              "https://media.discordapp.net/attachments/989565356957909022/1042513768699154543/team-gif.gif",
+            width: 660,
+            height: 410,
+          },
+        },
+      ],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2022-11-17T22:49:11.764000+00:00",
+      edited_timestamp: null,
+      flags: 0,
+      components: [
+        {
+          type: 1,
+          components: [
+            {
+              type: 2,
+              style: 5,
+              label: "Join our Discord",
+              url: "https://links.rythm.fm/discord-4?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19",
+            },
+            {
+              type: 2,
+              style: 5,
+              label: "Signup to Beta",
+              url: "https://links.rythm.fm/beta-signup?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19",
+            },
+            {
+              type: 2,
+              custom_id: "newsletter-unsubscribe",
+              style: 2,
+              label: "Unsubscribe 😔",
+            },
+          ],
+        },
+      ],
+      reactions: [
+        {
+          emoji: {
+            id: null,
+            name: "❤️",
+          },
+          count: 1,
+          count_details: {
+            burst: 0,
+            normal: 1,
+          },
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+      ],
+    },
+  ],
+};
+
 export const YouTubeEmbed = Template.bind({});
 YouTubeEmbed.args = {
   messages: [

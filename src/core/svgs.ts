@@ -40,6 +40,7 @@ export type Svg =
   | "IconVoiceChannel"
   | "IconStageChannel"
   | "IconForumChannel"
+  | "IconLinkExternal"
   | "MiscDiscordImageFailure"
   | `Custom${string}`;
 
@@ -80,6 +81,7 @@ const defaultSvgUrls: Record<Svg, string> = {
   IconStageChannel: SvgMissingAsset,
   IconForumChannel: SvgMissingAsset,
   MiscDiscordImageFailure: SvgMissingAsset,
+  IconLinkExternal: SvgMissingAsset,
 };
 
 export function getSvgUrl(svg: Svg): string {

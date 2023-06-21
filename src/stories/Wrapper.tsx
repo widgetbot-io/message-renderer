@@ -35,6 +35,7 @@ import SvgIconPlay from "../assets/storybookOnlyAssets/icon-play.svg";
 import SvgIconTextChannel from "../assets/storybookOnlyAssets/icon-text-channel.svg";
 import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channel.svg";
 import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
+import SvgIconLinkExternal from "../assets/storybookOnlyAssets/icon-link-external.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
 
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
@@ -84,6 +85,7 @@ const svgUrls = {
   IconTextChannel: SvgIconTextChannel,
   IconVoiceChannel: SvgIconVoiceChannel,
   IconStageChannel: SvgIconStageChannel,
+  IconLinkExternal: SvgIconLinkExternal,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
 };
 
@@ -173,6 +175,28 @@ function resolveMember(id: Snowflake): APIGuildMember {
         avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
         discriminator: "0",
         public_flags: 4604871,
+      },
+      mute: false,
+      deaf: false,
+    };
+  }
+
+  if (id === "53908232506183680") {
+    return {
+      avatar: null,
+      communication_disabled_until: null,
+      flags: 0,
+      joined_at: "2019-08-20T17:34:31.608000+00:00",
+      nick: null,
+      pending: false,
+      premium_since: null,
+      roles: ["613426354628722689"],
+      user: {
+        username: "Mason",
+        public_flags: 4325445,
+        id: "53908232506183680",
+        discriminator: "0",
+        avatar: "a_d5efa99b3eeaa7dd43acca82f5692432",
       },
       mute: false,
       deaf: false,
