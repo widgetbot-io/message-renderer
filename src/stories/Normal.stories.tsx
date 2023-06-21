@@ -122,8 +122,8 @@ CodeBlock.args = {
       channel_id: "993105555042357268",
       author: {
         id: "132819036282159104",
-        username: "Mr. Quine",
-        display_name: null,
+        username: "mrquine",
+        global_name: "Mr. Quine",
         avatar: "3a30ffeeeb354950804d77ded94162d3",
         avatar_decoration: null,
         discriminator: "0001",
@@ -158,7 +158,7 @@ Embed.args = {
       author: {
         id: "398690824721924107",
         username: "AdvaithBot",
-        display_name: null,
+        global_name: null,
         avatar: "aa710e791ef95cec9bf23350cabfcd1f",
         avatar_decoration: null,
         discriminator: "2249",
@@ -253,13 +253,7 @@ TwitterEmbed.args = {
       type: 0,
       content: "https://twitter.com/advaithj1/status/1562328510605103104",
       channel_id: "993210446096105522",
-      author: {
-        bot: true,
-        id: "993585352776364044",
-        username: "JohnyTheCarrot",
-        avatar: "eb7fd2f3911bd334234bca6bfc52f63d",
-        discriminator: "0000",
-      },
+      author: testUser,
       attachments: [],
       embeds: [
         {
@@ -907,10 +901,9 @@ CodeBlockReply.args = {
       channel_id: "993105555042357268",
       author: {
         id: "132819036282159104",
-        username: "JohnyTheCarrot",
-        display_name: null,
+        username: "johnythecarrot",
+        global_name: "JohnyTheCarrot",
         avatar: "3a30ffeeeb354950804d77ded94162d3",
-        avatar_decoration: null,
         discriminator: "0001",
         public_flags: 4457220,
       },
@@ -939,8 +932,8 @@ CodeBlockReply.args = {
         channel_id: "993105555042357268",
         author: {
           id: "132819036282159104",
-          username: "JohnyTheCarrot",
-          display_name: null,
+          username: "johnythecarrot",
+          global_name: "JohnyTheCarrot",
           avatar: "3a30ffeeeb354950804d77ded94162d3",
           avatar_decoration: null,
           discriminator: "0001",

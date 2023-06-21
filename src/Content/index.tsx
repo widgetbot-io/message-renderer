@@ -12,6 +12,7 @@ import Embed from "./Embed";
 import Reactions from "../Message/Reactions";
 import ThreadButton from "./Thread/ThreadButton";
 import Components from "../Message/Components";
+import getDisplayName from "../utils/getDisplayName";
 
 interface EditedProps {
   editedAt: string;
@@ -168,7 +169,7 @@ function Content(props: ContentProps) {
             />
           </g>
         </Styles.TypingIndicator>
-        {props.message.author.username} is thinking...
+        {getDisplayName(props.message.author)} is thinking...
       </Styles.DeferredContent>
     );
   }

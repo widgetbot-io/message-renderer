@@ -62,6 +62,7 @@ import type {
 import { ChannelType } from "discord-api-types/v10";
 import { MessageButtonListOption } from "../Message/MessageContainer";
 import { globalCss, styled, theme } from "../Stitches/stitches.config";
+import getDisplayName from "../utils/getDisplayName";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -185,6 +186,7 @@ function resolveMember(id: Snowflake): APIGuildMember {
       user: {
         id: "933123872641921044",
         username: "therealjethro",
+        global_name: "Jeff",
         avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
         discriminator: "0",
         public_flags: 4604871,
@@ -205,7 +207,8 @@ function resolveMember(id: Snowflake): APIGuildMember {
       premium_since: null,
       roles: ["613426354628722689"],
       user: {
-        username: "Mason",
+        username: "mason",
+        global_name: "Mason",
         public_flags: 4325445,
         id: "53908232506183680",
         discriminator: "0",
@@ -224,7 +227,8 @@ function resolveUser(userId: Snowflake): APIUser | null {
   if (userId === "132819036282159104") {
     return {
       id: "132819036282159104",
-      username: "JohnyTheCarrot",
+      username: "johnythecarrot",
+      global_name: "JohnyTheCarrot",
       avatar: "3a30ffeeeb354950804d77ded94162d3",
       discriminator: "0001",
       public_flags: 4457220,
@@ -322,7 +326,7 @@ function Wrapper(Story) {
         alert(`See Thread "${thread.name}" clicked on message ${messageId}`)
       }
       userMentionOnClick={(user) =>
-        alert(`User "${user.username}" mention clicked!`)
+        alert(`User "${getDisplayName(user)}" mention clicked!`)
       }
       roleMentionOnClick={(role) =>
         alert(`Role "${role.name}" mention clicked!`)

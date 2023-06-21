@@ -32,9 +32,8 @@ Add.args = {
         {
           id: "543225764036870167",
           username: "WidgetBot",
-          display_name: null,
+          global_name: null,
           avatar: "0459349547dc5b988b0ad1cd8583a05f",
-          avatar_decoration: null,
           discriminator: "0142",
           public_flags: 65536,
           bot: true,
@@ -56,9 +55,8 @@ Remove.args = {
         {
           id: "543225764036870167",
           username: "WidgetBot",
-          display_name: null,
+          global_name: null,
           avatar: "0459349547dc5b988b0ad1cd8583a05f",
-          avatar_decoration: null,
           discriminator: "0142",
           public_flags: 65536,
           bot: true,

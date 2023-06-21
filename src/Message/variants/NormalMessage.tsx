@@ -13,6 +13,7 @@ import {
   MessageType,
 } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import getDisplayName from "../../utils/getDisplayName";
 
 interface ReplyInfoProps {
   referencedMessage: APIMessage["referenced_message"];
@@ -54,19 +55,19 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
         ? props.interaction.user
         : props.referencedMessage.author;
 
-    if (!resolveChannel) return user.username;
+    if (!resolveChannel) return getDisplayName(user);
 
     const channel = resolveChannel(props.referencedMessage.channel_id);
-    if (!channel || !("guild_id" in channel)) return user.username;
+    if (!channel || !("guild_id" in channel)) return getDisplayName(user);
 
     const guildMember = resolveMember(
       props.referencedMessage.author.id,
       channel.guild_id
     );
 
-    if (!guildMember) return user.username;
+    if (!guildMember) return getDisplayName(user);
 
-    return guildMember.nick ?? guildMember.user.username;
+    return guildMember.nick ?? getDisplayName(guildMember.user);
   }, [props.referencedMessage, props.interaction, resolveChannel]);
 
   const miniUserNameColorHex = useMemo(() => {

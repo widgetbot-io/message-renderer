@@ -3,6 +3,7 @@ import * as React from "react";
 import { Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
+import getDisplayName from "../../../../utils/getDisplayName";
 
 interface UserMentionProps {
   userId: Snowflake;
@@ -13,7 +14,7 @@ function UserMention({ userId }: UserMentionProps) {
 
   // todo: resolve current channel to resolve member
   const user = resolveUser(userId);
-  const text = user?.username ?? "Unknown User";
+  const text = user ? getDisplayName(user) : "Unknown User";
 
   return (
     <Styles.Mention

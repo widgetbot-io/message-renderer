@@ -20,7 +20,7 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> has
+        <MessageAuthor author={props.author} onlyShowUsername /> has
         added{" "}
         <Styles.SystemMessageLink>{props.content}</Styles.SystemMessageLink> to
         this channel. It{"'"}s most important updates will show up here.

@@ -20,7 +20,7 @@ function GuildBoost(props: GuildBoostProps) {
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> just
+        <MessageAuthor author={props.author} onlyShowUsername /> just
         boosted the server
         {props.content !== "" && (
           <>

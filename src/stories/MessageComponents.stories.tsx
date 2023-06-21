@@ -82,7 +82,8 @@ Buttons.args = {
       ],
       channel_id: "697138785317814292",
       author: {
-        username: "Mason",
+        username: "mason",
+        global_name: "Mason",
         public_flags: 4325445,
         id: "53908232506183680",
         discriminator: "0",

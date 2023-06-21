@@ -25,7 +25,7 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
         svg="IconPin"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> pinned a
+        <MessageAuthor author={props.author} onlyShowUsername /> pinned a
         message to this channel. See all{" "}
         <Styles.SystemMessageLink onClick={openPinnedMessage}>
           pinned messages

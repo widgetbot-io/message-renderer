@@ -6,6 +6,7 @@ import getAvatar from "../utils/getAvatar";
 import * as Styles from "./style/author";
 import type { APIGuildMember, APIUser } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
+import getDisplayName from "../utils/getDisplayName";
 
 interface MessageAuthorProps {
   author: APIUser | APIGuildMember;
@@ -26,8 +27,8 @@ function MessageAuthor({
   const isGuildMember = "joined_at" in author;
   const user = isGuildMember ? author.user : author;
   const displayName = isGuildMember
-    ? author.nick ?? author.user.username
-    : author.username;
+    ? author.nick ?? getDisplayName(author.user)
+    : getDisplayName(author);
 
   const dominantRoleIconRole = useMemo(() => {
     if (!isGuildMember || !resolveRole) return null;
@@ -63,7 +64,7 @@ function MessageAuthor({
     return (
       <Styles.MessageAuthor>
         <Styles.Username style={{ color: dominantRoleColor }}>
-          {user.username}
+          {displayName}
         </Styles.Username>
       </Styles.MessageAuthor>
     );

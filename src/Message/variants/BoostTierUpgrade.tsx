@@ -35,7 +35,7 @@ function BoostTierUpgrade(props: BoostTierUpgradeProps) {
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername={true} /> just
+        <MessageAuthor author={props.author} onlyShowUsername /> just
         boosted the server <strong>{props.content}</strong> time
         {props.content === "1" ? "" : "s"}! guildNameHere has achieved{" "}
         <strong>Level {newLevel}!</strong>
