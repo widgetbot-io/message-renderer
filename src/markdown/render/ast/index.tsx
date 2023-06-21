@@ -50,10 +50,22 @@ const baseRules = {
   },
   customEmoji,
   text,
+  defaultEmoji: {
+    order: defaultRules.text.order,
+    match: (source) => /^:([^\s:]+?):/gu.exec(source),
+    parse: (match) => ({
+      content: match[1],
+    }),
+    react: ({ content }, recurseOutput, state) => (
+      <Fragment key={state.key}>
+        <Emoji emojiName={content} />
+      </Fragment>
+    ),
+  },
   emojiUnicode: {
     order: defaultRules.text.order,
     match: (source) =>
-      /^(\s*)(:([^\s:]+?):|\p{Extended_Pictographic})/gu.exec(source),
+      /^(\s*)(\p{Extended_Pictographic})/gu.exec(source),
     parse: (match) => ({
       spacing: match[1],
       content: match[2],
