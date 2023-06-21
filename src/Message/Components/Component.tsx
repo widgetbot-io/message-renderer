@@ -1,4 +1,5 @@
 import {
+  APIMessage,
   APIMessageActionRowComponent,
   ComponentType,
 } from "discord-api-types/v10";
@@ -7,12 +8,13 @@ import React from "react";
 
 interface ComponentProps {
   component: APIMessageActionRowComponent;
+  message: APIMessage;
 }
 
-function Component({ component }: ComponentProps) {
+function Component({ component, message }: ComponentProps) {
   switch (component.type) {
     case ComponentType.Button:
-      return <ButtonComponent button={component} />;
+      return <ButtonComponent button={component} message={message} />;
     default:
       return null;
   }

@@ -1,12 +1,14 @@
 import {
   APIButtonComponentWithCustomId,
   APIButtonComponentWithURL,
+  APIMessage,
 } from "discord-api-types/v10";
 import * as Styles from "./style";
 import React, { ComponentProps } from "react";
 import SvgFromUrl from "../../SvgFromUrl";
 import { ButtonStyle } from "discord-api-types/v10";
 import Emoji from "../../Emoji";
+import { useConfig } from "../../core/ConfigContext";
 
 const buttonStyleMap: Record<
   ButtonStyle,
@@ -21,10 +23,11 @@ const buttonStyleMap: Record<
 
 interface ButtonComponentProps {
   button: APIButtonComponentWithCustomId | APIButtonComponentWithURL;
+  message: APIMessage;
 }
 
-function ButtonComponent({ button }: ButtonComponentProps) {
-  console.log(button.style, buttonStyleMap[button.style]);
+function ButtonComponent({ button, message }: ButtonComponentProps) {
+  const { messageComponentButtonOnClick } = useConfig();
 
   if ("url" in button) {
     return (
@@ -51,7 +54,10 @@ function ButtonComponent({ button }: ButtonComponentProps) {
   }
 
   return (
-    <Styles.ButtonComponent buttonStyle={buttonStyleMap[button.style]}>
+    <Styles.ButtonComponent
+      buttonStyle={buttonStyleMap[button.style]}
+      onClick={() => messageComponentButtonOnClick?.(message, button.custom_id)}
+    >
       {button.emoji && (
         <Emoji
           emojiName={button.emoji.name}

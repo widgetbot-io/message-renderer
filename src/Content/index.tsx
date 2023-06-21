@@ -237,7 +237,10 @@ function Content(props: ContentProps) {
             <Reactions reactions={props.message.reactions} />
           )}
           {props.message.components?.length > 0 && (
-            <Components components={props.message.components} />
+            <Components
+              components={props.message.components}
+              message={props.message}
+            />
           )}
           {!props.noThreadButton && props.message.thread && (
             <ThreadButton

@@ -244,6 +244,11 @@ function Wrapper(Story) {
       channelMentionOnClick={(channel) =>
         alert(`Channel "${channel.name}" mention clicked!`)
       }
+      messageComponentButtonOnClick={(message, customId) => {
+        alert(
+          `Button by custom id "${customId}" pressed on message ${message.id}!`
+        );
+      }}
     >
       {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
     </MessageRendererProvider>

@@ -29,6 +29,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   userMentionOnClick?(user: APIUser): void;
   roleMentionOnClick?(role: APIRole): void;
   channelMentionOnClick?(channel: APIChannel): void;
+  messageComponentButtonOnClick?(message: APIMessage, customId: string): void;
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({

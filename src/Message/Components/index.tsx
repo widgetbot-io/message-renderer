@@ -5,13 +5,14 @@ import * as Styles from "./style";
 
 interface ComponentsProps {
   components: APIMessage["components"];
+  message: APIMessage;
 }
 
-function Components({ components }: ComponentsProps) {
+function Components({ components, message }: ComponentsProps) {
   return (
     <Styles.Components>
       {components.map((actionRow, index) => (
-        <ActionRow actionRow={actionRow} key={index} />
+        <ActionRow actionRow={actionRow} message={message} key={index} />
       ))}
     </Styles.Components>
   );
