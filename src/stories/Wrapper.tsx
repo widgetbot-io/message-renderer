@@ -38,6 +38,18 @@ import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channe
 import SvgIconLinkExternal from "../assets/storybookOnlyAssets/icon-link-external.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
 
+import ggSansNormal400 from "../assets/storybookOnlyAssets/gg-sans-normal-400.woff2";
+import ggSansNormal500 from "../assets/storybookOnlyAssets/gg-sans-normal-500.woff2";
+import ggSansNormal600 from "../assets/storybookOnlyAssets/gg-sans-normal-600.woff2";
+import ggSansNormal700 from "../assets/storybookOnlyAssets/gg-sans-normal-700.woff2";
+import ggSansNormal800 from "../assets/storybookOnlyAssets/gg-sans-normal-800.woff2";
+
+import ggSansItalic400 from "../assets/storybookOnlyAssets/gg-sans-italic-400.woff2";
+import ggSansItalic500 from "../assets/storybookOnlyAssets/gg-sans-italic-500.woff2";
+import ggSansItalic600 from "../assets/storybookOnlyAssets/gg-sans-italic-600.woff2";
+import ggSansItalic700 from "../assets/storybookOnlyAssets/gg-sans-italic-700.woff2";
+import ggSansItalic800 from "../assets/storybookOnlyAssets/gg-sans-italic-800.woff2";
+
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
 import type {
   APIChannel,
@@ -49,6 +61,7 @@ import type {
 } from "discord-api-types/v10";
 import { ChannelType } from "discord-api-types/v10";
 import { MessageButtonListOption } from "../Message/MessageContainer";
+import { globalCss, styled, theme } from "../Stitches/stitches.config";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -222,7 +235,80 @@ function resolveUser(userId: Snowflake): APIUser | null {
   return null;
 }
 
+const globalStyles = globalCss({
+  "@font-face": [
+    {
+      fontFamily: "gg sans",
+      fontStyle: "normal",
+      fontWeight: 400,
+      src: `url(${ggSansNormal400}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "normal",
+      fontWeight: 500,
+      src: `url(${ggSansNormal500}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "normal",
+      fontWeight: 600,
+      src: `url(${ggSansNormal600}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "normal",
+      fontWeight: 700,
+      src: `url(${ggSansNormal700}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "normal",
+      fontWeight: 800,
+      src: `url(${ggSansNormal800}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "italic",
+      fontWeight: 400,
+      src: `url(${ggSansItalic400}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "italic",
+      fontWeight: 500,
+      src: `url(${ggSansItalic500}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "italic",
+      fontWeight: 600,
+      src: `url(${ggSansItalic600}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "italic",
+      fontWeight: 700,
+      src: `url(${ggSansItalic700}) format('woff2')`,
+    },
+    {
+      fontFamily: "gg sans",
+      fontStyle: "italic",
+      fontWeight: 800,
+      src: `url(${ggSansItalic800}) format('woff2')`,
+    },
+  ],
+});
+
+const StorybookStyles = styled("div", {
+  "--fonts-main":
+    '"gg sans","Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif',
+  fontFamily: theme.fonts.main,
+});
+
 function Wrapper(Story) {
+  globalStyles();
+
   return (
     <MessageRendererProvider
       svgUrls={svgUrls}
@@ -250,7 +336,11 @@ function Wrapper(Story) {
         );
       }}
     >
-      {({ themeClass }) => <div className={themeClass}>{Story()}</div>}
+      {({ themeClass }) => (
+        <div className={themeClass}>
+          <StorybookStyles>{Story()}</StorybookStyles>
+        </div>
+      )}
     </MessageRendererProvider>
   );
 }

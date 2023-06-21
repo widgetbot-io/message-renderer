@@ -125,7 +125,7 @@ function MessageRendererProvider<TConfig extends PartialSvgConfig>({
     <ConfigContext.Provider
       value={config as unknown as Config<PartialSvgConfig>}
     >
-      {children({ themeClass: `${theme} ${extraCss}` })}
+      {children({ themeClass: `${theme} ${extraCss} ${config.themeOverrideClassName ?? ''}` })}
     </ConfigContext.Provider>
   );
 }

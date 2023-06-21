@@ -31,6 +31,7 @@ export const ButtonComponent = styled.withConfig({
   gap: theme.space.large,
   transition: "background-color .17s ease",
   textDecoration: "none",
+  fontFamily: theme.fonts.main,
 
   variants: {
     buttonStyle: {

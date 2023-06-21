@@ -31,7 +31,7 @@ export const Avatar = styled.withConfig({
   position: "absolute",
   left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
   transform: "translateX(-50%)",
-  marginTop: 1,
+  marginTop: "calc(4px - .125rem)",
   borderRadius: "100%",
   width: 40,
   height: 40,

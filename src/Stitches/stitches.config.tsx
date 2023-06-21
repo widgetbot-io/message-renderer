@@ -71,6 +71,6 @@ const stitches = createStitches({
   },
 });
 
-export const commonComponentId = undefined;
+export const commonComponentId = 'wb';
 
 export const { styled, theme, globalCss, keyframes, css } = stitches;

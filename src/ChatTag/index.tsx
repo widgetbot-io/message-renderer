@@ -4,7 +4,10 @@ import * as Styles from "./style";
 import { APIUser } from "discord-api-types/v10";
 
 const verified = (
-  <Tooltip placement="top" overlay="Verified Bot">
+  <Tooltip
+    placement="top"
+    overlay="Verified Bot"
+  >
     <Styles.VerifiedBot
       aria-label="Verified Bot"
       aria-hidden="false"
