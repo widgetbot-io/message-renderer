@@ -24,7 +24,7 @@ function Embed({ embed, images }: EmbedProps) {
     return <VideoAttachment attachmentOrEmbed={embed} />;
 
   const embedColor =
-    embed.color !== 0 && embed.color !== null
+    embed.color !== 0 && embed.color !== undefined
       ? numberToRgb(embed.color)
       : undefined;
 
@@ -72,7 +72,7 @@ function Embed({ embed, images }: EmbedProps) {
             </Styles.Author>
           )}
           {embed.title &&
-            (embed.url !== null ? (
+            (embed.url !== undefined ? (
               <Styles.Title as="a" link href={embed.url} target="_blank">
                 {parseEmbedTitle(embed.title)}
               </Styles.Title>

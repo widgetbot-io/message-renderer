@@ -101,10 +101,17 @@ function Content(props: ContentProps) {
   }, [props.message.attachments, props.message.stickers, props.isReplyContent]);
 
   const embedImages = useMemo(() => {
-    if (!props.message.embeds || props.message.embeds.length <= 1) return [];
+    if (
+      !props.message.embeds ||
+      props.message.embeds.length <= 1 ||
+      props.message.embeds[0].url === undefined
+    )
+      return [];
 
     if (
-      !props.message.embeds.every((e) => props.message.embeds[0].url === e.url)
+      !props.message.embeds.every(
+        (e) => e.url !== undefined && props.message.embeds[0].url === e.url
+      )
     )
       return [];
 
@@ -213,7 +220,7 @@ function Content(props: ContentProps) {
           {props.message.sticker_items?.map((sticker) => (
             <Sticker key={sticker.id} sticker={sticker} />
           ))}
-          {props.message.embeds !== null && embedImages.length > 0 ? (
+          {embedImages.length > 0 ? (
             <Embed
               key={props.message.embeds[0].url}
               embed={props.message.embeds[0]}
