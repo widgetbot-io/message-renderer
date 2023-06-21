@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import type {
   APIChannel,
+  APIGuild,
   APIGuildMember,
   APIMessage,
   APIRole,
@@ -23,6 +24,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveRole(id: Snowflake): APIRole | null;
   resolveChannel(id: Snowflake): APIChannel | null;
   resolveMember(id: Snowflake, guildId: Snowflake): APIGuildMember | null;
+  resolveGuild(id: Snowflake): APIGuild | null;
   resolveUser(id: Snowflake): APIUser | null;
   currentUser(): APIUser | null;
   seeThreadOnClick?(messageId: Snowflake, thread: APIChannel): void;
@@ -39,6 +41,7 @@ export const ConfigContext = createContext<Config<PartialSvgConfig>>({
   resolveUser: () => null,
   resolveChannel: () => null,
   resolveMember: () => null,
+  resolveGuild: () => null,
   currentUser: () => null,
 });
 

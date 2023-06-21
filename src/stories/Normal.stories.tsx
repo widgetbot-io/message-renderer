@@ -366,7 +366,7 @@ MultipleEmbeds.args = {
           type: "rich",
           title: "Rythm Newsletter #1 - The Return :rocket:",
           description:
-            "🎙️ *tap tap*... Is this thing on?\n\nFirst off: This is an official newsletter from the Rythm team! If you’re receiving this, you subscribed to our newsletter a while back. Thanks for that! \n\nWe appreciate your support as this newsletter is the best way to stay up to date with what we’re doing (as well as our [Discord Server](https://links.rythm.fm/discord-1?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)).",
+            "🎙️ *tap tap*... Is this thing on?\n\nFirst off: This is an official newsletter from the Rythm team! If you’re receiving this, you subscribed to our newsletter a while back. Thanks for that! \n\nWe appreciate your support as this newsletter is the best way to stay up to date with what we’re doing (as well as our [Discord Server](https://widgetbot.io/)).",
           color: 15780562,
         },
         {
@@ -385,19 +385,19 @@ MultipleEmbeds.args = {
             {
               name: "Join us  <:DiscordLight:1042615683017605212>",
               value:
-                "As we gear up to our big launch over the next couple of months, we've got a ton of events scheduled for you to join in on. We’re doing a ton of cool stuff, like showing off what it’s like to work at Rythm, giving you sneak peeks into what we've been working on, hosting AMAs with our team, doing some game nights with all of you, hosting giveaways, and more!\n\n:link: **[Cick here to join our Discord](https://links.rythm.fm/discord-2?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)**",
+                "As we gear up to our big launch over the next couple of months, we've got a ton of events scheduled for you to join in on. We’re doing a ton of cool stuff, like showing off what it’s like to work at Rythm, giving you sneak peeks into what we've been working on, hosting AMAs with our team, doing some game nights with all of you, hosting giveaways, and more!\n\n:link: **[Cick here to join our Discord](https://widgetbot.io/)**",
               inline: false,
             },
             {
               name: "Our beta program <:verified:1042615858217893908>",
               value:
-                "We're kicking off our beta early next year, and are looking for people to help us test the brand new Rythm! We're currently taking in applications and will slowly open things up as we get closer to our launch. [Click here to sign up!](https://links.rythm.fm/beta-signup?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)",
+                "We're kicking off our beta early next year, and are looking for people to help us test the brand new Rythm! We're currently taking in applications and will slowly open things up as we get closer to our launch. [Click here to sign up!](https://widgetbot.io/)",
               inline: false,
             },
             {
               name: "Sneak Peek <:eyess:1042616171054235749>",
               value:
-                "Here's a sneak peek into the brand new Rythm, we'll be posting more of these on our [Discord](https://links.rythm.fm/discord-3?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19) <:NepSmug:1042616153794678804>",
+                "Here's a sneak peek into the brand new Rythm, we'll be posting more of these on our [Discord](https://widgetbot.io/) <:NepSmug:1042616153794678804>",
               inline: false,
             },
           ],
@@ -413,7 +413,7 @@ MultipleEmbeds.args = {
           type: "rich",
           title: "A brand new way to discover music :musical_note:",
           description:
-            "We've recently launched a new project: **a community themed around music discovery.**\n\nAs music lovers, we're constantly on the lookout for both new music and ways to find new music. We wanted to create a place where everyone can find something to listen to.\n\nIn our community, you can find new music on a daily basis from all genres, curated by our incredible discovery team. This includes new hits, underground bangers, and much more. We'll also be running a lot of fun events you can participate in such as guess the song, club battles, and artist AMAs. \n\n:link: **[Click here to join our music discovery community](https://links.rythm.fm/discord-discovery-community?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19)**",
+            "We've recently launched a new project: **a community themed around music discovery.**\n\nAs music lovers, we're constantly on the lookout for both new music and ways to find new music. We wanted to create a place where everyone can find something to listen to.\n\nIn our community, you can find new music on a daily basis from all genres, curated by our incredible discovery team. This includes new hits, underground bangers, and much more. We'll also be running a lot of fun events you can participate in such as guess the song, club battles, and artist AMAs. \n\n:link: **[Click here to join our music discovery community](https://widgetbot.io/)**",
           color: 15301499,
         },
         {
@@ -464,13 +464,13 @@ MultipleEmbeds.args = {
               type: 2,
               style: 5,
               label: "Join our Discord",
-              url: "https://links.rythm.fm/discord-4?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19",
+              url: "https://widgetbot.io/",
             },
             {
               type: 2,
               style: 5,
               label: "Signup to Beta",
-              url: "https://links.rythm.fm/beta-signup?id=132819036282159104&ref=3d736766485d11e0a15a886ecb4e3a19",
+              url: "https://widgetbot.io/",
             },
             {
               type: 2,

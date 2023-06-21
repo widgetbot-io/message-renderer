@@ -53,13 +53,14 @@ import ggSansItalic800 from "../assets/storybookOnlyAssets/gg-sans-italic-800.wo
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
 import type {
   APIChannel,
+  APIGuild,
   APIGuildMember,
   APIMessage,
   APIRole,
   APIUser,
   Snowflake,
 } from "discord-api-types/v10";
-import { ChannelType } from "discord-api-types/v10";
+import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
 import { MessageButtonListOption } from "../Message/MessageContainer";
 import { globalCss, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
@@ -223,6 +224,46 @@ function resolveMember(id: Snowflake): APIGuildMember {
   return null;
 }
 
+function resolveGuild(): APIGuild | null {
+  return {
+    id: "197038439483310086",
+    name: "Example Server",
+    icon: "f64c482b807da4f539cff778d174971c",
+    description: "The official place to report Discord Bugs!",
+    splash: null,
+    discovery_splash: null,
+    features: [],
+    emojis: [],
+    banner: "9b6439a7de04f1d26af92f84ac9e1e4a",
+    owner_id: "73193882359173120",
+    application_id: null,
+    region: null,
+    afk_channel_id: null,
+    afk_timeout: 300,
+    system_channel_id: null,
+    widget_enabled: true,
+    widget_channel_id: null,
+    verification_level: 3,
+    roles: [],
+    default_message_notifications: 1,
+    mfa_level: 1,
+    explicit_content_filter: 2,
+    max_presences: 40000,
+    max_members: 250000,
+    vanity_url_code: "discord-testers",
+    premium_tier: 3,
+    premium_subscription_count: 33,
+    system_channel_flags: 0,
+    preferred_locale: "en-US",
+    rules_channel_id: "441688182833020939",
+    public_updates_channel_id: "281283303326089216",
+    nsfw_level: GuildNSFWLevel.Safe,
+    stickers: [],
+    premium_progress_bar_enabled: false,
+    hub_type: null,
+  };
+}
+
 function resolveUser(userId: Snowflake): APIUser | null {
   if (userId === "132819036282159104") {
     return {
@@ -320,6 +361,7 @@ function Wrapper(Story) {
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}
       resolveMember={resolveMember}
+      resolveGuild={resolveGuild}
       resolveUser={resolveUser}
       currentUser={() => resolveUser("132819036282159104")}
       seeThreadOnClick={(messageId, thread) =>

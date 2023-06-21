@@ -113,14 +113,14 @@ export const Title = styled.withConfig({
 })("div", {
   fontSize: theme.fontSizes.l,
   fontWeight: 600,
-
-  color: theme.colors.link,
+  color: theme.colors.primaryOpacity100,
 
   variants: {
     link: {
       true: {
         cursor: "pointer",
         textDecoration: "none",
+        color: theme.colors.link,
 
         "&:hover": {
           textDecoration: "underline",

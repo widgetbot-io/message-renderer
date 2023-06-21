@@ -11,11 +11,13 @@ import {
   APIMessage,
   APIMessageInteraction,
   MessageType,
+  Snowflake,
 } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
 
 interface ReplyInfoProps {
+  channelId: Snowflake;
   referencedMessage: APIMessage["referenced_message"];
   mentioned?: boolean;
   interaction: APIMessageInteraction | undefined;
@@ -57,7 +59,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
 
     if (!resolveChannel) return getDisplayName(user);
 
-    const channel = resolveChannel(props.referencedMessage.channel_id);
+    const channel = resolveChannel(props.channelId);
     if (!channel || !("guild_id" in channel)) return getDisplayName(user);
 
     const guildMember = resolveMember(
@@ -191,6 +193,7 @@ function NormalMessage(props: MessageProps) {
       <Styles.Message mentioned={isUserMentioned}>
         {shouldShowReply && (
           <ReplyInfo
+            channelId={props.message.channel_id}
             referencedMessage={props.message.referenced_message}
             mentioned={props.message.mentions.some(
               (m) => m.id === props.message.referenced_message?.author.id

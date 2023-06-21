@@ -49,6 +49,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.GuildBoostTier3:
       return (
         <BoostTierUpgrade
+          channelId={props.message.channel_id}
           content={props.message.content}
           createdAt={props.message.timestamp}
           author={props.message.author}

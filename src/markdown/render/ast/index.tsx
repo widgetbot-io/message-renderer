@@ -4,8 +4,7 @@ import { defaultRules, inlineRegex } from "simple-markdown";
 import { customEmoji } from "./customEmoji";
 import Emoji from "../../../Emoji";
 import React, { Fragment } from "react";
-import { channelMention, userMention } from "../elements/mentions";
-import { roleMention } from "../elements/mentions/roleMention";
+import { channelMention, roleMention, userMention } from "../elements/mentions";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -64,8 +63,7 @@ const baseRules = {
   },
   emojiUnicode: {
     order: defaultRules.text.order,
-    match: (source) =>
-      /^(\s*)(\p{Extended_Pictographic})/gu.exec(source),
+    match: (source) => /^(\s*)(\p{Extended_Pictographic})/gu.exec(source),
     parse: (match) => ({
       spacing: match[1],
       content: match[2],

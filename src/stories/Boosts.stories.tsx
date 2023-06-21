@@ -29,6 +29,7 @@ Boost.args = {
       type: MessageType.GuildBoost,
       author: testUser,
       content: "",
+      channel_id: "697138785317814292",
     },
   ],
 };
@@ -42,6 +43,7 @@ BoostToTier1.args = {
       type: MessageType.GuildBoostTier1,
       author: testUser,
       content: "",
+      channel_id: "697138785317814292",
     },
   ],
 };
@@ -55,6 +57,7 @@ BoostToTier2.args = {
       type: MessageType.GuildBoostTier2,
       author: testUser,
       content: "",
+      channel_id: "697138785317814292",
     },
   ],
 };
@@ -68,6 +71,7 @@ BoostToTier3.args = {
       type: MessageType.GuildBoostTier3,
       author: testUser,
       content: "",
+      channel_id: "697138785317814292",
     },
   ],
 };
