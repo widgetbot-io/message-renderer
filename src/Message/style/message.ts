@@ -238,6 +238,7 @@ export const MiniUserName = styled.withConfig({
   overflow: "hidden",
   maxWidth: "25vw",
   textOverflow: "ellipsis",
+  color: theme.colors.primaryOpacity100
 });
 
 export const SystemMessage = styled.withConfig({

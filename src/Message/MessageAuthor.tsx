@@ -25,7 +25,9 @@ function MessageAuthor({
   const { resolveRole } = useConfig();
   const isGuildMember = "joined_at" in author;
   const user = isGuildMember ? author.user : author;
-  const displayName = isGuildMember ? author.nick : author.username;
+  const displayName = isGuildMember
+    ? author.nick ?? author.user.username
+    : author.username;
 
   const dominantRoleIconRole = useMemo(() => {
     if (!isGuildMember || !resolveRole) return null;
@@ -38,12 +40,11 @@ function MessageAuthor({
       )
       .sort((a, b) => b.position - a.position);
 
-    if (!role)
-      return null;
+    if (!role) return null;
 
     return role;
   }, [isGuildMember, resolveRole, author]);
-  
+
   const dominantRoleColor = useMemo(() => {
     if (!isGuildMember || !resolveRole) return null;
 
@@ -53,16 +54,17 @@ function MessageAuthor({
       .sort((a, b) => b.position - a.position);
 
     const color = role?.color;
-    if (!color)
-      return null;
+    if (!color) return null;
 
-    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined
+    return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
   }, [isGuildMember, resolveRole, author]);
 
   if (onlyShowUsername) {
     return (
       <Styles.MessageAuthor>
-        <Styles.Username style={{ color: dominantRoleColor }}>{user.username}</Styles.Username>
+        <Styles.Username style={{ color: dominantRoleColor }}>
+          {user.username}
+        </Styles.Username>
       </Styles.MessageAuthor>
     );
   }
@@ -75,7 +77,9 @@ function MessageAuthor({
         })}
         draggable={false}
       />
-      <Styles.Username style={{ color: dominantRoleColor }}>{displayName}</Styles.Username>
+      <Styles.Username style={{ color: dominantRoleColor }}>
+        {displayName}
+      </Styles.Username>
       {dominantRoleIconRole !== null && (
         <RoleIcon role={dominantRoleIconRole} />
       )}

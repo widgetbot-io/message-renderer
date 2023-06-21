@@ -69,7 +69,6 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
     return guildMember.nick ?? guildMember.user.username;
   }, [props.referencedMessage, props.interaction, resolveChannel]);
 
-  // const miniUserNameColorHex = getDominantRoleColor(props.referencedMessage);
   const miniUserNameColorHex = useMemo(() => {
     if (!props.referencedMessage) return null;
 
@@ -81,7 +80,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       channel.guild_id
     );
 
-    if (!guildMember || !resolveRole) return null;
+    if (!guildMember) return null;
 
     const [role] = guildMember.roles
       .map((id) => resolveRole(id))
