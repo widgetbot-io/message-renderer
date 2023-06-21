@@ -36,6 +36,31 @@ function ButtonComponent({ button, message }: ButtonComponentProps) {
         href={button.url}
         buttonStyle={buttonStyleMap[button.style]}
       >
+        <Styles.ButtonComponentContent>
+          {button.emoji && (
+            <Emoji
+              emojiName={button.emoji.name}
+              src={
+                button.emoji.id &&
+                `https://cdn.discordapp.com/emojis/${button.emoji.id}.${
+                  button.emoji.animated ? "gif" : "png"
+                }`
+              }
+            />
+          )}
+          {button.label}
+          <SvgFromUrl width={16} height={16} svg="IconLinkExternal" />
+        </Styles.ButtonComponentContent>
+      </Styles.ButtonComponent>
+    );
+  }
+
+  return (
+    <Styles.ButtonComponent
+      buttonStyle={buttonStyleMap[button.style]}
+      onClick={() => messageComponentButtonOnClick?.(message, button.custom_id)}
+    >
+      <Styles.ButtonComponentContent>
         {button.emoji && (
           <Emoji
             emojiName={button.emoji.name}
@@ -48,28 +73,7 @@ function ButtonComponent({ button, message }: ButtonComponentProps) {
           />
         )}
         {button.label}
-        <SvgFromUrl width={16} height={16} svg="IconLinkExternal" />
-      </Styles.ButtonComponent>
-    );
-  }
-
-  return (
-    <Styles.ButtonComponent
-      buttonStyle={buttonStyleMap[button.style]}
-      onClick={() => messageComponentButtonOnClick?.(message, button.custom_id)}
-    >
-      {button.emoji && (
-        <Emoji
-          emojiName={button.emoji.name}
-          src={
-            button.emoji.id &&
-            `https://cdn.discordapp.com/emojis/${button.emoji.id}.${
-              button.emoji.animated ? "gif" : "png"
-            }`
-          }
-        />
-      )}
-      {button.label}
+      </Styles.ButtonComponentContent>
     </Styles.ButtonComponent>
   );
 }

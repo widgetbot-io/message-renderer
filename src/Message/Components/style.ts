@@ -17,7 +17,7 @@ export const ButtonComponent = styled.withConfig({
   displayName: "button-component",
   componentId: commonComponentId,
 })("button", {
-  padding: `${theme.space.large} ${theme.space.xxl}`,
+  padding: `${theme.space.xs} ${theme.space.xxl}`,
   cursor: "pointer",
   fontWeight: 500,
   fontSize: theme.fontSizes.m,
@@ -25,13 +25,12 @@ export const ButtonComponent = styled.withConfig({
   border: "none",
   borderRadius: 3,
   color: theme.colors.primaryOpacity100,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: theme.space.large,
+  display: "block",
   transition: "background-color .17s ease",
   textDecoration: "none",
   fontFamily: theme.fonts.main,
+  height: 32,
+  boxSizing: "border-box",
 
   variants: {
     buttonStyle: {
@@ -65,6 +64,19 @@ export const ButtonComponent = styled.withConfig({
       },
     },
   },
+});
+
+export const ButtonComponentContent = styled.withConfig({
+  displayName: "button-component-content",
+  componentId: commonComponentId,
+})("span", {
+  verticalAlign: "middle",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: theme.space.medium,
+  height: '100%'
 });
 
 export const ActionRow = styled.withConfig({
