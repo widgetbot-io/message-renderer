@@ -13,6 +13,32 @@ export const Link = styled.withConfig({
   },
 });
 
+export const Heading = styled.withConfig({
+  displayName: "heading",
+  componentId: commonComponentId,
+})("p", {
+  margin: `${theme.space.xxl} 0 ${theme.space.large}`,
+  fontWeight: 700,
+
+  "&:first-child": {
+    marginTop: theme.space.large,
+  },
+
+  variants: {
+    kind: {
+      1: {
+        fontSize: theme.fontSizes.xxl,
+      },
+      2: {
+        fontSize: theme.fontSizes.xl,
+      },
+      3: {
+        fontSize: theme.fontSizes.l,
+      },
+    },
+  },
+});
+
 export const QuoteContainer = styled.withConfig({
   displayName: "md-quote-container",
   componentId: commonComponentId,
