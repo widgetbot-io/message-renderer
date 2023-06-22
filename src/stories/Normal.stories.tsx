@@ -85,171 +85,199 @@ Basic.args = {
   ],
 };
 
+export const ExtendedMarkdown = Template.bind({});
+ExtendedMarkdown.args = {
+  messages: [
+    {
+      id: "1042882684902453278",
+      type: 0,
+      content: "# Heading 1\n## Heading 2\n### Heading 3",
+      channel_id: "998637045327081502",
+      author: testUser,
+      attachments: [],
+      reactions: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2022-11-17T19:23:27.904000+00:00",
+      edited_timestamp: "2022-11-18T02:10:11.977000+00:00",
+      flags: 0,
+      components: [],
+      webhook_id: "998882498719273090",
+      message_reference: null,
+    },
+  ],
+};
+
 export const Reactions = Template.bind({});
 Reactions.args = {
   messages: [
     {
-      "id": "1119332977688715364",
-      "type": 0,
-      "content": "Congrats to Town Hall for winning the DDevs vs. Town Hall Birthday Activities Tournament! We'll get them next time, DDevs! GGWP everyone. <:ddev_professional:1091569367340286032> \n\n*Shoutout to the Tourney Bot team for helping us run the tournament!* <:Poker_Heart:1037861714722562139> \n\nWe hope you enjoyed celebrating <:sparkle_blurple:1085312148818903150>**Discord's 8th Birthday**<:sparkle_blurple:1085312148818903150> with us! <:Birthday_MallowCelebrate:1107724424351846430>",
-      "channel_id": "613427779723067411",
-      "author": {
-        "id": "1025477315054030931",
-        "username": "emilieatwork",
-        "global_name": "emilie",
-        "avatar": "62be4e79009cf707711cb62a6c1365fb",
-        "discriminator": "0",
-        "public_flags": 4194561,
-        "avatar_decoration": "v3_a_898d52a79941712fd34b9218e0d80837"
+      id: "1119332977688715364",
+      type: 0,
+      content:
+        "Congrats to Town Hall for winning the DDevs vs. Town Hall Birthday Activities Tournament! We'll get them next time, DDevs! GGWP everyone. <:ddev_professional:1091569367340286032> \n\n*Shoutout to the Tourney Bot team for helping us run the tournament!* <:Poker_Heart:1037861714722562139> \n\nWe hope you enjoyed celebrating <:sparkle_blurple:1085312148818903150>**Discord's 8th Birthday**<:sparkle_blurple:1085312148818903150> with us! <:Birthday_MallowCelebrate:1107724424351846430>",
+      channel_id: "613427779723067411",
+      author: {
+        id: "1025477315054030931",
+        username: "emilieatwork",
+        global_name: "emilie",
+        avatar: "62be4e79009cf707711cb62a6c1365fb",
+        discriminator: "0",
+        public_flags: 4194561,
+        avatar_decoration: "v3_a_898d52a79941712fd34b9218e0d80837",
       },
-      "attachments": [],
-      "embeds": [],
-      "mentions": [],
-      "mention_roles": [],
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
-      "timestamp": "2023-06-16T18:29:38.082000+00:00",
-      "edited_timestamp": null,
-      "flags": 0,
-      "components": [],
-      "reactions": [
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-06-16T18:29:38.082000+00:00",
+      edited_timestamp: null,
+      flags: 0,
+      components: [],
+      reactions: [
         {
-          "emoji": {
-            "id": "1107789264135139509",
-            "name": "controller"
+          emoji: {
+            id: "1107789264135139509",
+            name: "controller",
           },
-          "count": 55,
-          "count_details": {
-            "burst": 0,
-            "normal": 55
+          count: 55,
+          count_details: {
+            burst: 0,
+            normal: 55,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1107789265645080716",
-            "name": "letter"
+          emoji: {
+            id: "1107789265645080716",
+            name: "letter",
           },
-          "count": 38,
-          "count_details": {
-            "burst": 0,
-            "normal": 38
+          count: 38,
+          count_details: {
+            burst: 0,
+            normal: 38,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1091569367340286032",
-            "name": "ddev_professional"
+          emoji: {
+            id: "1091569367340286032",
+            name: "ddev_professional",
           },
-          "count": 42,
-          "count_details": {
-            "burst": 0,
-            "normal": 42
+          count: 42,
+          count_details: {
+            burst: 0,
+            normal: 42,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1037861714722562139",
-            "name": "Poker_Heart"
+          emoji: {
+            id: "1037861714722562139",
+            name: "Poker_Heart",
           },
-          "count": 36,
-          "count_details": {
-            "burst": 0,
-            "normal": 36
+          count: 36,
+          count_details: {
+            burst: 0,
+            normal: 36,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1107724424351846430",
-            "name": "Birthday_MallowCelebrate"
+          emoji: {
+            id: "1107724424351846430",
+            name: "Birthday_MallowCelebrate",
           },
-          "count": 37,
-          "count_details": {
-            "burst": 0,
-            "normal": 37
+          count: 37,
+          count_details: {
+            burst: 0,
+            normal: 37,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1107724343397580900",
-            "name": "Birthday_CakeSmash"
+          emoji: {
+            id: "1107724343397580900",
+            name: "Birthday_CakeSmash",
           },
-          "count": 34,
-          "count_details": {
-            "burst": 0,
-            "normal": 34
+          count: 34,
+          count_details: {
+            burst: 0,
+            normal: 34,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1106993761948553287",
-            "name": "Birthday_Cake"
+          emoji: {
+            id: "1106993761948553287",
+            name: "Birthday_Cake",
           },
-          "count": 36,
-          "count_details": {
-            "burst": 0,
-            "normal": 36
+          count: 36,
+          count_details: {
+            burst: 0,
+            normal: 36,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1107724391715979294",
-            "name": "Birthday_WumpusCake"
+          emoji: {
+            id: "1107724391715979294",
+            name: "Birthday_WumpusCake",
           },
-          "count": 32,
-          "count_details": {
-            "burst": 0,
-            "normal": 32
+          count: 32,
+          count_details: {
+            burst: 0,
+            normal: 32,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
         },
         {
-          "emoji": {
-            "id": "1106993985525923951",
-            "name": "Birthday_Star"
+          emoji: {
+            id: "1106993985525923951",
+            name: "Birthday_Star",
           },
-          "count": 32,
-          "count_details": {
-            "burst": 0,
-            "normal": 32
+          count: 32,
+          count_details: {
+            burst: 0,
+            normal: 32,
           },
-          "burst_colors": [],
-          "me_burst": false,
-          "me": false,
-          "burst_count": 0
-        }
-      ]
+          burst_colors: [],
+          me_burst: false,
+          me: false,
+          burst_count: 0,
+        },
+      ],
     },
   ],
 };

@@ -4,7 +4,7 @@ import baseRules from "./ast";
 import { Highlighter } from "./elements";
 import * as Styles from "./elements";
 import { astToString, flattenAst, recurse } from "./util";
-import SimpleMarkdown from "simple-markdown";
+import SimpleMarkdown, { defaultRules } from "simple-markdown";
 import TextSpoiler from "./elements/TextSpoiler";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
@@ -49,6 +49,28 @@ function createRules(rule: { [key: string]: any }) {
 
   return {
     ...rule,
+    heading: {
+      ...defaultRules.heading,
+      match: (source, state) => {
+        const prevCaptureStr =
+          state.prevCapture === null ? "" : state.prevCapture[0];
+        const isStartOfLineCapture = /(?:^|\n)( *)$/.exec(prevCaptureStr);
+
+        if (isStartOfLineCapture) {
+          source = isStartOfLineCapture[1] + source;
+          return /^ *(#{1,3})([^\n]+?)(?:\n|$)/.exec(source);
+        }
+
+        return null;
+      },
+      react(node, parse, state) {
+        return (
+          <Styles.Heading key={state.key} kind={node.level}>
+            {parse(node.content, state)}
+          </Styles.Heading>
+        );
+      },
+    },
     s: {
       order: rule.u.order,
       match: SimpleMarkdown.inlineRegex(/^~~([\s\S]+?)~~(?!_)/),

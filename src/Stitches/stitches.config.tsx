@@ -50,6 +50,8 @@ const stitches = createStitches({
       s: "12px",
       m: "14px",
       l: "16px",
+      xl: "20px",
+      xxl: "24px",
     },
     space: {
       xxs: "1px",
