@@ -3,7 +3,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "target": "es6",
-    "module": "ESNext",
+    "module": "commonjs",
     "sourceMap": true,
     "esModuleInterop": true,
     "lib": ["esnext", "es6", "dom"],
@@ -19,8 +19,8 @@
     "rootDir": "src",
     "baseUrl": ".",
   },
-  "include": ["src/**/*",
-    "src/assets/libAssets/missing-asset.svg"
+  "include": [
+    "src/**/*"
   ],
   "exclude": ["node_modules", "src/stories"]
 }
