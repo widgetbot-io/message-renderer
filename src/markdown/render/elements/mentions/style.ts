@@ -11,7 +11,7 @@ export const Mention = styled.withConfig({
   backgroundColor: theme.colors.mentionBackground,
   color: theme.colors.mentionForeground,
   borderRadius: 3,
-  padding: theme.space.xs,
+  padding: `0 ${theme.space.xs}`,
   fontWeight: 500,
 
   variants: {
