@@ -64,6 +64,7 @@ import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
 import { MessageButtonListOption } from "../Message/MessageContainer";
 import { globalCss, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
+import { ChatBadgeProps } from "../core/ConfigContext";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -380,6 +381,12 @@ function Wrapper(Story) {
         alert(
           `Button by custom id "${customId}" pressed on message ${message.id}!`
         );
+      }}
+      chatBadge={({ user, TagWrapper }: ChatBadgeProps) => {
+        if (user.id === '132819036282159104')
+          return <TagWrapper>COOL</TagWrapper>;
+
+        return null;
       }}
     >
       {({ themeClass }) => (

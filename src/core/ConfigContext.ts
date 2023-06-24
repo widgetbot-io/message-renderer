@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, ReactElement, useContext } from "react";
 import type {
   APIChannel,
   APIGuild,
@@ -9,6 +9,7 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import type { SvgConfig } from "./svgs";
+import { Tag } from "../ChatTag/style";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 
@@ -16,6 +17,11 @@ export interface MessageButtonListOption<SC extends PartialSvgConfig> {
   onClick: () => void;
   icon: keyof SC;
   actionDescription: string;
+}
+
+export interface ChatBadgeProps {
+  user: APIUser;
+  TagWrapper: typeof Tag;
 }
 
 export type Config<SvgConfig extends PartialSvgConfig> = {
@@ -32,6 +38,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   roleMentionOnClick?(role: APIRole): void;
   channelMentionOnClick?(channel: APIChannel): void;
   messageComponentButtonOnClick?(message: APIMessage, customId: string): void;
+  chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
   themeOverrideClassName?: string;
 };
 
