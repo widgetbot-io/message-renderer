@@ -3,9 +3,9 @@ import { commonComponentId, styled } from "../Stitches/stitches.config";
 export const emojiCss = {
   objectFit: "contain",
   "-webkit-user-drag": "none",
-  width: 22,
-  height: 22,
-  verticalAlign: "-0.4em",
+  width: "1.375em",
+  height: "1.375em",
+  verticalAlign: "middle",
   margin: 0,
 
   variants: {
