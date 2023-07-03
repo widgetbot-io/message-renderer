@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import MessageGroup from "../index";
+import { MessageGroup } from "../index";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
 
@@ -35,7 +35,6 @@ Basic.args = {
         avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
         discriminator: "0",
         public_flags: 4604871,
-        avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
       },
       attachments: [],
       embeds: [],
@@ -91,7 +90,8 @@ ExtendedMarkdown.args = {
     {
       id: "1042882684902453278",
       type: 0,
-      content: "# :sparkles: Heading 1\n## :sparkles: Heading 2\n### :sparkles: Heading 3",
+      content:
+        "# :sparkles: Heading 1\n## :sparkles: Heading 2\n### :sparkles: Heading 3",
       channel_id: "998637045327081502",
       author: testUser,
       attachments: [],
@@ -128,7 +128,6 @@ Reactions.args = {
         avatar: "62be4e79009cf707711cb62a6c1365fb",
         discriminator: "0",
         public_flags: 4194561,
-        avatar_decoration: "v3_a_898d52a79941712fd34b9218e0d80837",
       },
       attachments: [],
       embeds: [],
