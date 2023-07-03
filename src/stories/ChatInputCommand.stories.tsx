@@ -1,4 +1,4 @@
-import MessageGroup from "../index";
+import { MessageGroup } from "../index";
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Wrapper from "./Wrapper";
@@ -33,7 +33,6 @@ ChatInputCommand.args = {
         username: "WidgetBot Staging",
         global_name: null,
         avatar: "06f657fdc0a5bcbac7776c461d60bdc7",
-        avatar_decoration: null,
         discriminator: "1493",
         public_flags: 0,
         bot: true,
@@ -74,7 +73,6 @@ FailedInteraction.args = {
         username: "WidgetBot Staging",
         global_name: null,
         avatar: "06f657fdc0a5bcbac7776c461d60bdc7",
-        avatar_decoration: null,
         discriminator: "1493",
         public_flags: 0,
         bot: true,
@@ -115,7 +113,6 @@ PendingInteraction.args = {
         username: "WidgetBot Staging",
         global_name: null,
         avatar: "06f657fdc0a5bcbac7776c461d60bdc7",
-        avatar_decoration: null,
         discriminator: "1493",
         public_flags: 0,
         bot: true,

@@ -1,4 +1,4 @@
-import MessageGroup from "../index";
+import { MessageGroup } from "../index";
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { testUser } from "./commonTestData";
