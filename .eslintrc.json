@@ -6,7 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:storybook/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -19,7 +20,10 @@
     ],
     "rules": {
         "eqeqeq": "error",
-        "func-style": ["error", "declaration"],
+        "func-style": [
+            "error",
+            "declaration"
+        ],
         "no-else-return": "error",
         "no-nested-ternary": "error",
         "no-redeclare": "error",
