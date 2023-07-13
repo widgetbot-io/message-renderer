@@ -1,10 +1,11 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { MessageGroup } from "../index";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
+import { EmbedType } from "discord-api-types/v10";
 
-export default {
+const meta: Meta<typeof MessageGroup> = {
   title: "Message Types/Normal",
   component: MessageGroup,
   parameters: {
@@ -12,14 +13,16 @@ export default {
     layout: "centered",
   },
   decorators: [Wrapper],
-} as ComponentMeta<typeof MessageGroup>;
+};
+
+export default meta;
 
 // eslint-disable-next-line func-style
-const Template: ComponentStory<typeof MessageGroup> = (args) => (
+const Template: StoryFn<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof MessageGroup> = Template.bind({});
 Basic.args = {
   messages: [
     {
@@ -55,14 +58,7 @@ Basic.args = {
             animated: true,
           },
           count: 241,
-          count_details: {
-            burst: 0,
-            normal: 241,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -70,21 +66,14 @@ Basic.args = {
             name: "🦏",
           },
           count: 272,
-          count_details: {
-            burst: 0,
-            normal: 272,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: true,
-          burst_count: 0,
         },
       ],
     },
   ],
 };
 
-export const ExtendedMarkdown = Template.bind({});
+export const ExtendedMarkdown: StoryFn<typeof MessageGroup> = Template.bind({});
 ExtendedMarkdown.args = {
   messages: [
     {
@@ -107,12 +96,11 @@ ExtendedMarkdown.args = {
       flags: 0,
       components: [],
       webhook_id: "998882498719273090",
-      message_reference: null,
     },
   ],
 };
 
-export const Reactions = Template.bind({});
+export const Reactions: StoryFn<typeof MessageGroup> = Template.bind({});
 Reactions.args = {
   messages: [
     {
@@ -147,14 +135,7 @@ Reactions.args = {
             name: "controller",
           },
           count: 55,
-          count_details: {
-            burst: 0,
-            normal: 55,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -162,14 +143,7 @@ Reactions.args = {
             name: "letter",
           },
           count: 38,
-          count_details: {
-            burst: 0,
-            normal: 38,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -177,14 +151,7 @@ Reactions.args = {
             name: "ddev_professional",
           },
           count: 42,
-          count_details: {
-            burst: 0,
-            normal: 42,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -192,14 +159,7 @@ Reactions.args = {
             name: "Poker_Heart",
           },
           count: 36,
-          count_details: {
-            burst: 0,
-            normal: 36,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -207,14 +167,7 @@ Reactions.args = {
             name: "Birthday_MallowCelebrate",
           },
           count: 37,
-          count_details: {
-            burst: 0,
-            normal: 37,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -222,14 +175,7 @@ Reactions.args = {
             name: "Birthday_CakeSmash",
           },
           count: 34,
-          count_details: {
-            burst: 0,
-            normal: 34,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -237,14 +183,7 @@ Reactions.args = {
             name: "Birthday_Cake",
           },
           count: 36,
-          count_details: {
-            burst: 0,
-            normal: 36,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -252,14 +191,7 @@ Reactions.args = {
             name: "Birthday_WumpusCake",
           },
           count: 32,
-          count_details: {
-            burst: 0,
-            normal: 32,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -267,21 +199,14 @@ Reactions.args = {
             name: "Birthday_Star",
           },
           count: 32,
-          count_details: {
-            burst: 0,
-            normal: 32,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
       ],
     },
   ],
 };
 
-export const Mentions = Template.bind({});
+export const Mentions: StoryFn<typeof MessageGroup> = Template.bind({});
 Mentions.args = {
   messages: [
     {
@@ -307,7 +232,7 @@ Mentions.args = {
   ],
 };
 
-export const CodeBlock = Template.bind({});
+export const CodeBlock: StoryFn<typeof MessageGroup> = Template.bind({});
 CodeBlock.args = {
   messages: [
     {
@@ -321,7 +246,6 @@ CodeBlock.args = {
         username: "mrquine",
         global_name: "Mr. Quine",
         avatar: "3a30ffeeeb354950804d77ded94162d3",
-        avatar_decoration: null,
         discriminator: "0001",
         public_flags: 4457220,
       },
@@ -342,7 +266,7 @@ CodeBlock.args = {
   ],
 };
 
-export const Embed = Template.bind({});
+export const Embed: StoryFn<typeof MessageGroup> = Template.bind({});
 Embed.args = {
   messages: [
     {
@@ -356,7 +280,6 @@ Embed.args = {
         username: "AdvaithBot",
         global_name: null,
         avatar: "aa710e791ef95cec9bf23350cabfcd1f",
-        avatar_decoration: null,
         discriminator: "2249",
         public_flags: 65536,
         bot: true,
@@ -364,7 +287,7 @@ Embed.args = {
       attachments: [],
       embeds: [
         {
-          type: "rich",
+          type: EmbedType.Rich,
           url: "https://discordapp.com",
           title: "title ~~(did you know you can have markdown here too?)~~",
           description:
@@ -441,7 +364,7 @@ Embed.args = {
   ],
 };
 
-export const TwitterEmbed = Template.bind({});
+export const TwitterEmbed: StoryFn<typeof MessageGroup> = Template.bind({});
 TwitterEmbed.args = {
   messages: [
     {
@@ -453,7 +376,7 @@ TwitterEmbed.args = {
       attachments: [],
       embeds: [
         {
-          type: "rich",
+          type: EmbedType.Rich,
           url: "https://twitter.com/advaithj1/status/1562328510605103104",
           description: "Profile Themes",
           color: 1942002,
@@ -489,7 +412,7 @@ TwitterEmbed.args = {
           },
         },
         {
-          type: "rich",
+          type: EmbedType.Rich,
           url: "https://twitter.com/advaithj1/status/1562328510605103104",
           image: {
             url: "https://pbs.twimg.com/media/Fa6BLnjVUAEF6pJ.jpg",
@@ -500,7 +423,7 @@ TwitterEmbed.args = {
           },
         },
         {
-          type: "rich",
+          type: EmbedType.Rich,
           url: "https://twitter.com/advaithj1/status/1562328510605103104",
           image: {
             url: "https://pbs.twimg.com/media/Fa6BORPUYAAf9_R.jpg",
@@ -511,7 +434,7 @@ TwitterEmbed.args = {
           },
         },
         {
-          type: "rich",
+          type: EmbedType.Rich,
           url: "https://twitter.com/advaithj1/status/1562328510605103104",
           image: {
             url: "https://pbs.twimg.com/media/Fa6BRZtUYAAgwnW.jpg",
@@ -533,12 +456,11 @@ TwitterEmbed.args = {
       components: [],
       application_id: "565479321247154186",
       webhook_id: "993585352776364044",
-      hit: true,
     },
   ],
 };
 
-export const MultipleEmbeds = Template.bind({});
+export const MultipleEmbeds: StoryFn<typeof MessageGroup> = Template.bind({});
 MultipleEmbeds.args = {
   messages: [
     {
@@ -554,19 +476,18 @@ MultipleEmbeds.args = {
         discriminator: "3722",
         public_flags: 65536,
         bot: true,
-        avatar_decoration: null,
       },
       attachments: [],
       embeds: [
         {
-          type: "rich",
+          type: EmbedType.Rich,
           title: "Rythm Newsletter #1 - The Return :rocket:",
           description:
             "🎙️ *tap tap*... Is this thing on?\n\nFirst off: This is an official newsletter from the Rythm team! If you’re receiving this, you subscribed to our newsletter a while back. Thanks for that! \n\nWe appreciate your support as this newsletter is the best way to stay up to date with what we’re doing (as well as our [Discord Server](https://widgetbot.io/)).",
           color: 15780562,
         },
         {
-          type: "rich",
+          type: EmbedType.Rich,
           title: "We're coming back :tada:",
           description:
             "That’s right baby, this newsletter marks the beginning of the comeback of Rythm!",
@@ -606,14 +527,14 @@ MultipleEmbeds.args = {
           },
         },
         {
-          type: "rich",
+          type: EmbedType.Rich,
           title: "A brand new way to discover music :musical_note:",
           description:
             "We've recently launched a new project: **a community themed around music discovery.**\n\nAs music lovers, we're constantly on the lookout for both new music and ways to find new music. We wanted to create a place where everyone can find something to listen to.\n\nIn our community, you can find new music on a daily basis from all genres, curated by our incredible discovery team. This includes new hits, underground bangers, and much more. We'll also be running a lot of fun events you can participate in such as guess the song, club battles, and artist AMAs. \n\n:link: **[Click here to join our music discovery community](https://widgetbot.io/)**",
           color: 15301499,
         },
         {
-          type: "rich",
+          type: EmbedType.Rich,
           title: "More about us :wave:",
           color: 14639487,
           fields: [
@@ -684,21 +605,14 @@ MultipleEmbeds.args = {
             name: "❤️",
           },
           count: 1,
-          count_details: {
-            burst: 0,
-            normal: 1,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
       ],
     },
   ],
 };
 
-export const YouTubeEmbed = Template.bind({});
+export const YouTubeEmbed: StoryFn<typeof MessageGroup> = Template.bind({});
 YouTubeEmbed.args = {
   messages: [
     {
@@ -710,7 +624,7 @@ YouTubeEmbed.args = {
       attachments: [],
       embeds: [
         {
-          type: "video",
+          type: EmbedType.Video,
           url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
           title: "Rick Astley - Never Gonna Give You Up (Official Music Video)",
           description:
@@ -751,7 +665,7 @@ YouTubeEmbed.args = {
   ],
 };
 
-export const ImageAttachment = Template.bind({});
+export const ImageAttachment: StoryFn<typeof MessageGroup> = Template.bind({});
 ImageAttachment.args = {
   messages: [
     {
@@ -789,7 +703,7 @@ ImageAttachment.args = {
   ],
 };
 
-export const ZipAttachment = Template.bind({});
+export const ZipAttachment: StoryFn<typeof MessageGroup> = Template.bind({});
 ZipAttachment.args = {
   messages: [
     {
@@ -824,7 +738,7 @@ ZipAttachment.args = {
   ],
 };
 
-export const AudioAttachment = Template.bind({});
+export const AudioAttachment: StoryFn<typeof MessageGroup> = Template.bind({});
 AudioAttachment.args = {
   messages: [
     {
@@ -860,7 +774,7 @@ AudioAttachment.args = {
   ],
 };
 
-export const Sticker = Template.bind({});
+export const Sticker: StoryFn<typeof MessageGroup> = Template.bind({});
 Sticker.args = {
   messages: [
     {
@@ -912,7 +826,6 @@ Sticker.args = {
         rate_limit_per_user: 0,
         flags: 0,
         total_message_sent: 1,
-        member_ids_preview: ["132819036282159104"],
       },
       sticker_items: [
         {
@@ -925,7 +838,7 @@ Sticker.args = {
   ],
 };
 
-export const VideoAttachment = Template.bind({});
+export const VideoAttachment: StoryFn<typeof MessageGroup> = Template.bind({});
 VideoAttachment.args = {
   messages: [
     {
@@ -964,7 +877,7 @@ VideoAttachment.args = {
   ],
 };
 
-export const Reply = Template.bind({});
+export const Reply: StoryFn<typeof MessageGroup> = Template.bind({});
 Reply.args = {
   messages: [
     {
@@ -980,7 +893,6 @@ Reply.args = {
         avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
         discriminator: "0",
         public_flags: 4604871,
-        avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
       },
       attachments: [],
       embeds: [],
@@ -1005,14 +917,7 @@ Reply.args = {
             name: "👍",
           },
           count: 234,
-          count_details: {
-            burst: 0,
-            normal: 234,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
         {
           emoji: {
@@ -1020,14 +925,7 @@ Reply.args = {
             name: "App_Broom",
           },
           count: 185,
-          count_details: {
-            burst: 0,
-            normal: 185,
-          },
-          burst_colors: [],
-          me_burst: false,
           me: false,
-          burst_count: 0,
         },
       ],
       referenced_message: {
@@ -1043,7 +941,6 @@ Reply.args = {
           avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
           discriminator: "0",
           public_flags: 4604871,
-          avatar_decoration: "0f19f304614f253d56257ce1bbfcf357",
         },
         attachments: [],
         embeds: [],
@@ -1061,7 +958,7 @@ Reply.args = {
   ],
 };
 
-export const UnknownReply = Template.bind({});
+export const UnknownReply: StoryFn<typeof MessageGroup> = Template.bind({});
 UnknownReply.args = {
   messages: [
     {
@@ -1087,7 +984,7 @@ UnknownReply.args = {
   ],
 };
 
-export const CodeBlockReply = Template.bind({});
+export const CodeBlockReply: StoryFn<typeof MessageGroup> = Template.bind({});
 CodeBlockReply.args = {
   messages: [
     {
@@ -1131,7 +1028,6 @@ CodeBlockReply.args = {
           username: "johnythecarrot",
           global_name: "JohnyTheCarrot",
           avatar: "3a30ffeeeb354950804d77ded94162d3",
-          avatar_decoration: null,
           discriminator: "0001",
           public_flags: 4457220,
         },
