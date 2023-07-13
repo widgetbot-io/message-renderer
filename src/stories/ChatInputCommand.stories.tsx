@@ -1,11 +1,11 @@
 import { MessageGroup } from "../index";
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import Wrapper from "./Wrapper";
 import { testUser } from "./commonTestData";
 import { MessageFlags } from "discord-api-types/v10";
 
-export default {
+const meta: Meta<typeof MessageGroup> = {
   title: "Message Types/Chat Input Command",
   component: MessageGroup,
   parameters: {
@@ -13,14 +13,16 @@ export default {
     layout: "centered",
   },
   decorators: [Wrapper],
-} as ComponentMeta<typeof MessageGroup>;
+};
+
+export default meta;
 
 // eslint-disable-next-line func-style
-const Template: ComponentStory<typeof MessageGroup> = (args) => (
+const Template: StoryFn<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const ChatInputCommand = Template.bind({});
+export const ChatInputCommand: StoryFn<typeof MessageGroup> = Template.bind({});
 ChatInputCommand.args = {
   messages: [
     {
@@ -60,14 +62,16 @@ ChatInputCommand.args = {
   ],
 };
 
-export const FailedInteraction = Template.bind({});
+export const FailedInteraction: StoryFn<typeof MessageGroup> = Template.bind(
+  {}
+);
 FailedInteraction.args = {
   messages: [
     {
       id: "1068543251537203210",
       type: 20,
       content: "This server has no custom CSS set.",
-      channel_id: "993105555042357268",
+      channel_id: "1068543251537203210",
       author: {
         id: "565479321247154186",
         username: "WidgetBot Staging",
@@ -100,14 +104,16 @@ FailedInteraction.args = {
   ],
 };
 
-export const PendingInteraction = Template.bind({});
+export const PendingInteraction: StoryFn<typeof MessageGroup> = Template.bind(
+  {}
+);
 PendingInteraction.args = {
   messages: [
     {
       id: "1068543251537203210",
       type: 20,
       content: "This server has no custom CSS set.",
-      channel_id: "993105555042357268",
+      channel_id: "1068543251537203210",
       author: {
         id: "565479321247154186",
         username: "WidgetBot Staging",

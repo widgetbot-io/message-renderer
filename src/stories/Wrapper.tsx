@@ -61,10 +61,11 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
-import { MessageButtonListOption } from "../Message/MessageContainer";
 import { globalCss, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
-import { ChatBadgeProps } from "../core/ConfigContext";
+import { ChatBadgeProps, MessageButtonListOption } from "../core/ConfigContext";
+import { testTextChannel } from "./commonTestData";
+import type { Decorator } from "@storybook/react";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -117,7 +118,7 @@ function getButtons(
   ];
 }
 
-function resolveRole(id: Snowflake): APIRole {
+function resolveRole(id: Snowflake): APIRole | null {
   console.log("id", id);
 
   if (id === "613426354628722689")
@@ -139,7 +140,7 @@ function resolveRole(id: Snowflake): APIRole {
   return null;
 }
 
-function resolveChannel(id: Snowflake): APIChannel {
+function resolveChannel(id: Snowflake): APIChannel | null {
   if (id === "697138785317814292") {
     return {
       name: "api-announcements",
@@ -148,6 +149,10 @@ function resolveChannel(id: Snowflake): APIChannel {
       guild_id: "613425648685547541",
       type: ChannelType.GuildAnnouncement,
     };
+  }
+
+  if (id === "4321") {
+    return testTextChannel;
   }
 
   if (id === "1234") {
@@ -174,7 +179,7 @@ function resolveChannel(id: Snowflake): APIChannel {
   return null;
 }
 
-function resolveMember(id: Snowflake): APIGuildMember {
+function resolveMember(id: Snowflake): APIGuildMember | null {
   if (id === "933123872641921044") {
     return {
       avatar: null,
@@ -238,7 +243,7 @@ function resolveGuild(): APIGuild | null {
     banner: "9b6439a7de04f1d26af92f84ac9e1e4a",
     owner_id: "73193882359173120",
     application_id: null,
-    region: null,
+    region: "",
     afk_channel_id: null,
     afk_timeout: 300,
     system_channel_id: null,
@@ -258,6 +263,7 @@ function resolveGuild(): APIGuild | null {
     preferred_locale: "en-US",
     rules_channel_id: "441688182833020939",
     public_updates_channel_id: "281283303326089216",
+    safety_alerts_channel_id: "281283303326089216",
     nsfw_level: GuildNSFWLevel.Safe,
     stickers: [],
     premium_progress_bar_enabled: false,
@@ -352,7 +358,8 @@ const StorybookStyles = styled("div", {
   fontFamily: theme.fonts.main,
 });
 
-function Wrapper(Story) {
+// eslint-disable-next-line func-style
+const Wrapper: Decorator = (Story) => {
   globalStyles();
 
   return (
@@ -383,7 +390,7 @@ function Wrapper(Story) {
         );
       }}
       chatBadge={({ user, TagWrapper }: ChatBadgeProps) => {
-        if (user.id === '132819036282159104')
+        if (user.id === "132819036282159104")
           return <TagWrapper>COOL</TagWrapper>;
 
         return null;
@@ -391,11 +398,13 @@ function Wrapper(Story) {
     >
       {({ themeClass }) => (
         <div className={themeClass}>
-          <StorybookStyles>{Story()}</StorybookStyles>
+          <StorybookStyles>
+            <Story />
+          </StorybookStyles>
         </div>
       )}
     </MessageRendererProvider>
   );
-}
+};
 
 export default Wrapper;
