@@ -25,7 +25,8 @@
     "baseUrl": ".",
     "paths": {
       "react-vite-library": [ "src/index.tsx" ]
-    }
+    },
+    "types": ["node", "vite/client"]
   },
   "include": [
     "src/**/*"
