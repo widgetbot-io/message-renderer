@@ -1,6 +1,7 @@
 import * as Styles from "./style";
-import React, { ReactNode, useState } from "react";
-import { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
+import type { ReactNode} from "react";
+import React, { useState } from "react";
+import type { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
 import { getSvgUrl } from "../../core/svgs";
 import VideoAttachment from "../Attachment/VideoAttachment";

@@ -1,6 +1,7 @@
 import * as Styles from "./style";
 import * as React from "react";
-import { ChannelType, Snowflake } from "discord-api-types/v10";
+import type { Snowflake } from "discord-api-types/v10";
+import { ChannelType } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
 import SvgFromUrl from "../../../../SvgFromUrl";

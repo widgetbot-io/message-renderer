@@ -1,10 +1,11 @@
-import {
+import type {
   APIButtonComponentWithCustomId,
   APIButtonComponentWithURL,
   APIMessage,
 } from "discord-api-types/v10";
 import * as Styles from "./style";
-import React, { ComponentProps } from "react";
+import type { ComponentProps } from "react";
+import React from "react";
 import SvgFromUrl from "../../SvgFromUrl";
 import { ButtonStyle } from "discord-api-types/v10";
 import Emoji from "../../Emoji";

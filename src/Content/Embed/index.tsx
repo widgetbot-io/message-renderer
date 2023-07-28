@@ -8,7 +8,8 @@ import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
 import useSize from "./useSize";
 import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
-import { APIEmbed, APIEmbedImage, EmbedType } from "discord-api-types/v10";
+import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
+import { EmbedType } from "discord-api-types/v10";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -62,7 +63,11 @@ function Embed({ embed, images }: EmbedProps) {
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
-                  <a href={embed.author.url} target="_blank" rel="noreferrer noopener">
+                  <a
+                    href={embed.author.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     {embed.author.name}
                   </a>
                 ) : (
@@ -79,7 +84,7 @@ function Embed({ embed, images }: EmbedProps) {
             ) : (
               <Styles.Title>{parseEmbedTitle(embed.title)}</Styles.Title>
             ))}
-          {embed.type === EmbedType.Video ? (
+          {embed.type === EmbedType.Video && embed.video ? (
             <EmbedVideo
               url={embed.video.url}
               proxyUrl={embed.video.proxy_url}

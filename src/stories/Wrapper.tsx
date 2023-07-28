@@ -63,7 +63,10 @@ import type {
 import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
 import { globalCss, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
-import { ChatBadgeProps, MessageButtonListOption } from "../core/ConfigContext";
+import type {
+  ChatBadgeProps,
+  MessageButtonListOption,
+} from "../core/ConfigContext";
 import { testTextChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 

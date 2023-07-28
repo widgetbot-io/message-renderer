@@ -12,7 +12,8 @@
     "build": "vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "lint": "eslint --ext .ts,.tsx src"
   },
   "repository": {
     "type": "git",
@@ -60,6 +61,7 @@
     "@storybook/react-vite": "^7.0.27",
     "@storybook/testing-library": "^0.2.0",
     "@storybook/theming": "^7.0.27",
+    "@types/memoizee": "^0.4.8",
     "@types/node": "^20.3.2",
     "@types/react": "^18.0.26",
     "@types/storybook__react": "^5.2.1",

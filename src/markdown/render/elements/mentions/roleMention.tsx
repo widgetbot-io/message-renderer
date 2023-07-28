@@ -1,6 +1,6 @@
 import * as Styles from "./style";
 import * as React from "react";
-import { Snowflake } from "discord-api-types/v10";
+import type { Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
 

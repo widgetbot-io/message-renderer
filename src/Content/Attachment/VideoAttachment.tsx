@@ -10,7 +10,7 @@ import useSize from "./useSize";
 import * as Styles from "./style";
 import Tooltip from "../../Tooltip";
 import SvgFromUrl from "../../SvgFromUrl";
-import { APIAttachment, APIEmbed } from "discord-api-types/v10";
+import type { APIAttachment, APIEmbed } from "discord-api-types/v10";
 
 interface VideoAttachmentProps {
   attachmentOrEmbed:

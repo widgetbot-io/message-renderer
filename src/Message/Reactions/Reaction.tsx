@@ -2,7 +2,7 @@ import * as Styles from "./style";
 import React, { useCallback, useMemo } from "react";
 import Tooltip from "../../Tooltip";
 import { findDefaultEmojiByUnicode } from "../../emojiData";
-import { APIReaction } from "discord-api-types/v10";
+import type { APIReaction } from "discord-api-types/v10";
 
 interface ReactionProps {
   reaction: APIReaction;

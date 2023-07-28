@@ -1,5 +1,6 @@
 import * as Styles from "./style";
-import React, { Fragment, ReactNode, useMemo } from "react";
+import type { ReactNode } from "react";
+import React, { Fragment, useMemo } from "react";
 import emoji from "react-easy-emoji";
 import { emojiCss } from "./style";
 import Tooltip from "../Tooltip";
@@ -39,11 +40,12 @@ export type EmojiProps = {
   disableTooltip?: boolean;
   emojiName: string;
   enlarged?: boolean;
+  src: React.ComponentPropsWithRef<"img">["src"]; // because of eslint false positive
 } & React.ComponentPropsWithRef<"img">;
 
 function Emoji({
   src,
-  disableTooltip,
+  disableTooltip = false,
   emojiName,
   enlarged,
   ...props

@@ -1,6 +1,6 @@
 import * as Styles from "./style";
 import React from "react";
-import { APIEmbed } from "discord-api-types/v10";
+import type { APIEmbed } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
 
 export interface GifVEmbedProps {

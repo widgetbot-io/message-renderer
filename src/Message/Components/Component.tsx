@@ -1,6 +1,7 @@
-import {
+import type {
   APIMessage,
-  APIMessageActionRowComponent,
+  APIMessageActionRowComponent} from "discord-api-types/v10";
+import {
   ComponentType,
 } from "discord-api-types/v10";
 import ButtonComponent from "./ButtonComponent";

@@ -5,7 +5,7 @@ import webpCheck from "../utils/webpCheck";
 import { memoize } from "lodash";
 import * as React from "react";
 import { Twemoji } from "../Emoji";
-import { APIRole } from "discord-api-types/v10";
+import type { APIRole } from "discord-api-types/v10";
 
 interface RoleIconProps {
   role: APIRole;

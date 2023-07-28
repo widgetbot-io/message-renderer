@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
+import React from "react";
 import { globalCss, css, theme } from "./Stitches/stitches.config";
 import {
   tooltipAnimDurationMs,
@@ -6,7 +7,8 @@ import {
   tooltipPrefix,
 } from "./Tooltip";
 import { hljsTheme } from "./markdown/render/elements/code/hljs";
-import { Config, ConfigContext, PartialSvgConfig } from "./core/ConfigContext";
+import type { Config, PartialSvgConfig } from "./core/ConfigContext";
+import { ConfigContext } from "./core/ConfigContext";
 
 type MessageRendererProviderProps<SvgConfig extends PartialSvgConfig> = {
   children: ({ themeClass }: { themeClass: string }) => ReactNode;
@@ -125,7 +127,11 @@ function MessageRendererProvider<TConfig extends PartialSvgConfig>({
     <ConfigContext.Provider
       value={config as unknown as Config<PartialSvgConfig>}
     >
-      {children({ themeClass: `${theme} ${extraCss} ${config.themeOverrideClassName ?? ''}` })}
+      {children({
+        themeClass: `${theme} ${extraCss} ${
+          config.themeOverrideClassName ?? ""
+        }`,
+      })}
     </ConfigContext.Provider>
   );
 }

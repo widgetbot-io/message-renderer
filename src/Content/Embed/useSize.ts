@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { APIEmbedImage } from "discord-api-types/v10";
+import type { APIEmbedImage } from "discord-api-types/v10";
 
 function useSize(
   type: string,

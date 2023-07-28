@@ -1,9 +1,10 @@
 import Tooltip from "../Tooltip";
 import React from "react";
 import * as Styles from "./style";
-import { APIUser } from "discord-api-types/v10";
+import type { APIUser } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 
+// todo: support custom
 const verified = (
   <Tooltip placement="top" overlay="Verified Bot">
     <Styles.VerifiedBot
@@ -23,12 +24,12 @@ const verified = (
 
 interface TagProps {
   author: APIUser;
-  crosspost: boolean;
-  referenceGuild: string;
+  crossPost: boolean;
+  referenceGuild: string | undefined;
 }
 
 // todo: support custom
-function ChatTag({ author, crosspost, referenceGuild }: TagProps) {
+function ChatTag({ author, crossPost, referenceGuild }: TagProps) {
   const { chatBadge: ChatBadge } = useConfig();
 
   if (ChatBadge !== undefined) {
@@ -43,9 +44,9 @@ function ChatTag({ author, crosspost, referenceGuild }: TagProps) {
       <Styles.Tag className="verified system">{verified} SYSTEM</Styles.Tag>
     );
 
-  if (crosspost) return <Styles.Tag className="server">SERVER</Styles.Tag>;
+  if (crossPost) return <Styles.Tag className="server">SERVER</Styles.Tag>;
 
-  if (author.flags & (1 << 16))
+  if (author.flags !== undefined && author.flags & (1 << 16))
     return <Styles.Tag className="verified bot">{verified} BOT</Styles.Tag>;
 
   return <Styles.Tag className="bot">BOT</Styles.Tag>;

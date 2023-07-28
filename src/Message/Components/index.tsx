@@ -1,4 +1,4 @@
-import { APIMessage } from "discord-api-types/v10";
+import type { APIMessage } from "discord-api-types/v10";
 import ActionRow from "./ActionRow";
 import React from "react";
 import * as Styles from "./style";

@@ -4,7 +4,7 @@ import ImageAttachment from "./ImageAttachment";
 import GenericAttachment from "./GenericAttachment";
 import * as Styles from "./style";
 
-import { APIAttachment } from "discord-api-types/v10";
+import type { APIAttachment } from "discord-api-types/v10";
 
 export interface AttachmentProps {
   attachment: APIAttachment;

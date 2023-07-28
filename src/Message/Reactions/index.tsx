@@ -1,7 +1,7 @@
 import * as Styles from "./style";
 import Reaction from "../Reactions/Reaction";
 import React from "react";
-import { APIReaction } from "discord-api-types/v10";
+import type { APIReaction } from "discord-api-types/v10";
 
 interface ReactionsProps {
   reactions: APIReaction[];

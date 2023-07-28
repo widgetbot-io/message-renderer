@@ -1,7 +1,7 @@
 import useSize from "./useSize";
 import React from "react";
 import * as Styles from "./style";
-import { APIAttachment } from "discord-api-types/v10";
+import type { APIAttachment } from "discord-api-types/v10";
 
 interface ImageAttachmentProps {
   attachment: APIAttachment;
