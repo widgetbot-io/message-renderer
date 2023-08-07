@@ -8,7 +8,9 @@ export interface GifVEmbedProps {
 }
 
 function GifVEmbed({ embed }: GifVEmbedProps) {
-  const size = useSize(embed.video.width, embed.video.height);
+  const size = useSize(embed.video?.width ?? 1, embed.video?.height ?? 1);
+
+  if (!("video" in embed) || !embed.video) return null;
 
   return (
     <Styles.MediaEmbed

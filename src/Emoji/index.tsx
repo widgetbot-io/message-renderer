@@ -40,7 +40,7 @@ export type EmojiProps = {
   disableTooltip?: boolean;
   emojiName: string;
   enlarged?: boolean;
-  src: React.ComponentPropsWithRef<"img">["src"]; // because of eslint false positive
+  src?: React.ComponentPropsWithRef<"img">["src"]; // because of eslint false positive
 } & React.ComponentPropsWithRef<"img">;
 
 function Emoji({

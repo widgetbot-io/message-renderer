@@ -46,7 +46,7 @@ function ChatTag({ author, crossPost, referenceGuild }: TagProps) {
 
   if (crossPost) return <Styles.Tag className="server">SERVER</Styles.Tag>;
 
-  if (author.flags !== undefined && author.flags & (1 << 16))
+  if (author.flags !== undefined && (author.flags & (1 << 16)) !== 0)
     return <Styles.Tag className="verified bot">{verified} BOT</Styles.Tag>;
 
   return <Styles.Tag className="bot">BOT</Styles.Tag>;

@@ -17,6 +17,11 @@ export interface EmbedProps {
 }
 
 function Embed({ embed, images }: EmbedProps) {
+  if (embed.type === undefined) {
+    console.error("Embed: Embed type is undefined", embed);
+    return null;
+  }
+
   if (embed.type === EmbedType.GIFV) return <GifVEmbed embed={embed} />;
 
   if (embed.type === EmbedType.Image) return <ImageEmbed embed={embed} />;
@@ -33,7 +38,7 @@ function Embed({ embed, images }: EmbedProps) {
     embed.type,
     embed.image,
     "EmbedImage",
-    images?.length > 0
+    !images || images.length > 0
   );
 
   const {
@@ -90,7 +95,7 @@ function Embed({ embed, images }: EmbedProps) {
               proxyUrl={embed.video.proxy_url}
               width={embed.video.width}
               height={embed.video.height}
-              thumbnail={embed.thumbnail.proxy_url}
+              thumbnail={embed.thumbnail?.proxy_url}
             />
           ) : (
             embed.description && (
@@ -121,8 +126,8 @@ function Embed({ embed, images }: EmbedProps) {
           <Styles.Image
             src={embed.thumbnail.proxy_url}
             // originalUrl={embed.thumbnail.url}
-            width={widthThumbnail}
-            height={heightThumbnail}
+            width={widthThumbnail ?? undefined}
+            height={heightThumbnail ?? undefined}
           />
         )}
       </Styles.ContentAndThumbnail>
@@ -130,11 +135,11 @@ function Embed({ embed, images }: EmbedProps) {
         <Styles.Image
           src={embed.image.proxy_url}
           // originalUrl={embed.image.url}
-          width={widthImage}
-          height={heightImage}
+          width={widthImage ?? undefined}
+          height={heightImage ?? undefined}
         />
       )}
-      {images?.length > 0 && (
+      {images && images.length > 0 && (
         <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>

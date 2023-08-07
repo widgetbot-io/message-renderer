@@ -8,6 +8,15 @@ interface ImageAttachmentProps {
 }
 
 function ImageAttachment(props: ImageAttachmentProps) {
+  if (!props.attachment.width || !props.attachment.height) {
+    // todo: dev mode only
+    console.error(
+      "ImageAttachment: attachment has no width or height",
+      props.attachment
+    );
+    return null;
+  }
+
   const { width, height } = useSize(
     props.attachment.width,
     props.attachment.height

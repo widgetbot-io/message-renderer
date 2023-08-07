@@ -1,5 +1,5 @@
 import * as Styles from "./style";
-import type { ReactNode} from "react";
+import type { ReactNode } from "react";
 import React, { useState } from "react";
 import type { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
@@ -75,6 +75,11 @@ function EmbedVideo(props: EmbedVideoProps) {
         />
       </ThumbnailWrapper>
     );
+
+  if (props.url === undefined) {
+    console.error("EmbedVideo: url is undefined when proxyUrl is undefined");
+    return null;
+  }
 
   const url = new URL(props.url);
   url.searchParams.set("autoplay", "1");

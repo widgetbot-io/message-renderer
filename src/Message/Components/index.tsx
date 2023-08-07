@@ -9,6 +9,8 @@ interface ComponentsProps {
 }
 
 function Components({ components, message }: ComponentsProps) {
+  if (!components) return null;
+
   return (
     <Styles.Components>
       {components.map((actionRow, index) => (
