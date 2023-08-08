@@ -73,6 +73,6 @@ const stitches = createStitches({
   },
 });
 
-export const commonComponentId = 'wb';
+export const commonComponentId = import.meta.env.DEV ? undefined : "wb";
 
 export const { styled, theme, globalCss, keyframes, css } = stitches;
