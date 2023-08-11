@@ -27,7 +27,6 @@ interface TagProps {
   referenceGuild: string;
 }
 
-// todo: support custom
 function ChatTag({ author, crosspost, referenceGuild }: TagProps) {
   const { chatBadge: ChatBadge } = useConfig();
 
