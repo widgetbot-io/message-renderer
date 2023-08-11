@@ -22,6 +22,12 @@ const verified = (
   </Tooltip>
 );
 
+function isVerifiedBot(flags: number | undefined) {
+  const FLAG_VERIFIED = 1 << 16;
+
+  return flags !== undefined && (flags & FLAG_VERIFIED) !== 0;
+}
+
 interface TagProps {
   author: APIUser;
   crossPost: boolean;
@@ -46,7 +52,7 @@ function ChatTag({ author, crossPost, referenceGuild }: TagProps) {
 
   if (crossPost) return <Styles.Tag className="server">SERVER</Styles.Tag>;
 
-  if (author.flags !== undefined && (author.flags & (1 << 16)) !== 0)
+  if (isVerifiedBot(author.flags))
     return <Styles.Tag className="verified bot">{verified} BOT</Styles.Tag>;
 
   return <Styles.Tag className="bot">BOT</Styles.Tag>;

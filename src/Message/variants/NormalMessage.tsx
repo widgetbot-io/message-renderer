@@ -45,6 +45,8 @@ function getMiniAvatarUrl(
   return null;
 }
 
+const FLAG_CROSSPOST = 1 << 1;
+
 const ReplyInfo = memo((props: ReplyInfoProps) => {
   const miniAvatarUrl = useMemo(
     () => getMiniAvatarUrl(props.referencedMessage, props.interaction),
@@ -133,7 +135,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
             <ChatTag
               author={props.referencedMessage.author}
               crossPost={Boolean(
-                (props.referencedMessage.flags ?? 0) & (1 << 1)
+                (props.referencedMessage.flags ?? 0) & FLAG_CROSSPOST
               )}
               referenceGuild={
                 props.referencedMessage.message_reference?.guild_id
@@ -220,7 +222,7 @@ function NormalMessage(props: MessageProps) {
             guildId={guildId}
             author={props.message.author}
             avatarAnimated={props.isHovered ?? false}
-            crossPost={Boolean((props.message.flags ?? 0) & (1 << 1))}
+            crossPost={Boolean((props.message.flags ?? 0) & FLAG_CROSSPOST)}
             referenceGuild={props.message.message_reference?.guild_id}
           />
           {props.hideTimestamp || (
