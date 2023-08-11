@@ -8,17 +8,18 @@ export const Mention = styled.withConfig({
   displayName: "mention",
   componentId: commonComponentId,
 })("span", {
-  backgroundColor: theme.colors.mentionBackground,
+  backgroundColor: `var(--mention-color, ${theme.colors.mentionBackground})`,
   color: theme.colors.mentionForeground,
   borderRadius: 3,
   padding: `0 ${theme.space.xs}`,
   fontWeight: 500,
+  transition: "background-color 50ms ease-out,color 50ms ease-out",
 
   variants: {
     canBeClicked: {
       true: {
         "&:hover": {
-          // todo: go to full color, hard because of role colors and SSR..
+          backgroundColor: `var(--mention-color-hover, ${theme.colors.mentionBackgroundHover})`,
           textDecoration: "underline",
           cursor: "pointer",
         },

@@ -34,7 +34,7 @@ export const Base = styled.withConfig({
 
         [`${Heading}`]: {
           display: "inline",
-          fontSize: '100%'
+          fontSize: "100%",
         },
       },
     },

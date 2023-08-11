@@ -1,4 +1,3 @@
-import * as AuthorStyles from "../style/author";
 import MessageAuthor from "../MessageAuthor";
 import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
@@ -33,12 +32,12 @@ function RecipientRemove(props: RecipientRemoveProps) {
           author={props.author}
           guildId={guildId}
           onlyShowUsername
-        />{" "}
-        removed{" "}
-        <AuthorStyles.Username>
-          {getDisplayName(props.target)}
-        </AuthorStyles.Username>{" "}
-        from the thread.
+        /> removed{" "}
+        <MessageAuthor
+          author={props.target}
+          guildId={guildId}
+          onlyShowUsername
+        /> from the thread.
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

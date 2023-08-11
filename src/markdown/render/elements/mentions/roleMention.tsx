@@ -23,9 +23,10 @@ function RoleMention({ roleId }: RoleMentionProps) {
 
   return (
     <Styles.Mention
-      style={{
+      css={{
         color: `rgb(${red}, ${green}, ${blue})`,
-        backgroundColor: `rgba(${red}, ${green}, ${blue}, 0.1)`,
+        "--mention-color": `rgba(${red}, ${green}, ${blue}, 0.1)`,
+        "--mention-color-hover": `rgba(${red}, ${green}, ${blue}, 0.3)`,
       }}
       onClick={() => roleMentionOnClick?.(role)}
       canBeClicked={roleMentionOnClick !== undefined}

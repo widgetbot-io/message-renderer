@@ -1,4 +1,3 @@
-import * as AuthorStyles from "../style/author";
 import MessageAuthor from "../MessageAuthor";
 import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
@@ -34,12 +33,12 @@ function RecipientAdd(props: RecipientAddProps) {
           author={props.author}
           guildId={guildId}
           onlyShowUsername
-        />{" "}
-        added{" "}
-        <AuthorStyles.Username>
-          {getDisplayName(props.target)}
-        </AuthorStyles.Username>{" "}
-        to the thread.
+        /> added{" "}
+        <MessageAuthor
+          author={props.target}
+          guildId={guildId}
+          onlyShowUsername
+        /> to the thread.
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

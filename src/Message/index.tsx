@@ -33,6 +33,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.ChannelPinnedMessage:
       return (
         <ChannelPinnedMessage
+          channelId={props.message.channel_id}
           createdAt={props.message.timestamp}
           author={props.message.author}
           channelId={props.message.channel_id}

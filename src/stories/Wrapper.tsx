@@ -394,6 +394,9 @@ const Wrapper: Decorator = (Story) => {
           `Button by custom id "${customId}" pressed on message ${message.id}!`
         );
       }}
+      openPinnedMessagesOnClick={(channel) => {
+        alert(`Open pinned messages clicked on channel ${channel.name}!`);
+      }}
       chatBadge={({ user, TagWrapper }: ChatBadgeProps) => {
         if (user.id === "132819036282159104")
           return <TagWrapper>COOL</TagWrapper>;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo } from "react";
+import { ComponentProps, useMemo } from "react";
 import ChatTag from "../ChatTag";
 import RoleIcon from "./RoleIcon";
 import getAvatar from "../utils/getAvatar";
@@ -8,7 +8,7 @@ import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 import getDisplayName from "../utils/getDisplayName";
 
-interface MessageAuthorProps {
+interface MessageAuthorProps extends ComponentProps<typeof Styles.MessageAuthor> {
   author: APIUser;
   avatarAnimated?: boolean;
   onlyShowUsername?: boolean;
@@ -24,8 +24,9 @@ function MessageAuthor({
   crossPost,
   referenceGuild,
   guildId,
+  ...props
 }: MessageAuthorProps) {
-  const { resolveRole, resolveMember } = useConfig();
+  const { resolveRole, resolveMember, userMentionOnClick } = useConfig();
   const member = guildId ? resolveMember(author.id, guildId) : null;
   const isGuildMember = member !== null;
 
@@ -70,7 +71,11 @@ function MessageAuthor({
 
   if (onlyShowUsername) {
     return (
-      <Styles.MessageAuthor>
+      <Styles.MessageAuthor
+        clickable={userMentionOnClick !== undefined}
+        {...props}
+        onClick={() => userMentionOnClick?.(user)}
+      >
         <Styles.Username style={{ color: dominantRoleColor }}>
           {displayName}
         </Styles.Username>
@@ -79,7 +84,11 @@ function MessageAuthor({
   }
 
   return (
-    <Styles.MessageAuthor>
+    <Styles.MessageAuthor
+      clickable={userMentionOnClick !== undefined}
+      {...props}
+      onClick={() => userMentionOnClick?.(user)}
+    >
       <Styles.Avatar
         src={getAvatar(author, {
           animated: avatarAnimated ?? false,

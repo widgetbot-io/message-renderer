@@ -1,5 +1,5 @@
 import MessageAuthor from "../MessageAuthor";
-import React, { useCallback } from "react";
+import React, { useMemo } from "react";
 import LargeTimestamp from "../LargeTimestamp";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
@@ -13,11 +13,13 @@ interface ChannelPinnedMessageProps {
 }
 
 function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
-  const openPinnedMessage = useCallback(
-    // todo: implement ?
-    () => {},
-    []
-  );
+  const { openPinnedMessagesOnClick, resolveChannel } = useConfig();
+
+  const channel = useMemo(() => {
+    if (!openPinnedMessagesOnClick) return undefined;
+
+    return resolveChannel(props.channelId);
+  }, [resolveChannel, props.channelId, openPinnedMessagesOnClick]);
 
   const { resolveChannel } = useConfig();
   const channel = resolveChannel(props.channelId);
@@ -38,7 +40,11 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
           onlyShowUsername
         />{" "}
         pinned a message to this channel. See all{" "}
-        <Styles.SystemMessageLink onClick={openPinnedMessage}>
+        <Styles.SystemMessageLink
+          onClick={() => {
+            if (channel) openPinnedMessagesOnClick?.(channel);
+          }}
+        >
           pinned messages
         </Styles.SystemMessageLink>
         .
