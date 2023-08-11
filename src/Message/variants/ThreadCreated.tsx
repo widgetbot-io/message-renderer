@@ -5,6 +5,7 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { APIMessage, MessageType } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface ThreadCreatedProps {
   createdAt: APIMessage["timestamp"];
@@ -16,14 +17,11 @@ interface ThreadCreatedProps {
 }
 
 function ThreadCreated(props: ThreadCreatedProps) {
-  // todo: make work
-  // const openThread = useCallback(() => generalStore.setActiveThread({
-  //   id: props.messageReference.channelId,
-  //   name: props.messageContent,
-  //   messageCount: 0,
-  //   archivedAt: null,
-  //   locked: false
-  // }), [props.messageId, props.messageContent]);
+  const { seeThreadOnClick } = useConfig();
+
+  function openThread() {
+    if (props.thread) seeThreadOnClick?.(props.messageId, props.thread);
+  }
 
   if (props.thread === null)
     return (
@@ -36,7 +34,7 @@ function ThreadCreated(props: ThreadCreatedProps) {
           />
           <MessageAuthor author={props.author} onlyShowUsername /> started a
           thread:{" "}
-          <Styles.SystemMessageLink /* onClick={openThread} */>
+          <Styles.SystemMessageLink onClick={openThread}>
             {props.messageContent}
           </Styles.SystemMessageLink>
         </Styles.SystemMessageContent>
@@ -54,8 +52,8 @@ function ThreadCreated(props: ThreadCreatedProps) {
         />
         <MessageAuthor author={props.author} onlyShowUsername /> started a
         thread:{" "}
-        <Styles.SystemMessageLink /* onClick={openThread} */>
-          {props.thread.name}
+        <Styles.SystemMessageLink onClick={openThread}>
+          {props.thread?.name ?? "Unknown thread"}
         </Styles.SystemMessageLink>
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />

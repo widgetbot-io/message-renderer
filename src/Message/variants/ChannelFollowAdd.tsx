@@ -4,6 +4,7 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { APIMessage } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface ChannelFollowAddProps {
   content: string;
@@ -20,8 +21,7 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername /> has
-        added{" "}
+        <MessageAuthor author={props.author} onlyShowUsername /> has added{" "}
         <Styles.SystemMessageLink>{props.content}</Styles.SystemMessageLink> to
         this channel. It{"'"}s most important updates will show up here.
         <LargeTimestamp timestamp={props.createdAt} />

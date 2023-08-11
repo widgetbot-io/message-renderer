@@ -9,6 +9,17 @@ export const MessageAuthor = styled.withConfig({
   componentId: commonComponentId,
 })("span", {
   display: "inline-flex",
+
+  variants: {
+    clickable: {
+      true: {
+        "&:hover": {
+          cursor: "pointer",
+          textDecoration: "underline",
+        },
+      },
+    },
+  },
 });
 
 export const Username = styled.withConfig({
