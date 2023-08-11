@@ -1,6 +1,6 @@
 import { MessageGroup } from "../index";
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import Wrapper from "./Wrapper";
 import { MessageType } from "discord-api-types/v10";
 import { testUser } from "./commonTestData";

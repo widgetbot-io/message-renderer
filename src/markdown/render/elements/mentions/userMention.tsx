@@ -1,6 +1,6 @@
 import * as Styles from "./style";
 import * as React from "react";
-import { Snowflake } from "discord-api-types/v10";
+import type { Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
 import getDisplayName from "../../../../utils/getDisplayName";
@@ -18,7 +18,9 @@ function UserMention({ userId }: UserMentionProps) {
 
   return (
     <Styles.Mention
-      onClick={() => userMentionOnClick?.(user)}
+      onClick={() => {
+        if (user !== null) userMentionOnClick?.(user);
+      }}
       canBeClicked={userMentionOnClick !== undefined}
     >
       <Styles.MentionIcon>@</Styles.MentionIcon>

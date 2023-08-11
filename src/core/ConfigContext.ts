@@ -1,4 +1,5 @@
-import { createContext, ReactElement, useContext } from "react";
+import type { ReactElement} from "react";
+import { createContext, useContext } from "react";
 import type {
   APIChannel,
   APIGuild,
@@ -9,7 +10,7 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import type { SvgConfig } from "./svgs";
-import { Tag } from "../ChatTag/style";
+import type { Tag } from "../ChatTag/style";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 

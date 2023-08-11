@@ -1,7 +1,8 @@
 import NormalMessage from "./variants/NormalMessage";
 import React, { memo } from "react";
 import MessageContainer from "./MessageContainer";
-import { APIMessage, MessageType } from "discord-api-types/v10";
+import type { APIChannel, APIMessage } from "discord-api-types/v10";
+import { MessageType } from "discord-api-types/v10";
 import GuildMemberJoin from "./variants/GuildMemberJoin";
 import GuildDiscoveryRequalified from "./variants/GuildDiscoveryRequalified";
 import GuildDiscoveryGracePeriodInitialWarning from "./variants/GuildDiscoveryGracePeriodInitialWarning";
@@ -16,6 +17,7 @@ import RecipientAdd from "./variants/RecipientAdd";
 import RecipientRemove from "./variants/RecipientRemove";
 import ThreadCreated from "./variants/ThreadCreated";
 import { useConfig } from "../core/ConfigContext";
+import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
@@ -41,6 +43,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
         <GuildMemberJoin
           createdAt={props.message.timestamp}
           author={props.message.author}
+          channelId={props.message.channel_id}
         />
       );
     case MessageType.GuildDiscoveryRequalified:
@@ -63,6 +66,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           createdAt={props.message.timestamp}
           author={props.message.author}
           content={props.message.content}
+          channelId={props.message.channel_id}
         />
       );
     case MessageType.RecipientAdd:
@@ -71,6 +75,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           createdAt={props.message.timestamp}
           author={props.message.author}
           target={props.message.mentions[0]}
+          channelId={props.message.channel_id}
         />
       );
     case MessageType.RecipientRemove:
@@ -79,12 +84,14 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           createdAt={props.message.timestamp}
           author={props.message.author}
           target={props.message.mentions[0]}
+          channelId={props.message.channel_id}
         />
       );
     case MessageType.ChannelNameChange:
       return (
         <ChannelNameChange
           createdAt={props.message.timestamp}
+          channelId={props.message.channel_id}
           author={props.message.author}
           content={props.message.content}
         />
@@ -93,9 +100,10 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
       return (
         <ThreadCreated
           createdAt={props.message.timestamp}
-          thread={props.message.thread}
+          thread={props.message.thread as APIChannel}
           author={props.message.author}
           messageId={props.message.id}
+          channelId={props.message.channel_id}
           messageReference={props.message.message_reference}
           messageContent={props.message.content}
         />
@@ -110,6 +118,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           createdAt={props.message.timestamp}
           author={props.message.author}
           content={props.message.content}
+          channelId={props.message.channel_id}
         />
       );
     case MessageType.GuildDiscoveryGracePeriodInitialWarning:
@@ -130,10 +139,9 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
       return <NormalMessage {...props} isContextMenuInteraction={true} />;
     case MessageType.ThreadStarterMessage:
       return (
-        <NormalMessage
-          {...props}
-          message={props.message.referenced_message}
-          noThreadButton={true}
+        <ThreadStarterMessage
+          referencedMessage={props.message.referenced_message}
+          createdAt={props.message.timestamp}
         />
       );
     default: {

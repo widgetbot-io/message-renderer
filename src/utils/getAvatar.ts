@@ -1,4 +1,4 @@
-import { APIUser } from "discord-api-types/v10";
+import type { APIUser } from "discord-api-types/v10";
 
 type AvatarSize =
   | 16
@@ -60,14 +60,17 @@ function getAvatar(
   animated ??= false;
   size ??= 80;
 
+  const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${
+    Number(user.discriminator ?? 0) % 5
+  }.png`;
+
   const avatarUrl = getAvatarProperty(user, size);
+
+  if (avatarUrl === null) return defaultAvatar;
+
   const potentialGif = animated ? gifCheck(avatarUrl) : avatarUrl;
 
-  return avatarUrl
-    ? potentialGif.replace("webp", "png")
-    : `https://cdn.discordapp.com/embed/avatars/${
-        Number(user.discriminator ?? 0) % 5
-      }.png`;
+  return avatarUrl ? potentialGif.replace("webp", "png") : defaultAvatar;
 }
 
 export default getAvatar;
