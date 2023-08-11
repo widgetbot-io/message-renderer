@@ -36,7 +36,6 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           channelId={props.message.channel_id}
           createdAt={props.message.timestamp}
           author={props.message.author}
-          channelId={props.message.channel_id}
         />
       );
     case MessageType.UserJoin:

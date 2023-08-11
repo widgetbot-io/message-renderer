@@ -22,7 +22,7 @@ const verified = (
   </Tooltip>
 );
 
-function isVerifiedBot(flags: number | undefined) {
+function isVerifiedBot(flags?: number) {
   const FLAG_VERIFIED = 1 << 16;
 
   return flags !== undefined && (flags & FLAG_VERIFIED) !== 0;

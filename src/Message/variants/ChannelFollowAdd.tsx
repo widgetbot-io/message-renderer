@@ -4,7 +4,6 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
-import { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 
 interface ChannelFollowAddProps {
