@@ -3,6 +3,7 @@ import * as React from "react";
 import { Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
+import { colorIntToRgba } from "../../../../utils/colorIntToCss";
 
 interface RoleMentionProps {
   roleId: Snowflake;
@@ -17,16 +18,12 @@ function RoleMention({ roleId }: RoleMentionProps) {
     return <>@deleted-role</>;
   }
 
-  const red = (role.color & 0xff_00_00) >> 16;
-  const green = (role.color & 0x00_ff_00) >> 8;
-  const blue = role.color & 0x00_00_ff;
-
   return (
     <Styles.Mention
       css={{
-        color: `rgb(${red}, ${green}, ${blue})`,
-        "--mention-color": `rgba(${red}, ${green}, ${blue}, 0.1)`,
-        "--mention-color-hover": `rgba(${red}, ${green}, ${blue}, 0.3)`,
+        color: colorIntToRgba(role.color),
+        "--mention-color": colorIntToRgba(role.color, 0.1),
+        "--mention-color-hover": colorIntToRgba(role.color, 0.3),
       }}
       onClick={() => roleMentionOnClick?.(role)}
       canBeClicked={roleMentionOnClick !== undefined}
