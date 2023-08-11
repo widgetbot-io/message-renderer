@@ -22,8 +22,16 @@ const buttonStyleMap: Record<
   [ButtonStyle.Success]: "success",
 };
 
+type ButtonComponentWithCustomId = APIButtonComponentWithCustomId & {
+  emoji: APIButtonComponentWithCustomId["emoji"] & { name: string };
+};
+
+type ButtonComponentWithURL = APIButtonComponentWithURL & {
+  emoji: APIButtonComponentWithURL["emoji"] & { name: string };
+};
+
 interface ButtonComponentProps {
-  button: APIButtonComponentWithCustomId | APIButtonComponentWithURL;
+  button: ButtonComponentWithCustomId | ButtonComponentWithURL;
   message: APIMessage;
 }
 

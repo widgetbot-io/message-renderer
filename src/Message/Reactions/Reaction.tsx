@@ -22,26 +22,24 @@ function Reaction(props: ReactionProps) {
       props.reaction.emoji.animated ? "gif" : "webp"
     }?v=1&size=64&quality=lossless`;
 
+    const emojiName = props.reaction.emoji.name ?? "unknown emoji";
+
     return (
       <Styles.ReactionTooltip>
         {props.reaction.emoji.id !== null ? (
           <Styles.ReactionEmoji
-            emojiName={props.reaction.emoji.name}
+            emojiName={emojiName}
             src={url}
             disableTooltip
             enlarged
           />
         ) : (
-          <Styles.ReactionEmoji
-            emojiName={props.reaction.emoji.name}
-            disableTooltip
-            enlarged
-          />
+          <Styles.ReactionEmoji emojiName={emojiName} disableTooltip enlarged />
         )}
         :
         {props.reaction.emoji.id !== null
-          ? props.reaction.emoji.name
-          : findDefaultEmojiByUnicode(props.reaction.emoji.name)
+          ? emojiName
+          : findDefaultEmojiByUnicode(props.reaction.emoji.name ?? "")
               ?.keywords?.[0] ?? "unknown emoji"}
         :
       </Styles.ReactionTooltip>
@@ -58,11 +56,13 @@ function Reaction(props: ReactionProps) {
         {emojiUrl ? (
           <Styles.ReactionEmoji
             src={emojiUrl}
+            // @ts-expect-error TS2769 (can be null only in reaction emoji objects)
             emojiName={props.reaction.emoji.name}
             disableTooltip
           />
         ) : (
           <Styles.ReactionEmoji
+            // @ts-expect-error TS2769 (can be null only in reaction emoji objects)
             emojiName={props.reaction.emoji.name}
             disableTooltip
           />

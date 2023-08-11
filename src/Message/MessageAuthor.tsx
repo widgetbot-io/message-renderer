@@ -40,7 +40,9 @@ function MessageAuthor({
       .map((id) => resolveRole(id))
       .filter(
         (role: APIRole | null): role is APIRole =>
-          role !== null && (role.icon !== null || role.unicode_emoji !== null)
+          role !== null &&
+          ((role.icon !== null && role.icon !== undefined) ||
+            (role.unicode_emoji !== null && role.unicode_emoji !== undefined))
       )
       .sort((a, b) => b.position - a.position);
 

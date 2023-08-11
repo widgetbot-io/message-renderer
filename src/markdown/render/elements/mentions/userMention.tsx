@@ -18,7 +18,9 @@ function UserMention({ userId }: UserMentionProps) {
 
   return (
     <Styles.Mention
-      onClick={() => userMentionOnClick?.(user)}
+      onClick={() => {
+        if (user !== null) userMentionOnClick?.(user);
+      }}
       canBeClicked={userMentionOnClick !== undefined}
     >
       <Styles.MentionIcon>@</Styles.MentionIcon>

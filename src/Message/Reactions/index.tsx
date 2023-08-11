@@ -13,7 +13,9 @@ function Reactions(props: ReactionsProps) {
       {props.reactions.map((reaction) => (
         <Reaction
           key={
-            reaction.emoji.animated + reaction.emoji.id + reaction.emoji.name
+            (reaction.emoji.animated ? "a" : "") +
+            reaction.emoji.id +
+            (reaction.emoji.name ?? "")
           }
           reaction={reaction}
         />

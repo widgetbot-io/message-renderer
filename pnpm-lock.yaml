@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.2.3
     version: 4.2.3
   discord-api-types:
-    specifier: ^0.37.48
-    version: 0.37.48
+    specifier: ^0.37.52
+    version: 0.37.52
   filesize:
     specifier: ^10.0.6
     version: 10.0.6
@@ -91,6 +91,9 @@ devDependencies:
   '@storybook/theming':
     specifier: ^7.0.27
     version: 7.0.27(react-dom@18.2.0)(react@18.2.0)
+  '@types/lodash':
+    specifier: ^4.14.197
+    version: 4.14.197
   '@types/memoizee':
     specifier: ^0.4.8
     version: 0.4.8
@@ -100,6 +103,9 @@ devDependencies:
   '@types/react':
     specifier: ^18.0.26
     version: 18.0.26
+  '@types/react-lazy-load-image-component':
+    specifier: ^1.5.3
+    version: 1.5.3
   '@types/storybook__react':
     specifier: ^5.2.1
     version: 5.2.1(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.4)
@@ -3922,7 +3928,7 @@ packages:
       '@storybook/preview-api': 7.0.27
       '@storybook/theming': 7.0.27(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.27
-      '@types/lodash': 4.14.195
+      '@types/lodash': 4.14.197
       color-convert: 2.0.1
       dequal: 2.0.3
       lodash: 4.17.21
@@ -4771,8 +4777,8 @@ packages:
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
     dev: true
 
-  /@types/lodash@4.14.195:
-    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==}
+  /@types/lodash@4.14.197:
+    resolution: {integrity: sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==}
     dev: true
 
   /@types/mdx@2.0.5:
@@ -4845,6 +4851,13 @@ packages:
     resolution: {integrity: sha512-j23ChnIEiW8aAP4KT8OVyTXOFr+Ri65BDnwzmfHFO9WHypXYevHFjeil1Cj7YH3emfCE924BwAmgW4hOv7Wg3g==}
     dependencies:
       '@types/react': 18.0.26
+    dev: true
+
+  /@types/react-lazy-load-image-component@1.5.3:
+    resolution: {integrity: sha512-hTzsQQ64mmPR6W03DQr6zhzeBGn17ExnVd7sLHqTQZQVd9Oi0Dy7tfSPgK0+AZV5YNC+e8Jw7oq9kzYfDkCDCA==}
+    dependencies:
+      '@types/react': 18.0.26
+      csstype: 3.1.2
     dev: true
 
   /@types/react-syntax-highlighter@11.0.4:
@@ -6896,8 +6909,8 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /discord-api-types@0.37.48:
-    resolution: {integrity: sha512-vu2NQJD7SZRjpKDC2DPNsxTz34KS53OrotA+LGRW6mcyT55Hjqu66aRrouzjYhea7tllL9I7rvWVX7bg3aT2AQ==}
+  /discord-api-types@0.37.52:
+    resolution: {integrity: sha512-TP99aMgY6rHuDIy056GDm1j2nGOcaLbFpjVbvAmv6N6vhkjHNqHXCHVqKtGisaQ8D15slbxTHNl/SSkPdx2syg==}
     dev: false
 
   /doctrine@2.1.0:

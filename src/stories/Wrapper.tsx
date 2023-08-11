@@ -135,8 +135,9 @@ function resolveRole(id: Snowflake): APIRole | null {
       hoist: false,
       managed: false,
       tags: {},
-      icon: null,
+      icon: "6b3d7f2ff245e627322355767b055d22",
       unicode_emoji: null,
+      flags: 0,
     };
 
   console.log(`Unknown role ${id}`);

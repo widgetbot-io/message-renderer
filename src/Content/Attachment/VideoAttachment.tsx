@@ -12,10 +12,17 @@ import Tooltip from "../../Tooltip";
 import SvgFromUrl from "../../SvgFromUrl";
 import type { APIAttachment, APIEmbed } from "discord-api-types/v10";
 
+export type Attachment = APIAttachment & { width: number; height: number };
+type Embed = APIEmbed & {
+  width: number;
+  height: number;
+  video: Required<APIEmbed["video"]>;
+};
+
 interface VideoAttachmentProps {
   attachmentOrEmbed:
-    | APIAttachment
-    | APIEmbed
+    | Attachment
+    | Embed
     | {
         url: string;
         width: number;
@@ -25,7 +32,7 @@ interface VideoAttachmentProps {
 
 function checkWhetherVideoEmbed(
   attachmentOrEmbed: VideoAttachmentProps["attachmentOrEmbed"]
-): attachmentOrEmbed is APIEmbed {
+): attachmentOrEmbed is Embed {
   return "video" in attachmentOrEmbed;
 }
 
@@ -92,36 +99,27 @@ function VideoAttachment(props: VideoAttachmentProps) {
   const { width: extractedWidth, height: extractedHeight } =
     checkWhetherVideoEmbed(props.attachmentOrEmbed)
       ? (props.attachmentOrEmbed.video as Exclude<
-          APIEmbed["video"],
+          Embed["video"],
           null | undefined
         >)
       : props.attachmentOrEmbed;
 
-  const { width, height } = useSize(
-    extractedWidth,
-    extractedHeight,
-    isFullscreen
-  );
-
   function fullScreenChange() {
     setIsFullscreen(document.fullscreenElement !== null);
   }
-
   function seekVideo(
     e: React.MouseEvent<HTMLDivElement>,
     overrideSeeking?: boolean
   ) {
     if (videoRef.current === null || (!isSeeking && !overrideSeeking)) return;
-
     const rect = e.currentTarget.getBoundingClientRect();
+
     const x = e.clientX - rect.left;
-
     const duration = videoRef.current?.duration;
-    if (duration === undefined) return;
 
+    if (duration === undefined) return;
     videoRef.current.currentTime = (x / rect.width) * duration;
   }
-
   useEffect(() => {
     document.addEventListener("fullscreenchange", fullScreenChange);
 
@@ -129,6 +127,14 @@ function VideoAttachment(props: VideoAttachmentProps) {
       document.removeEventListener("fullscreenchange", fullScreenChange);
     };
   }, []);
+
+  const { width, height } = useSize(
+    extractedWidth,
+    extractedHeight,
+    isFullscreen
+  );
+
+  if (width === undefined || height === undefined) return null;
 
   return (
     <Styles.VideoAttachmentContainer
