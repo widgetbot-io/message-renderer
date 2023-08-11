@@ -32,14 +32,17 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveMember(id: Snowflake, guildId: Snowflake): APIGuildMember | null;
   resolveGuild(id: Snowflake): APIGuild | null;
   resolveUser(id: Snowflake): APIUser | null;
+  chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
+  themeOverrideClassName?: string;
+
+  // Click handlers
   currentUser(): APIUser | null;
   seeThreadOnClick?(messageId: Snowflake, thread: APIChannel): void;
   userMentionOnClick?(user: APIUser): void;
   roleMentionOnClick?(role: APIRole): void;
   channelMentionOnClick?(channel: APIChannel): void;
+  openPinnedMessagesOnClick?(channel: APIChannel): void;
   messageComponentButtonOnClick?(message: APIMessage, customId: string): void;
-  chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
-  themeOverrideClassName?: string;
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({
