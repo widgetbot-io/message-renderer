@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo } from "react";
+import { ComponentProps, useMemo } from "react";
 import ChatTag from "../ChatTag";
 import RoleIcon from "./RoleIcon";
 import getAvatar from "../utils/getAvatar";
@@ -8,7 +8,8 @@ import type { APIGuildMember, APIUser } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 import getDisplayName from "../utils/getDisplayName";
 
-interface MessageAuthorProps {
+interface MessageAuthorProps
+  extends ComponentProps<typeof Styles.MessageAuthor> {
   author: APIUser | APIGuildMember;
   avatarAnimated?: boolean;
   onlyShowUsername?: boolean;
@@ -22,8 +23,9 @@ function MessageAuthor({
   avatarAnimated,
   crossPost,
   referenceGuild,
+  ...props
 }: MessageAuthorProps) {
-  const { resolveRole } = useConfig();
+  const { resolveRole, userMentionOnClick } = useConfig();
   const isGuildMember = "joined_at" in author;
   const user = isGuildMember ? author.user : author;
   const displayName = isGuildMember
@@ -62,7 +64,11 @@ function MessageAuthor({
 
   if (onlyShowUsername) {
     return (
-      <Styles.MessageAuthor>
+      <Styles.MessageAuthor
+        clickable={userMentionOnClick !== undefined}
+        {...props}
+        onClick={() => userMentionOnClick?.(user)}
+      >
         <Styles.Username style={{ color: dominantRoleColor }}>
           {displayName}
         </Styles.Username>
@@ -71,7 +77,11 @@ function MessageAuthor({
   }
 
   return (
-    <Styles.MessageAuthor>
+    <Styles.MessageAuthor
+      clickable={userMentionOnClick !== undefined}
+      {...props}
+      onClick={() => userMentionOnClick?.(user)}
+    >
       <Styles.Avatar
         src={getAvatar(user, {
           animated: avatarAnimated ?? false,

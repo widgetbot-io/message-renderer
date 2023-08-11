@@ -4,6 +4,7 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { APIMessage } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface GuildBoostProps {
   createdAt: APIMessage["timestamp"];
@@ -20,8 +21,8 @@ function GuildBoost(props: GuildBoostProps) {
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername /> just
-        boosted the server
+        <MessageAuthor author={props.author} onlyShowUsername /> just boosted
+        the server
         {props.content !== "" && (
           <>
             {" "}
