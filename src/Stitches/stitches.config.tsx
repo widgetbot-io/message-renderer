@@ -32,6 +32,7 @@ const stitches = createStitches({
       attachmentBorder: "rgba(27, 29, 32, 0.5)",
       danger: "#ed4245",
       mentionBackground: "rgba(88, 101, 242, 0.298)",
+      mentionBackgroundHover: "#5865f2",
       mentionForeground: "#c9cdfb",
       buttonPrimaryBackground: "#5865f2",
       buttonPrimaryHoverBackground: "#4752c4",
