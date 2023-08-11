@@ -1,6 +1,7 @@
-import React, { CSSProperties, useState } from "react";
+import type { CSSProperties } from "react";
+import React, { useState } from "react";
 import Message from "./Message";
-import { APIMessage } from "discord-api-types/v10";
+import type { APIMessage } from "discord-api-types/v10";
 
 export interface MessageProps {
   messages: APIMessage[];

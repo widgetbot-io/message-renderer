@@ -4,15 +4,17 @@ import ThreadButton from "../../Content/Thread/ThreadButton";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import { APIMessage, MessageType } from "discord-api-types/v10";
+import type { APIMessage } from "discord-api-types/v10";
+import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 
 interface ThreadCreatedProps {
   createdAt: APIMessage["timestamp"];
-  thread: APIMessage["thread"];
+  thread: Exclude<APIMessage["thread"], undefined>;
   author: APIMessage["author"];
   messageReference: APIMessage["message_reference"];
   messageId: APIMessage["id"];
+  channelId: APIMessage["channel_id"];
   messageContent: string;
 }
 
@@ -23,6 +25,11 @@ function ThreadCreated(props: ThreadCreatedProps) {
     if (props.thread) seeThreadOnClick?.(props.messageId, props.thread);
   }
 
+  const { resolveChannel } = useConfig();
+  const channel = resolveChannel(props.channelId);
+  const guildId =
+    channel !== null && "guild_id" in channel ? channel.guild_id : null;
+
   if (props.thread === null)
     return (
       <Styles.SystemMessage>
@@ -32,8 +39,12 @@ function ThreadCreated(props: ThreadCreatedProps) {
             height={SystemMessageIconSize}
             svg="IconThreadCreated"
           />
-          <MessageAuthor author={props.author} onlyShowUsername /> started a
-          thread:{" "}
+          <MessageAuthor
+            author={props.author}
+            guildId={guildId}
+            onlyShowUsername
+          />{" "}
+          started a thread:{" "}
           <Styles.SystemMessageLink onClick={openThread}>
             {props.messageContent}
           </Styles.SystemMessageLink>
@@ -50,10 +61,14 @@ function ThreadCreated(props: ThreadCreatedProps) {
           height={SystemMessageIconSize}
           svg="IconThreadCreated"
         />
-        <MessageAuthor author={props.author} onlyShowUsername /> started a
-        thread:{" "}
+        <MessageAuthor
+          author={props.author}
+          guildId={guildId}
+          onlyShowUsername
+        />{" "}
+        started a thread:{" "}
         <Styles.SystemMessageLink onClick={openThread}>
-          {props.thread?.name ?? "Unknown thread"}
+          {props.thread.name ?? "Unknown thread"}
         </Styles.SystemMessageLink>
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />

@@ -26,7 +26,7 @@ function ThreadButton(props: ThreadButtonProps) {
         <Styles.ThreadButtonTopLine>
           <Styles.ThreadButtonName>{props.thread.name}</Styles.ThreadButtonName>
           <Styles.SeeThreadButton
-            onClick={() => seeThreadOnClick(props.messageId, props.thread)}
+            onClick={() => seeThreadOnClick?.(props.messageId, props.thread)}
             role="button"
           >
             See Thread ›

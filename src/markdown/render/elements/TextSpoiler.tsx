@@ -1,4 +1,5 @@
-import React, { CSSProperties, PureComponent } from "react";
+import type { CSSProperties} from "react";
+import React, { PureComponent } from "react";
 
 interface Props {
   content: string;

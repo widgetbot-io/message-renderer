@@ -3,7 +3,8 @@ import React, { useMemo } from "react";
 import LargeTimestamp from "../LargeTimestamp";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import { APIMessage, MessageType, Snowflake } from "discord-api-types/v10";
+import type { APIMessage, Snowflake } from "discord-api-types/v10";
+import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 
 interface BoostTierUpgradeProps {
@@ -14,16 +15,25 @@ interface BoostTierUpgradeProps {
   author: APIMessage["author"];
 }
 
-function BoostTierUpgrade(props: BoostTierUpgradeProps) {
+function BoostTierUpgrade({
+  createdAt,
+  content,
+  channelId,
+  type,
+  author,
+}: BoostTierUpgradeProps) {
   const { resolveChannel, resolveGuild } = useConfig();
-  const channel = resolveChannel(props.channelId);
+  const channel = resolveChannel(channelId);
+  const guild =
+    channel !== null && "guild_id" in channel && channel.guild_id !== undefined
+      ? resolveGuild(channel.guild_id)
+      : null;
+
   const guildName =
-    channel !== null && "guild_id" in channel
-      ? resolveGuild(channel.guild_id).name ?? "Unknown Guild"
-      : "Unknown Guild";
+    guild !== null ? guild.name ?? "Unknown Guild" : "Unknown Guild";
 
   const newLevel = useMemo(() => {
-    switch (props.type) {
+    switch (type) {
       case MessageType.GuildBoostTier1:
         return 1;
       case MessageType.GuildBoostTier2:
@@ -33,7 +43,7 @@ function BoostTierUpgrade(props: BoostTierUpgradeProps) {
       default:
         return -1;
     }
-  }, [props.type]);
+  }, [type]);
 
   // todo: guildNameHere
   return (
@@ -44,12 +54,12 @@ function BoostTierUpgrade(props: BoostTierUpgradeProps) {
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={props.author} onlyShowUsername /> just boosted
-        the server <strong>{props.content}</strong> time
-        {props.content === "1" ? "" : "s"}! {guildName} has achieved{" "}
+        <MessageAuthor author={author} guildId={guild?.id} onlyShowUsername />{" "}
+        just boosted the server <strong>{content}</strong> time
+        {content === "1" ? "" : "s"}! {guildName} has achieved{" "}
         <strong>Level {newLevel}!</strong>
       </Styles.SystemMessageContent>
-      <LargeTimestamp timestamp={props.createdAt} />
+      <LargeTimestamp timestamp={createdAt} />
     </Styles.SystemMessage>
   );
 }

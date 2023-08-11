@@ -1,6 +1,6 @@
 import * as Styles from "./style";
 import React from "react";
-import { APIEmbed } from "discord-api-types/v10";
+import type { APIEmbed } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
 
 export interface GifVEmbedProps {
@@ -8,7 +8,9 @@ export interface GifVEmbedProps {
 }
 
 function GifVEmbed({ embed }: GifVEmbedProps) {
-  const size = useSize(embed.video.width, embed.video.height);
+  const size = useSize(embed.video?.width ?? 1, embed.video?.height ?? 1);
+
+  if (!("video" in embed) || !embed.video) return null;
 
   return (
     <Styles.MediaEmbed

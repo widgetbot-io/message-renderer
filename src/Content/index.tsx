@@ -1,8 +1,10 @@
-import React, { Children, memo, ReactNode, useMemo } from "react";
+import type { ReactNode } from "react";
+import React, { Children, memo, useMemo } from "react";
 import Moment from "moment/moment";
 import Message from "../Message";
 import * as Styles from "./style";
-import { APIMessage, MessageFlags } from "discord-api-types/v10";
+import type { APIEmbedImage, APIMessage } from "discord-api-types/v10";
+import { MessageFlags } from "discord-api-types/v10";
 import Tooltip from "../Tooltip";
 import SvgFromUrl from "../SvgFromUrl";
 import Markdown, { LinkMarkdown } from "../markdown/render";
@@ -30,6 +32,8 @@ const Edited = memo((props: EditedProps) => {
   );
 });
 
+Edited.displayName = "Edited";
+
 interface ReplyIconProps {
   message: ContentProps["message"];
 }
@@ -38,7 +42,7 @@ function ReplyIcon({ message }: ReplyIconProps) {
   if (message.interaction)
     return <Styles.ReplyIcon width={20} height={20} svg="IconCommand" />;
 
-  if (message.sticker_items?.length > 0)
+  if (message.sticker_items && message.sticker_items?.length > 0)
     return <Styles.ReplyIcon width={20} height={20} svg="IconSticker" />;
 
   if (message.attachments.length > 0 || message.embeds.length > 0)
@@ -71,7 +75,11 @@ function ContentCore(props: ContentCoreProps) {
     <Tooltip
       overlay={
         <Styles.ContentMessageTooltip>
-          <Message message={props.referencedMessage} isFirstMessage={true} />
+          {props.referencedMessage ? (
+            <Message message={props.referencedMessage} isFirstMessage={true} />
+          ) : (
+            "This message has been deleted or is unavailable"
+          )}
         </Styles.ContentMessageTooltip>
       }
       placement="top"
@@ -94,7 +102,8 @@ function Content(props: ContentProps) {
 
     if (props.message.interaction) return "Click to see command";
 
-    if (props.message.sticker_items?.length > 0) return "Click to see sticker";
+    if (props.message.sticker_items && props.message.sticker_items?.length > 0)
+      return "Click to see sticker";
 
     if (props.message.attachments.length > 0 || props.message.embeds.length > 0)
       return "Click to see attachment";
@@ -118,15 +127,21 @@ function Content(props: ContentProps) {
       return [];
 
     const images = props.message.embeds
-      .reduce((acc, embed) => [...acc, embed.image], [])
-      .filter((i) => i !== null && i !== undefined);
+      .reduce(
+        (acc, embed) => [...acc, embed.image],
+        [] as (APIEmbedImage | null | undefined)[]
+      )
+      .filter(
+        (embedImage): embedImage is APIEmbedImage =>
+          embedImage !== null && embedImage !== undefined
+      );
 
     if (images.length === 0) return [];
 
     return images;
   }, [props.message.embeds]);
 
-  if (props.message.flags & MessageFlags.Loading) {
+  if ((props.message.flags ?? 0) & MessageFlags.Loading) {
     const fifteenMinutes = 15 * 60 * 1000;
 
     if (
@@ -179,7 +194,7 @@ function Content(props: ContentProps) {
       <Styles.Base isReplyContent={props.isReplyContent}>
         <ContentCore
           referencedMessage={props.message}
-          showTooltip={props.isReplyContent}
+          showTooltip={props.isReplyContent ?? false}
         >
           <Styles.ContentContainer isReplyContent={props.isReplyContent}>
             {props.message.content.length > 0 ? (
@@ -209,12 +224,12 @@ function Content(props: ContentProps) {
       {!props.isReplyContent && (
         <MessageAccessories
           active={
-            props.message.reactions?.length > 0 ||
+            (props.message.reactions?.length ?? 0) > 0 ||
             props.message.attachments.length > 0 ||
-            props.message.sticker_items?.length > 0 ||
+            (props.message.sticker_items?.length ?? 0) > 0 ||
             props.message.thread !== undefined ||
             props.message.embeds?.length > 0 ||
-            props.message.components?.length > 0
+            (props.message.components?.length ?? 0) > 0
           }
         >
           {props.message.attachments.map((attachment) => (
@@ -234,10 +249,10 @@ function Content(props: ContentProps) {
               <Embed key={embed.url} embed={embed} images={undefined} />
             ))
           )}
-          {props.message.reactions?.length > 0 && (
+          {props.message.reactions && props.message.reactions?.length > 0 && (
             <Reactions reactions={props.message.reactions} />
           )}
-          {props.message.components?.length > 0 && (
+          {(props.message.components?.length ?? 0) > 0 && (
             <Components
               components={props.message.components}
               message={props.message}

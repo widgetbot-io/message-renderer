@@ -1,6 +1,7 @@
 import * as Styles from "./style";
-import React, { ReactNode, useState } from "react";
-import { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
+import type { ReactNode } from "react";
+import React, { useState } from "react";
+import type { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
 import { getSvgUrl } from "../../core/svgs";
 import VideoAttachment from "../Attachment/VideoAttachment";
@@ -51,7 +52,8 @@ function ThumbnailWrapper({
   );
 }
 
-interface EmbedVideoProps extends Pick<APIEmbedVideo, "width" | "height"> {
+interface EmbedVideoProps
+  extends Required<Pick<APIEmbedVideo, "width" | "height">> {
   thumbnail?: APIEmbedThumbnail["url"];
   url: APIEmbedVideo["url"] | undefined;
   proxyUrl: APIEmbedVideo["proxy_url"] | undefined;
@@ -74,6 +76,11 @@ function EmbedVideo(props: EmbedVideoProps) {
         />
       </ThumbnailWrapper>
     );
+
+  if (props.url === undefined) {
+    console.error("EmbedVideo: url is undefined when proxyUrl is undefined");
+    return null;
+  }
 
   const url = new URL(props.url);
   url.searchParams.set("autoplay", "1");

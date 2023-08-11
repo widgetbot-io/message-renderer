@@ -1,13 +1,22 @@
 import useSize from "./useSize";
 import React from "react";
 import * as Styles from "./style";
-import { APIAttachment } from "discord-api-types/v10";
+import type { APIAttachment } from "discord-api-types/v10";
 
 interface ImageAttachmentProps {
   attachment: APIAttachment;
 }
 
 function ImageAttachment(props: ImageAttachmentProps) {
+  if (!props.attachment.width || !props.attachment.height) {
+    // todo: dev mode only
+    console.error(
+      "ImageAttachment: attachment has no width or height",
+      props.attachment
+    );
+    return null;
+  }
+
   const { width, height } = useSize(
     props.attachment.width,
     props.attachment.height

@@ -5,7 +5,7 @@ import webpCheck from "../utils/webpCheck";
 import { memoize } from "lodash";
 import * as React from "react";
 import { Twemoji } from "../Emoji";
-import { APIRole } from "discord-api-types/v10";
+import type { APIRole } from "discord-api-types/v10";
 
 interface RoleIconProps {
   role: APIRole;
@@ -18,25 +18,29 @@ class RoleIcon extends PureComponent<RoleIconProps> {
 
   render() {
     if (
-      this.props.role === null ||
-      (this.props.role.icon === null && this.props.role.unicode_emoji === null)
+      this.props.role.unicode_emoji !== null &&
+      this.props.role.unicode_emoji !== undefined
     )
-      return null;
-
-    if (this.props.role.unicode_emoji !== null)
       return (
         <Tooltip overlay={this.props.role.name} placement="top">
           <span>
             <Styles.RoleIcon
               as={Twemoji}
               disableTooltip={true}
-              emojiName={this.props.role.unicode_emoji}
+              emojiName={this.props.role.unicode_emoji ?? "unknown emoji"}
             >
               {this.props.role.unicode_emoji}
             </Styles.RoleIcon>
           </span>
         </Tooltip>
       );
+
+    if (this.props.role.icon === null || this.props.role.icon === undefined) {
+      console.error(
+        "Role icon AND unicode_emoji is null or undefined but RoleIcon was rendered."
+      );
+      return null;
+    }
 
     const iconUrl = this.getRoleIcon(this.props.role.icon, this.props.role.id);
 

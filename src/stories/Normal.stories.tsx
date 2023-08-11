@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import { MessageGroup } from "../index";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";

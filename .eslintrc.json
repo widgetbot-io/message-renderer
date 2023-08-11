@@ -30,6 +30,7 @@
         "no-return-await": "error",
         "no-var": "error",
         "prefer-const": "error",
-        "yoda": "error"
+        "yoda": "error",
+        "@typescript-eslint/consistent-type-imports": "error"
     }
 }

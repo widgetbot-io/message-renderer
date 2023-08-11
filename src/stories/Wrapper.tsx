@@ -63,7 +63,10 @@ import type {
 import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
 import { globalCss, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
-import { ChatBadgeProps, MessageButtonListOption } from "../core/ConfigContext";
+import type {
+  ChatBadgeProps,
+  MessageButtonListOption,
+} from "../core/ConfigContext";
 import { testTextChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 
@@ -132,8 +135,9 @@ function resolveRole(id: Snowflake): APIRole | null {
       hoist: false,
       managed: false,
       tags: {},
-      icon: null,
+      icon: "6b3d7f2ff245e627322355767b055d22",
       unicode_emoji: null,
+      flags: 0,
     };
 
   console.log(`Unknown role ${id}`);

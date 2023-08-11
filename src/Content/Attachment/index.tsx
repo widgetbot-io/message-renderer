@@ -4,7 +4,7 @@ import ImageAttachment from "./ImageAttachment";
 import GenericAttachment from "./GenericAttachment";
 import * as Styles from "./style";
 
-import { APIAttachment } from "discord-api-types/v10";
+import type { APIAttachment } from "discord-api-types/v10";
 
 export interface AttachmentProps {
   attachment: APIAttachment;
@@ -13,6 +13,7 @@ export interface AttachmentProps {
 function AttachmentBase(props: AttachmentProps) {
   if (props.attachment.width && props.attachment.height) {
     if (/\.(?:mp4|webm|mov)$/.test(props.attachment.filename))
+      // @ts-expect-error TS2322 Type error is not applicable here
       return <VideoAttachment attachmentOrEmbed={props.attachment} />;
 
     return <ImageAttachment attachment={props.attachment} />;

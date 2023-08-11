@@ -1,4 +1,5 @@
-import { APIChannel, APIUser, ChannelType } from "discord-api-types/v10";
+import type { APIChannel, APIUser } from "discord-api-types/v10";
+import { ChannelType } from "discord-api-types/v10";
 
 export const testUser: APIUser = {
   id: "132819036282159104",

@@ -8,7 +8,8 @@ import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
 import useSize from "./useSize";
 import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
-import { APIEmbed, APIEmbedImage, EmbedType } from "discord-api-types/v10";
+import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
+import { EmbedType } from "discord-api-types/v10";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -16,11 +17,17 @@ export interface EmbedProps {
 }
 
 function Embed({ embed, images }: EmbedProps) {
+  if (embed.type === undefined) {
+    console.error("Embed: Embed type is undefined", embed);
+    return null;
+  }
+
   if (embed.type === EmbedType.GIFV) return <GifVEmbed embed={embed} />;
 
   if (embed.type === EmbedType.Image) return <ImageEmbed embed={embed} />;
 
   if (embed.type === EmbedType.Video && !embed.thumbnail)
+    // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
     return <VideoAttachment attachmentOrEmbed={embed} />;
 
   const embedColor =
@@ -32,7 +39,7 @@ function Embed({ embed, images }: EmbedProps) {
     embed.type,
     embed.image,
     "EmbedImage",
-    images?.length > 0
+    !images || images.length > 0
   );
 
   const {
@@ -62,7 +69,11 @@ function Embed({ embed, images }: EmbedProps) {
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
-                  <a href={embed.author.url} target="_blank" rel="noreferrer noopener">
+                  <a
+                    href={embed.author.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     {embed.author.name}
                   </a>
                 ) : (
@@ -79,13 +90,15 @@ function Embed({ embed, images }: EmbedProps) {
             ) : (
               <Styles.Title>{parseEmbedTitle(embed.title)}</Styles.Title>
             ))}
-          {embed.type === EmbedType.Video ? (
+          {embed.type === EmbedType.Video && embed.video ? (
             <EmbedVideo
               url={embed.video.url}
               proxyUrl={embed.video.proxy_url}
+              // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
               width={embed.video.width}
+              // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
               height={embed.video.height}
-              thumbnail={embed.thumbnail.proxy_url}
+              thumbnail={embed.thumbnail?.proxy_url}
             />
           ) : (
             embed.description && (
@@ -116,8 +129,8 @@ function Embed({ embed, images }: EmbedProps) {
           <Styles.Image
             src={embed.thumbnail.proxy_url}
             // originalUrl={embed.thumbnail.url}
-            width={widthThumbnail}
-            height={heightThumbnail}
+            width={widthThumbnail ?? undefined}
+            height={heightThumbnail ?? undefined}
           />
         )}
       </Styles.ContentAndThumbnail>
@@ -125,11 +138,11 @@ function Embed({ embed, images }: EmbedProps) {
         <Styles.Image
           src={embed.image.proxy_url}
           // originalUrl={embed.image.url}
-          width={widthImage}
-          height={heightImage}
+          width={widthImage ?? undefined}
+          height={heightImage ?? undefined}
         />
       )}
-      {images?.length > 0 && (
+      {images && images.length > 0 && (
         <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>

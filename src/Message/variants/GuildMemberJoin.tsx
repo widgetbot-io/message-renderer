@@ -3,18 +3,23 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import { APIMessage } from "discord-api-types/v10";
+import type { APIMessage, Snowflake } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
 
 interface GuildMemberJoinProps {
   createdAt: APIMessage["timestamp"];
   author: APIMessage["author"];
+  channelId: APIMessage["channel_id"];
 }
 
 function joinMessage(
   createdAt: APIMessage["timestamp"],
-  author: APIMessage["author"]
+  author: APIMessage["author"],
+  guildId: Snowflake | undefined | null
 ): JSX.Element {
-  const member = <MessageAuthor author={author} onlyShowUsername />;
+  const member = (
+    <MessageAuthor author={author} guildId={guildId} onlyShowUsername />
+  );
 
   const messages = [
     <>{member} joined the party.</>,
@@ -38,6 +43,11 @@ function joinMessage(
 }
 
 function GuildMemberJoin(props: GuildMemberJoinProps) {
+  const { resolveChannel } = useConfig();
+  const channel = resolveChannel(props.channelId);
+  const guildId =
+    channel !== null && "guild_id" in channel ? channel.guild_id : null;
+
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -46,7 +56,7 @@ function GuildMemberJoin(props: GuildMemberJoinProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        {joinMessage(props.createdAt, props.author)}
+        {joinMessage(props.createdAt, props.author, guildId)}
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>
