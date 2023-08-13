@@ -7,6 +7,7 @@ import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface ThreadCreatedProps {
   createdAt: APIMessage["timestamp"];
@@ -21,6 +22,8 @@ interface ThreadCreatedProps {
 function ThreadCreated(props: ThreadCreatedProps) {
   const { seeThreadOnClick } = useConfig();
 
+  const { t } = useTranslation();
+
   function openThread() {
     if (props.thread) seeThreadOnClick?.(props.messageId, props.thread);
   }
@@ -30,29 +33,6 @@ function ThreadCreated(props: ThreadCreatedProps) {
   const guildId =
     channel !== null && "guild_id" in channel ? channel.guild_id : null;
 
-  if (props.thread === null)
-    return (
-      <Styles.SystemMessage>
-        <Styles.SystemMessageContent>
-          <Styles.ThreadCreatedIcon
-            width={SystemMessageIconSize}
-            height={SystemMessageIconSize}
-            svg="IconThreadCreated"
-          />
-          <MessageAuthor
-            author={props.author}
-            guildId={guildId}
-            onlyShowUsername
-          />{" "}
-          started a thread:{" "}
-          <Styles.SystemMessageLink onClick={openThread}>
-            {props.messageContent}
-          </Styles.SystemMessageLink>
-        </Styles.SystemMessageContent>
-        <LargeTimestamp timestamp={props.createdAt} />
-      </Styles.SystemMessage>
-    );
-
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageContent>
@@ -61,24 +41,41 @@ function ThreadCreated(props: ThreadCreatedProps) {
           height={SystemMessageIconSize}
           svg="IconThreadCreated"
         />
-        <MessageAuthor
-          author={props.author}
-          guildId={guildId}
-          onlyShowUsername
-        />{" "}
-        started a thread:{" "}
-        <Styles.SystemMessageLink onClick={openThread}>
-          {props.thread.name ?? "Unknown thread"}
-        </Styles.SystemMessageLink>
+        <Trans
+          i18nKey="ThreadCreated.content"
+          values={{
+            threadName:
+              props.thread !== undefined
+                ? props.thread.name
+                : props.messageContent,
+          }}
+          components={{
+            Author: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+            OpenThreadLink: <Styles.SystemMessageLink onClick={openThread} />,
+          }}
+          t={t}
+        >
+          {
+            "<Author/> started a thread: <OpenThreadLink>{{threadName}}</OpenThreadLink>"
+          }
+        </Trans>
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
-      <ThreadButton
-        thread={props.thread}
-        messageId={props.messageId}
-        messageContent={props.messageContent}
-        messageType={MessageType.ThreadCreated}
-        hasReply={false}
-      />
+      {props.thread !== undefined && (
+        <ThreadButton
+          thread={props.thread}
+          messageId={props.messageId}
+          messageContent={props.messageContent}
+          messageType={MessageType.ThreadCreated}
+          hasReply={false}
+        />
+      )}
     </Styles.SystemMessage>
   );
 }

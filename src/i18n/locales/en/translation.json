@@ -1,0 +1,79 @@
+{
+  "chatTag": {
+    "system": "SYSTEM",
+    "server": "SERVER",
+    "bot": "BOT"
+  },
+  "loading": "Loading...",
+  "messageGeneric": {
+    "deleted_or_unavailable": "This message has been deleted or is unavailable",
+    "slash_command_click": "Click to see command",
+    "sticker_click": "Click to see sticker",
+    "attachment_click": "Click to see attachment"
+  },
+  "ThreadButton": {
+    "seeThread": "See Thread"
+  },
+  "unknownEntities": {
+    "emoji": "Unknown Emoji",
+    "guild": "Unknown Guild"
+  },
+  "BoostTierUpgrade": {
+    "content_one": "<Author/> just boosted the server! {{guildName}} has achieved <strong>Level {{newLevel}}!</strong>",
+    "content_other": "<Author/> just boosted the server <strong>{{count}}</strong> times! {{guildName}} has achieved <strong>Level {{newLevel}}!</strong>"
+  },
+  "ChannelFollowAdd": {
+    "content": "<Author/> has added <ChannelName>{{channelName}}</ChannelName> to this channel. Its most important updates will show up here."
+  },
+  "ChannelNameChange": {
+    "content": "<Author/> changed the channel name: <strong>{{content}}</strong>"
+  },
+  "ChannelPinnedMessage": {
+    "content": "<Author/> pinned a message to this channel. See all <OpenPinnedMessage>pinned messages</OpenPinnedMessage>."
+  },
+  "GuildBoost": {
+    "content_one": "<Author/> just boosted the server!",
+    "content_other": "<Author/> just boosted the server <strong>{{ count }}</strong> times!"
+  },
+  "GuildDiscoveryDisqualified": {
+    "content": "This server has been removed from Server Discovery because it no longer passes all the requirements."
+  },
+  "GuildDiscoveryGracePeriodFinalWarning": {
+    "content": "This server has failed Discovery activity requirements for 3 weeks. If this server fails for 1 more week, it will be removed from Discovery."
+  },
+  "GuildDiscoveryGracePeriodInitialWarning": {
+    "content": "This server has failed Discovery activity requirements for 1 week. If this server fails for 4 weeks in a row, it will be automatically removed from Discovery."
+  },
+  "GuildDiscoveryRequalified": {
+    "content": "This server is eligible for Server Discovery again and has been automatically relisted!"
+  },
+  "GuildMemberJoin": {
+    "joinMessage": {
+      "0": "<Member/> joined the party.",
+      "1": "<Member/> is here.",
+      "2": "Welcome, <Member/>. We hope you brought pizza.",
+      "3": "A wild <Member/> appeared.",
+      "4": "<Member/> just landed.",
+      "5": "<Member/> just slid into the server.",
+      "6": "<Member/> just showed up!",
+      "7": "Welcome <Member/>. Say hi!",
+      "8": "<Member/> hopped into the server.",
+      "9": "Everyone welcome <Member/>!",
+      "10": "Glad you're here, <Member/>.",
+      "11": "Good to see you, <Member/>.",
+      "12": "Yay you made it, <Member/>!"
+    }
+  },
+  "RecipientAdd": {
+    "content": "<Author/> added <Target>{{displayName}}</Target> to the thread."
+  },
+  "RecipientRemove": {
+    "content": "<Author/> removed <Target>{{displayName}}</Target> from the thread."
+  },
+  "ThreadCreated": {
+    "content": "<Author/> started a thread: <OpenThreadLink>{{threadName}}</OpenThreadLink>"
+  },
+  "ThreadStarterMessage": {
+    "content": "Sorry, we couldn't load the first message in this thread"
+  }
+}

@@ -5,6 +5,7 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface ChannelPinnedMessageProps {
   author: APIMessage["author"];
@@ -13,6 +14,8 @@ interface ChannelPinnedMessageProps {
 }
 
 function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
+  const { t } = useTranslation();
+
   const { openPinnedMessagesOnClick, resolveChannel } = useConfig();
 
   const channel = resolveChannel(props.channelId);
@@ -27,20 +30,30 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
         svg="IconPin"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor
-          author={props.author}
-          guildId={guildId}
-          onlyShowUsername
-        />{" "}
-        pinned a message to this channel. See all{" "}
-        <Styles.SystemMessageLink
-          onClick={() => {
-            if (channel) openPinnedMessagesOnClick?.(channel);
+        <Trans
+          i18nKey="ChannelPinnedMessage.content"
+          components={{
+            Author: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+            OpenPinnedMessage: (
+              <Styles.SystemMessageLink
+                onClick={() => {
+                  if (channel) openPinnedMessagesOnClick?.(channel);
+                }}
+              />
+            ),
           }}
+          t={t}
         >
-          pinned messages
-        </Styles.SystemMessageLink>
-        .
+          {
+            "<Author/> pinned a message to this channel. See all <OpenPinnedMessage>pinned messages</OpenPinnedMessage>."
+          }
+        </Trans>
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

@@ -1,5 +1,6 @@
 import * as React from "react";
-import { ComponentProps, useMemo } from "react";
+import type { ComponentProps } from "react";
+import { useMemo } from "react";
 import ChatTag from "../ChatTag";
 import RoleIcon from "./RoleIcon";
 import getAvatar from "../utils/getAvatar";
@@ -8,7 +9,8 @@ import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 import getDisplayName from "../utils/getDisplayName";
 
-interface MessageAuthorProps extends ComponentProps<typeof Styles.MessageAuthor> {
+interface MessageAuthorProps
+  extends ComponentProps<typeof Styles.MessageAuthor> {
   author: APIUser;
   avatarAnimated?: boolean;
   onlyShowUsername?: boolean;
@@ -74,7 +76,7 @@ function MessageAuthor({
       <Styles.MessageAuthor
         clickable={userMentionOnClick !== undefined}
         {...props}
-        onClick={() => userMentionOnClick?.(user)}
+        onClick={() => userMentionOnClick?.(author)}
       >
         <Styles.Username style={{ color: dominantRoleColor }}>
           {displayName}
@@ -87,7 +89,7 @@ function MessageAuthor({
     <Styles.MessageAuthor
       clickable={userMentionOnClick !== undefined}
       {...props}
-      onClick={() => userMentionOnClick?.(user)}
+      onClick={() => userMentionOnClick?.(author)}
     >
       <Styles.Avatar
         src={getAvatar(author, {

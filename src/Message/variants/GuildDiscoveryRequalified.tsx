@@ -3,12 +3,15 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
+import { Trans, useTranslation } from "react-i18next";
 
 interface GuildDiscoveryRequalifiedProps {
   createdAt: APIMessage["timestamp"];
 }
 
 function GuildDiscoveryRequalified(props: GuildDiscoveryRequalifiedProps) {
+  const { t } = useTranslation();
+
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -17,8 +20,10 @@ function GuildDiscoveryRequalified(props: GuildDiscoveryRequalifiedProps) {
         svg="IconCheckmark"
       />
       <Styles.SystemMessageContent>
-        This server is eligible for Server Discovery again and has been
-        automatically relisted!
+        <Trans i18nKey="GuildDiscoveryRequalified.content" t={t}>
+          This server is eligible for Server Discovery again and has been
+          automatically relisted!
+        </Trans>
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>
