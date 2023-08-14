@@ -6,6 +6,7 @@ import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import getDisplayName from "../../utils/getDisplayName";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface RecipientAddProps {
   createdAt: APIMessage["timestamp"];
@@ -16,6 +17,7 @@ interface RecipientAddProps {
 
 // todo: check if this also applies to group chats, and support those as well.
 function RecipientAdd(props: RecipientAddProps) {
+  const { t } = useTranslation();
   const { resolveChannel } = useConfig();
   const channel = resolveChannel(props.channelId);
   const guildId =
@@ -29,16 +31,29 @@ function RecipientAdd(props: RecipientAddProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor
-          author={props.author}
-          guildId={guildId}
-          onlyShowUsername
-        /> added{" "}
-        <MessageAuthor
-          author={props.target}
-          guildId={guildId}
-          onlyShowUsername
-        /> to the thread.
+        <Trans
+          i18nKey="RecipientAdd.content"
+          values={{
+            displayName: getDisplayName(props.target),
+          }}
+          components={{
+            Author: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+            Target: (
+              <MessageAuthor
+                author={props.target}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+          }}
+          t={t}
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

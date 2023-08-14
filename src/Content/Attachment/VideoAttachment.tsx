@@ -75,7 +75,7 @@ function VideoAttachment(props: VideoAttachmentProps) {
 
     if (video === null) return;
 
-    if (video.paused) video.play();
+    if (video.paused) void video.play();
     else video.pause();
   }
 

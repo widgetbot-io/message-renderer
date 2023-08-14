@@ -3,12 +3,15 @@ import React, { useCallback, useMemo } from "react";
 import Tooltip from "../../Tooltip";
 import { findDefaultEmojiByUnicode } from "../../emojiData";
 import type { APIReaction } from "discord-api-types/v10";
+import { useTranslation } from "react-i18next";
 
 interface ReactionProps {
   reaction: APIReaction;
 }
 
 function Reaction(props: ReactionProps) {
+  const { t } = useTranslation();
+
   const emojiUrl = useMemo(() => {
     if (props.reaction.emoji.id === null) return null;
 
@@ -40,7 +43,7 @@ function Reaction(props: ReactionProps) {
         {props.reaction.emoji.id !== null
           ? emojiName
           : findDefaultEmojiByUnicode(props.reaction.emoji.name ?? "")
-              ?.keywords?.[0] ?? "unknown emoji"}
+              ?.keywords?.[0] ?? t("unknownEntities.emoji")}
         :
       </Styles.ReactionTooltip>
     );

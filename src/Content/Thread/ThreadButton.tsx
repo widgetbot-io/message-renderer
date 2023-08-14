@@ -4,6 +4,7 @@ import React from "react";
 import type { APIChannel } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { useTranslation } from "react-i18next";
 
 interface ThreadButtonProps {
   messageType: MessageType;
@@ -14,6 +15,8 @@ interface ThreadButtonProps {
 }
 
 function ThreadButton(props: ThreadButtonProps) {
+  const { t } = useTranslation();
+
   const { seeThreadOnClick } = useConfig();
 
   return (
@@ -29,7 +32,7 @@ function ThreadButton(props: ThreadButtonProps) {
             onClick={() => seeThreadOnClick?.(props.messageId, props.thread)}
             role="button"
           >
-            See Thread ›
+            {t("ThreadButton.seeThread")} ›
           </Styles.SeeThreadButton>
         </Styles.ThreadButtonTopLine>
       </Styles.ThreadButton>

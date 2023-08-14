@@ -1,3 +1,4 @@
+import "./i18n";
 import type { CSSProperties } from "react";
 import React, { useState } from "react";
 import Message from "./Message";

@@ -5,6 +5,7 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface ChannelFollowAddProps {
   content: string;
@@ -14,6 +15,8 @@ interface ChannelFollowAddProps {
 }
 
 function ChannelFollowAdd(props: ChannelFollowAddProps) {
+  const { t } = useTranslation();
+
   const { resolveChannel } = useConfig();
   const channel = resolveChannel(props.channelId);
   const guildId =
@@ -27,14 +30,23 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor
-          author={props.author}
-          guildId={guildId}
-          onlyShowUsername
-        />{" "}
-        has added{" "}
-        <Styles.SystemMessageLink>{props.content}</Styles.SystemMessageLink> to
-        this channel. It{"'"}s most important updates will show up here.
+        <Trans
+          i18nKey="ChannelFollowAdd.content"
+          values={{
+            channelName: props.content,
+          }}
+          components={{
+            Author: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+            ChannelName: <Styles.SystemMessageLink />,
+          }}
+          t={t}
+        />
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

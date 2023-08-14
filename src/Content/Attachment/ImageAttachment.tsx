@@ -2,6 +2,7 @@ import useSize from "./useSize";
 import React from "react";
 import * as Styles from "./style";
 import type { APIAttachment } from "discord-api-types/v10";
+import { t } from "i18next";
 
 interface ImageAttachmentProps {
   attachment: APIAttachment;
@@ -29,7 +30,7 @@ function ImageAttachment(props: ImageAttachmentProps) {
       height={height}
       placeholder={
         <Styles.LazyImagePlaceholder style={{ width, height }}>
-          Loading...
+          {t("loading")}
         </Styles.LazyImagePlaceholder>
       }
     />

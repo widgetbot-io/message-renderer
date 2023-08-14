@@ -6,6 +6,7 @@ import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage, Snowflake } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface BoostTierUpgradeProps {
   createdAt: APIMessage["timestamp"];
@@ -22,6 +23,8 @@ function BoostTierUpgrade({
   type,
   author,
 }: BoostTierUpgradeProps) {
+  const { t } = useTranslation();
+
   const { resolveChannel, resolveGuild } = useConfig();
   const channel = resolveChannel(channelId);
   const guild =
@@ -30,7 +33,9 @@ function BoostTierUpgrade({
       : null;
 
   const guildName =
-    guild !== null ? guild.name ?? "Unknown Guild" : "Unknown Guild";
+    guild !== null
+      ? guild.name ?? t("unknownEntities.guild")
+      : t("unknownEntities.guild");
 
   const newLevel = useMemo(() => {
     switch (type) {
@@ -45,7 +50,6 @@ function BoostTierUpgrade({
     }
   }, [type]);
 
-  // todo: guildNameHere
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -54,10 +58,24 @@ function BoostTierUpgrade({
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor author={author} guildId={guild?.id} onlyShowUsername />{" "}
-        just boosted the server <strong>{content}</strong> time
-        {content === "1" ? "" : "s"}! {guildName} has achieved{" "}
-        <strong>Level {newLevel}!</strong>
+        <Trans
+          i18nKey="BoostTierUpgrade.content"
+          count={content === "" ? 1 : parseInt(content)}
+          values={{
+            guildName,
+            newLevel,
+          }}
+          components={{
+            Author: (
+              <MessageAuthor
+                author={author}
+                guildId={guild?.id}
+                onlyShowUsername
+              />
+            ),
+          }}
+          t={t}
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={createdAt} />
     </Styles.SystemMessage>
