@@ -20,10 +20,7 @@ function GuildDiscoveryDisqualified(props: GuildDiscoveryDisqualifiedProps) {
         svg="IconCross"
       />
       <Styles.SystemMessageContent>
-        <Trans i18nKey="GuildDiscoveryDisqualified.content" t={t}>
-          This server has been removed from Server Discovery because it no
-          longer passes all the requirements.
-        </Trans>
+        <Trans i18nKey="GuildDiscoveryDisqualified.content" t={t} />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

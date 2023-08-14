@@ -45,9 +45,7 @@ function ChannelNameChange(props: ChannelNameChangeProps) {
             ),
           }}
           t={t}
-        >
-          {"<Author/> changed the channel name: <strong>{{content}}</strong>"}
-        </Trans>
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

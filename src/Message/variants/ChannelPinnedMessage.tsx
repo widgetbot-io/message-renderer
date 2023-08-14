@@ -49,11 +49,7 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
             ),
           }}
           t={t}
-        >
-          {
-            "<Author/> pinned a message to this channel. See all <OpenPinnedMessage>pinned messages</OpenPinnedMessage>."
-          }
-        </Trans>
+        />
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

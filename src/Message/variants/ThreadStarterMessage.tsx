@@ -35,9 +35,7 @@ function ThreadStarterMessage({
         svg="IconThreadCreated"
       />
       <Styles.SystemMessageContent>
-        <Trans i18nKey="ThreadStarterMessage.content" t={t}>
-          Sorry, we couldn{"'"}t load the first message in this thread
-        </Trans>
+        <Trans i18nKey="ThreadStarterMessage.content" t={t} />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={createdAt} />
     </Styles.SystemMessage>

@@ -22,11 +22,10 @@ function GuildDiscoveryGracePeriodInitialWarning(
         svg="IconWarning"
       />
       <Styles.SystemMessageContent>
-        <Trans i18nKey="GuildDiscoveryGracePeriodInitialWarning.content" t={t}>
-          This server has failed Discovery activity requirements for 1 week. If
-          this server fails for 4 weeks in a row, it will be automatically
-          removed from Discovery.
-        </Trans>
+        <Trans
+          i18nKey="GuildDiscoveryGracePeriodInitialWarning.content"
+          t={t}
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

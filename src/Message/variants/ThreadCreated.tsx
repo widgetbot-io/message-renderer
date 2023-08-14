@@ -60,11 +60,7 @@ function ThreadCreated(props: ThreadCreatedProps) {
             OpenThreadLink: <Styles.SystemMessageLink onClick={openThread} />,
           }}
           t={t}
-        >
-          {
-            "<Author/> started a thread: <OpenThreadLink>{{threadName}}</OpenThreadLink>"
-          }
-        </Trans>
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
       {props.thread !== undefined && (

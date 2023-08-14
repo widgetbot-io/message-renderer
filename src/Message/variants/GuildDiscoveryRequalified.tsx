@@ -20,10 +20,7 @@ function GuildDiscoveryRequalified(props: GuildDiscoveryRequalifiedProps) {
         svg="IconCheckmark"
       />
       <Styles.SystemMessageContent>
-        <Trans i18nKey="GuildDiscoveryRequalified.content" t={t}>
-          This server is eligible for Server Discovery again and has been
-          automatically relisted!
-        </Trans>
+        <Trans i18nKey="GuildDiscoveryRequalified.content" t={t} />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

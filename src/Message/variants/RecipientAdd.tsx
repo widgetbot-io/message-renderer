@@ -53,9 +53,7 @@ function RecipientAdd(props: RecipientAddProps) {
             ),
           }}
           t={t}
-        >
-          {"<Author/> added <Target>{{displayName}}</Target> to the thread."}
-        </Trans>
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

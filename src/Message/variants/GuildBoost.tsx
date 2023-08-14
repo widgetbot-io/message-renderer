@@ -45,11 +45,7 @@ function GuildBoost(props: GuildBoostProps) {
             ),
           }}
           t={t}
-        >
-          {
-            "<Author/> just boosted the server <strong>{{ count }}</strong> times!"
-          }
-        </Trans>
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

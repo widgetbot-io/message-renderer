@@ -53,11 +53,7 @@ function RecipientRemove(props: RecipientRemoveProps) {
             ),
           }}
           t={t}
-        >
-          {
-            "<Author/> removed <Target>{{displayName}}</Target> from the thread."
-          }
-        </Trans>{" "}
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

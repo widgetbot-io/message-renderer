@@ -75,11 +75,7 @@ function BoostTierUpgrade({
             ),
           }}
           t={t}
-        >
-          {
-            "<Author/> just boosted the server <strong>{{count}}</strong> times! {{guildName}} has achieved <strong>Level {{newLevel}}!</strong>"
-          }
-        </Trans>
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={createdAt} />
     </Styles.SystemMessage>

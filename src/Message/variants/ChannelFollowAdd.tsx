@@ -46,11 +46,7 @@ function ChannelFollowAdd(props: ChannelFollowAddProps) {
             ChannelName: <Styles.SystemMessageLink />,
           }}
           t={t}
-        >
-          {
-            "<Author/> has added <ChannelName>{{channelName}}</ChannelName> to this channel. Its most important updates will show up here."
-          }
-        </Trans>
+        />
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

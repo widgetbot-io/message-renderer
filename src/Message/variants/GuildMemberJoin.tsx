@@ -30,105 +30,79 @@ function joinMessage(
       key="GuildMemberJoin.joinMessage.0"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"<Member/> joined the party."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.1"
       key="GuildMemberJoin.joinMessage.1"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"<Member/> is here."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.2"
       key="GuildMemberJoin.joinMessage.2"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"Welcome, <Member/>. We hope you brought pizza."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.3"
       key="GuildMemberJoin.joinMessage.3"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"A wild <Member/> appeared."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.4"
       key="GuildMemberJoin.joinMessage.4"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"<Member/> just landed."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.5"
       key="GuildMemberJoin.joinMessage.5"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"<Member/> just slid into the server."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.6"
       key="GuildMemberJoin.joinMessage.6"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"<Member/> just showed up!"}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.7"
       key="GuildMemberJoin.joinMessage.7"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"Welcome <Member/>. Say hi!"}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.8"
       key="GuildMemberJoin.joinMessage.8"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"<Member/> hopped into the server."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.9"
       key="GuildMemberJoin.joinMessage.9"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"Everyone welcome <Member/>!"}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.10"
       key="GuildMemberJoin.joinMessage.10"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"Glad you're here, <Member/>."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.11"
       key="GuildMemberJoin.joinMessage.11"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"Good to see you, <Member/>."}
-    </Trans>,
+    />,
     <Trans
       i18nKey="joinMessages.12"
       key="GuildMemberJoin.joinMessage.12"
       t={t}
       components={{ Member: <Member /> }}
-    >
-      {"Yay you made it, <Member/>!"}
-    </Trans>,
+    />,
   ];
 
   return messages[Number(new Date(createdAt)) % messages.length];

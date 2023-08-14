@@ -22,10 +22,7 @@ function GuildDiscoveryGracePeriodFinalWarning(
         svg="IconWarning"
       />
       <Styles.SystemMessageContent>
-        <Trans i18nKey="GuildDiscoveryGracePeriodFinalWarning.content" t={t}>
-          This server has failed Discovery activity requirements for 3 weeks. If
-          this server fails for 1 more week, it will be removed from Discovery.
-        </Trans>
+        <Trans i18nKey="GuildDiscoveryGracePeriodFinalWarning.content" t={t} />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>
