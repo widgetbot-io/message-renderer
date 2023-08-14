@@ -5,6 +5,7 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface ChannelNameChangeProps {
   content: string;
@@ -14,6 +15,8 @@ interface ChannelNameChangeProps {
 }
 
 function ChannelNameChange(props: ChannelNameChangeProps) {
+  const { t } = useTranslation();
+
   const { resolveChannel } = useConfig();
   const channel = resolveChannel(props.channelId);
   const guildId =
@@ -27,12 +30,22 @@ function ChannelNameChange(props: ChannelNameChangeProps) {
         svg="IconPencil"
       />
       <Styles.SystemMessageContent fullColor>
-        <MessageAuthor
-          author={props.author}
-          guildId={guildId}
-          onlyShowUsername
-        />{" "}
-        changed the channel name: <strong>{props.content}</strong>
+        <Trans
+          i18nKey="ChannelNameChange.content"
+          values={{
+            content: props.content,
+          }}
+          components={{
+            Author: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+          }}
+          t={t}
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

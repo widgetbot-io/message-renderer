@@ -15,6 +15,7 @@ import Reactions from "../Message/Reactions";
 import ThreadButton from "./Thread/ThreadButton";
 import Components from "../Message/Components";
 import getDisplayName from "../utils/getDisplayName";
+import { useTranslation } from "react-i18next";
 
 interface EditedProps {
   editedAt: string;
@@ -69,6 +70,8 @@ interface ContentCoreProps {
 }
 
 function ContentCore(props: ContentCoreProps) {
+  const { t } = useTranslation();
+
   if (!props.showTooltip) return <>{props.children}</>;
 
   return (
@@ -78,7 +81,7 @@ function ContentCore(props: ContentCoreProps) {
           {props.referencedMessage ? (
             <Message message={props.referencedMessage} isFirstMessage={true} />
           ) : (
-            "This message has been deleted or is unavailable"
+            t("messageGeneric.deleted_or_unavailable")
           )}
         </Styles.ContentMessageTooltip>
       }
@@ -97,16 +100,19 @@ interface ContentProps {
 }
 
 function Content(props: ContentProps) {
+  const { t } = useTranslation();
+
   const dominantAccessoryText = useMemo(() => {
     if (!props.isReplyContent) return null;
 
-    if (props.message.interaction) return "Click to see command";
+    if (props.message.interaction)
+      return t("messageGeneric.slash_command_click");
 
     if (props.message.sticker_items && props.message.sticker_items?.length > 0)
-      return "Click to see sticker";
+      return t("messageGeneric.sticker_click");
 
     if (props.message.attachments.length > 0 || props.message.embeds.length > 0)
-      return "Click to see attachment";
+      return t("messageGeneric.attachment_click");
 
     return null;
   }, [props.message.attachments, props.message.stickers, props.isReplyContent]);

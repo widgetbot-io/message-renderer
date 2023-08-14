@@ -4,6 +4,7 @@ import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import NormalMessage from "./NormalMessage";
 import LargeTimestamp from "../LargeTimestamp";
+import { Trans, useTranslation } from "react-i18next";
 
 interface ThreadStarterMessageProps {
   createdAt: APIMessage["timestamp"];
@@ -14,6 +15,8 @@ function ThreadStarterMessage({
   createdAt,
   referencedMessage,
 }: ThreadStarterMessageProps) {
+  const { t } = useTranslation();
+
   if (referencedMessage !== null && referencedMessage !== undefined) {
     return (
       <NormalMessage
@@ -32,7 +35,7 @@ function ThreadStarterMessage({
         svg="IconThreadCreated"
       />
       <Styles.SystemMessageContent>
-        Sorry, we couldn{"'"}t load the first message in this thread
+        <Trans i18nKey="ThreadStarterMessage.content" t={t} />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={createdAt} />
     </Styles.SystemMessage>

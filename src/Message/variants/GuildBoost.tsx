@@ -5,6 +5,7 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
 
 interface GuildBoostProps {
   createdAt: APIMessage["timestamp"];
@@ -14,10 +15,14 @@ interface GuildBoostProps {
 }
 
 function GuildBoost(props: GuildBoostProps) {
+  const { t } = useTranslation();
+
   const { resolveChannel } = useConfig();
   const channel = resolveChannel(props.channelId);
   const guildId =
     channel !== null && "guild_id" in channel ? channel.guild_id : null;
+
+  const count = props.content === "" ? 1 : parseInt(props.content);
 
   return (
     <Styles.SystemMessage>
@@ -27,19 +32,20 @@ function GuildBoost(props: GuildBoostProps) {
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <MessageAuthor
-          author={props.author}
-          guildId={guildId}
-          onlyShowUsername
-        />{" "}
-        just boosted the server
-        {props.content !== "" && (
-          <>
-            {" "}
-            <strong>{props.content}</strong> times
-          </>
-        )}
-        !
+        <Trans
+          i18nKey="GuildBoost.content"
+          count={count}
+          components={{
+            Author: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+          }}
+          t={t}
+        />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>
