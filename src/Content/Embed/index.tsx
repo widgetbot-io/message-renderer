@@ -2,7 +2,7 @@ import GifVEmbed from "./GifVEmbed";
 import ImageEmbed from "./ImageEmbed";
 import VideoAttachment from "../Attachment/VideoAttachment";
 import * as Styles from "./style";
-import numberToRgb from "../../utils/numberToRgb";
+import { colorIntToRgba } from "../../utils/colorIntToCss";
 import moment from "moment";
 import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
 import useSize from "./useSize";
@@ -32,7 +32,7 @@ function Embed({ embed, images }: EmbedProps) {
 
   const embedColor =
     embed.color !== 0 && embed.color !== undefined
-      ? numberToRgb(embed.color)
+      ? colorIntToRgba(embed.color)
       : undefined;
 
   const { width: widthImage, height: heightImage } = useSize(
