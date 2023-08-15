@@ -1,4 +1,4 @@
-import type { ReactElement} from "react";
+import type { ReactElement } from "react";
 import { createContext, useContext } from "react";
 import type {
   APIChannel,
@@ -44,6 +44,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   channelMentionOnClick?(channel: APIChannel): void;
   openPinnedMessagesOnClick?(channel: APIChannel): void;
   messageComponentButtonOnClick?(message: APIMessage, customId: string): void;
+  externalLinkOpenRequested?(url: string): void;
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({

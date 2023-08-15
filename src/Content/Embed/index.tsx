@@ -10,6 +10,7 @@ import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
 import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
 import { EmbedType } from "discord-api-types/v10";
+import ExternalLink from "../../ExternalLink";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -69,13 +70,9 @@ function Embed({ embed, images }: EmbedProps) {
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
-                  <a
-                    href={embed.author.url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                  <ExternalLink href={embed.author.url}>
                     {embed.author.name}
-                  </a>
+                  </ExternalLink>
                 ) : (
                   embed.author.name
                 )}
@@ -84,7 +81,7 @@ function Embed({ embed, images }: EmbedProps) {
           )}
           {embed.title &&
             (embed.url !== undefined ? (
-              <Styles.Title as="a" link href={embed.url} target="_blank">
+              <Styles.Title as={ExternalLink} link href={embed.url}>
                 {parseEmbedTitle(embed.title)}
               </Styles.Title>
             ) : (

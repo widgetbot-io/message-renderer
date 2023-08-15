@@ -403,6 +403,9 @@ const Wrapper: Decorator = (Story) => {
 
         return null;
       }}
+      externalLinkOpenRequested={(url) => {
+        alert(`External link "${url}" requested!`);
+      }}
     >
       {({ themeClass }) => (
         <div className={themeClass}>
