@@ -3,6 +3,7 @@ import {
   styled,
   theme,
 } from "../../../Stitches/stitches.config";
+import ExternalLink from "../../../ExternalLink";
 
 export const Text = styled.withConfig({
   displayName: "md-text",
@@ -14,7 +15,7 @@ export const Text = styled.withConfig({
 export const Link = styled.withConfig({
   displayName: "md-link",
   componentId: commonComponentId,
-})("a", {
+})(ExternalLink, {
   "& code": {
     color: "inherit",
   },
