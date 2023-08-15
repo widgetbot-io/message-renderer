@@ -5,12 +5,13 @@ import {
   theme,
 } from "../../Stitches/stitches.config";
 import SvgFromUrl from "../../SvgFromUrl";
-import { LazyLoadImage  } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import ExternalLink from "../../ExternalLink";
 
 export const ImageAttachment = styled.withConfig({
   displayName: "image-attachment",
   componentId: commonComponentId,
-})(LazyLoadImage , {
+})(LazyLoadImage, {
   cursor: "pointer",
 });
 
@@ -329,7 +330,7 @@ export const AttachmentMetadata = styled.withConfig({
 export const AttachmentFileName = styled.withConfig({
   displayName: "attachment-file-name",
   componentId: commonComponentId,
-})("a", {
+})(ExternalLink, {
   color: theme.colors.link,
   maxWidth: "40vw",
   overflow: "hidden",
@@ -353,7 +354,7 @@ export const AttachmentFileSize = styled.withConfig({
 export const DownloadIcon = styled.withConfig({
   displayName: "attachment-download-icon",
   componentId: commonComponentId,
-})("a", {
+})(ExternalLink, {
   opacity: 0.8,
   marginLeft: "auto",
   color: theme.colors.primaryOpacity100,
