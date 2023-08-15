@@ -1,15 +1,16 @@
-import type { HTMLProps } from "react";
+import type { ComponentProps } from "react";
 import React from "react";
-import { useConfig } from "./core/ConfigContext";
+import { useConfig } from "../core/ConfigContext";
+import * as Styles from "./style";
 
-function ExternalLink(
-  props: HTMLProps<HTMLAnchorElement> &
-    Required<Pick<HTMLProps<HTMLAnchorElement>, "href">>
-) {
+type Props = ComponentProps<typeof Styles.ExternalLink> &
+  Required<Pick<ComponentProps<typeof Styles.ExternalLink>, "href">>;
+
+function ExternalLink(props: Props) {
   const { externalLinkOpenRequested } = useConfig();
 
   return (
-    <a
+    <Styles.ExternalLink
       {...props}
       rel="noreferrer noopener"
       target="_blank"
