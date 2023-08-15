@@ -28,7 +28,7 @@ function MessageAuthor({
   guildId,
   ...props
 }: MessageAuthorProps) {
-  const { resolveRole, resolveMember, userMentionOnClick } = useConfig();
+  const { resolveRole, resolveMember, userOnClick } = useConfig();
   const member = guildId ? resolveMember(author.id, guildId) : null;
   const isGuildMember = member !== null;
 
@@ -74,9 +74,9 @@ function MessageAuthor({
   if (onlyShowUsername) {
     return (
       <Styles.MessageAuthor
-        clickable={userMentionOnClick !== undefined}
+        clickable={userOnClick !== undefined}
         {...props}
-        onClick={() => userMentionOnClick?.(author)}
+        onClick={() => userOnClick?.(author)}
       >
         <Styles.Username style={{ color: dominantRoleColor }}>
           {displayName}
@@ -87,9 +87,9 @@ function MessageAuthor({
 
   return (
     <Styles.MessageAuthor
-      clickable={userMentionOnClick !== undefined}
+      clickable={userOnClick !== undefined}
       {...props}
-      onClick={() => userMentionOnClick?.(author)}
+      onClick={() => userOnClick?.(author)}
     >
       <Styles.Avatar
         src={getAvatar(author, {

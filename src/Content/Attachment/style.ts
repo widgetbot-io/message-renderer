@@ -5,13 +5,19 @@ import {
   theme,
 } from "../../Stitches/stitches.config";
 import SvgFromUrl from "../../SvgFromUrl";
-import { LazyLoadImage  } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const ImageAttachment = styled.withConfig({
   displayName: "image-attachment",
   componentId: commonComponentId,
-})(LazyLoadImage , {
-  cursor: "pointer",
+})(LazyLoadImage, {
+  variants: {
+    clickable: {
+      true: {
+        cursor: "pointer",
+      },
+    },
+  },
 });
 
 export const LazyImagePlaceholder = styled.withConfig({
