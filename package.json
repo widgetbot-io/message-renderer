@@ -10,7 +10,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "i18n-extract": "i18next 'src/**/*.tsx' --config i18next-parser.config.mjs",
-    "build": "pnpm run i18n-extract && vite build",
+    "build": "vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepublishOnly": "pnpm build",
