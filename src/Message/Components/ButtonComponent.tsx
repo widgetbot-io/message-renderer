@@ -10,6 +10,7 @@ import SvgFromUrl from "../../SvgFromUrl";
 import { ButtonStyle } from "discord-api-types/v10";
 import Emoji from "../../Emoji";
 import { useConfig } from "../../core/ConfigContext";
+import ExternalLink from "../../ExternalLink";
 
 const buttonStyleMap: Record<
   ButtonStyle,
@@ -41,7 +42,7 @@ function ButtonComponent({ button, message }: ButtonComponentProps) {
   if ("url" in button) {
     return (
       <Styles.ButtonComponent
-        as="a"
+        as={ExternalLink}
         href={button.url}
         buttonStyle={buttonStyleMap[button.style]}
       >

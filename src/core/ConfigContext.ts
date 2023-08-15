@@ -48,6 +48,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   messageComponentButtonOnClick?(message: APIMessage, customId: string): void;
   attachmentImageOnClick?(image: APIAttachment): void;
   embedImageOnClick?(image: APIEmbedImage): void;
+  externalLinkOpenRequested?(url: string): void;
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({

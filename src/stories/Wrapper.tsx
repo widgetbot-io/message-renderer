@@ -406,6 +406,8 @@ const Wrapper: Decorator = (Story) => {
       }}
       embedImageOnClick={(embed) => {
         alert(`Embed image ${embed.url} clicked!`);
+      externalLinkOpenRequested={(url) => {
+        alert(`External link "${url}" requested!`);
       }}
     >
       {({ themeClass }) => (
