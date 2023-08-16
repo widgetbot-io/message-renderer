@@ -60,9 +60,14 @@ function Embed({ embed, images }: EmbedProps) {
     <Styles.Embed style={{ borderLeftColor: embedColor }} thin={isEmbedThin}>
       <Styles.ContentAndThumbnail hasLargeThumbnail={isThumbnailLarge}>
         <Styles.Content>
-          {embed.provider && (
-            <Styles.Provider>{embed.provider.name}</Styles.Provider>
-          )}
+          {embed.provider &&
+            (embed.provider.url ? (
+              <ExternalLink href={embed.provider.url}>
+                <Styles.Provider>{embed.provider.name}</Styles.Provider>
+              </ExternalLink>
+            ) : (
+              <Styles.Provider>{embed.provider.name}</Styles.Provider>
+            ))}
           {embed.author && (
             <Styles.Author>
               {embed.author.proxy_icon_url && (
