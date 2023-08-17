@@ -1,6 +1,9 @@
 import { createStitches } from "@stitches/react";
 
+export const prefix = "wb-msg";
+
 const stitches = createStitches({
+  prefix,
   theme: {
     colors: {
       primaryOpacity10: "rgba(255, 255, 255, 0.1)",
