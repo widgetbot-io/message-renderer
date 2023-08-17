@@ -61,7 +61,7 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
-import { globalCss, styled, theme } from "../Stitches/stitches.config";
+import { globalCss, prefix, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
 import type {
   ChatBadgeProps,
@@ -357,7 +357,7 @@ const globalStyles = globalCss({
 });
 
 const StorybookStyles = styled("div", {
-  "--fonts-main":
+  [`--${prefix}-fonts-main`]:
     '"gg sans","Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif',
   fontFamily: theme.fonts.main,
   padding: 40,
