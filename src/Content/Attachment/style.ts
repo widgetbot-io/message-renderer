@@ -12,7 +12,13 @@ export const ImageAttachment = styled.withConfig({
   displayName: "image-attachment",
   componentId: commonComponentId,
 })(LazyLoadImage, {
-  cursor: "pointer",
+  variants: {
+    clickable: {
+      true: {
+        cursor: "pointer",
+      },
+    },
+  },
 });
 
 export const LazyImagePlaceholder = styled.withConfig({

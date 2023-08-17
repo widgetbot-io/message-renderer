@@ -10,7 +10,7 @@ interface UserMentionProps {
 }
 
 function UserMention({ userId }: UserMentionProps) {
-  const { resolveUser, userMentionOnClick } = useConfig();
+  const { resolveUser, userOnClick } = useConfig();
 
   // todo: resolve current channel to resolve member
   const user = resolveUser(userId);
@@ -19,9 +19,9 @@ function UserMention({ userId }: UserMentionProps) {
   return (
     <Styles.Mention
       onClick={() => {
-        if (user !== null) userMentionOnClick?.(user);
+        if (user !== null) userOnClick?.(user);
       }}
-      canBeClicked={userMentionOnClick !== undefined}
+      canBeClicked={userOnClick !== undefined}
     >
       <Styles.MentionIcon>@</Styles.MentionIcon>
       {text}

@@ -380,9 +380,7 @@ const Wrapper: Decorator = (Story) => {
       seeThreadOnClick={(messageId, thread) =>
         alert(`See Thread "${thread.name}" clicked on message ${messageId}`)
       }
-      userMentionOnClick={(user) =>
-        alert(`User "${getDisplayName(user)}" mention clicked!`)
-      }
+      userOnClick={(user) => alert(`User "${getDisplayName(user)}" clicked!`)}
       roleMentionOnClick={(role) =>
         alert(`Role "${role.name}" mention clicked!`)
       }
@@ -403,6 +401,11 @@ const Wrapper: Decorator = (Story) => {
 
         return null;
       }}
+      attachmentImageOnClick={(image) => {
+        alert(`Image attachment ${image.filename} clicked!`);
+      }}
+      embedImageOnClick={(embed) => {
+        alert(`Embed image ${embed.url} clicked!`);
       externalLinkOpenRequested={(url) => {
         alert(`External link "${url}" requested!`);
       }}

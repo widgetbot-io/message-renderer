@@ -10,6 +10,7 @@ import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
 import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
 import { EmbedType } from "discord-api-types/v10";
+import EmbeddedImage from "./EmbeddedImage";
 import ExternalLink from "../../ExternalLink";
 
 export interface EmbedProps {
@@ -128,18 +129,16 @@ function Embed({ embed, images }: EmbedProps) {
           )}
         </Styles.Content>
         {embed.thumbnail && embed.type !== EmbedType.Video && (
-          <Styles.Image
-            src={embed.thumbnail.proxy_url}
-            // originalUrl={embed.thumbnail.url}
+          <EmbeddedImage
+            embedImage={embed.thumbnail}
             width={widthThumbnail ?? undefined}
             height={heightThumbnail ?? undefined}
           />
         )}
       </Styles.ContentAndThumbnail>
       {(images === undefined || images?.length === 0) && embed.image && (
-        <Styles.Image
-          src={embed.image.proxy_url}
-          // originalUrl={embed.image.url}
+        <EmbeddedImage
+          embedImage={embed.image}
           width={widthImage ?? undefined}
           height={heightImage ?? undefined}
         />
@@ -148,11 +147,7 @@ function Embed({ embed, images }: EmbedProps) {
         <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>
-              <Styles.Image
-                src={image.proxy_url}
-                // originalUrl={image.url}
-                withMargin
-              />
+              <EmbeddedImage embedImage={image} withMargin />
             </Styles.ImageGridImageContainer>
           ))}
         </Styles.Images>
