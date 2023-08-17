@@ -10,7 +10,7 @@ import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
 import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
 import { EmbedType } from "discord-api-types/v10";
-import EmbedImage from "./EmbedImage";
+import EmbeddedImage from "./EmbeddedImage";
 import ExternalLink from "../../ExternalLink";
 
 export interface EmbedProps {
@@ -124,7 +124,7 @@ function Embed({ embed, images }: EmbedProps) {
           )}
         </Styles.Content>
         {embed.thumbnail && embed.type !== EmbedType.Video && (
-          <EmbedImage
+          <EmbeddedImage
             embedImage={embed.thumbnail}
             width={widthThumbnail ?? undefined}
             height={heightThumbnail ?? undefined}
@@ -132,7 +132,7 @@ function Embed({ embed, images }: EmbedProps) {
         )}
       </Styles.ContentAndThumbnail>
       {(images === undefined || images?.length === 0) && embed.image && (
-        <EmbedImage
+        <EmbeddedImage
           embedImage={embed.image}
           width={widthImage ?? undefined}
           height={heightImage ?? undefined}
@@ -142,7 +142,7 @@ function Embed({ embed, images }: EmbedProps) {
         <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>
-              <EmbedImage embedImage={image} withMargin />
+              <EmbeddedImage embedImage={image} withMargin />
             </Styles.ImageGridImageContainer>
           ))}
         </Styles.Images>

@@ -11,7 +11,7 @@ interface Props extends ComponentProps<typeof Styles.Image> {
 }
 
 // Not to be confused with ImageEmbed, this is images that are embedded in embeds
-function EmbedImage({ width, height, embedImage, ...rest }: Props) {
+function EmbeddedImage({ width, height, embedImage, ...rest }: Props) {
   const { embedImageOnClick } = useConfig();
 
   return (
@@ -26,4 +26,4 @@ function EmbedImage({ width, height, embedImage, ...rest }: Props) {
   );
 }
 
-export default EmbedImage;
+export default EmbeddedImage;

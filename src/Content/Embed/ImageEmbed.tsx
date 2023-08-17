@@ -1,14 +1,12 @@
-import * as Styles from "./style";
 import React from "react";
 import type { APIEmbed } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
-import EmbedImage from "./EmbedImage";
+import EmbeddedImage from "./EmbeddedImage";
 
 export interface GifVEmbedProps {
   embed: APIEmbed;
 }
 
-// Not to be confused with EmbedImage, this is an embed image. Not an image embedded in an embed.
 function ImageEmbed({ embed }: GifVEmbedProps) {
   const size = useSize(
     embed.thumbnail?.width ?? 1,
@@ -20,7 +18,7 @@ function ImageEmbed({ embed }: GifVEmbedProps) {
     return null;
   }
 
-  return <EmbedImage embedImage={embed.thumbnail} {...size} />;
+  return <EmbeddedImage embedImage={embed.thumbnail} {...size} />;
 }
 
 export default ImageEmbed;
