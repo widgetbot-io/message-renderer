@@ -50,23 +50,20 @@ function getAvatarProperty(
 export interface GetAvatarOptions {
   animated?: boolean;
   size?: AvatarSize;
+  forceDefault?: boolean;
 }
 
 function getAvatar(
   user: APIUser,
-  { animated, size }: GetAvatarOptions = {}
+  { animated = false, size = 80, forceDefault = false }: GetAvatarOptions = {}
 ): string {
-  // assign default values
-  animated ??= false;
-  size ??= 80;
-
   const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${
     Number(user.discriminator ?? 0) % 5
   }.png`;
 
   const avatarUrl = getAvatarProperty(user, size);
 
-  if (avatarUrl === null) return defaultAvatar;
+  if (forceDefault || avatarUrl === null) return defaultAvatar;
 
   const potentialGif = animated ? gifCheck(avatarUrl) : avatarUrl;
 

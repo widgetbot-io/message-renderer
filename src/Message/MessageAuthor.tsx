@@ -92,11 +92,20 @@ function MessageAuthor({
       onClick={() => userOnClick?.(author)}
     >
       <Styles.Avatar
-        src={getAvatar(author, {
+        data={getAvatar(author, {
           animated: avatarAnimated ?? false,
         })}
         draggable={false}
-      />
+        type="image/png"
+      >
+        <Styles.AvatarFallback
+          src={getAvatar(author, {
+            animated: avatarAnimated ?? false,
+            forceDefault: true,
+          })}
+          alt="avatar"
+        />
+      </Styles.Avatar>
       <Styles.Username style={{ color: dominantRoleColor }}>
         {displayName}
       </Styles.Username>
