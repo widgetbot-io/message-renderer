@@ -8,7 +8,7 @@ const canUseWebP = memoize(() => {
   return false;
 });
 
-function webpCheck(url: string) {
+function webpCheck(url) {
   return canUseWebP() ? url : url.replace("webp", "png");
 }
 

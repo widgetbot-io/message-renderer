@@ -1,11 +1,11 @@
-import { MessageGroup } from "../index";
+import MessageGroup from "../index";
 import React from "react";
-import type { Meta, StoryFn } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
 import { MessageType } from "discord-api-types/v10";
 
-const meta: Meta<typeof MessageGroup> = {
+export default {
   title: "Message Types/Recipient Add or Remove",
   component: MessageGroup,
   parameters: {
@@ -13,16 +13,14 @@ const meta: Meta<typeof MessageGroup> = {
     layout: "centered",
   },
   decorators: [Wrapper],
-};
-
-export default meta;
+} as ComponentMeta<typeof MessageGroup>;
 
 // eslint-disable-next-line func-style
-const Template: StoryFn<typeof MessageGroup> = (args) => (
+const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const Add: StoryFn<typeof MessageGroup> = Template.bind({});
+export const Add = Template.bind({});
 Add.args = {
   messages: [
     {
@@ -41,20 +39,11 @@ Add.args = {
           bot: true,
         },
       ],
-      content: "",
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
     },
   ],
 };
 
-export const Remove: StoryFn<typeof MessageGroup> = Template.bind({});
+export const Remove = Template.bind({});
 Remove.args = {
   messages: [
     {
@@ -73,15 +62,6 @@ Remove.args = {
           bot: true,
         },
       ],
-      content: "",
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
     },
   ],
 };

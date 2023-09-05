@@ -9,7 +9,7 @@ import TextSpoiler from "./elements/TextSpoiler";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
 import { InlineCode } from "./elements/code/style";
-import type { APIMessage, APIUser } from "discord-api-types/v10";
+import { APIMessage, APIUser } from "discord-api-types/v10";
 import { findDefaultEmojiByUnicode } from "../../emojiData";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {

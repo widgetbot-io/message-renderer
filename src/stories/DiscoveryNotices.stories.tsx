@@ -1,11 +1,10 @@
-import { MessageGroup } from "../index";
+import MessageGroup from "../index";
 import React from "react";
-import type { Meta, StoryFn } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Wrapper from "./Wrapper";
 import { MessageType } from "discord-api-types/v10";
-import { testUser } from "./commonTestData";
 
-const meta: Meta<typeof MessageGroup> = {
+export default {
   title: "Message Types/Discovery Notices",
   component: MessageGroup,
   parameters: {
@@ -13,99 +12,57 @@ const meta: Meta<typeof MessageGroup> = {
     layout: "centered",
   },
   decorators: [Wrapper],
-};
-
-export default meta;
+} as ComponentMeta<typeof MessageGroup>;
 
 // eslint-disable-next-line func-style
-const Template: StoryFn<typeof MessageGroup> = (args) => (
+const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const Requalified: StoryFn<typeof MessageGroup> = Template.bind({});
+export const Requalified = Template.bind({});
 Requalified.args = {
   messages: [
     {
       id: "1",
       timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryRequalified,
-      content: "",
-      author: testUser,
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mentions: [],
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
+      author: null,
     },
   ],
 };
 
-export const InitialWarning: StoryFn<typeof MessageGroup> = Template.bind({});
+export const InitialWarning = Template.bind({});
 InitialWarning.args = {
   messages: [
     {
       id: "1",
       timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryGracePeriodInitialWarning,
-      content: "",
-      author: testUser,
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mentions: [],
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
+      author: null,
     },
   ],
 };
 
-export const FinalWarning: StoryFn<typeof MessageGroup> = Template.bind({});
+export const FinalWarning = Template.bind({});
 FinalWarning.args = {
   messages: [
     {
       id: "1",
       timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryGracePeriodFinalWarning,
-      content: "",
-      author: testUser,
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mentions: [],
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
+      author: null,
     },
   ],
 };
 
-export const Disqualified: StoryFn<typeof MessageGroup> = Template.bind({});
+export const Disqualified = Template.bind({});
 Disqualified.args = {
   messages: [
     {
       id: "1",
       timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.GuildDiscoveryDisqualified,
-      content: "",
-      author: testUser,
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mentions: [],
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
+      author: null,
     },
   ],
 };

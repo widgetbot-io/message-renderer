@@ -61,14 +61,9 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
-import { globalCss, prefix, styled, theme } from "../Stitches/stitches.config";
+import { MessageButtonListOption } from "../Message/MessageContainer";
+import { globalCss, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
-import type {
-  ChatBadgeProps,
-  MessageButtonListOption,
-} from "../core/ConfigContext";
-import { testTextChannel } from "./commonTestData";
-import type { Decorator } from "@storybook/react";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -121,7 +116,7 @@ function getButtons(
   ];
 }
 
-function resolveRole(id: Snowflake): APIRole | null {
+function resolveRole(id: Snowflake): APIRole {
   console.log("id", id);
 
   if (id === "613426354628722689")
@@ -135,16 +130,15 @@ function resolveRole(id: Snowflake): APIRole | null {
       hoist: false,
       managed: false,
       tags: {},
-      icon: "6b3d7f2ff245e627322355767b055d22",
+      icon: null,
       unicode_emoji: null,
-      flags: 0,
     };
 
   console.log(`Unknown role ${id}`);
   return null;
 }
 
-function resolveChannel(id: Snowflake): APIChannel | null {
+function resolveChannel(id: Snowflake): APIChannel {
   if (id === "697138785317814292") {
     return {
       name: "api-announcements",
@@ -153,10 +147,6 @@ function resolveChannel(id: Snowflake): APIChannel | null {
       guild_id: "613425648685547541",
       type: ChannelType.GuildAnnouncement,
     };
-  }
-
-  if (id === "4321") {
-    return testTextChannel;
   }
 
   if (id === "1234") {
@@ -183,7 +173,7 @@ function resolveChannel(id: Snowflake): APIChannel | null {
   return null;
 }
 
-function resolveMember(id: Snowflake): APIGuildMember | null {
+function resolveMember(id: Snowflake): APIGuildMember {
   if (id === "933123872641921044") {
     return {
       avatar: null,
@@ -247,7 +237,7 @@ function resolveGuild(): APIGuild | null {
     banner: "9b6439a7de04f1d26af92f84ac9e1e4a",
     owner_id: "73193882359173120",
     application_id: null,
-    region: "",
+    region: null,
     afk_channel_id: null,
     afk_timeout: 300,
     system_channel_id: null,
@@ -267,7 +257,6 @@ function resolveGuild(): APIGuild | null {
     preferred_locale: "en-US",
     rules_channel_id: "441688182833020939",
     public_updates_channel_id: "281283303326089216",
-    safety_alerts_channel_id: "281283303326089216",
     nsfw_level: GuildNSFWLevel.Safe,
     stickers: [],
     premium_progress_bar_enabled: false,
@@ -357,14 +346,12 @@ const globalStyles = globalCss({
 });
 
 const StorybookStyles = styled("div", {
-  [`--${prefix}-fonts-main`]:
+  "--fonts-main":
     '"gg sans","Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif',
   fontFamily: theme.fonts.main,
-  padding: 40,
 });
 
-// eslint-disable-next-line func-style
-const Wrapper: Decorator = (Story) => {
+function Wrapper(Story) {
   globalStyles();
 
   return (
@@ -380,7 +367,9 @@ const Wrapper: Decorator = (Story) => {
       seeThreadOnClick={(messageId, thread) =>
         alert(`See Thread "${thread.name}" clicked on message ${messageId}`)
       }
-      userOnClick={(user) => alert(`User "${getDisplayName(user)}" clicked!`)}
+      userMentionOnClick={(user) =>
+        alert(`User "${getDisplayName(user)}" mention clicked!`)
+      }
       roleMentionOnClick={(role) =>
         alert(`Role "${role.name}" mention clicked!`)
       }
@@ -392,34 +381,14 @@ const Wrapper: Decorator = (Story) => {
           `Button by custom id "${customId}" pressed on message ${message.id}!`
         );
       }}
-      openPinnedMessagesOnClick={(channel) => {
-        alert(`Open pinned messages clicked on channel ${channel.name}!`);
-      }}
-      chatBadge={({ user, TagWrapper }: ChatBadgeProps) => {
-        if (user.id === "132819036282159104")
-          return <TagWrapper>COOL</TagWrapper>;
-
-        return null;
-      }}
-      attachmentImageOnClick={(image) => {
-        alert(`Image attachment ${image.filename} clicked!`);
-      }}
-      embedImageOnClick={(embed) => {
-        alert(`Embed image ${embed.url} clicked!`);
-      }}
-      externalLinkOpenRequested={(url) => {
-        alert(`External link "${url}" requested!`);
-      }}
     >
       {({ themeClass }) => (
         <div className={themeClass}>
-          <StorybookStyles>
-            <Story />
-          </StorybookStyles>
+          <StorybookStyles>{Story()}</StorybookStyles>
         </div>
       )}
     </MessageRendererProvider>
   );
-};
+}
 
 export default Wrapper;

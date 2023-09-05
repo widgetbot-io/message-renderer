@@ -45,6 +45,4 @@ export const InlineCode = styled.withConfig({
   whiteSpace: "pre-wrap",
   backgroundColor: theme.colors.backgroundSecondary,
   fontFamily: fonts,
-  borderRadius: 3,
-  verticalAlign: "middle",
 });

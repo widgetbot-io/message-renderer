@@ -3,10 +3,8 @@ import React, { useMemo } from "react";
 import LargeTimestamp from "../LargeTimestamp";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage, Snowflake } from "discord-api-types/v10";
-import { MessageType } from "discord-api-types/v10";
+import { APIMessage, MessageType, Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
-import { Trans, useTranslation } from "react-i18next";
 
 interface BoostTierUpgradeProps {
   createdAt: APIMessage["timestamp"];
@@ -16,29 +14,16 @@ interface BoostTierUpgradeProps {
   author: APIMessage["author"];
 }
 
-function BoostTierUpgrade({
-  createdAt,
-  content,
-  channelId,
-  type,
-  author,
-}: BoostTierUpgradeProps) {
-  const { t } = useTranslation();
-
+function BoostTierUpgrade(props: BoostTierUpgradeProps) {
   const { resolveChannel, resolveGuild } = useConfig();
-  const channel = resolveChannel(channelId);
-  const guild =
-    channel !== null && "guild_id" in channel && channel.guild_id !== undefined
-      ? resolveGuild(channel.guild_id)
-      : null;
-
+  const channel = resolveChannel(props.channelId);
   const guildName =
-    guild !== null
-      ? guild.name ?? t("unknownEntities.guild")
-      : t("unknownEntities.guild");
+    channel !== null && "guild_id" in channel
+      ? resolveGuild(channel.guild_id).name ?? "Unknown Guild"
+      : "Unknown Guild";
 
   const newLevel = useMemo(() => {
-    switch (type) {
+    switch (props.type) {
       case MessageType.GuildBoostTier1:
         return 1;
       case MessageType.GuildBoostTier2:
@@ -48,8 +33,9 @@ function BoostTierUpgrade({
       default:
         return -1;
     }
-  }, [type]);
+  }, [props.type]);
 
+  // todo: guildNameHere
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -58,26 +44,12 @@ function BoostTierUpgrade({
         svg="IconBoost"
       />
       <Styles.SystemMessageContent>
-        <Trans
-          i18nKey="BoostTierUpgrade.content"
-          count={content === "" ? 1 : parseInt(content)}
-          values={{
-            guildName,
-            newLevel,
-          }}
-          components={{
-            Author: (
-              <MessageAuthor
-                author={author}
-                guildId={guild?.id}
-                onlyShowUsername
-              />
-            ),
-          }}
-          t={t}
-        />
+        <MessageAuthor author={props.author} onlyShowUsername /> just boosted
+        the server <strong>{props.content}</strong> time
+        {props.content === "1" ? "" : "s"}! {guildName} has achieved{" "}
+        <strong>Level {newLevel}!</strong>
       </Styles.SystemMessageContent>
-      <LargeTimestamp timestamp={createdAt} />
+      <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>
   );
 }

@@ -3,19 +3,11 @@ import {
   styled,
   theme,
 } from "../../../Stitches/stitches.config";
-import ExternalLink from "../../../ExternalLink";
-
-export const Text = styled.withConfig({
-  displayName: "md-text",
-  componentId: commonComponentId,
-})("span", {
-  verticalAlign: "middle",
-});
 
 export const Link = styled.withConfig({
   displayName: "md-link",
   componentId: commonComponentId,
-})(ExternalLink, {
+})("a", {
   "& code": {
     color: "inherit",
   },
@@ -27,7 +19,6 @@ export const Heading = styled.withConfig({
 })("p", {
   margin: `${theme.space.xxl} 0 ${theme.space.large}`,
   fontWeight: 700,
-  color: theme.colors.primaryOpacity100,
 
   "&:first-child": {
     marginTop: theme.space.large,

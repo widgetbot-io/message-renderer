@@ -1,11 +1,11 @@
-import { MessageGroup } from "../index";
+import MessageGroup from "../index";
 import React from "react";
-import type { Meta, StoryFn } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Wrapper from "./Wrapper";
-import { testTextChannel, testUser } from "./commonTestData";
+import { testUser } from "./commonTestData";
 import { MessageType } from "discord-api-types/v10";
 
-const meta: Meta<typeof MessageGroup> = {
+export default {
   title: "Message Types/Thread Created",
   component: MessageGroup,
   parameters: {
@@ -13,16 +13,14 @@ const meta: Meta<typeof MessageGroup> = {
     layout: "centered",
   },
   decorators: [Wrapper],
-};
-
-export default meta;
+} as ComponentMeta<typeof MessageGroup>;
 
 // eslint-disable-next-line func-style
-const Template: StoryFn<typeof MessageGroup> = (args) => (
+const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const ThreadCreated: StoryFn<typeof MessageGroup> = Template.bind({});
+export const ThreadCreated = Template.bind({});
 ThreadCreated.args = {
   messages: [
     {
@@ -30,17 +28,12 @@ ThreadCreated.args = {
       timestamp: "2023-01-29T13:19:13.365000+00:00",
       type: MessageType.ThreadCreated,
       author: testUser,
-      thread: testTextChannel,
-      content: "",
-      mentions: [],
-      channel_id: "4321",
-      edited_timestamp: null,
-      tts: false,
-      mention_everyone: false,
-      mention_roles: [],
-      attachments: [],
-      embeds: [],
-      pinned: false,
+      thread: {
+        id: "1",
+        name: "Meme Thread",
+        locked: false,
+        messageCount: 3,
+      },
     },
   ],
 };

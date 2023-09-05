@@ -6,7 +6,6 @@ import {
 } from "../Stitches/stitches.config";
 import { CodeBlock } from "../markdown/render/elements/code/style";
 import SvgFromUrl from "../SvgFromUrl";
-import { Heading } from "../markdown/render/elements";
 
 export const Base = styled.withConfig({
   displayName: "message-content",
@@ -30,11 +29,6 @@ export const Base = styled.withConfig({
 
         "&:hover": {
           opacity: 1,
-        },
-
-        [`${Heading}`]: {
-          display: "inline",
-          fontSize: "100%",
         },
       },
     },

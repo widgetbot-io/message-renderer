@@ -1,52 +1,51 @@
+import { PureComponent } from "react";
 import * as Styles from "./style/message";
 import Tooltip from "../Tooltip";
 import webpCheck from "../utils/webpCheck";
+import { memoize } from "lodash";
 import * as React from "react";
 import { Twemoji } from "../Emoji";
-import type { APIRole } from "discord-api-types/v10";
-import { useTranslation } from "react-i18next";
+import { APIRole } from "discord-api-types/v10";
 
 interface RoleIconProps {
   role: APIRole;
 }
 
-function RoleIcon(props: RoleIconProps) {
-  const { t } = useTranslation();
-
-  const roleIconUrl = webpCheck(
-    `https://cdn.discordapp.com/role-icons/${props.role.id}/${props.role.icon}.webp`
+class RoleIcon extends PureComponent<RoleIconProps> {
+  private getRoleIcon = memoize((icon: string, roleId: string): string =>
+    webpCheck(`https://cdn.discordapp.com/role-icons/${roleId}/${icon}.webp`)
   );
 
-  if (
-    props.role.unicode_emoji !== null &&
-    props.role.unicode_emoji !== undefined
-  )
+  render() {
+    if (
+      this.props.role === null ||
+      (this.props.role.icon === null && this.props.role.unicode_emoji === null)
+    )
+      return null;
+
+    if (this.props.role.unicode_emoji !== null)
+      return (
+        <Tooltip overlay={this.props.role.name} placement="top">
+          <span>
+            <Styles.RoleIcon
+              as={Twemoji}
+              disableTooltip={true}
+              emojiName={this.props.role.unicode_emoji}
+            >
+              {this.props.role.unicode_emoji}
+            </Styles.RoleIcon>
+          </span>
+        </Tooltip>
+      );
+
+    const iconUrl = this.getRoleIcon(this.props.role.icon, this.props.role.id);
+
     return (
-      <Tooltip overlay={props.role.name} placement="top">
-        <span>
-          <Styles.RoleIcon
-            as={Twemoji}
-            disableTooltip={true}
-            emojiName={props.role.unicode_emoji ?? t("unknownEntities.emoji")}
-          >
-            {props.role.unicode_emoji}
-          </Styles.RoleIcon>
-        </span>
+      <Tooltip overlay={this.props.role.name} placement="top">
+        <Styles.RoleIcon src={iconUrl} />
       </Tooltip>
     );
-
-  if (props.role.icon === null || props.role.icon === undefined) {
-    console.error(
-      "Role icon AND unicode_emoji is null or undefined but RoleIcon was rendered."
-    );
-    return null;
   }
-
-  return (
-    <Tooltip overlay={props.role.name} placement="top">
-      <Styles.RoleIcon src={roleIconUrl} />
-    </Tooltip>
-  );
 }
 
 export default RoleIcon;

@@ -1,24 +1,25 @@
-import "./i18n";
-import type { CSSProperties } from "react";
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
+import * as Styles from "./style";
 import Message from "./Message";
-import type { APIMessage } from "discord-api-types/v10";
+import { APIMessage } from "discord-api-types/v10";
 
-export interface MessageProps {
+interface MessageProps {
   messages: APIMessage[];
   style?: CSSProperties;
   showButtons?: boolean;
   thread: boolean;
 }
 
-export function MessageGroup(props: MessageProps) {
+function MessageGroup(props: MessageProps) {
   const [firstMessage, ...otherMessages] = props.messages;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className="message-group"
-      style={props.style}
+    <Styles.MessageGroup
+      style={{
+        ...props.style,
+        marginTop: 0, // todo: temporary
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -37,9 +38,10 @@ export function MessageGroup(props: MessageProps) {
           thread={props.thread}
         />
       ))}
-    </div>
+    </Styles.MessageGroup>
   );
 }
 
 export { default as Message } from "./Message";
 export { default as MessageRendererProvider } from "./MessageRendererProvider";
+export default MessageGroup;

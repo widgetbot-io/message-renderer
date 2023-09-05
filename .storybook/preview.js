@@ -7,19 +7,3 @@ export const parameters = {
     },
   },
 };
-
-const preview = {
-  parameters: {
-    backgrounds: {
-      default: "discord-dark",
-      values: [
-        {
-          name: "discord-dark",
-          value: "#424549",
-        },
-      ],
-    },
-  },
-};
-
-export default preview;
