@@ -3,41 +3,31 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import { APIMessage } from "discord-api-types/v10";
+import type { APIMessage } from "discord-api-types/v10";
+import { useConfig } from "../../core/ConfigContext";
+import { Trans, useTranslation } from "react-i18next";
+import { GuildMemberJoin as GuildMemberJoinI18n } from "../../i18n/locales/en/translation.json";
 
 interface GuildMemberJoinProps {
   createdAt: APIMessage["timestamp"];
   author: APIMessage["author"];
-}
-
-function joinMessage(
-  createdAt: APIMessage["timestamp"],
-  author: APIMessage["author"]
-): JSX.Element {
-  const member = <MessageAuthor author={author} onlyShowUsername />;
-
-  const messages = [
-    <>{member} joined the party.</>,
-    <>{member} is here.</>,
-    <>Welcome, {member}. We hope you brought pizza.</>,
-    <>A wild {member} appeared.</>,
-    <>{member} just landed.</>,
-    <>{member} just slid into the server.</>,
-    <>{member} just showed up!</>,
-    <>Welcome {member}. Say hi!</>,
-    <>{member} hopped into the server.</>,
-    <>Everyone welcome {member}!</>,
-    <>
-      Glad you{"'"}re here, {member}.
-    </>,
-    <>Good to see you, {member}.</>,
-    <>Yay you made it, {member}!</>,
-  ];
-
-  return messages[Number(new Date(createdAt)) % messages.length];
+  channelId: APIMessage["channel_id"];
 }
 
 function GuildMemberJoin(props: GuildMemberJoinProps) {
+  const { resolveChannel } = useConfig();
+  const channel = resolveChannel(props.channelId);
+  const guildId =
+    channel !== null && "guild_id" in channel ? channel.guild_id : null;
+
+  const { t } = useTranslation();
+
+  const numberOfJoinMessages = Object.keys(
+    GuildMemberJoinI18n.joinMessage
+  ).length;
+  const joinMessageIndex =
+    Number(new Date(props.createdAt)) % numberOfJoinMessages;
+
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -46,7 +36,19 @@ function GuildMemberJoin(props: GuildMemberJoinProps) {
         svg="IconAdd"
       />
       <Styles.SystemMessageContent>
-        {joinMessage(props.createdAt, props.author)}
+        <Trans
+          i18nKey={`GuildMemberJoin.joinMessage.${joinMessageIndex}`}
+          t={t}
+          components={{
+            Member: (
+              <MessageAuthor
+                author={props.author}
+                guildId={guildId}
+                onlyShowUsername
+              />
+            ),
+          }}
+        />
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

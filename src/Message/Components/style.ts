@@ -76,7 +76,8 @@ export const ButtonComponentContent = styled.withConfig({
   alignItems: "center",
   justifyContent: "center",
   gap: theme.space.medium,
-  height: '100%'
+  height: "100%",
+  userSelect: "none",
 });
 
 export const ActionRow = styled.withConfig({

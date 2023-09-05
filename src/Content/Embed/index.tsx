@@ -2,13 +2,16 @@ import GifVEmbed from "./GifVEmbed";
 import ImageEmbed from "./ImageEmbed";
 import VideoAttachment from "../Attachment/VideoAttachment";
 import * as Styles from "./style";
-import numberToRgb from "../../utils/numberToRgb";
+import { colorIntToRgba } from "../../utils/colorIntToCss";
 import moment from "moment";
 import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
 import useSize from "./useSize";
 import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
-import { APIEmbed, APIEmbedImage, EmbedType } from "discord-api-types/v10";
+import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
+import { EmbedType } from "discord-api-types/v10";
+import EmbeddedImage from "./EmbeddedImage";
+import ExternalLink from "../../ExternalLink";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -16,23 +19,29 @@ export interface EmbedProps {
 }
 
 function Embed({ embed, images }: EmbedProps) {
+  if (embed.type === undefined) {
+    console.error("Embed: Embed type is undefined", embed);
+    return null;
+  }
+
   if (embed.type === EmbedType.GIFV) return <GifVEmbed embed={embed} />;
 
   if (embed.type === EmbedType.Image) return <ImageEmbed embed={embed} />;
 
   if (embed.type === EmbedType.Video && !embed.thumbnail)
+    // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
     return <VideoAttachment attachmentOrEmbed={embed} />;
 
   const embedColor =
     embed.color !== 0 && embed.color !== undefined
-      ? numberToRgb(embed.color)
+      ? colorIntToRgba(embed.color)
       : undefined;
 
   const { width: widthImage, height: heightImage } = useSize(
     embed.type,
     embed.image,
     "EmbedImage",
-    images?.length > 0
+    !images || images.length > 0
   );
 
   const {
@@ -52,9 +61,14 @@ function Embed({ embed, images }: EmbedProps) {
     <Styles.Embed style={{ borderLeftColor: embedColor }} thin={isEmbedThin}>
       <Styles.ContentAndThumbnail hasLargeThumbnail={isThumbnailLarge}>
         <Styles.Content>
-          {embed.provider && (
-            <Styles.Provider>{embed.provider.name}</Styles.Provider>
-          )}
+          {embed.provider &&
+            (embed.provider.url ? (
+              <ExternalLink href={embed.provider.url}>
+                <Styles.Provider>{embed.provider.name}</Styles.Provider>
+              </ExternalLink>
+            ) : (
+              <Styles.Provider>{embed.provider.name}</Styles.Provider>
+            ))}
           {embed.author && (
             <Styles.Author>
               {embed.author.proxy_icon_url && (
@@ -62,9 +76,9 @@ function Embed({ embed, images }: EmbedProps) {
               )}
               <Styles.AuthorName>
                 {embed.author.url ? (
-                  <a href={embed.author.url} target="_blank" rel="noreferrer noopener">
+                  <ExternalLink href={embed.author.url}>
                     {embed.author.name}
-                  </a>
+                  </ExternalLink>
                 ) : (
                   embed.author.name
                 )}
@@ -73,19 +87,21 @@ function Embed({ embed, images }: EmbedProps) {
           )}
           {embed.title &&
             (embed.url !== undefined ? (
-              <Styles.Title as="a" link href={embed.url} target="_blank">
+              <Styles.Title as={ExternalLink} link href={embed.url}>
                 {parseEmbedTitle(embed.title)}
               </Styles.Title>
             ) : (
               <Styles.Title>{parseEmbedTitle(embed.title)}</Styles.Title>
             ))}
-          {embed.type === EmbedType.Video ? (
+          {embed.type === EmbedType.Video && embed.video ? (
             <EmbedVideo
               url={embed.video.url}
               proxyUrl={embed.video.proxy_url}
+              // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
               width={embed.video.width}
+              // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
               height={embed.video.height}
-              thumbnail={embed.thumbnail.proxy_url}
+              thumbnail={embed.thumbnail?.proxy_url}
             />
           ) : (
             embed.description && (
@@ -113,31 +129,25 @@ function Embed({ embed, images }: EmbedProps) {
           )}
         </Styles.Content>
         {embed.thumbnail && embed.type !== EmbedType.Video && (
-          <Styles.Image
-            src={embed.thumbnail.proxy_url}
-            // originalUrl={embed.thumbnail.url}
-            width={widthThumbnail}
-            height={heightThumbnail}
+          <EmbeddedImage
+            embedImage={embed.thumbnail}
+            width={widthThumbnail ?? undefined}
+            height={heightThumbnail ?? undefined}
           />
         )}
       </Styles.ContentAndThumbnail>
       {(images === undefined || images?.length === 0) && embed.image && (
-        <Styles.Image
-          src={embed.image.proxy_url}
-          // originalUrl={embed.image.url}
-          width={widthImage}
-          height={heightImage}
+        <EmbeddedImage
+          embedImage={embed.image}
+          width={widthImage ?? undefined}
+          height={heightImage ?? undefined}
         />
       )}
-      {images?.length > 0 && (
+      {images && images.length > 0 && (
         <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
           {images.map((image) => (
             <Styles.ImageGridImageContainer key={image.url}>
-              <Styles.Image
-                src={image.proxy_url}
-                // originalUrl={image.url}
-                withMargin
-              />
+              <EmbeddedImage embedImage={image} withMargin />
             </Styles.ImageGridImageContainer>
           ))}
         </Styles.Images>

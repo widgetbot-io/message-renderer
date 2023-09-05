@@ -1,14 +1,16 @@
-import {
+import type {
   APIButtonComponentWithCustomId,
   APIButtonComponentWithURL,
   APIMessage,
 } from "discord-api-types/v10";
 import * as Styles from "./style";
-import React, { ComponentProps } from "react";
+import type { ComponentProps } from "react";
+import React from "react";
 import SvgFromUrl from "../../SvgFromUrl";
 import { ButtonStyle } from "discord-api-types/v10";
 import Emoji from "../../Emoji";
 import { useConfig } from "../../core/ConfigContext";
+import ExternalLink from "../../ExternalLink";
 
 const buttonStyleMap: Record<
   ButtonStyle,
@@ -21,8 +23,16 @@ const buttonStyleMap: Record<
   [ButtonStyle.Success]: "success",
 };
 
+type ButtonComponentWithCustomId = APIButtonComponentWithCustomId & {
+  emoji: APIButtonComponentWithCustomId["emoji"] & { name: string };
+};
+
+type ButtonComponentWithURL = APIButtonComponentWithURL & {
+  emoji: APIButtonComponentWithURL["emoji"] & { name: string };
+};
+
 interface ButtonComponentProps {
-  button: APIButtonComponentWithCustomId | APIButtonComponentWithURL;
+  button: ButtonComponentWithCustomId | ButtonComponentWithURL;
   message: APIMessage;
 }
 
@@ -32,7 +42,7 @@ function ButtonComponent({ button, message }: ButtonComponentProps) {
   if ("url" in button) {
     return (
       <Styles.ButtonComponent
-        as="a"
+        as={ExternalLink}
         href={button.url}
         buttonStyle={buttonStyleMap[button.style]}
       >

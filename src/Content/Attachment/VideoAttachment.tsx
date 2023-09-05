@@ -10,17 +10,36 @@ import useSize from "./useSize";
 import * as Styles from "./style";
 import Tooltip from "../../Tooltip";
 import SvgFromUrl from "../../SvgFromUrl";
-import { APIAttachment, APIEmbed } from "discord-api-types/v10";
+import type { APIAttachment, APIEmbed } from "discord-api-types/v10";
+
+export type Attachment = APIAttachment & { width: number; height: number };
+type Embed = APIEmbed & {
+  width: number;
+  height: number;
+  video: Required<APIEmbed["video"]>;
+};
 
 interface VideoAttachmentProps {
   attachmentOrEmbed:
-    | APIAttachment
-    | APIEmbed
+    | Attachment
+    | Embed
     | {
         url: string;
         width: number;
         height: number;
       };
+}
+
+function checkWhetherVideoEmbed(
+  attachmentOrEmbed: VideoAttachmentProps["attachmentOrEmbed"]
+): attachmentOrEmbed is Embed {
+  return "video" in attachmentOrEmbed;
+}
+
+function isValidEmbedVideo(
+  embedVideo: APIEmbed["video"] | null
+): embedVideo is Exclude<APIEmbed["video"], null | undefined> {
+  return embedVideo !== null;
 }
 
 function VideoAttachment(props: VideoAttachmentProps) {
@@ -32,10 +51,12 @@ function VideoAttachment(props: VideoAttachmentProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isSeeking, setIsSeeking] = useState(false);
 
-  const videoRef = useRef(null);
-  const attachmentRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const attachmentRef = useRef<HTMLDivElement>(null);
 
   const durationPlayedHumanized = useMemo(() => {
+    if (videoRef.current === null) return "0:00/0:00";
+
     const minutesPassed = Math.floor(videoRef.current?.currentTime / 60);
     const secondsPassedRaw = Math.floor(videoRef.current?.currentTime % 60);
     const secondsPassed =
@@ -54,7 +75,7 @@ function VideoAttachment(props: VideoAttachmentProps) {
 
     if (video === null) return;
 
-    if (video.paused) video.play();
+    if (video.paused) void video.play();
     else video.pause();
   }
 
@@ -67,33 +88,38 @@ function VideoAttachment(props: VideoAttachmentProps) {
     );
   }, []);
 
-  const { width: extractedWidth, height: extractedHeight } =
-    "video" in props.attachmentOrEmbed
-      ? props.attachmentOrEmbed.video
-      : (props.attachmentOrEmbed as APIAttachment);
+  if (
+    checkWhetherVideoEmbed(props.attachmentOrEmbed) &&
+    !isValidEmbedVideo(props.attachmentOrEmbed)
+  ) {
+    console.error("Video embed has no video property", props.attachmentOrEmbed);
+    return null;
+  }
 
-  const { width, height } = useSize(
-    extractedWidth,
-    extractedHeight,
-    isFullscreen
-  );
+  const { width: extractedWidth, height: extractedHeight } =
+    checkWhetherVideoEmbed(props.attachmentOrEmbed)
+      ? (props.attachmentOrEmbed.video as Exclude<
+          Embed["video"],
+          null | undefined
+        >)
+      : props.attachmentOrEmbed;
 
   function fullScreenChange() {
     setIsFullscreen(document.fullscreenElement !== null);
   }
-
-  function seekVideo(e, overrideSeeking?: boolean) {
+  function seekVideo(
+    e: React.MouseEvent<HTMLDivElement>,
+    overrideSeeking?: boolean
+  ) {
     if (videoRef.current === null || (!isSeeking && !overrideSeeking)) return;
+    const rect = e.currentTarget.getBoundingClientRect();
 
-    const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
-
     const duration = videoRef.current?.duration;
-    if (duration === undefined) return;
 
+    if (duration === undefined) return;
     videoRef.current.currentTime = (x / rect.width) * duration;
   }
-
   useEffect(() => {
     document.addEventListener("fullscreenchange", fullScreenChange);
 
@@ -101,6 +127,14 @@ function VideoAttachment(props: VideoAttachmentProps) {
       document.removeEventListener("fullscreenchange", fullScreenChange);
     };
   }, []);
+
+  const { width, height } = useSize(
+    extractedWidth,
+    extractedHeight,
+    isFullscreen
+  );
+
+  if (width === undefined || height === undefined) return null;
 
   return (
     <Styles.VideoAttachmentContainer
@@ -168,7 +202,8 @@ function VideoAttachment(props: VideoAttachmentProps) {
             <Styles.ProgressBarFill
               style={{
                 width:
-                  (videoRef.current?.currentTime / videoRef.current?.duration) *
+                  ((videoRef.current?.currentTime ?? 0) /
+                    (videoRef.current?.duration ?? 1)) *
                     100 +
                   "%",
               }}
@@ -180,7 +215,10 @@ function VideoAttachment(props: VideoAttachmentProps) {
               height={14}
               svg="IconFullscreen"
               onClick={() => {
-                if (document.fullscreenElement === null)
+                if (
+                  attachmentRef.current !== null &&
+                  document.fullscreenElement === null
+                )
                   attachmentRef.current?.requestFullscreen();
                 else void document.exitFullscreen();
               }}

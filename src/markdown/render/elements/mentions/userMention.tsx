@@ -1,6 +1,6 @@
 import * as Styles from "./style";
 import * as React from "react";
-import { Snowflake } from "discord-api-types/v10";
+import type { Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
 import getDisplayName from "../../../../utils/getDisplayName";
@@ -10,7 +10,7 @@ interface UserMentionProps {
 }
 
 function UserMention({ userId }: UserMentionProps) {
-  const { resolveUser, userMentionOnClick } = useConfig();
+  const { resolveUser, userOnClick } = useConfig();
 
   // todo: resolve current channel to resolve member
   const user = resolveUser(userId);
@@ -18,8 +18,10 @@ function UserMention({ userId }: UserMentionProps) {
 
   return (
     <Styles.Mention
-      onClick={() => userMentionOnClick?.(user)}
-      canBeClicked={userMentionOnClick !== undefined}
+      onClick={() => {
+        if (user !== null) userOnClick?.(user);
+      }}
+      canBeClicked={userOnClick !== undefined}
     >
       <Styles.MentionIcon>@</Styles.MentionIcon>
       {text}

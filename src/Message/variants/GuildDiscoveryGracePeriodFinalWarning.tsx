@@ -2,7 +2,8 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import { APIMessage } from "discord-api-types/v10";
+import type { APIMessage } from "discord-api-types/v10";
+import { Trans, useTranslation } from "react-i18next";
 
 interface GuildDiscoveryGracePeriodFinalWarningProps {
   createdAt: APIMessage["timestamp"];
@@ -11,6 +12,8 @@ interface GuildDiscoveryGracePeriodFinalWarningProps {
 function GuildDiscoveryGracePeriodFinalWarning(
   props: GuildDiscoveryGracePeriodFinalWarningProps
 ) {
+  const { t } = useTranslation();
+
   return (
     <Styles.SystemMessage>
       <Styles.SystemMessageIcon
@@ -19,8 +22,7 @@ function GuildDiscoveryGracePeriodFinalWarning(
         svg="IconWarning"
       />
       <Styles.SystemMessageContent>
-        This server has failed Discovery activity requirements for 3 weeks. If
-        this server fails for 1 more week, it will be removed from Discovery.
+        <Trans i18nKey="GuildDiscoveryGracePeriodFinalWarning.content" t={t} />
       </Styles.SystemMessageContent>
       <LargeTimestamp timestamp={props.createdAt} />
     </Styles.SystemMessage>

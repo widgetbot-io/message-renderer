@@ -27,7 +27,6 @@ export const Tag = styled.withConfig({
 })("span", {
   marginLeft: theme.space.small,
   fontSize: theme.fontSizes.xs,
-  textTransform: "uppercase",
   height: "fit-content",
   borderRadius: 3,
   padding: `${theme.space.xxs} ${theme.space.small}`,

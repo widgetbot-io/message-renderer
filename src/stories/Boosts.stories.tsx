@@ -1,11 +1,11 @@
-import MessageGroup from "../index";
+import { MessageGroup } from "../index";
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import Wrapper from "./Wrapper";
 import { testUser } from "./commonTestData";
 import { MessageType } from "discord-api-types/v10";
 
-export default {
+const meta: Meta<typeof MessageGroup> = {
   title: "Message Types/Boosts",
   component: MessageGroup,
   parameters: {
@@ -13,14 +13,16 @@ export default {
     layout: "centered",
   },
   decorators: [Wrapper],
-} as ComponentMeta<typeof MessageGroup>;
+};
+
+export default meta;
 
 // eslint-disable-next-line func-style
-const Template: ComponentStory<typeof MessageGroup> = (args) => (
+const Template: StoryFn<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const Boost = Template.bind({});
+export const Boost: StoryFn<typeof MessageGroup> = Template.bind({});
 Boost.args = {
   messages: [
     {
@@ -30,11 +32,19 @@ Boost.args = {
       author: testUser,
       content: "",
       channel_id: "697138785317814292",
+      edited_timestamp: null,
+      tts: false,
+      mention_everyone: false,
+      mentions: [],
+      mention_roles: [],
+      attachments: [],
+      embeds: [],
+      pinned: false,
     },
   ],
 };
 
-export const BoostToTier1 = Template.bind({});
+export const BoostToTier1: StoryFn<typeof MessageGroup> = Template.bind({});
 BoostToTier1.args = {
   messages: [
     {
@@ -44,11 +54,19 @@ BoostToTier1.args = {
       author: testUser,
       content: "",
       channel_id: "697138785317814292",
+      edited_timestamp: null,
+      tts: false,
+      mention_everyone: false,
+      mentions: [],
+      mention_roles: [],
+      attachments: [],
+      embeds: [],
+      pinned: false,
     },
   ],
 };
 
-export const BoostToTier2 = Template.bind({});
+export const BoostToTier2: StoryFn<typeof MessageGroup> = Template.bind({});
 BoostToTier2.args = {
   messages: [
     {
@@ -58,11 +76,19 @@ BoostToTier2.args = {
       author: testUser,
       content: "",
       channel_id: "697138785317814292",
+      edited_timestamp: null,
+      tts: false,
+      mention_everyone: false,
+      mentions: [],
+      mention_roles: [],
+      attachments: [],
+      embeds: [],
+      pinned: false,
     },
   ],
 };
 
-export const BoostToTier3 = Template.bind({});
+export const BoostToTier3: StoryFn<typeof MessageGroup> = Template.bind({});
 BoostToTier3.args = {
   messages: [
     {
@@ -72,6 +98,14 @@ BoostToTier3.args = {
       author: testUser,
       content: "",
       channel_id: "697138785317814292",
+      edited_timestamp: null,
+      tts: false,
+      mention_everyone: false,
+      mentions: [],
+      mention_roles: [],
+      attachments: [],
+      embeds: [],
+      pinned: false,
     },
   ],
 };
