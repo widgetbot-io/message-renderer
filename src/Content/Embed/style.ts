@@ -211,8 +211,11 @@ export const Images = styled.withConfig({
   displayName: "embed-field-images",
   componentId: commonComponentId,
 })("div", {
+  $$maxHeight: "300px",
+  $$gap: theme.space.small,
+
   display: "grid",
-  gap: theme.space.small,
+  gap: "$$gap",
   borderRadius: 3,
   overflow: "hidden",
 
@@ -224,20 +227,28 @@ export const Images = styled.withConfig({
 
   variants: {
     nImages: {
-      1: {},
+      1: {
+        $$imageHeight: "unset",
+      },
       2: {
+        $$imageHeight: "unset",
+
         gridTemplateColumns: "1fr 1fr",
       },
       3: {
+        $$imageHeight: "calc(($$maxHeight - $$gap) / 2)",
+
         gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "calc((300px - 4px) / 2) calc((300px - 4px) / 2)",
+        gridTemplateRows: "$$imageHeight $$imageHeight",
         "& > *:first-child": {
           gridRow: "span 2",
         },
       },
       4: {
+        $$imageHeight: "calc(($$maxHeight - $$gap) / 2)",
+
         gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "calc((300px - 4px) / 2) calc((300px - 4px) / 2)",
+        gridTemplateRows: "$$imageHeight $$imageHeight",
       },
     },
   },
@@ -247,6 +258,7 @@ export const ImageGridImageContainer = styled.withConfig({
   displayName: "embed-image-grid-image-container",
   componentId: commonComponentId,
 })("div", {
+  height: "$$imageHeight",
   overflow: "hidden",
   display: "flex",
   justifyContent: "center",
