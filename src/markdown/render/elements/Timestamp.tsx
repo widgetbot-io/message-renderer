@@ -41,9 +41,7 @@ export function Timestamp({ data: { timestamp, style } }: Props) {
     F: "LLLL",
   };
 
-  function displayTime(
-    style: Exclude<TimestampStyle, TimestampStyle.RelativeTime>
-  ) {
+  function displayTime(style: TimestampStyle) {
     return time.format(formats[style]);
   }
 

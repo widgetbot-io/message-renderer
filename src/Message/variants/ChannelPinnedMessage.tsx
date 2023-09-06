@@ -1,26 +1,21 @@
 import MessageAuthor from "../MessageAuthor";
-import React from "react";
+import React, { useCallback } from "react";
 import LargeTimestamp from "../LargeTimestamp";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
-import { useConfig } from "../../core/ConfigContext";
-import { Trans, useTranslation } from "react-i18next";
+import { APIMessage } from "discord-api-types/v10";
 
 interface ChannelPinnedMessageProps {
   author: APIMessage["author"];
   createdAt: APIMessage["timestamp"];
-  channelId: APIMessage["channel_id"];
 }
 
 function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
-  const { t } = useTranslation();
-
-  const { openPinnedMessagesOnClick, resolveChannel } = useConfig();
-
-  const channel = resolveChannel(props.channelId);
-  const guildId =
-    channel !== null && "guild_id" in channel ? channel.guild_id : null;
+  const openPinnedMessage = useCallback(
+    // todo: implement ?
+    () => {},
+    []
+  );
 
   return (
     <Styles.SystemMessage>
@@ -30,26 +25,12 @@ function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {
         svg="IconPin"
       />
       <Styles.SystemMessageContent>
-        <Trans
-          i18nKey="ChannelPinnedMessage.content"
-          components={{
-            Author: (
-              <MessageAuthor
-                author={props.author}
-                guildId={guildId}
-                onlyShowUsername
-              />
-            ),
-            OpenPinnedMessage: (
-              <Styles.SystemMessageLink
-                onClick={() => {
-                  if (channel) openPinnedMessagesOnClick?.(channel);
-                }}
-              />
-            ),
-          }}
-          t={t}
-        />
+        <MessageAuthor author={props.author} onlyShowUsername /> pinned a
+        message to this channel. See all{" "}
+        <Styles.SystemMessageLink onClick={openPinnedMessage}>
+          pinned messages
+        </Styles.SystemMessageLink>
+        .
         <LargeTimestamp timestamp={props.createdAt} />
       </Styles.SystemMessageContent>
     </Styles.SystemMessage>

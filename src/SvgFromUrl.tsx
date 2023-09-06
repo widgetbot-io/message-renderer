@@ -1,7 +1,5 @@
-import type { ComponentProps } from "react";
-import React from "react";
-import type { Svg } from "./core/svgs";
-import { getSvgUrl } from "./core/svgs";
+import React, { ComponentProps } from "react";
+import { getSvgUrl, Svg } from "./core/svgs";
 
 type SvgFromUrlProps = {
   width: number;

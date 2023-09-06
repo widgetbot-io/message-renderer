@@ -9,17 +9,6 @@ export const MessageAuthor = styled.withConfig({
   componentId: commonComponentId,
 })("span", {
   display: "inline-flex",
-
-  variants: {
-    clickable: {
-      true: {
-        "&:hover": {
-          cursor: "pointer",
-          textDecoration: "underline",
-        },
-      },
-    },
-  },
 });
 
 export const Username = styled.withConfig({
@@ -38,23 +27,11 @@ export const Username = styled.withConfig({
 export const Avatar = styled.withConfig({
   displayName: "message-author-avatar",
   componentId: commonComponentId,
-})("object", {
+})("img", {
   position: "absolute",
   left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
   transform: "translateX(-50%)",
   marginTop: "calc(4px - .125rem)",
-  borderRadius: "100%",
-  width: 40,
-  height: 40,
-  zIndex: 1,
-  backgroundColor: theme.colors.backgroundSecondary, // when the avatar is loading
-  outline: "none",
-});
-
-export const AvatarFallback = styled.withConfig({
-  displayName: "message-author-avatar-fallback",
-  componentId: commonComponentId,
-})("img", {
   borderRadius: "100%",
   width: 40,
   height: 40,

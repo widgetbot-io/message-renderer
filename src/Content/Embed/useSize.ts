@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { APIEmbedImage } from "discord-api-types/v10";
+import { APIEmbedImage } from "discord-api-types/v10";
 
 function useSize(
   type: string,
@@ -10,11 +10,7 @@ function useSize(
   const { width, height, isLarge } = useMemo(() => {
     if (cancel) return { width: null, height: null, isLarge: false };
 
-    if (
-      image === undefined ||
-      image.width === undefined ||
-      image.height === undefined
-    )
+    if (image === undefined)
       return { width: null, height: null, isLarge: false };
 
     if (internalType === "EmbedImage" || /^article|image$/i.test(type)) {

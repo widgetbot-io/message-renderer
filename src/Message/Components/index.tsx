@@ -1,4 +1,4 @@
-import type { APIMessage } from "discord-api-types/v10";
+import { APIMessage } from "discord-api-types/v10";
 import ActionRow from "./ActionRow";
 import React from "react";
 import * as Styles from "./style";
@@ -9,8 +9,6 @@ interface ComponentsProps {
 }
 
 function Components({ components, message }: ComponentsProps) {
-  if (!components) return null;
-
   return (
     <Styles.Components>
       {components.map((actionRow, index) => (

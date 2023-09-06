@@ -1,34 +1,26 @@
 {
   "compilerOptions": {
     "resolveJsonModule": true,
-    "strict": true,
     "skipLibCheck": true,
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es6",
+    "module": "commonjs",
     "sourceMap": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "noEmit": true,
-    "allowJs": false,
-    "isolatedModules": true,
+    "lib": ["esnext", "es6", "dom"],
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "declaration": true,
+    "emitDeclarationOnly": false,
     "outDir": "dist",
     "declarationDir": "types",
     "allowSyntheticDefaultImports": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "rootDir": "src",
-    "declarationMap": true,
     "baseUrl": ".",
-    "paths": {
-      "react-vite-library": [ "src/index.tsx" ]
-    },
-    "types": ["node", "vite/client"]
   },
   "include": [
     "src/**/*"
   ],
-  "exclude": ["node_modules", "dist", "src/stories"]
+  "exclude": ["node_modules", "src/stories"]
 }

@@ -1,22 +1,19 @@
 import * as React from "react";
-import type { ComponentProps } from "react";
 import { useMemo } from "react";
 import ChatTag from "../ChatTag";
 import RoleIcon from "./RoleIcon";
 import getAvatar from "../utils/getAvatar";
 import * as Styles from "./style/author";
-import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
+import type { APIGuildMember, APIUser } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 import getDisplayName from "../utils/getDisplayName";
 
-interface MessageAuthorProps
-  extends ComponentProps<typeof Styles.MessageAuthor> {
-  author: APIUser;
+interface MessageAuthorProps {
+  author: APIUser | APIGuildMember;
   avatarAnimated?: boolean;
   onlyShowUsername?: boolean;
   crossPost?: boolean;
-  referenceGuild?: Snowflake;
-  guildId: Snowflake | null | undefined;
+  referenceGuild?: string;
 }
 
 function MessageAuthor({
@@ -25,59 +22,47 @@ function MessageAuthor({
   avatarAnimated,
   crossPost,
   referenceGuild,
-  guildId,
-  ...props
 }: MessageAuthorProps) {
-  const { resolveRole, resolveMember, userOnClick } = useConfig();
-  const member = guildId ? resolveMember(author.id, guildId) : null;
-  const isGuildMember = member !== null;
-
+  const { resolveRole } = useConfig();
+  const isGuildMember = "joined_at" in author;
+  const user = isGuildMember ? author.user : author;
   const displayName = isGuildMember
-    ? member.nick ?? getDisplayName(author)
+    ? author.nick ?? getDisplayName(author.user)
     : getDisplayName(author);
 
   const dominantRoleIconRole = useMemo(() => {
     if (!isGuildMember || !resolveRole) return null;
 
-    const [role] = member.roles
+    const [role] = author.roles
       .map((id) => resolveRole(id))
       .filter(
-        (role: APIRole | null): role is APIRole =>
-          role !== null &&
-          ((role.icon !== null && role.icon !== undefined) ||
-            (role.unicode_emoji !== null && role.unicode_emoji !== undefined))
+        (role) =>
+          role !== null && (role.icon !== null || role.unicode_emoji !== null)
       )
       .sort((a, b) => b.position - a.position);
 
     if (!role) return null;
 
     return role;
-  }, [isGuildMember, resolveRole, member]);
+  }, [isGuildMember, resolveRole, author]);
 
-  const dominantRoleColor: string | undefined = useMemo(() => {
-    if (!isGuildMember || !resolveRole) return undefined;
+  const dominantRoleColor = useMemo(() => {
+    if (!isGuildMember || !resolveRole) return null;
 
-    const [role] = member.roles
+    const [role] = author.roles
       .map((id) => resolveRole(id))
-      .filter(
-        (role: APIRole | null): role is APIRole =>
-          role !== null && role.color !== 0
-      )
+      .filter((r) => r !== undefined && r.color !== 0)
       .sort((a, b) => b.position - a.position);
 
     const color = role?.color;
-    if (!color) return undefined;
+    if (!color) return null;
 
     return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
-  }, [isGuildMember, resolveRole, member]);
+  }, [isGuildMember, resolveRole, author]);
 
   if (onlyShowUsername) {
     return (
-      <Styles.MessageAuthor
-        clickable={userOnClick !== undefined}
-        {...props}
-        onClick={() => userOnClick?.(author)}
-      >
+      <Styles.MessageAuthor>
         <Styles.Username style={{ color: dominantRoleColor }}>
           {displayName}
         </Styles.Username>
@@ -86,26 +71,13 @@ function MessageAuthor({
   }
 
   return (
-    <Styles.MessageAuthor
-      clickable={userOnClick !== undefined}
-      {...props}
-      onClick={() => userOnClick?.(author)}
-    >
+    <Styles.MessageAuthor>
       <Styles.Avatar
-        data={getAvatar(author, {
+        src={getAvatar(user, {
           animated: avatarAnimated ?? false,
         })}
         draggable={false}
-        type="image/png"
-      >
-        <Styles.AvatarFallback
-          src={getAvatar(author, {
-            animated: avatarAnimated ?? false,
-            forceDefault: true,
-          })}
-          alt="avatar"
-        />
-      </Styles.Avatar>
+      />
       <Styles.Username style={{ color: dominantRoleColor }}>
         {displayName}
       </Styles.Username>
@@ -113,8 +85,8 @@ function MessageAuthor({
         <RoleIcon role={dominantRoleIconRole} />
       )}
       <ChatTag
-        author={author}
-        crossPost={crossPost ?? false}
+        author={user}
+        crosspost={crossPost}
         referenceGuild={referenceGuild}
       />
     </Styles.MessageAuthor>

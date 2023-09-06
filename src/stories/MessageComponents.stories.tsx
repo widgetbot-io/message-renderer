@@ -1,9 +1,9 @@
-import { MessageGroup } from "../index";
+import MessageGroup from "../index";
 import React from "react";
-import type { Meta, StoryFn } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Wrapper from "./Wrapper";
 
-const meta: Meta<typeof MessageGroup> = {
+export default {
   title: "Message Types/Normal/Message Components",
   component: MessageGroup,
   parameters: {
@@ -11,16 +11,14 @@ const meta: Meta<typeof MessageGroup> = {
     layout: "centered",
   },
   decorators: [Wrapper],
-};
-
-export default meta;
+} as ComponentMeta<typeof MessageGroup>;
 
 // eslint-disable-next-line func-style
-const Template: StoryFn<typeof MessageGroup> = (args) => (
+const Template: ComponentStory<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
 
-export const Buttons: StoryFn<typeof MessageGroup> = Template.bind({});
+export const Buttons = Template.bind({});
 Buttons.args = {
   messages: [
     {

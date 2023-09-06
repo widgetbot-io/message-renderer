@@ -1,7 +1,6 @@
 import * as Styles from "../style";
 import * as React from "react";
-import type { APIStickerItem} from "discord-api-types/v10";
-import { StickerFormatType } from "discord-api-types/v10";
+import { APIStickerItem, StickerFormatType } from "discord-api-types/v10";
 import Tooltip from "../../Tooltip";
 import webpCheck from "../../utils/webpCheck";
 

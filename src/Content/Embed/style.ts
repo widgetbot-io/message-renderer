@@ -192,13 +192,9 @@ export const Image = styled.withConfig({
   componentId: commonComponentId,
 })("img", {
   borderRadius: 3,
+  cursor: "pointer",
 
   variants: {
-    clickable: {
-      true: {
-        cursor: "pointer",
-      },
-    },
     withMargin: {
       true: {
         marginTop: theme.space.large,

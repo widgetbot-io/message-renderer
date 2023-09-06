@@ -2,16 +2,13 @@ import * as Styles from "./style";
 import React, { useCallback, useMemo } from "react";
 import Tooltip from "../../Tooltip";
 import { findDefaultEmojiByUnicode } from "../../emojiData";
-import type { APIReaction } from "discord-api-types/v10";
-import { useTranslation } from "react-i18next";
+import { APIReaction } from "discord-api-types/v10";
 
 interface ReactionProps {
   reaction: APIReaction;
 }
 
 function Reaction(props: ReactionProps) {
-  const { t } = useTranslation();
-
   const emojiUrl = useMemo(() => {
     if (props.reaction.emoji.id === null) return null;
 
@@ -25,25 +22,27 @@ function Reaction(props: ReactionProps) {
       props.reaction.emoji.animated ? "gif" : "webp"
     }?v=1&size=64&quality=lossless`;
 
-    const emojiName = props.reaction.emoji.name ?? "unknown emoji";
-
     return (
       <Styles.ReactionTooltip>
         {props.reaction.emoji.id !== null ? (
           <Styles.ReactionEmoji
-            emojiName={emojiName}
+            emojiName={props.reaction.emoji.name}
             src={url}
             disableTooltip
             enlarged
           />
         ) : (
-          <Styles.ReactionEmoji emojiName={emojiName} disableTooltip enlarged />
+          <Styles.ReactionEmoji
+            emojiName={props.reaction.emoji.name}
+            disableTooltip
+            enlarged
+          />
         )}
         :
         {props.reaction.emoji.id !== null
-          ? emojiName
-          : findDefaultEmojiByUnicode(props.reaction.emoji.name ?? "")
-              ?.keywords?.[0] ?? t("unknownEntities.emoji")}
+          ? props.reaction.emoji.name
+          : findDefaultEmojiByUnicode(props.reaction.emoji.name)
+              ?.keywords?.[0] ?? "unknown emoji"}
         :
       </Styles.ReactionTooltip>
     );
@@ -59,13 +58,11 @@ function Reaction(props: ReactionProps) {
         {emojiUrl ? (
           <Styles.ReactionEmoji
             src={emojiUrl}
-            // @ts-expect-error TS2769 (can be null only in reaction emoji objects)
             emojiName={props.reaction.emoji.name}
             disableTooltip
           />
         ) : (
           <Styles.ReactionEmoji
-            // @ts-expect-error TS2769 (can be null only in reaction emoji objects)
             emojiName={props.reaction.emoji.name}
             disableTooltip
           />

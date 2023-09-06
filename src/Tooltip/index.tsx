@@ -1,6 +1,5 @@
 import RcTooltip from "rc-tooltip";
-import type { ReactNode } from "react";
-import React from "react";
+import React, { ReactNode } from "react";
 
 export const tooltipPrefix = "message-renderer-rc-tooltip";
 export const tooltipAnimPrefix = "tooltip-anim";

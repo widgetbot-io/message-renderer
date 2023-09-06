@@ -12,8 +12,6 @@ function Lottie({ data, width, height }: Props) {
   const ref = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (!ref.current) return;
-
     lottie.loadAnimation({
       container: ref.current,
       animationData: JSON.parse(data),

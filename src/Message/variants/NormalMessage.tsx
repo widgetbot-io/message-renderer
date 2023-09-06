@@ -3,19 +3,16 @@ import MessageAuthor from "../MessageAuthor";
 import Content from "../../Content";
 import Moment from "moment";
 import Tooltip from "../../Tooltip";
-import type { GetAvatarOptions } from "../../utils/getAvatar";
-import getAvatar from "../../utils/getAvatar";
+import getAvatar, { GetAvatarOptions } from "../../utils/getAvatar";
 import LargeTimestamp from "../LargeTimestamp";
 import ChatTag from "../../ChatTag";
 import * as Styles from "../style/message";
-import type {
+import {
   APIMessage,
   APIMessageInteraction,
-  APIRole,
-  APIUser,
+  MessageType,
   Snowflake,
 } from "discord-api-types/v10";
-import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
 
@@ -45,8 +42,6 @@ function getMiniAvatarUrl(
   return null;
 }
 
-const FLAG_CROSSPOST = 1 << 1;
-
 const ReplyInfo = memo((props: ReplyInfoProps) => {
   const miniAvatarUrl = useMemo(
     () => getMiniAvatarUrl(props.referencedMessage, props.interaction),
@@ -57,22 +52,15 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
   const miniUserName = useMemo(() => {
     if (!props.interaction && !props.referencedMessage) return null;
 
-    const user = props.interaction
-      ? props.interaction.user
-      : props.referencedMessage?.author;
-
-    if (!user) return null;
+    const user =
+      props.interaction !== undefined
+        ? props.interaction.user
+        : props.referencedMessage.author;
 
     if (!resolveChannel) return getDisplayName(user);
 
     const channel = resolveChannel(props.channelId);
-    if (
-      !channel ||
-      !("guild_id" in channel) ||
-      !channel.guild_id ||
-      !props.referencedMessage
-    )
-      return getDisplayName(user);
+    if (!channel || !("guild_id" in channel)) return getDisplayName(user);
 
     const guildMember = resolveMember(
       props.referencedMessage.author.id,
@@ -81,33 +69,29 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
 
     if (!guildMember) return getDisplayName(user);
 
-    return guildMember.nick ?? getDisplayName(guildMember.user as APIUser);
+    return guildMember.nick ?? getDisplayName(guildMember.user);
   }, [props.referencedMessage, props.interaction, resolveChannel]);
 
   const miniUserNameColorHex = useMemo(() => {
-    if (!props.referencedMessage) return undefined;
+    if (!props.referencedMessage) return null;
 
     const channel = resolveChannel(props.referencedMessage.channel_id);
-    if (!channel || !("guild_id" in channel) || !channel.guild_id)
-      return undefined;
+    if (!channel || !("guild_id" in channel)) return null;
 
     const guildMember = resolveMember(
       props.referencedMessage.author.id,
       channel.guild_id
     );
 
-    if (!guildMember) return undefined;
+    if (!guildMember) return null;
 
     const [role] = guildMember.roles
       .map((id) => resolveRole(id))
-      .filter(
-        (role): role is APIRole =>
-          role !== null && role !== undefined && role.color !== 0
-      )
+      .filter((r) => r !== undefined && r.color !== 0)
       .sort((a, b) => b.position - a.position);
 
     const color = role?.color;
-    if (!color) return undefined;
+    if (!color) return null;
 
     return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
   }, [resolveRole]);
@@ -130,13 +114,11 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
         </>
       ) : (
         <Styles.ReplyUser>
-          {miniAvatarUrl && <Styles.MiniUserAvatar src={miniAvatarUrl} />}
+          <Styles.MiniUserAvatar src={miniAvatarUrl} />
           {props.referencedMessage && (
             <ChatTag
               author={props.referencedMessage.author}
-              crossPost={Boolean(
-                (props.referencedMessage.flags ?? 0) & FLAG_CROSSPOST
-              )}
+              crosspost={!!(props.referencedMessage.flags & (1 << 1))}
               referenceGuild={
                 props.referencedMessage.message_reference?.guild_id
               }
@@ -165,8 +147,6 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
   );
 });
 
-ReplyInfo.displayName = "ReplyInfo";
-
 // type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
 
 interface MessageProps {
@@ -185,10 +165,15 @@ function NormalMessage(props: MessageProps) {
   const shouldShowReply =
     props.message.type === MessageType.Reply ||
     Boolean(props.message.interaction);
-  const { currentUser, resolveChannel } = useConfig();
-  const channel = resolveChannel(props.message.channel_id);
-  const guildId =
-    channel !== null && "guild_id" in channel ? channel.guild_id : null;
+  const { resolveChannel, resolveMember, currentUser } = useConfig();
+
+  const member = useMemo(() => {
+    const channel = resolveChannel(props.message.channel_id);
+
+    if (!channel || !("guild_id" in channel)) return null;
+
+    return resolveMember(props.message.author.id, channel.guild_id);
+  }, [resolveChannel, resolveMember]);
 
   const isUserMentioned = useMemo(() => {
     const userMentionedOverride = props.overrides?.userMentioned ?? false;
@@ -219,10 +204,9 @@ function NormalMessage(props: MessageProps) {
         )}
         <Styles.MessageHeaderBase>
           <MessageAuthor
-            guildId={guildId}
-            author={props.message.author}
+            author={member ?? props.message.author}
             avatarAnimated={props.isHovered ?? false}
-            crossPost={Boolean((props.message.flags ?? 0) & FLAG_CROSSPOST)}
+            crossPost={Boolean(props.message.flags & (1 << 1))}
             referenceGuild={props.message.message_reference?.guild_id}
           />
           {props.hideTimestamp || (

@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import Tooltip from "../Tooltip";
 import React from "react";
 import { MessageContainerStyle } from "./style/message";
 import SvgFromUrl from "../SvgFromUrl";
-import type {
+import {
   MessageButtonListOption,
   PartialSvgConfig,
 } from "../core/ConfigContext";
