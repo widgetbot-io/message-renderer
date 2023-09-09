@@ -410,6 +410,7 @@ const Wrapper: Decorator = (Story) => {
       externalLinkOpenRequested={(url) => {
         alert(`External link "${url}" requested!`);
       }}
+      unknownMessageTypeResponse="in-app-error"
     >
       {({ themeClass }) => (
         <div className={themeClass}>

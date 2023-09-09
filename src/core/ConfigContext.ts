@@ -37,6 +37,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveUser(id: Snowflake): APIUser | null;
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
   themeOverrideClassName?: string;
+  unknownMessageTypeResponse?: "in-app-error" | "console-error" | "none";
 
   // Click handlers
   currentUser(): APIUser | null;
