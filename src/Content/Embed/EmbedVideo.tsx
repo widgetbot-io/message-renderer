@@ -5,6 +5,7 @@ import type { APIEmbedThumbnail, APIEmbedVideo } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
 import { getSvgUrl } from "../../core/svgs";
 import VideoAttachment from "../Attachment/VideoAttachment";
+import { error } from "../../utils/error";
 
 interface ThumbnailWrapperProps {
   thumbnail?: APIEmbedThumbnail["url"];
@@ -78,7 +79,7 @@ function EmbedVideo(props: EmbedVideoProps) {
     );
 
   if (props.url === undefined) {
-    console.error("EmbedVideo: url is undefined when proxyUrl is undefined");
+    error("EmbedVideo: url is undefined when proxyUrl is undefined");
     return null;
   }
 

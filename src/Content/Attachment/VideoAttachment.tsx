@@ -11,6 +11,7 @@ import * as Styles from "./style";
 import Tooltip from "../../Tooltip";
 import SvgFromUrl from "../../SvgFromUrl";
 import type { APIAttachment, APIEmbed } from "discord-api-types/v10";
+import { error } from "../../utils/error";
 
 export type Attachment = APIAttachment & { width: number; height: number };
 type Embed = APIEmbed & {
@@ -92,7 +93,7 @@ function VideoAttachment(props: VideoAttachmentProps) {
     checkWhetherVideoEmbed(props.attachmentOrEmbed) &&
     !isValidEmbedVideo(props.attachmentOrEmbed)
   ) {
-    console.error("Video embed has no video property", props.attachmentOrEmbed);
+    error("Video embed has no video property", props.attachmentOrEmbed);
     return null;
   }
 
