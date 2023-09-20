@@ -183,7 +183,7 @@ function resolveChannel(id: Snowflake): APIChannel | null {
   return null;
 }
 
-function resolveMember(id: Snowflake): APIGuildMember | null {
+function resolveMember({ id }: APIUser): APIGuildMember | null {
   if (id === "933123872641921044") {
     return {
       avatar: null,

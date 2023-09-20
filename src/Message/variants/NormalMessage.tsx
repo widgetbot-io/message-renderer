@@ -75,7 +75,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       return getDisplayName(user);
 
     const guildMember = resolveMember(
-      props.referencedMessage.author.id,
+      props.referencedMessage.author,
       channel.guild_id
     );
 
@@ -92,7 +92,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       return undefined;
 
     const guildMember = resolveMember(
-      props.referencedMessage.author.id,
+      props.referencedMessage.author,
       channel.guild_id
     );
 

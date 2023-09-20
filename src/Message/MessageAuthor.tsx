@@ -29,7 +29,7 @@ function MessageAuthor({
   ...props
 }: MessageAuthorProps) {
   const { resolveRole, resolveMember, userOnClick } = useConfig();
-  const member = guildId ? resolveMember(author.id, guildId) : null;
+  const member = guildId ? resolveMember(author, guildId) : null;
   const isGuildMember = member !== null;
 
   const displayName = isGuildMember
