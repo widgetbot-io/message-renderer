@@ -216,7 +216,7 @@ function NormalMessage(props: MessageProps) {
           <MessageAuthor
             guildId={guildId}
             author={props.message.author}
-            avatarAnimated={props.isHovered ?? false}
+            isAvatarAnimated={props.isHovered ?? false}
             crossPost={Boolean((props.message.flags ?? 0) & FLAG_CROSSPOST)}
             referenceGuild={props.message.message_reference?.guild_id}
           />

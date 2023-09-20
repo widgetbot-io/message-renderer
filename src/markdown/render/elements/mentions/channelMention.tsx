@@ -22,7 +22,7 @@ interface ChannelMentionProps {
   channelId: Snowflake;
 }
 
-function ChannelMention({ channelId }: ChannelMentionProps) {
+export function ChannelMention({ channelId }: ChannelMentionProps) {
   const { resolveChannel, channelMentionOnClick } = useConfig();
 
   const channel = resolveChannel(channelId);

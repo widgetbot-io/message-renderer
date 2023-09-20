@@ -95,6 +95,42 @@ export const MessageHeaderBase = styled.withConfig({
   alignItems: "center",
 });
 
+export const AutomodHeaderText = styled.withConfig({
+  displayName: "automod-header-text",
+  componentId: commonComponentId,
+})("span", {
+  marginLeft: theme.space.small,
+  color: theme.colors.primaryOpacity100,
+});
+
+export const AutomodMessageInQuestion = styled.withConfig({
+  displayName: "automod-message-in-question",
+  componentId: commonComponentId,
+})("div", {
+  padding: theme.space.xl,
+  backgroundColor: theme.colors.backgroundSecondary,
+  borderRadius: 8,
+  position: "relative",
+  paddingLeft: 72,
+  marginTop: theme.space.small,
+});
+
+export const AutomodMessageContent = styled.withConfig({
+  displayName: "automod-message-content",
+  componentId: commonComponentId,
+})("div", {
+  color: theme.colors.primaryOpacity80,
+  whiteSpace: "break-spaces",
+  fontSize: theme.fontSizes.l,
+});
+
+export const AutomodFlaggedKeyword = styled.withConfig({
+  displayName: "automod-flagged-keyword",
+  componentId: commonComponentId,
+})("span", {
+  backgroundColor: theme.colors.automodMatchedWord,
+});
+
 export namespace MessageContainerStyle {
   export const Buttons = styled.withConfig({
     displayName: "message-hover-buttons",
@@ -239,7 +275,7 @@ export const MiniUserName = styled.withConfig({
   overflow: "hidden",
   maxWidth: "25vw",
   textOverflow: "ellipsis",
-  color: theme.colors.primaryOpacity100
+  color: theme.colors.primaryOpacity100,
 });
 
 export const SystemMessage = styled.withConfig({

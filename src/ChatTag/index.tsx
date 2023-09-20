@@ -30,7 +30,7 @@ function isVerifiedBot(flags?: number) {
 }
 
 interface TagProps {
-  author: APIUser;
+  author: APIUser | "automod";
   crossPost: boolean;
   referenceGuild: string | undefined;
 }
@@ -40,14 +40,18 @@ function ChatTag({ author, crossPost, referenceGuild }: TagProps) {
 
   const { chatBadge: ChatBadge } = useConfig();
 
-  if (ChatBadge !== undefined) {
+  if (author !== "automod" && ChatBadge !== undefined) {
     const chatBadgeResult = ChatBadge({ user: author, TagWrapper: Styles.Tag });
     if (chatBadgeResult !== null) return chatBadgeResult;
   }
 
-  if (!author.bot) return null;
+  if (author !== "automod" && !author.bot) return null;
 
-  if (author.system || referenceGuild === "667560445975986187")
+  if (
+    author === "automod" ||
+    author.system ||
+    referenceGuild === "667560445975986187"
+  )
     return (
       <Styles.Tag className="verified system">
         {verified} {t("chatTag.system")}

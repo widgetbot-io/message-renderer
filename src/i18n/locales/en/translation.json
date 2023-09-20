@@ -75,5 +75,9 @@
   },
   "ThreadStarterMessage": {
     "content": "Sorry, we couldn't load the first message in this thread"
+  },
+  "AutomodAction": {
+    "username": "AutoMod",
+    "flaggedMessage": "detected cringe in <Channel/>"
   }
 }

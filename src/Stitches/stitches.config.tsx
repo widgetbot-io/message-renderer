@@ -45,6 +45,8 @@ const stitches = createStitches({
       buttonDangerHoverBackground: "#a12828",
       buttonSuccessBackground: "#248046",
       buttonSuccessHoverBackground: "#1a6334",
+      automodUsername: "#949CF7",
+      automodMatchedWord: "rgba(240, 177, 50, 0.3)",
     },
     fonts: {
       main: "Open Sans, sans-serif",
