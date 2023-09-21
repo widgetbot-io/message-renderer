@@ -410,6 +410,12 @@ const Wrapper: Decorator = (Story) => {
       externalLinkOpenRequested={(url) => {
         alert(`External link "${url}" requested!`);
       }}
+      // avatarUrlOverride={(user) => {
+      //   if (user.id === "132819036282159104")
+      //     return "https://cdn.discordapp.com/emojis/698964060770926684.png";
+      //
+      //   return null;
+      // }}
     >
       {({ themeClass }) => (
         <div className={themeClass}>
