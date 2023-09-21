@@ -30,7 +30,7 @@ function MessageAuthor({
 }: MessageAuthorProps) {
   const { resolveRole, resolveMember, userOnClick, avatarUrlOverride } =
     useConfig();
-  const member = guildId ? resolveMember(author.id, guildId) : null;
+  const member = guildId ? resolveMember(author, guildId) : null;
   const isGuildMember = member !== null;
 
   const avatarUrl =

@@ -5,6 +5,7 @@ import * as React from "react";
 import { Twemoji } from "../Emoji";
 import type { APIRole } from "discord-api-types/v10";
 import { useTranslation } from "react-i18next";
+import { error } from "../utils/error";
 
 interface RoleIconProps {
   role: APIRole;
@@ -36,7 +37,7 @@ function RoleIcon(props: RoleIconProps) {
     );
 
   if (props.role.icon === null || props.role.icon === undefined) {
-    console.error(
+    error(
       "Role icon AND unicode_emoji is null or undefined but RoleIcon was rendered."
     );
     return null;

@@ -4,6 +4,7 @@ import * as Styles from "./style";
 import type { APIAttachment } from "discord-api-types/v10";
 import { t } from "i18next";
 import { useConfig } from "../../core/ConfigContext";
+import { error } from "../../utils/error";
 
 interface ImageAttachmentProps {
   attachment: APIAttachment;
@@ -14,7 +15,7 @@ function ImageAttachment(props: ImageAttachmentProps) {
 
   if (!props.attachment.width || !props.attachment.height) {
     // todo: dev mode only
-    console.error(
+    error(
       "ImageAttachment: attachment has no width or height",
       props.attachment
     );
