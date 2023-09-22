@@ -1,6 +1,6 @@
 {
   "name": "@widgetbot/message-renderer",
-  "version": "v2.0.0",
+  "version": "v2.1.0",
   "description": "",
   "module": "dist/message-renderer.mjs",
   "files": [
