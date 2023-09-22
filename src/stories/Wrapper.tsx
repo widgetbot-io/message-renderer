@@ -183,7 +183,7 @@ function resolveChannel(id: Snowflake): APIChannel | null {
   return null;
 }
 
-function resolveMember(id: Snowflake): APIGuildMember | null {
+function resolveMember({ id }: APIUser): APIGuildMember | null {
   if (id === "933123872641921044") {
     return {
       avatar: null,
@@ -410,6 +410,12 @@ const Wrapper: Decorator = (Story) => {
       externalLinkOpenRequested={(url) => {
         alert(`External link "${url}" requested!`);
       }}
+      // avatarUrlOverride={(user) => {
+      //   if (user.id === "132819036282159104")
+      //     return "https://cdn.discordapp.com/emojis/698964060770926684.png";
+      //
+      //   return null;
+      // }}
     >
       {({ themeClass }) => (
         <div className={themeClass}>

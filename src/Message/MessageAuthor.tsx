@@ -28,9 +28,16 @@ function MessageAuthor({
   guildId,
   ...props
 }: MessageAuthorProps) {
-  const { resolveRole, resolveMember, userOnClick } = useConfig();
-  const member = guildId ? resolveMember(author.id, guildId) : null;
+  const { resolveRole, resolveMember, userOnClick, avatarUrlOverride } =
+    useConfig();
+  const member = guildId ? resolveMember(author, guildId) : null;
   const isGuildMember = member !== null;
+
+  const avatarUrl =
+    avatarUrlOverride?.(author) ??
+    getAvatar(author, {
+      animated: avatarAnimated ?? false,
+    });
 
   const displayName = isGuildMember
     ? member.nick ?? getDisplayName(author)
@@ -91,16 +98,10 @@ function MessageAuthor({
       {...props}
       onClick={() => userOnClick?.(author)}
     >
-      <Styles.Avatar
-        data={getAvatar(author, {
-          animated: avatarAnimated ?? false,
-        })}
-        draggable={false}
-        type="image/png"
-      >
+      <Styles.Avatar data={avatarUrl} draggable={false} type="image/png">
         <Styles.AvatarFallback
           src={getAvatar(author, {
-            animated: avatarAnimated ?? false,
+            animated: false,
             forceDefault: true,
           })}
           alt="avatar"

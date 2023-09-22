@@ -32,10 +32,11 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   messageButtons(message: APIMessage): MessageButtonListOption<SvgConfig>[];
   resolveRole(id: Snowflake): APIRole | null;
   resolveChannel(id: Snowflake): APIChannel | null;
-  resolveMember(id: Snowflake, guildId: Snowflake): APIGuildMember | null;
+  resolveMember(user: APIUser, guildId: Snowflake): APIGuildMember | null;
   resolveGuild(id: Snowflake): APIGuild | null;
   resolveUser(id: Snowflake): APIUser | null;
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
+  avatarUrlOverride?(user: APIUser): string | null;
   themeOverrideClassName?: string;
 
   // Click handlers

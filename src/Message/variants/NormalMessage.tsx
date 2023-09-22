@@ -27,41 +27,28 @@ interface ReplyInfoProps {
   isContextMenuInteraction?: boolean;
 }
 
-function getMiniAvatarUrl(
-  referencedMessage: APIMessage["referenced_message"],
-  interaction: APIMessage["interaction"]
-) {
+function getMiniAvatarUrl(user: APIUser) {
   const getAvatarSettings: GetAvatarOptions = {
     size: 16,
     animated: false,
   };
 
-  if (interaction !== undefined)
-    return getAvatar(interaction.user, getAvatarSettings);
-
-  if (referencedMessage !== undefined && referencedMessage !== null)
-    return getAvatar(referencedMessage.author, getAvatarSettings);
-
-  return null;
+  return getAvatar(user, getAvatarSettings);
 }
 
 const FLAG_CROSSPOST = 1 << 1;
 
 const ReplyInfo = memo((props: ReplyInfoProps) => {
-  const miniAvatarUrl = useMemo(
-    () => getMiniAvatarUrl(props.referencedMessage, props.interaction),
-    [props.referencedMessage, props.interaction]
-  );
-  const { resolveRole, resolveChannel, resolveMember } = useConfig();
+  const user = props.interaction
+    ? props.interaction.user
+    : props.referencedMessage?.author;
 
+  const { resolveRole, resolveChannel, resolveMember, avatarUrlOverride } =
+    useConfig();
   const miniUserName = useMemo(() => {
     if (!props.interaction && !props.referencedMessage) return null;
 
-    const user = props.interaction
-      ? props.interaction.user
-      : props.referencedMessage?.author;
-
-    if (!user) return null;
+    if (user === undefined) return null;
 
     if (!resolveChannel) return getDisplayName(user);
 
@@ -75,7 +62,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       return getDisplayName(user);
 
     const guildMember = resolveMember(
-      props.referencedMessage.author.id,
+      props.referencedMessage.author,
       channel.guild_id
     );
 
@@ -83,6 +70,14 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
 
     return guildMember.nick ?? getDisplayName(guildMember.user as APIUser);
   }, [props.referencedMessage, props.interaction, resolveChannel]);
+
+  const miniAvatarUrl = useMemo(
+    () =>
+      user === undefined
+        ? null
+        : avatarUrlOverride?.(user) ?? getMiniAvatarUrl(user),
+    [props.referencedMessage, props.interaction]
+  );
 
   const miniUserNameColorHex = useMemo(() => {
     if (!props.referencedMessage) return undefined;
@@ -92,7 +87,7 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
       return undefined;
 
     const guildMember = resolveMember(
-      props.referencedMessage.author.id,
+      props.referencedMessage.author,
       channel.guild_id
     );
 
