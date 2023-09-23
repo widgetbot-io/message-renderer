@@ -124,6 +124,36 @@ export const AutomodMessageContent = styled.withConfig({
   fontSize: theme.fontSizes.l,
 });
 
+export const AutomodMatchInfoContainer = styled.withConfig({
+  displayName: "automod-match-info-container",
+  componentId: commonComponentId,
+})("span", {
+  display: "flex",
+  flexDirection: "row",
+  color: theme.colors.textMuted,
+  fontSize: theme.fontSizes.s,
+});
+
+export const AutomodMatchInfo = styled.withConfig({
+  displayName: "automod-match-info",
+  componentId: commonComponentId,
+})("span", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+
+  "&:not(:last-child)::after": {
+    marginLeft: theme.space.large,
+    marginRight: theme.space.large,
+    content: "",
+    display: "inline-block",
+    width: 4,
+    height: 4,
+    backgroundColor: theme.colors.automodDot,
+    borderRadius: "100%",
+  },
+});
+
 export const AutomodFlaggedKeyword = styled.withConfig({
   displayName: "automod-flagged-keyword",
   componentId: commonComponentId,

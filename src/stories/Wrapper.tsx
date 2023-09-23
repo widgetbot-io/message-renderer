@@ -70,7 +70,7 @@ import type {
   ChatBadgeProps,
   MessageButtonListOption,
 } from "../core/ConfigContext";
-import { testTextChannel } from "./commonTestData";
+import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 
 const svgUrls = {
@@ -160,6 +160,10 @@ function resolveChannel(id: Snowflake): APIChannel | null {
 
   if (id === testTextChannel.id) {
     return testTextChannel;
+  }
+
+  if (id === testVoiceChannel.id) {
+    return testVoiceChannel;
   }
 
   if (id === "1234") {

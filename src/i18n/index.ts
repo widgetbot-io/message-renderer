@@ -18,3 +18,39 @@ void i18next
     },
   })
   .then(console.log);
+
+if (i18next.services.formatter) {
+  i18next.services.formatter.add("duration", (value, lng, options) => {
+    const numericValue = Number(value);
+
+    if (numericValue < 60)
+      return i18next.t("duration.seconds", { count: numericValue }, options);
+
+    if (numericValue < 3600)
+      return i18next.t(
+        "duration.minutes",
+        { count: Math.floor(numericValue / 60) },
+        options
+      );
+
+    if (numericValue < 86400)
+      return i18next.t(
+        "duration.hours",
+        { count: Math.floor(numericValue / 3600) },
+        options
+      );
+
+    if (numericValue < 604800)
+      return i18next.t(
+        "duration.days",
+        { count: Math.floor(numericValue / 86400) },
+        options
+      );
+
+    return i18next.t(
+      "duration.weeks",
+      { count: Math.floor(numericValue / 604800) },
+      options
+    );
+  });
+}
