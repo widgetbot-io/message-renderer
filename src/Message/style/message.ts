@@ -93,6 +93,7 @@ export const MessageHeaderBase = styled.withConfig({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
+  flexWrap: "wrap",
 });
 
 export const AutomodHeaderText = styled.withConfig({
