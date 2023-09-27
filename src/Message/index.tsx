@@ -158,7 +158,6 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
         <NormalMessage
           message={errorMessage}
           isFirstMessage={props.isFirstMessage}
-          isHovered={props.isHovered}
         />
       );
     }

@@ -412,7 +412,7 @@ const Wrapper: Decorator = (Story) => {
       }}
       // avatarUrlOverride={(user) => {
       //   if (user.id === "132819036282159104")
-      //     return "https://cdn.discordapp.com/emojis/698964060770926684.png";
+      //     return { still: "https://cdn.discordapp.com/emojis/698964060770926684.png" };
       //
       //   return null;
       // }}

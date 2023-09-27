@@ -13,6 +13,7 @@ import type {
 import type { SvgConfig } from "./svgs";
 import type { Tag } from "../ChatTag/style";
 import type { APIAttachment } from "discord-api-types/v10";
+import type { UserAvatar } from "../utils/getAvatar";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 
@@ -36,7 +37,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveGuild(id: Snowflake): APIGuild | null;
   resolveUser(id: Snowflake): APIUser | null;
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
-  avatarUrlOverride?(user: APIUser): string | null;
+  avatarUrlOverride?(user: APIUser): UserAvatar | null;
   themeOverrideClassName?: string;
 
   // Click handlers

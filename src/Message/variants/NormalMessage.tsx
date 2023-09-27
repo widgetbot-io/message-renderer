@@ -30,7 +30,6 @@ interface ReplyInfoProps {
 function getMiniAvatarUrl(user: APIUser) {
   const getAvatarSettings: GetAvatarOptions = {
     size: 16,
-    animated: false,
   };
 
   return getAvatar(user, getAvatarSettings);
@@ -125,7 +124,9 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
         </>
       ) : (
         <Styles.ReplyUser>
-          {miniAvatarUrl && <Styles.MiniUserAvatar src={miniAvatarUrl} />}
+          {miniAvatarUrl && (
+            <Styles.MiniUserAvatar src={miniAvatarUrl.stillAvatarUrl} />
+          )}
           {props.referencedMessage && (
             <ChatTag
               author={props.referencedMessage.author}
@@ -216,7 +217,6 @@ function NormalMessage(props: MessageProps) {
           <MessageAuthor
             guildId={guildId}
             author={props.message.author}
-            avatarAnimated={props.isHovered ?? false}
             crossPost={Boolean((props.message.flags ?? 0) & FLAG_CROSSPOST)}
             referenceGuild={props.message.message_reference?.guild_id}
           />

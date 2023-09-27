@@ -39,16 +39,35 @@ export const Avatar = styled.withConfig({
   displayName: "message-author-avatar",
   componentId: commonComponentId,
 })("object", {
+  borderRadius: "100%",
+  width: 40,
+  height: 40,
+  backgroundColor: theme.colors.backgroundSecondary, // when the avatar is loading
+  outline: "none",
   position: "absolute",
   left: `calc(${theme.sizes.messageLeftPadding} / 2)`,
   transform: "translateX(-50%)",
   marginTop: "calc(4px - .125rem)",
-  borderRadius: "100%",
-  width: 40,
-  height: 40,
   zIndex: 1,
-  backgroundColor: theme.colors.backgroundSecondary, // when the avatar is loading
-  outline: "none",
+});
+
+export const StillAvatar = styled.withConfig({
+  displayName: "message-author-still-avatar",
+  componentId: commonComponentId,
+})(Avatar, {});
+
+export const AnimatedAvatar = styled.withConfig({
+  displayName: "message-author-animated-avatar",
+  componentId: commonComponentId,
+})(Avatar, {});
+
+export const AnimatedAvatarTrigger = styled.withConfig({
+  displayName: "message-author-animated-avatar-trigger",
+  componentId: commonComponentId,
+})("span", {
+  [`& ${AnimatedAvatar}`]: {
+    display: "none",
+  },
 });
 
 export const AvatarFallback = styled.withConfig({
