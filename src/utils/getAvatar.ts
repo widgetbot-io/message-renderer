@@ -57,9 +57,11 @@ function getAvatar(
   user: APIUser,
   { animated = false, size = 80, forceDefault = false }: GetAvatarOptions = {}
 ): string {
-  const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${
-    Number(BigInt(user.id) >> 22n) % 6
-  }.png`;
+  const defaultAvatarIndex = isNaN(Number(user.id))
+    ? 0
+    : Number(BigInt(user.id) >> 22n) % 6;
+
+  const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
 
   const avatarUrl = getAvatarProperty(user, size);
 
