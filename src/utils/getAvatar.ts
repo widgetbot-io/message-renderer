@@ -57,7 +57,7 @@ function getAvatar(
   user: APIUser,
   { animated = false, size = 80, forceDefault = false }: GetAvatarOptions = {}
 ): string {
-  const defaultAvatarIndex = isNaN(parseInt(user.id))
+  const defaultAvatarIndex = isNaN(Number(user.id))
     ? 0
     : Number(BigInt(user.id) >> 22n) % 6;
 
