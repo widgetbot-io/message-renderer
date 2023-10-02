@@ -29,6 +29,10 @@ export interface ChatBadgeProps {
 
 export type Config<SvgConfig extends PartialSvgConfig> = {
   svgUrls?: SvgConfig;
+  automodAvatar: {
+    still: string;
+    animated: string;
+  };
   messageButtons(message: APIMessage): MessageButtonListOption<SvgConfig>[];
   resolveRole(id: Snowflake): APIRole | null;
   resolveChannel(id: Snowflake): APIChannel | null;
@@ -60,6 +64,10 @@ export const ConfigContext = createContext<Config<PartialSvgConfig>>({
   resolveMember: () => null,
   resolveGuild: () => null,
   currentUser: () => null,
+  automodAvatar: {
+    still: "",
+    animated: "",
+  },
 });
 
 export function useConfig() {

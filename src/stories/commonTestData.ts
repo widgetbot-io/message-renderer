@@ -17,3 +17,11 @@ export const testTextChannel: APIChannel = {
   guild_id: "613425648685547541",
   type: ChannelType.GuildText,
 };
+
+export const testVoiceChannel: APIChannel = {
+  name: "Test Voice",
+  position: 10,
+  id: "5555",
+  guild_id: "613425648685547541",
+  type: ChannelType.GuildVoice,
+};

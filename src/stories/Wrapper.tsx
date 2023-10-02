@@ -50,6 +50,9 @@ import ggSansItalic600 from "../assets/storybookOnlyAssets/gg-sans-italic-600.wo
 import ggSansItalic700 from "../assets/storybookOnlyAssets/gg-sans-italic-700.woff2";
 import ggSansItalic800 from "../assets/storybookOnlyAssets/gg-sans-italic-800.woff2";
 
+import automodAvatarStill from "../assets/storybookOnlyAssets/automod-avatar.png";
+import automodAvatarAnimated from "../assets/storybookOnlyAssets/automod-avatar.gif";
+
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
 import type {
   APIChannel,
@@ -67,7 +70,7 @@ import type {
   ChatBadgeProps,
   MessageButtonListOption,
 } from "../core/ConfigContext";
-import { testTextChannel } from "./commonTestData";
+import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 
 const svgUrls = {
@@ -155,8 +158,12 @@ function resolveChannel(id: Snowflake): APIChannel | null {
     };
   }
 
-  if (id === "4321") {
+  if (id === testTextChannel.id) {
     return testTextChannel;
+  }
+
+  if (id === testVoiceChannel.id) {
+    return testVoiceChannel;
   }
 
   if (id === "1234") {
@@ -370,6 +377,10 @@ const Wrapper: Decorator = (Story) => {
   return (
     <MessageRendererProvider
       svgUrls={svgUrls}
+      automodAvatar={{
+        still: automodAvatarStill,
+        animated: automodAvatarAnimated,
+      }}
       messageButtons={getButtons}
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}

@@ -33,6 +33,15 @@ export const Username = styled.withConfig({
   verticalAlign: "baseline",
   whiteSpace: "nowrap",
   lineHeight: `1.375rem`,
+
+  variants: {
+    automod: {
+      true: {
+        color: theme.colors.automodUsername,
+        fontWeight: 600,
+      },
+    },
+  },
 });
 
 export const Avatar = styled.withConfig({
