@@ -8,11 +8,33 @@ import * as Styles from "./style/author";
 import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 import getDisplayName from "../utils/getDisplayName";
+import { useTranslation } from "react-i18next";
+
+interface AutomodAuthorProps {
+  isAvatarAnimated?: boolean;
+}
+
+export function AutomodAuthor({ isAvatarAnimated }: AutomodAuthorProps) {
+  const {
+    automodAvatar: { still: avatarStill, animated: avatarAnimated },
+  } = useConfig();
+  const { t } = useTranslation();
+
+  const automodAvatar = isAvatarAnimated ? avatarAnimated : avatarStill;
+
+  return (
+    <Styles.MessageAuthor>
+      <Styles.Avatar data={automodAvatar} draggable={false} type="image/png" />
+      <Styles.Username automod>{t("AutomodAction.username")}</Styles.Username>
+      <ChatTag author="automod" crossPost={false} referenceGuild={undefined} />
+    </Styles.MessageAuthor>
+  );
+}
 
 interface MessageAuthorProps
   extends ComponentProps<typeof Styles.MessageAuthor> {
   author: APIUser;
-  avatarAnimated?: boolean;
+  isAvatarAnimated?: boolean;
   onlyShowUsername?: boolean;
   crossPost?: boolean;
   referenceGuild?: Snowflake;

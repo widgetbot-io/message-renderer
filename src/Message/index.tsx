@@ -18,6 +18,7 @@ import RecipientRemove from "./variants/RecipientRemove";
 import ThreadCreated from "./variants/ThreadCreated";
 import { useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
+import AutomodAction from "./variants/AutomodAction";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
@@ -143,6 +144,10 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           referencedMessage={props.message.referenced_message}
           createdAt={props.message.timestamp}
         />
+      );
+    case MessageType.AutoModerationAction:
+      return (
+        <AutomodAction message={props.message} isHovered={props.isHovered} />
       );
     default: {
       // todo: lock behind a debug mode
