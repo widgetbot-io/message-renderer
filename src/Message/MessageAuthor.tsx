@@ -44,7 +44,6 @@ interface MessageAuthorProps
 function MessageAuthor({
   onlyShowUsername,
   author,
-  isAvatarAnimated,
   crossPost,
   referenceGuild,
   guildId,
@@ -55,11 +54,8 @@ function MessageAuthor({
   const member = guildId ? resolveMember(author, guildId) : null;
   const isGuildMember = member !== null;
 
-  const avatarUrl =
-    avatarUrlOverride?.(author) ??
-    getAvatar(author, {
-      animated: isAvatarAnimated ?? false,
-    });
+  const { stillAvatarUrl, animatedAvatarUrl } =
+    avatarUrlOverride?.(author) ?? getAvatar(author);
 
   const displayName = isGuildMember
     ? member.nick ?? getDisplayName(author)
@@ -120,15 +116,40 @@ function MessageAuthor({
       {...props}
       onClick={() => userOnClick?.(author)}
     >
-      <Styles.Avatar data={avatarUrl} draggable={false} type="image/png">
-        <Styles.AvatarFallback
-          src={getAvatar(author, {
-            animated: false,
-            forceDefault: true,
-          })}
-          alt="avatar"
-        />
-      </Styles.Avatar>
+      <Styles.AnimatedAvatarTrigger
+        data-is-animated={animatedAvatarUrl !== undefined}
+      >
+        <Styles.StillAvatar
+          data={stillAvatarUrl}
+          draggable={false}
+          type="image/png"
+        >
+          <Styles.AvatarFallback
+            src={
+              getAvatar(author, {
+                forceDefault: true,
+              }).stillAvatarUrl
+            }
+            alt="avatar"
+          />
+        </Styles.StillAvatar>
+        {animatedAvatarUrl && (
+          <Styles.AnimatedAvatar
+            data={animatedAvatarUrl}
+            draggable={false}
+            type="image/gif"
+          >
+            <Styles.AvatarFallback
+              src={
+                getAvatar(author, {
+                  forceDefault: true,
+                }).stillAvatarUrl
+              }
+              alt="avatar"
+            />
+          </Styles.AnimatedAvatar>
+        )}
+      </Styles.AnimatedAvatarTrigger>
       <Styles.Username style={{ color: dominantRoleColor }}>
         {displayName}
       </Styles.Username>
