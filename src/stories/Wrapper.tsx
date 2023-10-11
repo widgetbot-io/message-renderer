@@ -67,6 +67,7 @@ import type {
   ChatBadgeProps,
   MessageButtonListOption,
 } from "../core/ConfigContext";
+import { MessageTypeResponse } from "../core/ConfigContext";
 import { testTextChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 
@@ -410,7 +411,7 @@ const Wrapper: Decorator = (Story) => {
       externalLinkOpenRequested={(url) => {
         alert(`External link "${url}" requested!`);
       }}
-      unknownMessageTypeResponse="in-app-error"
+      unknownMessageTypeResponse={MessageTypeResponse.InAppError}
     >
       {({ themeClass }) => (
         <div className={themeClass}>
