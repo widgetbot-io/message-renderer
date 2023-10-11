@@ -93,6 +93,73 @@ export const MessageHeaderBase = styled.withConfig({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
+  flexWrap: "wrap",
+});
+
+export const AutomodHeaderText = styled.withConfig({
+  displayName: "automod-header-text",
+  componentId: commonComponentId,
+})("span", {
+  marginLeft: theme.space.small,
+  color: theme.colors.primaryOpacity100,
+});
+
+export const AutomodMessageInQuestion = styled.withConfig({
+  displayName: "automod-message-in-question",
+  componentId: commonComponentId,
+})("div", {
+  padding: theme.space.xl,
+  backgroundColor: theme.colors.backgroundSecondary,
+  borderRadius: 8,
+  position: "relative",
+  paddingLeft: 72,
+  marginTop: theme.space.small,
+});
+
+export const AutomodMessageContent = styled.withConfig({
+  displayName: "automod-message-content",
+  componentId: commonComponentId,
+})("div", {
+  color: theme.colors.primaryOpacity80,
+  whiteSpace: "break-spaces",
+  fontSize: theme.fontSizes.l,
+});
+
+export const AutomodMatchInfoContainer = styled.withConfig({
+  displayName: "automod-match-info-container",
+  componentId: commonComponentId,
+})("span", {
+  display: "flex",
+  flexDirection: "row",
+  color: theme.colors.textMuted,
+  fontSize: theme.fontSizes.s,
+});
+
+export const AutomodMatchInfo = styled.withConfig({
+  displayName: "automod-match-info",
+  componentId: commonComponentId,
+})("span", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+
+  "&:not(:last-child)::after": {
+    marginLeft: theme.space.large,
+    marginRight: theme.space.large,
+    content: "",
+    display: "inline-block",
+    width: 4,
+    height: 4,
+    backgroundColor: theme.colors.automodDot,
+    borderRadius: "100%",
+  },
+});
+
+export const AutomodFlaggedKeyword = styled.withConfig({
+  displayName: "automod-flagged-keyword",
+  componentId: commonComponentId,
+})("span", {
+  backgroundColor: theme.colors.automodMatchedWord,
 });
 
 export namespace MessageContainerStyle {
@@ -239,7 +306,7 @@ export const MiniUserName = styled.withConfig({
   overflow: "hidden",
   maxWidth: "25vw",
   textOverflow: "ellipsis",
-  color: theme.colors.primaryOpacity100
+  color: theme.colors.primaryOpacity100,
 });
 
 export const SystemMessage = styled.withConfig({

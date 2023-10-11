@@ -50,6 +50,9 @@ import ggSansItalic600 from "../assets/storybookOnlyAssets/gg-sans-italic-600.wo
 import ggSansItalic700 from "../assets/storybookOnlyAssets/gg-sans-italic-700.woff2";
 import ggSansItalic800 from "../assets/storybookOnlyAssets/gg-sans-italic-800.woff2";
 
+import automodAvatarStill from "../assets/storybookOnlyAssets/automod-avatar.png";
+import automodAvatarAnimated from "../assets/storybookOnlyAssets/automod-avatar.gif";
+
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
 import type {
   APIChannel,
@@ -68,7 +71,7 @@ import type {
   MessageButtonListOption,
 } from "../core/ConfigContext";
 import { MessageTypeResponse } from "../core/ConfigContext";
-import { testTextChannel } from "./commonTestData";
+import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 
 const svgUrls = {
@@ -156,8 +159,12 @@ function resolveChannel(id: Snowflake): APIChannel | null {
     };
   }
 
-  if (id === "4321") {
+  if (id === testTextChannel.id) {
     return testTextChannel;
+  }
+
+  if (id === testVoiceChannel.id) {
+    return testVoiceChannel;
   }
 
   if (id === "1234") {
@@ -184,7 +191,7 @@ function resolveChannel(id: Snowflake): APIChannel | null {
   return null;
 }
 
-function resolveMember(id: Snowflake): APIGuildMember | null {
+function resolveMember({ id }: APIUser): APIGuildMember | null {
   if (id === "933123872641921044") {
     return {
       avatar: null,
@@ -371,6 +378,10 @@ const Wrapper: Decorator = (Story) => {
   return (
     <MessageRendererProvider
       svgUrls={svgUrls}
+      automodAvatar={{
+        still: automodAvatarStill,
+        animated: automodAvatarAnimated,
+      }}
       messageButtons={getButtons}
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}
@@ -412,6 +423,12 @@ const Wrapper: Decorator = (Story) => {
         alert(`External link "${url}" requested!`);
       }}
       unknownMessageTypeResponse={MessageTypeResponse.InAppError}
+      // avatarUrlOverride={(user) => {
+      //   if (user.id === "132819036282159104")
+      //     return { still: "https://cdn.discordapp.com/emojis/698964060770926684.png" };
+      //
+      //   return null;
+      // }}
     >
       {({ themeClass }) => (
         <div className={themeClass}>

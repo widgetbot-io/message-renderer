@@ -13,6 +13,7 @@ import type {
 import type { SvgConfig } from "./svgs";
 import type { Tag } from "../ChatTag/style";
 import type { APIAttachment } from "discord-api-types/v10";
+import type { UserAvatar } from "../utils/getAvatar";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 
@@ -35,13 +36,18 @@ export enum MessageTypeResponse {
 
 export type Config<SvgConfig extends PartialSvgConfig> = {
   svgUrls?: SvgConfig;
+  automodAvatar: {
+    still: string;
+    animated: string;
+  };
   messageButtons(message: APIMessage): MessageButtonListOption<SvgConfig>[];
   resolveRole(id: Snowflake): APIRole | null;
   resolveChannel(id: Snowflake): APIChannel | null;
-  resolveMember(id: Snowflake, guildId: Snowflake): APIGuildMember | null;
+  resolveMember(user: APIUser, guildId: Snowflake): APIGuildMember | null;
   resolveGuild(id: Snowflake): APIGuild | null;
   resolveUser(id: Snowflake): APIUser | null;
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
+  avatarUrlOverride?(user: APIUser): UserAvatar | null;
   themeOverrideClassName?: string;
   unknownMessageTypeResponse?: MessageTypeResponse;
 
@@ -66,6 +72,10 @@ export const ConfigContext = createContext<Config<PartialSvgConfig>>({
   resolveMember: () => null,
   resolveGuild: () => null,
   currentUser: () => null,
+  automodAvatar: {
+    still: "",
+    animated: "",
+  },
 });
 
 export function useConfig() {

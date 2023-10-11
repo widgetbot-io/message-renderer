@@ -2,6 +2,7 @@ import React from "react";
 import type { APIEmbed } from "discord-api-types/v10";
 import useSize from "../Attachment/useSize";
 import EmbeddedImage from "./EmbeddedImage";
+import { error } from "../../utils/error";
 
 export interface GifVEmbedProps {
   embed: APIEmbed;
@@ -14,7 +15,7 @@ function ImageEmbed({ embed }: GifVEmbedProps) {
   );
 
   if (!("thumbnail" in embed) || !embed.thumbnail) {
-    console.error("ImageEmbed: embed.thumbnail is null");
+    error("ImageEmbed: embed.thumbnail is null");
     return null;
   }
 

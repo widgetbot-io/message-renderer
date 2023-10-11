@@ -12,6 +12,7 @@ import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
 import { EmbedType } from "discord-api-types/v10";
 import EmbeddedImage from "./EmbeddedImage";
 import ExternalLink from "../../ExternalLink";
+import { error } from "../../utils/error";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -20,7 +21,7 @@ export interface EmbedProps {
 
 function Embed({ embed, images }: EmbedProps) {
   if (embed.type === undefined) {
-    console.error("Embed: Embed type is undefined", embed);
+    error("Embed: Embed type is undefined", embed);
     return null;
   }
 

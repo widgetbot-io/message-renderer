@@ -18,6 +18,7 @@ import RecipientRemove from "./variants/RecipientRemove";
 import ThreadCreated from "./variants/ThreadCreated";
 import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
+import AutomodAction from "./variants/AutomodAction";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
@@ -147,6 +148,10 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           createdAt={props.message.timestamp}
         />
       );
+    case MessageType.AutoModerationAction:
+      return (
+        <AutomodAction message={props.message} isHovered={props.isHovered} />
+      );
     default: {
       switch (unknownMessageTypeResponse) {
         case MessageTypeResponse.InAppError: {
@@ -171,7 +176,6 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
             <NormalMessage
               message={errorMessage}
               isFirstMessage={props.isFirstMessage}
-              isHovered={props.isHovered}
             />
           );
         }

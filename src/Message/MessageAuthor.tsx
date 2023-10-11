@@ -8,11 +8,33 @@ import * as Styles from "./style/author";
 import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../core/ConfigContext";
 import getDisplayName from "../utils/getDisplayName";
+import { useTranslation } from "react-i18next";
+
+interface AutomodAuthorProps {
+  isAvatarAnimated?: boolean;
+}
+
+export function AutomodAuthor({ isAvatarAnimated }: AutomodAuthorProps) {
+  const {
+    automodAvatar: { still: avatarStill, animated: avatarAnimated },
+  } = useConfig();
+  const { t } = useTranslation();
+
+  const automodAvatar = isAvatarAnimated ? avatarAnimated : avatarStill;
+
+  return (
+    <Styles.MessageAuthor>
+      <Styles.Avatar data={automodAvatar} draggable={false} type="image/png" />
+      <Styles.Username automod>{t("AutomodAction.username")}</Styles.Username>
+      <ChatTag author="automod" crossPost={false} referenceGuild={undefined} />
+    </Styles.MessageAuthor>
+  );
+}
 
 interface MessageAuthorProps
   extends ComponentProps<typeof Styles.MessageAuthor> {
   author: APIUser;
-  avatarAnimated?: boolean;
+  isAvatarAnimated?: boolean;
   onlyShowUsername?: boolean;
   crossPost?: boolean;
   referenceGuild?: Snowflake;
@@ -22,15 +44,18 @@ interface MessageAuthorProps
 function MessageAuthor({
   onlyShowUsername,
   author,
-  avatarAnimated,
   crossPost,
   referenceGuild,
   guildId,
   ...props
 }: MessageAuthorProps) {
-  const { resolveRole, resolveMember, userOnClick } = useConfig();
-  const member = guildId ? resolveMember(author.id, guildId) : null;
+  const { resolveRole, resolveMember, userOnClick, avatarUrlOverride } =
+    useConfig();
+  const member = guildId ? resolveMember(author, guildId) : null;
   const isGuildMember = member !== null;
+
+  const { stillAvatarUrl, animatedAvatarUrl } =
+    avatarUrlOverride?.(author) ?? getAvatar(author);
 
   const displayName = isGuildMember
     ? member.nick ?? getDisplayName(author)
@@ -91,21 +116,40 @@ function MessageAuthor({
       {...props}
       onClick={() => userOnClick?.(author)}
     >
-      <Styles.Avatar
-        data={getAvatar(author, {
-          animated: avatarAnimated ?? false,
-        })}
-        draggable={false}
-        type="image/png"
+      <Styles.AnimatedAvatarTrigger
+        data-is-animated={animatedAvatarUrl !== undefined}
       >
-        <Styles.AvatarFallback
-          src={getAvatar(author, {
-            animated: avatarAnimated ?? false,
-            forceDefault: true,
-          })}
-          alt="avatar"
-        />
-      </Styles.Avatar>
+        <Styles.StillAvatar
+          data={stillAvatarUrl}
+          draggable={false}
+          type="image/png"
+        >
+          <Styles.AvatarFallback
+            src={
+              getAvatar(author, {
+                forceDefault: true,
+              }).stillAvatarUrl
+            }
+            alt="avatar"
+          />
+        </Styles.StillAvatar>
+        {animatedAvatarUrl && (
+          <Styles.AnimatedAvatar
+            data={animatedAvatarUrl}
+            draggable={false}
+            type="image/gif"
+          >
+            <Styles.AvatarFallback
+              src={
+                getAvatar(author, {
+                  forceDefault: true,
+                }).stillAvatarUrl
+              }
+              alt="avatar"
+            />
+          </Styles.AnimatedAvatar>
+        )}
+      </Styles.AnimatedAvatarTrigger>
       <Styles.Username style={{ color: dominantRoleColor }}>
         {displayName}
       </Styles.Username>

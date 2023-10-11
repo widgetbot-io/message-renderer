@@ -57,7 +57,10 @@ interface MessageAccessoriesProps {
   children?: ReactNode;
 }
 
-function MessageAccessories({ children, active }: MessageAccessoriesProps) {
+export function MessageAccessories({
+  children,
+  active,
+}: MessageAccessoriesProps) {
   if (!active || !children || Children.count(children) === 0) return <></>;
 
   return <Styles.MessageAccessories>{children}</Styles.MessageAccessories>;

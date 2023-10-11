@@ -15,7 +15,7 @@ const preview = {
       values: [
         {
           name: "discord-dark",
-          value: "#424549",
+          value: "#313338",
         },
       ],
     },
