@@ -16,7 +16,7 @@ import ChannelPinnedMessage from "./variants/ChannelPinnedMessage";
 import RecipientAdd from "./variants/RecipientAdd";
 import RecipientRemove from "./variants/RecipientRemove";
 import ThreadCreated from "./variants/ThreadCreated";
-import { useConfig } from "../core/ConfigContext";
+import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 import AutomodAction from "./variants/AutomodAction";
 
@@ -30,6 +30,9 @@ export interface MessageProps {
 }
 
 function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
+  const { unknownMessageTypeResponse = MessageTypeResponse.ConsoleError } =
+    useConfig();
+
   switch (props.message.type) {
     case MessageType.ChannelPinnedMessage:
       return (
@@ -150,21 +153,41 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
         <AutomodAction message={props.message} isHovered={props.isHovered} />
       );
     default: {
-      // todo: lock behind a debug mode
-      const errorMessage: APIMessage = {
-        ...props.message,
-        type: MessageType.Default,
-        content: `Unknown message type \`${
-          props.message.type
-        }\`\n\n\`\`\`json\n${JSON.stringify(props.message, null, 2)}\n\`\`\``,
-      };
+      switch (unknownMessageTypeResponse) {
+        case MessageTypeResponse.InAppError: {
+          const errorMessage: APIMessage = {
+            ...props.message,
+            type: MessageType.Default,
+            content: `Unknown message type \`${
+              props.message.type
+            }\`\n\n\`\`\`json\n${JSON.stringify(
+              props.message,
+              null,
+              2
+            )}\n\`\`\``,
+          };
 
-      return (
-        <NormalMessage
-          message={errorMessage}
-          isFirstMessage={props.isFirstMessage}
-        />
-      );
+          console.error(
+            `Unknown message type \`${props.message.type}\``,
+            props.message
+          );
+
+          return (
+            <NormalMessage
+              message={errorMessage}
+              isFirstMessage={props.isFirstMessage}
+            />
+          );
+        }
+        case MessageTypeResponse.ConsoleError:
+          console.error(
+            `Unknown message type \`${props.message.type}\``,
+            props.message
+          );
+          return null;
+        case MessageTypeResponse.None:
+          return null;
+      }
     }
   }
 }

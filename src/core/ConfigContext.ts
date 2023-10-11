@@ -28,6 +28,12 @@ export interface ChatBadgeProps {
   TagWrapper: typeof Tag;
 }
 
+export enum MessageTypeResponse {
+  InAppError,
+  ConsoleError,
+  None,
+}
+
 export type Config<SvgConfig extends PartialSvgConfig> = {
   svgUrls?: SvgConfig;
   automodAvatar: {
@@ -43,6 +49,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
   avatarUrlOverride?(user: APIUser): UserAvatar | null;
   themeOverrideClassName?: string;
+  unknownMessageTypeResponse?: MessageTypeResponse;
 
   // Click handlers
   currentUser(): APIUser | null;

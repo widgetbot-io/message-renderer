@@ -70,6 +70,7 @@ import type {
   ChatBadgeProps,
   MessageButtonListOption,
 } from "../core/ConfigContext";
+import { MessageTypeResponse } from "../core/ConfigContext";
 import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 
@@ -421,6 +422,7 @@ const Wrapper: Decorator = (Story) => {
       externalLinkOpenRequested={(url) => {
         alert(`External link "${url}" requested!`);
       }}
+      unknownMessageTypeResponse={MessageTypeResponse.InAppError}
       // avatarUrlOverride={(user) => {
       //   if (user.id === "132819036282159104")
       //     return { still: "https://cdn.discordapp.com/emojis/698964060770926684.png" };
