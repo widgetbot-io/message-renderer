@@ -27,6 +27,12 @@ export interface ChatBadgeProps {
   TagWrapper: typeof Tag;
 }
 
+export enum MessageTypeResponse {
+  InAppError,
+  ConsoleError,
+  None,
+}
+
 export type Config<SvgConfig extends PartialSvgConfig> = {
   svgUrls?: SvgConfig;
   messageButtons(message: APIMessage): MessageButtonListOption<SvgConfig>[];
@@ -37,7 +43,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveUser(id: Snowflake): APIUser | null;
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
   themeOverrideClassName?: string;
-  unknownMessageTypeResponse?: "in-app-error" | "console-error" | "none";
+  unknownMessageTypeResponse?: MessageTypeResponse;
 
   // Click handlers
   currentUser(): APIUser | null;

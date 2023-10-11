@@ -16,7 +16,7 @@ import ChannelPinnedMessage from "./variants/ChannelPinnedMessage";
 import RecipientAdd from "./variants/RecipientAdd";
 import RecipientRemove from "./variants/RecipientRemove";
 import ThreadCreated from "./variants/ThreadCreated";
-import { useConfig } from "../core/ConfigContext";
+import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 
 export interface MessageProps {
@@ -29,7 +29,8 @@ export interface MessageProps {
 }
 
 function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
-  const { unknownMessageTypeResponse = "console-error" } = useConfig();
+  const { unknownMessageTypeResponse = MessageTypeResponse.ConsoleError } =
+    useConfig();
 
   switch (props.message.type) {
     case MessageType.ChannelPinnedMessage:
@@ -148,7 +149,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
       );
     default: {
       switch (unknownMessageTypeResponse) {
-        case "in-app-error": {
+        case MessageTypeResponse.InAppError: {
           const errorMessage: APIMessage = {
             ...props.message,
             type: MessageType.Default,
@@ -161,6 +162,11 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
             )}\n\`\`\``,
           };
 
+          console.error(
+            `Unknown message type \`${props.message.type}\``,
+            props.message
+          );
+
           return (
             <NormalMessage
               message={errorMessage}
@@ -169,13 +175,13 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
             />
           );
         }
-        case "console-error":
+        case MessageTypeResponse.ConsoleError:
           console.error(
             `Unknown message type \`${props.message.type}\``,
             props.message
           );
           return null;
-        default:
+        case MessageTypeResponse.None:
           return null;
       }
     }
