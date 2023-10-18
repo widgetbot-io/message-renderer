@@ -1,14 +1,12 @@
-import type {
-  APIMessage,
-  APIMessageActionRowComponent,
-} from "discord-api-types/v10";
+import type { APIMessageActionRowComponent } from "discord-api-types/v10";
 import { ComponentType } from "discord-api-types/v10";
 import ButtonComponent from "./ButtonComponent";
 import React from "react";
+import type { DiscordMessage } from "../../types";
 
 interface ComponentProps {
   component: APIMessageActionRowComponent;
-  message: APIMessage;
+  message: DiscordMessage;
 }
 
 function Component({ component, message }: ComponentProps) {

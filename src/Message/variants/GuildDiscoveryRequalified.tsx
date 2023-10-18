@@ -2,11 +2,11 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import { Trans, useTranslation } from "react-i18next";
+import type { DiscordMessage } from "../../types";
 
 interface GuildDiscoveryRequalifiedProps {
-  createdAt: APIMessage["timestamp"];
+  createdAt: DiscordMessage["timestamp"];
 }
 
 function GuildDiscoveryRequalified(props: GuildDiscoveryRequalifiedProps) {

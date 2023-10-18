@@ -4,18 +4,18 @@ import ThreadButton from "../../Content/Thread/ThreadButton";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
+import type { DiscordMessage } from "../../types";
 
 interface ThreadCreatedProps {
-  createdAt: APIMessage["timestamp"];
-  thread: Exclude<APIMessage["thread"], undefined>;
-  author: APIMessage["author"];
-  messageReference: APIMessage["message_reference"];
-  messageId: APIMessage["id"];
-  channelId: APIMessage["channel_id"];
+  createdAt: DiscordMessage["timestamp"];
+  thread: Exclude<DiscordMessage["thread"], undefined>;
+  author: DiscordMessage["author"];
+  messageReference: DiscordMessage["message_reference"];
+  messageId: DiscordMessage["id"];
+  channelId: DiscordMessage["channel_id"];
   messageContent: string;
 }
 

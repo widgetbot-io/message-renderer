@@ -1,7 +1,6 @@
 import type {
   APIButtonComponentWithCustomId,
   APIButtonComponentWithURL,
-  APIMessage,
 } from "discord-api-types/v10";
 import * as Styles from "./style";
 import type { ComponentProps } from "react";
@@ -11,6 +10,7 @@ import { ButtonStyle } from "discord-api-types/v10";
 import Emoji from "../../Emoji";
 import { useConfig } from "../../core/ConfigContext";
 import ExternalLink from "../../ExternalLink";
+import type { DiscordMessage } from "../../types";
 
 const buttonStyleMap: Record<
   ButtonStyle,
@@ -33,7 +33,7 @@ type ButtonComponentWithURL = APIButtonComponentWithURL & {
 
 interface ButtonComponentProps {
   button: ButtonComponentWithCustomId | ButtonComponentWithURL;
-  message: APIMessage;
+  message: DiscordMessage;
 }
 
 function ButtonComponent({ button, message }: ButtonComponentProps) {

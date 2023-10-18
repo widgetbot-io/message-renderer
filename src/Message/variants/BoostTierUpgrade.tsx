@@ -3,17 +3,18 @@ import React, { useMemo } from "react";
 import LargeTimestamp from "../LargeTimestamp";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage, Snowflake } from "discord-api-types/v10";
+import type { Snowflake } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
+import type { DiscordMessage } from "../../types";
 
 interface BoostTierUpgradeProps {
-  createdAt: APIMessage["timestamp"];
+  createdAt: DiscordMessage["timestamp"];
   content: string;
   channelId: Snowflake;
   type: MessageType;
-  author: APIMessage["author"];
+  author: DiscordMessage["author"];
 }
 
 function BoostTierUpgrade({

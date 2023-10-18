@@ -9,8 +9,9 @@ import TextSpoiler from "./elements/TextSpoiler";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
 import { InlineCode } from "./elements/code/style";
-import type { APIMessage, APIUser } from "discord-api-types/v10";
+import type { APIUser } from "discord-api-types/v10";
 import { findDefaultEmojiByUnicode } from "../../emojiData";
+import type { DiscordMessage } from "../../types";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {
   const parser = SimpleMarkdown.parserFor(rules);
@@ -188,7 +189,7 @@ function Markdown({
   users,
 }: {
   children: string;
-  mentions?: APIMessage["mentions"];
+  mentions?: DiscordMessage["mentions"];
   users?: Map<string, APIUser>;
 }) {
   const unicodeEmojisHandled = handleUnicodeEmojis(content);
@@ -204,7 +205,7 @@ export function LinkMarkdown({
   users,
 }: {
   children: string;
-  mentions?: APIMessage["mentions"];
+  mentions?: DiscordMessage["mentions"];
   users?: Map<string, APIUser>;
 }) {
   const unicodeEmojisHandled = handleUnicodeEmojis(content);

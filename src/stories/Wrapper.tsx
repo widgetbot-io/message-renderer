@@ -58,7 +58,6 @@ import type {
   APIChannel,
   APIGuild,
   APIGuildMember,
-  APIMessage,
   APIRole,
   APIUser,
   Snowflake,
@@ -73,6 +72,7 @@ import type {
 import { MessageTypeResponse } from "../core/ConfigContext";
 import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
+import type { DiscordMessage } from "../types";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -114,7 +114,7 @@ const svgUrls = {
 };
 
 function getButtons(
-  message: APIMessage
+  message: DiscordMessage
 ): MessageButtonListOption<typeof svgUrls>[] {
   return [
     {

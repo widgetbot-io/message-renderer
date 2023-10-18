@@ -2,12 +2,12 @@ import "./i18n";
 import type { CSSProperties } from "react";
 import React from "react";
 import Message from "./Message";
-import type { APIMessage } from "discord-api-types/v10";
 import { commonComponentId, styled } from "./Stitches/stitches.config";
 import * as MessageAuthorStyles from "./Message/style/author";
+import type { DiscordMessage } from "./types";
 
 export interface MessageProps {
-  messages: APIMessage[];
+  messages: DiscordMessage[];
   style?: CSSProperties;
   showButtons?: boolean;
   thread: boolean;
