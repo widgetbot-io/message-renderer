@@ -190,6 +190,8 @@ function NormalMessage(props: MessageProps) {
     const userMentionedOverride = props.overrides?.userMentioned ?? false;
     if (userMentionedOverride) return true;
 
+    if (props.message.mention_everyone) return true;
+
     const user = currentUser();
 
     if (!user) return false;
@@ -197,11 +199,16 @@ function NormalMessage(props: MessageProps) {
     return (
       props.message.mentions.find(({ id }) => id === user.id) !== undefined
     );
-  }, [currentUser, props.message.mentions, props.overrides?.userMentioned]);
+  }, [
+    currentUser,
+    props.message.mentions,
+    props.overrides?.userMentioned,
+    props.message.mention_everyone,
+  ]);
 
   if (props.isFirstMessage)
     return (
-      <Styles.Message mentioned={isUserMentioned}>
+      <Styles.Message isMentioned={isUserMentioned}>
         {shouldShowReply && (
           <ReplyInfo
             channelId={props.message.channel_id}
@@ -232,7 +239,7 @@ function NormalMessage(props: MessageProps) {
     );
 
   return (
-    <Styles.Message mentioned={isUserMentioned}>
+    <Styles.Message isMentioned={isUserMentioned}>
       <Tooltip
         placement="top"
         overlay={Moment(props.message.timestamp).format("LLLL")}

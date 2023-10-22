@@ -232,6 +232,31 @@ Mentions.args = {
   ],
 };
 
+export const MentionsEveryone: StoryFn<typeof MessageGroup> = Template.bind({});
+MentionsEveryone.args = {
+  messages: [
+    {
+      id: "1101622366137749574",
+      type: 0,
+      content: "HEY @everyone, fear not, for I am @here",
+      channel_id: "697138785317814292",
+      author: testUser,
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: true,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [],
+    },
+  ],
+};
+
 export const CodeBlock: StoryFn<typeof MessageGroup> = Template.bind({});
 CodeBlock.args = {
   messages: [
