@@ -7,15 +7,15 @@ import { SystemMessageIconSize } from "../style/message";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ThreadCreatedProps {
-  createdAt: DiscordMessage["timestamp"];
-  thread: Exclude<DiscordMessage["thread"], undefined>;
-  author: DiscordMessage["author"];
-  messageReference: DiscordMessage["message_reference"];
-  messageId: DiscordMessage["id"];
-  channelId: DiscordMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
+  thread: Exclude<ChatMessage["thread"], undefined>;
+  author: ChatMessage["author"];
+  messageReference: ChatMessage["message_reference"];
+  messageId: ChatMessage["id"];
+  channelId: ChatMessage["channel_id"];
   messageContent: string;
 }
 

@@ -5,11 +5,11 @@ import type {
 import * as Styles from "./style";
 import React from "react";
 import Component from "./Component";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ActionRowProps {
   actionRow: APIActionRowComponent<APIMessageActionRowComponent>;
-  message: DiscordMessage;
+  message: ChatMessage;
 }
 
 function ActionRow({ actionRow, message }: ActionRowProps) {

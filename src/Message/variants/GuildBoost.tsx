@@ -5,13 +5,13 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface GuildBoostProps {
-  createdAt: DiscordMessage["timestamp"];
-  author: DiscordMessage["author"];
+  createdAt: ChatMessage["timestamp"];
+  author: ChatMessage["author"];
   content: string;
-  channelId: DiscordMessage["channel_id"];
+  channelId: ChatMessage["channel_id"];
 }
 
 function GuildBoost(props: GuildBoostProps) {

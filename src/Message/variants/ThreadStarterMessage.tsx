@@ -4,11 +4,11 @@ import { SystemMessageIconSize } from "../style/message";
 import NormalMessage from "./NormalMessage";
 import LargeTimestamp from "../LargeTimestamp";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ThreadStarterMessageProps {
-  createdAt: DiscordMessage["timestamp"];
-  referencedMessage: DiscordMessage | null | undefined;
+  createdAt: ChatMessage["timestamp"];
+  referencedMessage: ChatMessage | null | undefined;
 }
 
 function ThreadStarterMessage({

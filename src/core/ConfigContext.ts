@@ -13,7 +13,7 @@ import type { SvgConfig } from "./svgs";
 import type { Tag } from "../ChatTag/style";
 import type { APIAttachment } from "discord-api-types/v10";
 import type { UserAvatar } from "../utils/getAvatar";
-import type { DiscordMessage } from "../types";
+import type { ChatMessage } from "../types";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 
@@ -40,7 +40,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
     still: string;
     animated: string;
   };
-  messageButtons(message: DiscordMessage): MessageButtonListOption<SvgConfig>[];
+  messageButtons(message: ChatMessage): MessageButtonListOption<SvgConfig>[];
   resolveRole(id: Snowflake): APIRole | null;
   resolveChannel(id: Snowflake): APIChannel | null;
   resolveMember(user: APIUser, guildId: Snowflake): APIGuildMember | null;
@@ -58,10 +58,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   roleMentionOnClick?(role: APIRole): void;
   channelMentionOnClick?(channel: APIChannel): void;
   openPinnedMessagesOnClick?(channel: APIChannel): void;
-  messageComponentButtonOnClick?(
-    message: DiscordMessage,
-    customId: string
-  ): void;
+  messageComponentButtonOnClick?(message: ChatMessage, customId: string): void;
   attachmentImageOnClick?(image: APIAttachment): void;
   embedImageOnClick?(image: APIEmbedImage): void;
   externalLinkOpenRequested?(url: string): void;

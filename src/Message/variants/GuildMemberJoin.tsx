@@ -6,12 +6,12 @@ import { SystemMessageIconSize } from "../style/message";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
 import { GuildMemberJoin as GuildMemberJoinI18n } from "../../i18n/locales/en/translation.json";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface GuildMemberJoinProps {
-  createdAt: DiscordMessage["timestamp"];
-  author: DiscordMessage["author"];
-  channelId: DiscordMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
+  author: ChatMessage["author"];
+  channelId: ChatMessage["channel_id"];
 }
 
 function GuildMemberJoin(props: GuildMemberJoinProps) {

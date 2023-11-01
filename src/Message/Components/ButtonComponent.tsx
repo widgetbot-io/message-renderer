@@ -10,7 +10,7 @@ import { ButtonStyle } from "discord-api-types/v10";
 import Emoji from "../../Emoji";
 import { useConfig } from "../../core/ConfigContext";
 import ExternalLink from "../../ExternalLink";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 const buttonStyleMap: Record<
   ButtonStyle,
@@ -33,7 +33,7 @@ type ButtonComponentWithURL = APIButtonComponentWithURL & {
 
 interface ButtonComponentProps {
   button: ButtonComponentWithCustomId | ButtonComponentWithURL;
-  message: DiscordMessage;
+  message: ChatMessage;
 }
 
 function ButtonComponent({ button, message }: ButtonComponentProps) {

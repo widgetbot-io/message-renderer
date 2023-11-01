@@ -5,12 +5,12 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ChannelPinnedMessageProps {
-  author: DiscordMessage["author"];
-  createdAt: DiscordMessage["timestamp"];
-  channelId: DiscordMessage["channel_id"];
+  author: ChatMessage["author"];
+  createdAt: ChatMessage["timestamp"];
+  channelId: ChatMessage["channel_id"];
 }
 
 function ChannelPinnedMessage(props: ChannelPinnedMessageProps) {

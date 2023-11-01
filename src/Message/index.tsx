@@ -19,11 +19,11 @@ import ThreadCreated from "./variants/ThreadCreated";
 import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 import AutomodAction from "./variants/AutomodAction";
-import type { DiscordMessage } from "../types";
+import type { ChatMessage } from "../types";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
-  message: DiscordMessage;
+  message: ChatMessage;
   isHovered?: boolean;
   showButtons?: boolean;
   thread?: boolean;
@@ -156,7 +156,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     default: {
       switch (unknownMessageTypeResponse) {
         case MessageTypeResponse.InAppError: {
-          const errorMessage: DiscordMessage = {
+          const errorMessage: ChatMessage = {
             ...props.message,
             type: MessageType.Default,
             content: `Unknown message type \`${

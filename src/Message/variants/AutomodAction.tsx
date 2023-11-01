@@ -9,7 +9,7 @@ import { useConfig } from "../../core/ConfigContext";
 import { error } from "../../utils/error";
 import { MessageAccessories } from "../../Content";
 import Reactions from "../Reactions";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 type QuarantineUserAction =
   | "quarantine_user"
@@ -116,7 +116,7 @@ function hasReactions(
 }
 
 interface AutomodActionProps {
-  message: DiscordMessage;
+  message: ChatMessage;
   isHovered?: boolean;
 }
 

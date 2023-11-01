@@ -16,7 +16,7 @@ import ThreadButton from "./Thread/ThreadButton";
 import Components from "../Message/Components";
 import getDisplayName from "../utils/getDisplayName";
 import { useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../types";
+import type { ChatMessage } from "../types";
 
 interface EditedProps {
   editedAt: string;
@@ -70,7 +70,7 @@ export function MessageAccessories({
 interface ContentCoreProps {
   children: ReactNode;
   showTooltip: boolean;
-  referencedMessage: DiscordMessage | null;
+  referencedMessage: ChatMessage | null;
 }
 
 function ContentCore(props: ContentCoreProps) {
@@ -98,7 +98,7 @@ function ContentCore(props: ContentCoreProps) {
 }
 
 interface ContentProps {
-  message: DiscordMessage;
+  message: ChatMessage;
   isReplyContent?: boolean;
   noThreadButton?: boolean;
 }

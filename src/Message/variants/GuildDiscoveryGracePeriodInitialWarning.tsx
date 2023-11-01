@@ -3,10 +3,10 @@ import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface GuildDiscoveryGracePeriodInitialWarningProps {
-  createdAt: DiscordMessage["timestamp"];
+  createdAt: ChatMessage["timestamp"];
 }
 
 function GuildDiscoveryGracePeriodInitialWarning(

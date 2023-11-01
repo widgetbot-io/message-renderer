@@ -4,10 +4,10 @@ import React from "react";
 import Message from "./Message";
 import { commonComponentId, styled } from "./Stitches/stitches.config";
 import * as MessageAuthorStyles from "./Message/style/author";
-import type { DiscordMessage } from "./types";
+import type { ChatMessage } from "./types";
 
 export interface MessageProps {
-  messages: DiscordMessage[];
+  messages: ChatMessage[];
   style?: CSSProperties;
   showButtons?: boolean;
   thread: boolean;

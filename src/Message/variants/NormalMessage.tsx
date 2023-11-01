@@ -17,11 +17,11 @@ import type {
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ReplyInfoProps {
   channelId: Snowflake;
-  referencedMessage: DiscordMessage["referenced_message"];
+  referencedMessage: ChatMessage["referenced_message"];
   mentioned?: boolean;
   interaction: APIMessageInteraction | undefined;
   isContextMenuInteraction?: boolean;
@@ -167,7 +167,7 @@ ReplyInfo.displayName = "ReplyInfo";
 
 interface MessageProps {
   isFirstMessage?: boolean;
-  message: DiscordMessage;
+  message: ChatMessage;
   isHovered?: boolean;
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;

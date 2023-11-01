@@ -1,11 +1,11 @@
 import ActionRow from "./ActionRow";
 import React from "react";
 import * as Styles from "./style";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ComponentsProps {
-  components: DiscordMessage["components"];
-  message: DiscordMessage;
+  components: ChatMessage["components"];
+  message: ChatMessage;
 }
 
 function Components({ components, message }: ComponentsProps) {

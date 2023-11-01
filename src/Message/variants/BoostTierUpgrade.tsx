@@ -7,14 +7,14 @@ import type { Snowflake } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface BoostTierUpgradeProps {
-  createdAt: DiscordMessage["timestamp"];
+  createdAt: ChatMessage["timestamp"];
   content: string;
   channelId: Snowflake;
   type: MessageType;
-  author: DiscordMessage["author"];
+  author: ChatMessage["author"];
 }
 
 function BoostTierUpgrade({

@@ -6,13 +6,13 @@ import { SystemMessageIconSize } from "../style/message";
 import getDisplayName from "../../utils/getDisplayName";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface RecipientRemoveProps {
-  createdAt: DiscordMessage["timestamp"];
-  author: DiscordMessage["author"];
-  target: DiscordMessage["mentions"][0];
-  channelId: DiscordMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
+  author: ChatMessage["author"];
+  target: ChatMessage["mentions"][0];
+  channelId: ChatMessage["channel_id"];
 }
 
 function RecipientRemove(props: RecipientRemoveProps) {

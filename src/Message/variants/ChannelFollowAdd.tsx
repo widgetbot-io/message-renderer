@@ -5,13 +5,13 @@ import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
-import type { DiscordMessage } from "../../types";
+import type { ChatMessage } from "../../types";
 
 interface ChannelFollowAddProps {
   content: string;
-  author: DiscordMessage["author"];
-  channelId: DiscordMessage["channel_id"];
-  createdAt: DiscordMessage["timestamp"];
+  author: ChatMessage["author"];
+  channelId: ChatMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
 }
 
 function ChannelFollowAdd(props: ChannelFollowAddProps) {
