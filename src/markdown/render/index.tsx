@@ -164,7 +164,14 @@ const parse = parserFor(rulesWithoutMaskedLinks);
 export const parseAllowLinks = parserFor(createRules(baseRules));
 export const parseEmbedTitle = parserFor(
   R.omit(
-    ["codeBlock", "br", "mention", "channelMention", "roleMention"],
+    [
+      "codeBlock",
+      "br",
+      "mention",
+      "channelMention",
+      "roleMention",
+      "everyoneOrHereMention",
+    ],
     rulesWithoutMaskedLinks
   )
 );

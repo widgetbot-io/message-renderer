@@ -63,7 +63,7 @@ export const Message = styled.withConfig({
     },
 
     variants: {
-      mentioned: {
+      isMentioned: {
         true: {
           backgroundColor: theme.colors.mentioned,
 

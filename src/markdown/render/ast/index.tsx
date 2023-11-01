@@ -4,7 +4,12 @@ import { defaultRules, inlineRegex } from "simple-markdown";
 import { customEmoji } from "./customEmoji";
 import Emoji from "../../../Emoji";
 import React, { Fragment } from "react";
-import { channelMention, roleMention, userMention } from "../elements/mentions";
+import {
+  channelMention,
+  roleMention,
+  userMention,
+  everyoneOrHereMention,
+} from "../elements/mentions";
 
 const baseRules = {
   newline: defaultRules.newline,
@@ -66,6 +71,7 @@ const baseRules = {
   mention: userMention,
   channelMention,
   roleMention,
+  everyoneOrHereMention,
 
   s: {
     order: defaultRules.u.order,
