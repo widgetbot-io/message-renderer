@@ -15,16 +15,20 @@ function RoleMention({ roleId }: RoleMentionProps) {
   const role = resolveRole(roleId);
 
   if (!role) {
-    return <>@deleted-role</>;
+    return "@deleted-role";
   }
 
   return (
     <Styles.Mention
-      css={{
-        color: colorIntToRgba(role.color),
-        "--mention-color": colorIntToRgba(role.color, 0.1),
-        "--mention-color-hover": colorIntToRgba(role.color, 0.3),
-      }}
+      css={
+        role.color > 0
+          ? {
+              color: colorIntToRgba(role.color),
+              "--mention-color": colorIntToRgba(role.color, 0.1),
+              "--mention-color-hover": colorIntToRgba(role.color, 0.3),
+            }
+          : undefined
+      }
       onClick={() => roleMentionOnClick?.(role)}
       canBeClicked={roleMentionOnClick !== undefined}
     >
