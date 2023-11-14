@@ -209,7 +209,10 @@ function Content(props: ContentProps) {
           referencedMessage={props.message}
           showTooltip={props.isReplyContent ?? false}
         >
-          <Styles.ContentContainer isReplyContent={props.isReplyContent}>
+          <Styles.ContentContainer
+            isReplyContent={props.isReplyContent}
+            didFailToSend={props.message.failedToSend}
+          >
             {props.message.content.length > 0 ? (
               <>
                 {props.message.webhook_id !== undefined ? (
