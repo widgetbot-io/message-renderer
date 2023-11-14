@@ -9,7 +9,6 @@ import LargeTimestamp from "../LargeTimestamp";
 import ChatTag from "../../ChatTag";
 import * as Styles from "../style/message";
 import type {
-  APIMessage,
   APIMessageInteraction,
   APIRole,
   APIUser,
@@ -18,10 +17,11 @@ import type {
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
+import type { ChatMessage } from "../../types";
 
 interface ReplyInfoProps {
   channelId: Snowflake;
-  referencedMessage: APIMessage["referenced_message"];
+  referencedMessage: ChatMessage["referenced_message"];
   mentioned?: boolean;
   interaction: APIMessageInteraction | undefined;
   isContextMenuInteraction?: boolean;
@@ -167,7 +167,7 @@ ReplyInfo.displayName = "ReplyInfo";
 
 interface MessageProps {
   isFirstMessage?: boolean;
-  message: APIMessage;
+  message: ChatMessage;
   isHovered?: boolean;
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;

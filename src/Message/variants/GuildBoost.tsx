@@ -3,15 +3,15 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
+import type { ChatMessage } from "../../types";
 
 interface GuildBoostProps {
-  createdAt: APIMessage["timestamp"];
-  author: APIMessage["author"];
+  createdAt: ChatMessage["timestamp"];
+  author: ChatMessage["author"];
   content: string;
-  channelId: APIMessage["channel_id"];
+  channelId: ChatMessage["channel_id"];
 }
 
 function GuildBoost(props: GuildBoostProps) {

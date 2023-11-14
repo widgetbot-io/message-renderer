@@ -3,15 +3,15 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
 import { GuildMemberJoin as GuildMemberJoinI18n } from "../../i18n/locales/en/translation.json";
+import type { ChatMessage } from "../../types";
 
 interface GuildMemberJoinProps {
-  createdAt: APIMessage["timestamp"];
-  author: APIMessage["author"];
-  channelId: APIMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
+  author: ChatMessage["author"];
+  channelId: ChatMessage["channel_id"];
 }
 
 function GuildMemberJoin(props: GuildMemberJoinProps) {

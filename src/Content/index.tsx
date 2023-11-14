@@ -3,7 +3,7 @@ import React, { Children, memo, useMemo } from "react";
 import Moment from "moment/moment";
 import Message from "../Message";
 import * as Styles from "./style";
-import type { APIEmbedImage, APIMessage } from "discord-api-types/v10";
+import type { APIEmbedImage } from "discord-api-types/v10";
 import { MessageFlags } from "discord-api-types/v10";
 import Tooltip from "../Tooltip";
 import SvgFromUrl from "../SvgFromUrl";
@@ -16,6 +16,7 @@ import ThreadButton from "./Thread/ThreadButton";
 import Components from "../Message/Components";
 import getDisplayName from "../utils/getDisplayName";
 import { useTranslation } from "react-i18next";
+import type { ChatMessage } from "../types";
 
 interface EditedProps {
   editedAt: string;
@@ -69,7 +70,7 @@ export function MessageAccessories({
 interface ContentCoreProps {
   children: ReactNode;
   showTooltip: boolean;
-  referencedMessage: APIMessage | null;
+  referencedMessage: ChatMessage | null;
 }
 
 function ContentCore(props: ContentCoreProps) {
@@ -97,7 +98,7 @@ function ContentCore(props: ContentCoreProps) {
 }
 
 interface ContentProps {
-  message: APIMessage;
+  message: ChatMessage;
   isReplyContent?: boolean;
   noThreadButton?: boolean;
 }
@@ -200,7 +201,10 @@ function Content(props: ContentProps) {
 
   return (
     <>
-      <Styles.Base isReplyContent={props.isReplyContent}>
+      <Styles.MessageContent
+        isReplyContent={props.isReplyContent}
+        isOptimistic={props.message.optimistic}
+      >
         <ContentCore
           referencedMessage={props.message}
           showTooltip={props.isReplyContent ?? false}
@@ -229,7 +233,7 @@ function Content(props: ContentProps) {
           </Styles.ContentContainer>
         </ContentCore>
         {props.isReplyContent && <ReplyIcon message={props.message} />}
-      </Styles.Base>
+      </Styles.MessageContent>
       {!props.isReplyContent && (
         <MessageAccessories
           active={

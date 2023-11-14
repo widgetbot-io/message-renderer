@@ -1,7 +1,7 @@
 import NormalMessage from "./variants/NormalMessage";
 import React, { memo } from "react";
 import MessageContainer from "./MessageContainer";
-import type { APIChannel, APIMessage } from "discord-api-types/v10";
+import type { APIChannel } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import GuildMemberJoin from "./variants/GuildMemberJoin";
 import GuildDiscoveryRequalified from "./variants/GuildDiscoveryRequalified";
@@ -19,10 +19,11 @@ import ThreadCreated from "./variants/ThreadCreated";
 import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 import AutomodAction from "./variants/AutomodAction";
+import type { ChatMessage } from "../types";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
-  message: APIMessage;
+  message: ChatMessage;
   isHovered?: boolean;
   showButtons?: boolean;
   thread?: boolean;
@@ -155,7 +156,7 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     default: {
       switch (unknownMessageTypeResponse) {
         case MessageTypeResponse.InAppError: {
-          const errorMessage: APIMessage = {
+          const errorMessage: ChatMessage = {
             ...props.message,
             type: MessageType.Default,
             content: `Unknown message type \`${

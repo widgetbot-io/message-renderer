@@ -8,7 +8,7 @@ import { CodeBlock } from "../markdown/render/elements/code/style";
 import SvgFromUrl from "../SvgFromUrl";
 import { Heading } from "../markdown/render/elements";
 
-export const Base = styled.withConfig({
+export const MessageContent = styled.withConfig({
   displayName: "message-content",
   componentId: commonComponentId,
 })("span", {
@@ -16,6 +16,11 @@ export const Base = styled.withConfig({
   whiteSpace: "break-spaces",
   fontSize: theme.fontSizes.l,
   variants: {
+    isOptimistic: {
+      true: {
+        opacity: 0.5,
+      },
+    },
     isReplyContent: {
       true: {
         fontSize: theme.fontSizes.m,

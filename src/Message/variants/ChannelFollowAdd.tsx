@@ -3,15 +3,15 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
+import type { ChatMessage } from "../../types";
 
 interface ChannelFollowAddProps {
   content: string;
-  author: APIMessage["author"];
-  channelId: APIMessage["channel_id"];
-  createdAt: APIMessage["timestamp"];
+  author: ChatMessage["author"];
+  channelId: ChatMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
 }
 
 function ChannelFollowAdd(props: ChannelFollowAddProps) {
