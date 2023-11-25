@@ -195,6 +195,7 @@ export namespace MessageContainerStyle {
     padding: theme.space.medium,
     opacity: 0.7,
     backgroundColor: "transparent",
+    color: theme.colors.primaryOpacity100,
 
     "&:hover": {
       backgroundColor: theme.colors.primaryOpacity10,

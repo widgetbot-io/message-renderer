@@ -37,6 +37,7 @@ import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channe
 import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
 import SvgIconLinkExternal from "../assets/storybookOnlyAssets/icon-link-external.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
+import SvgCustomDelete from "../assets/storybookOnlyAssets/custom-delete.svg";
 
 import ggSansNormal400 from "../assets/storybookOnlyAssets/gg-sans-normal-400.woff2";
 import ggSansNormal500 from "../assets/storybookOnlyAssets/gg-sans-normal-500.woff2";
@@ -67,9 +68,14 @@ import { globalCss, prefix, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
 import type {
   ChatBadgeProps,
+  ContextMenuItem,
   MessageButtonListOption,
 } from "../core/ConfigContext";
-import { MessageTypeResponse } from "../core/ConfigContext";
+import {
+  ContextMenuItemType,
+  IconType,
+  MessageTypeResponse,
+} from "../core/ConfigContext";
 import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 import type { ChatMessage } from "../types";
@@ -111,6 +117,8 @@ const svgUrls = {
   IconStageChannel: SvgIconStageChannel,
   IconLinkExternal: SvgIconLinkExternal,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
+
+  CustomDelete: SvgCustomDelete,
 };
 
 function getButtons(
@@ -121,6 +129,47 @@ function getButtons(
       icon: "IconId",
       onClick: () => navigator.clipboard.writeText(message.id),
       actionDescription: "Copy Message ID",
+    },
+  ];
+}
+
+function getContextMenuItems(): ContextMenuItem<typeof svgUrls>[] {
+  return [
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconPencil",
+      },
+      content: "Edit Message",
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconPin",
+      },
+      content: "Pin Message",
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "CustomDelete",
+      },
+      isDanger: true,
+      content: "Delete Message",
+    },
+    {
+      type: ContextMenuItemType.Separator,
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconId",
+      },
+      content: "Copy Message ID",
     },
   ];
 }
@@ -383,6 +432,7 @@ const Wrapper: Decorator = (Story) => {
         animated: automodAvatarAnimated,
       }}
       messageButtons={getButtons}
+      messageContextMenuItems={getContextMenuItems}
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}
       resolveMember={resolveMember}
