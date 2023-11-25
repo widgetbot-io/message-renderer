@@ -55,6 +55,7 @@ import automodAvatarStill from "../assets/storybookOnlyAssets/automod-avatar.png
 import automodAvatarAnimated from "../assets/storybookOnlyAssets/automod-avatar.gif";
 
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
+import SvgMiscCaret from "../assets/storybookOnlyAssets/misc-caret.svg";
 import type {
   APIChannel,
   APIGuild,
@@ -117,6 +118,7 @@ const svgUrls = {
   IconStageChannel: SvgIconStageChannel,
   IconLinkExternal: SvgIconLinkExternal,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
+  MiscCaret: SvgMiscCaret,
 
   CustomDelete: SvgCustomDelete,
 };
@@ -147,6 +149,48 @@ function getContextMenuItems(
       onSelect() {
         alert(`Edit Message selected on ${message.id}`);
       },
+    },
+    {
+      type: ContextMenuItemType.SubMenu,
+      content: "Submenu",
+      items: [
+        {
+          type: ContextMenuItemType.Item,
+          icon: {
+            type: IconType.Svg,
+            svg: "IconAttachment",
+          },
+          content: "Submenu Item 1",
+          onSelect() {
+            alert("Submenu Item 1 selected");
+          },
+        },
+        {
+          type: ContextMenuItemType.Item,
+          icon: {
+            type: IconType.Svg,
+            svg: "IconCommand",
+          },
+          content: "Submenu Item 2",
+          onSelect() {
+            alert("Submenu Item 2 selected");
+          },
+        },
+        {
+          type: ContextMenuItemType.Separator,
+        },
+        {
+          type: ContextMenuItemType.Item,
+          icon: {
+            type: IconType.Svg,
+            svg: "IconDownload",
+          },
+          content: "Submenu Item 3",
+          onSelect() {
+            alert("Submenu Item 3 selected");
+          },
+        },
+      ],
     },
     {
       type: ContextMenuItemType.Item,

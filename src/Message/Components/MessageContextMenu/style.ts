@@ -18,7 +18,10 @@ export const Content = styled.withConfig({
   maxWidth: 320,
 });
 
-export const Item = styled(ContextMenu.Item, {
+export const Item = styled.withConfig({
+  displayName: "context-menu-item",
+  componentId: commonComponentId,
+})(ContextMenu.Item, {
   color: theme.colors.interactiveNormal,
   display: "flex",
   flexDirection: "row",
@@ -33,7 +36,7 @@ export const Item = styled(ContextMenu.Item, {
   marginTop: theme.space.xs,
   marginBottom: theme.space.xs,
 
-  "&:hover": {
+  '&[data-state="open"], &[data-highlighted]': {
     backgroundColor: theme.colors.contextMenuItemHoverPrimary,
     color: theme.colors.primaryFull,
     cursor: "pointer",
@@ -44,7 +47,7 @@ export const Item = styled(ContextMenu.Item, {
       true: {
         color: theme.colors.danger,
 
-        "&:hover": {
+        '&[data-state="open"], &[data-highlighted]': {
           backgroundColor: theme.colors.danger,
         },
       },
@@ -52,12 +55,21 @@ export const Item = styled(ContextMenu.Item, {
   },
 });
 
-export const ItemIcon = styled("div", {
+export const ItemIcon = styled.withConfig({
+  displayName: "context-menu-item-icon",
+  componentId: commonComponentId,
+})("div", {
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
+  width: 18,
+  height: 18,
 });
 
-export const Separator = styled(ContextMenu.Separator, {
+export const Separator = styled.withConfig({
+  displayName: "context-menu-separator",
+  componentId: commonComponentId,
+})(ContextMenu.Separator, {
   margin: theme.space.small,
   borderBottomWidth: 1,
   borderBottomStyle: "solid",

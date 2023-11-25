@@ -1,6 +1,10 @@
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import type { ReactElement } from "react";
 import React, { useMemo } from "react";
+import type {
+  ContextMenuItem,
+  PartialSvgConfig,
+} from "../../../core/ConfigContext";
 import {
   ContextMenuItemType,
   IconType,
@@ -8,8 +12,54 @@ import {
 } from "../../../core/ConfigContext";
 import * as Styles from "./style";
 import type { ChatMessage } from "../../../types";
-import { error } from "../../../utils/error";
 import SvgFromUrl from "../../../SvgFromUrl";
+import type { SvgConfig } from "../../../core/svgs";
+
+function MenuItem<SC extends PartialSvgConfig>({
+  menuItem,
+}: {
+  menuItem: ContextMenuItem<SC>;
+}) {
+  switch (menuItem.type) {
+    case ContextMenuItemType.Separator:
+      return <Styles.Separator />;
+    case ContextMenuItemType.SubMenu:
+      return (
+        <ContextMenu.Sub>
+          <Styles.Item as={ContextMenu.SubTrigger}>
+            {menuItem.content}
+            <Styles.ItemIcon>
+              <SvgFromUrl width={10} height={14} svg="MiscCaret" />
+            </Styles.ItemIcon>
+          </Styles.Item>
+          <ContextMenu.Portal>
+            <Styles.Content as={ContextMenu.SubContent} sideOffset={12}>
+              {menuItem.items.map((subMenuItem, index) => (
+                <MenuItem menuItem={subMenuItem} key={index} />
+              ))}
+            </Styles.Content>
+          </ContextMenu.Portal>
+        </ContextMenu.Sub>
+      );
+    case ContextMenuItemType.Item:
+      return (
+        <Styles.Item isDanger={menuItem.isDanger} onSelect={menuItem.onSelect}>
+          {menuItem.content}
+          <Styles.ItemIcon>
+            {menuItem.icon.type === IconType.Svg ? (
+              <SvgFromUrl
+                width={18}
+                height={18}
+                svg={menuItem.icon.svg as keyof SvgConfig}
+              />
+            ) : (
+              <img src={menuItem.icon.url} width={18} height={18} alt="" />
+            )}
+          </Styles.ItemIcon>
+        </Styles.Item>
+      );
+  }
+}
 
 interface Props {
   children: ReactElement;
@@ -31,41 +81,9 @@ export function MessageContextMenu({ children, message }: Props) {
       <ContextMenu.Trigger>{children}</ContextMenu.Trigger>
       <ContextMenu.Portal>
         <Styles.Content>
-          {menuItems.map((value, index) => {
-            switch (value.type) {
-              case ContextMenuItemType.Separator:
-                return <Styles.Separator key={`separator-${index}`} />;
-              case ContextMenuItemType.Item:
-                return (
-                  <Styles.Item
-                    isDanger={value.isDanger}
-                    key={`item-${index}`}
-                    onSelect={value.onSelect}
-                  >
-                    {value.content}{" "}
-                    <Styles.ItemIcon>
-                      {value.icon.type === IconType.Svg ? (
-                        <SvgFromUrl
-                          width={18}
-                          height={18}
-                          svg={value.icon.svg}
-                        />
-                      ) : (
-                        <img
-                          src={value.icon.url}
-                          width={18}
-                          height={18}
-                          alt=""
-                        />
-                      )}
-                    </Styles.ItemIcon>
-                  </Styles.Item>
-                );
-              default:
-                error("Unknown menu item type", value.type);
-                return <>unknown menu item type</>;
-            }
-          })}
+          {menuItems.map((value, index) => (
+            <MenuItem menuItem={value} key={index} />
+          ))}
         </Styles.Content>
       </ContextMenu.Portal>
     </ContextMenu.Root>

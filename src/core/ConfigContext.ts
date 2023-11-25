@@ -29,6 +29,7 @@ export interface Separator {
 
 export interface SubMenu<SC extends PartialSvgConfig> {
   type: ContextMenuItemType.SubMenu;
+  content: ReactNode;
   items: ContextMenuItem<SC>[];
 }
 
