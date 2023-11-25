@@ -26,7 +26,11 @@ function MenuItem<SC extends PartialSvgConfig>({
     case ContextMenuItemType.SubMenu:
       return (
         <ContextMenu.Sub>
-          <Styles.Item as={ContextMenu.SubTrigger}>
+          <Styles.Item
+            as={ContextMenu.SubTrigger}
+            disabled={menuItem.isDisabled}
+            isDisabled={menuItem.isDisabled}
+          >
             {menuItem.content}
             <Styles.ItemIcon>
               <SvgFromUrl width={10} height={14} svg="MiscCaret" />
@@ -43,7 +47,12 @@ function MenuItem<SC extends PartialSvgConfig>({
       );
     case ContextMenuItemType.Item:
       return (
-        <Styles.Item isDanger={menuItem.isDanger} onSelect={menuItem.onSelect}>
+        <Styles.Item
+          isDanger={menuItem.isDanger}
+          isDisabled={menuItem.isDisabled}
+          disabled={menuItem.isDisabled}
+          onSelect={menuItem.onSelect}
+        >
           {menuItem.content}
           <Styles.ItemIcon>
             {menuItem.icon.type === IconType.Svg ? (

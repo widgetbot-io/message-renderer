@@ -43,6 +43,13 @@ export const Item = styled.withConfig({
   },
 
   variants: {
+    isDisabled: {
+      true: {
+        opacity: 0.7,
+        cursor: "not-allowed",
+      },
+    },
+
     isDanger: {
       true: {
         color: theme.colors.danger,

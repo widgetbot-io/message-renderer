@@ -30,6 +30,7 @@ export interface Separator {
 export interface SubMenu<SC extends PartialSvgConfig> {
   type: ContextMenuItemType.SubMenu;
   content: ReactNode;
+  isDisabled?: boolean;
   items: ContextMenuItem<SC>[];
 }
 
@@ -51,6 +52,7 @@ export interface MenuItem<SC extends PartialSvgConfig> {
       };
   content: ReactNode;
   isDanger?: boolean;
+  isDisabled?: boolean;
   onSelect?(): void;
 }
 

@@ -207,6 +207,18 @@ function getContextMenuItems(
       type: ContextMenuItemType.Item,
       icon: {
         type: IconType.Svg,
+        svg: "IconFullscreen",
+      },
+      content: "Pop Out",
+      isDisabled: true,
+      onSelect() {
+        alert(`Pop Out selected on ${message.id}`);
+      },
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
         svg: "CustomDelete",
       },
       isDanger: true,
