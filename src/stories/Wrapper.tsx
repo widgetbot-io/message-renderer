@@ -133,7 +133,9 @@ function getButtons(
   ];
 }
 
-function getContextMenuItems(): ContextMenuItem<typeof svgUrls>[] {
+function getContextMenuItems(
+  message: ChatMessage
+): ContextMenuItem<typeof svgUrls>[] {
   return [
     {
       type: ContextMenuItemType.Item,
@@ -142,6 +144,9 @@ function getContextMenuItems(): ContextMenuItem<typeof svgUrls>[] {
         svg: "IconPencil",
       },
       content: "Edit Message",
+      onSelect() {
+        alert(`Edit Message selected on ${message.id}`);
+      },
     },
     {
       type: ContextMenuItemType.Item,
@@ -150,6 +155,9 @@ function getContextMenuItems(): ContextMenuItem<typeof svgUrls>[] {
         svg: "IconPin",
       },
       content: "Pin Message",
+      onSelect() {
+        alert(`Pin Message selected on ${message.id}`);
+      },
     },
     {
       type: ContextMenuItemType.Item,
@@ -159,6 +167,9 @@ function getContextMenuItems(): ContextMenuItem<typeof svgUrls>[] {
       },
       isDanger: true,
       content: "Delete Message",
+      onSelect() {
+        alert(`Delete Message selected on ${message.id}`);
+      },
     },
     {
       type: ContextMenuItemType.Separator,
@@ -170,6 +181,9 @@ function getContextMenuItems(): ContextMenuItem<typeof svgUrls>[] {
         svg: "IconId",
       },
       content: "Copy Message ID",
+      onSelect() {
+        alert(`Copy Message ID selected on ${message.id}`);
+      },
     },
   ];
 }

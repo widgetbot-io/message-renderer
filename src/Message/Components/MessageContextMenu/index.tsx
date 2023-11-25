@@ -37,7 +37,11 @@ export function MessageContextMenu({ children, message }: Props) {
                 return <Styles.Separator key={`separator-${index}`} />;
               case ContextMenuItemType.Item:
                 return (
-                  <Styles.Item isDanger={value.isDanger} key={`item-${index}`}>
+                  <Styles.Item
+                    isDanger={value.isDanger}
+                    key={`item-${index}`}
+                    onSelect={value.onSelect}
+                  >
                     {value.content}{" "}
                     <Styles.ItemIcon>
                       {value.icon.type === IconType.Svg ? (

@@ -50,6 +50,7 @@ export interface MenuItem<SC extends PartialSvgConfig> {
       };
   content: ReactNode;
   isDanger?: boolean;
+  onSelect?(): void;
 }
 
 export type ContextMenuItem<SC extends PartialSvgConfig> =
