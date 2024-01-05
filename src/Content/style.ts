@@ -62,6 +62,11 @@ export const ContentContainer = styled.withConfig({
   lineHeight: "1.375rem",
 
   variants: {
+    didFailToSend: {
+      true: {
+        color: theme.colors.danger,
+      },
+    },
     isReplyContent: {
       true: {
         overflow: "hidden",
