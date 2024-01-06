@@ -73,6 +73,58 @@ Basic.args = {
   ],
 };
 
+export const Optimistic: StoryFn<typeof MessageGroup> = Template.bind({});
+Optimistic.args = {
+  messages: [
+    {
+      id: "1101622366137749574",
+      type: 0,
+      content:
+        'Small update on expanded markdown <:Kermit:865566651017068554>\nWe had to roll it back yesterday to patch some issues. We will most likely be bringing it back ~~sometime next week.~~ soon <:KermitTPose:814341617234083871> \n\nHave a good, markdown-less weekend! <:KermitCloutGlasses:874106679321571428>\n\nAnimal fact of the week: a group of rhino is called a "crash" 🦏',
+      channel_id: "697138785317814292",
+      author: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+      },
+      optimistic: true,
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [
+        {
+          emoji: {
+            id: "1100159330264813638",
+            name: "frog_nae_nae",
+            animated: true,
+          },
+          count: 241,
+          me: false,
+        },
+        {
+          emoji: {
+            id: null,
+            name: "🦏",
+          },
+          count: 272,
+          me: true,
+        },
+      ],
+    },
+  ],
+};
+
 export const ExtendedMarkdown: StoryFn<typeof MessageGroup> = Template.bind({});
 ExtendedMarkdown.args = {
   messages: [
@@ -96,6 +148,58 @@ ExtendedMarkdown.args = {
       flags: 0,
       components: [],
       webhook_id: "998882498719273090",
+    },
+  ],
+};
+
+export const FailedToSend: StoryFn<typeof MessageGroup> = Template.bind({});
+FailedToSend.args = {
+  messages: [
+    {
+      id: "1101622366137749574",
+      type: 0,
+      content:
+        'Small update on expanded markdown <:Kermit:865566651017068554>\nWe had to roll it back yesterday to patch some issues. We will most likely be bringing it back ~~sometime next week.~~ soon <:KermitTPose:814341617234083871> \n\nHave a good, markdown-less weekend! <:KermitCloutGlasses:874106679321571428>\n\nAnimal fact of the week: a group of rhino is called a "crash" 🦏',
+      channel_id: "697138785317814292",
+      author: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+      },
+      failedToSend: true,
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [
+        {
+          emoji: {
+            id: "1100159330264813638",
+            name: "frog_nae_nae",
+            animated: true,
+          },
+          count: 241,
+          me: false,
+        },
+        {
+          emoji: {
+            id: null,
+            name: "🦏",
+          },
+          count: 272,
+          me: true,
+        },
+      ],
     },
   ],
 };
@@ -222,6 +326,31 @@ Mentions.args = {
       mention_roles: [],
       pinned: false,
       mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-28T21:33:59.241000+00:00",
+      edited_timestamp: "2023-05-04T16:50:42.356000+00:00",
+      flags: 1,
+      components: [],
+      reactions: [],
+    },
+  ],
+};
+
+export const MentionsEveryone: StoryFn<typeof MessageGroup> = Template.bind({});
+MentionsEveryone.args = {
+  messages: [
+    {
+      id: "1101622366137749574",
+      type: 0,
+      content: "HEY @everyone, fear not, for I am @here",
+      channel_id: "697138785317814292",
+      author: testUser,
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: true,
       tts: false,
       timestamp: "2023-04-28T21:33:59.241000+00:00",
       edited_timestamp: "2023-05-04T16:50:42.356000+00:00",

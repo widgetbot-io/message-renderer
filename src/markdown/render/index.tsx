@@ -9,8 +9,9 @@ import TextSpoiler from "./elements/TextSpoiler";
 import { Timestamp } from "./elements/Timestamp";
 import React from "react";
 import { InlineCode } from "./elements/code/style";
-import type { APIMessage, APIUser } from "discord-api-types/v10";
+import type { APIUser } from "discord-api-types/v10";
 import { findDefaultEmojiByUnicode } from "../../emojiData";
+import type { ChatMessage } from "../../types";
 
 function parserFor(rules: SimpleMarkdown.ReactRules, returnAst?) {
   const parser = SimpleMarkdown.parserFor(rules);
@@ -164,7 +165,14 @@ const parse = parserFor(rulesWithoutMaskedLinks);
 export const parseAllowLinks = parserFor(createRules(baseRules));
 export const parseEmbedTitle = parserFor(
   R.omit(
-    ["codeBlock", "br", "mention", "channelMention", "roleMention"],
+    [
+      "codeBlock",
+      "br",
+      "mention",
+      "channelMention",
+      "roleMention",
+      "everyoneOrHereMention",
+    ],
     rulesWithoutMaskedLinks
   )
 );
@@ -188,7 +196,7 @@ function Markdown({
   users,
 }: {
   children: string;
-  mentions?: APIMessage["mentions"];
+  mentions?: ChatMessage["mentions"];
   users?: Map<string, APIUser>;
 }) {
   const unicodeEmojisHandled = handleUnicodeEmojis(content);
@@ -204,7 +212,7 @@ export function LinkMarkdown({
   users,
 }: {
   children: string;
-  mentions?: APIMessage["mentions"];
+  mentions?: ChatMessage["mentions"];
   users?: Map<string, APIUser>;
 }) {
   const unicodeEmojisHandled = handleUnicodeEmojis(content);

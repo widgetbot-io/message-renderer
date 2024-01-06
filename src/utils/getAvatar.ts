@@ -33,41 +33,57 @@ type AvatarSize =
   | 3072
   | 4096;
 
-function gifCheck(url: string) {
-  return url?.includes("/a_") ? url.replace("webp", "gif") : url;
+function checkIfAnimatedAvatar(url: string) {
+  return url?.includes("/a_") ?? false;
 }
 
 function getAvatarProperty(
   user: APIUser,
-  avatarSize: AvatarSize = 80
+  avatarSize: AvatarSize = 80,
+  fileType: "webp" | "gif" = "webp"
 ): string | null {
   if (!user.avatar) return null;
 
   // todo: allow custom CDN
-  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=${avatarSize}`;
+  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${fileType}?size=${avatarSize}`;
 }
 
 export interface GetAvatarOptions {
-  animated?: boolean;
   size?: AvatarSize;
   forceDefault?: boolean;
 }
 
+export interface UserAvatar {
+  stillAvatarUrl: string;
+  animatedAvatarUrl?: string;
+}
+
 function getAvatar(
   user: APIUser,
-  { animated = false, size = 80, forceDefault = false }: GetAvatarOptions = {}
-): string {
-  const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${
-    Number(BigInt(user.id) >> 22n) % 6
-  }.png`;
+  { size = 80, forceDefault = false }: GetAvatarOptions = {}
+): UserAvatar {
+  const defaultAvatarIndex = isNaN(Number(user.id))
+    ? 0
+    : Number(BigInt(user.id) >> 22n) % 6;
 
-  const avatarUrl = getAvatarProperty(user, size);
+  const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
 
-  if (forceDefault || avatarUrl === null) return defaultAvatar;
+  const stillAvatarUrl = getAvatarProperty(user, size);
 
-  const potentialGif = animated ? gifCheck(avatarUrl) : avatarUrl;
+  if (forceDefault || stillAvatarUrl === null)
+    return { stillAvatarUrl: defaultAvatar };
 
-  return avatarUrl ? potentialGif.replace("webp", "png") : defaultAvatar;
+  const isAnimatedAvatar = checkIfAnimatedAvatar(stillAvatarUrl);
+
+  if (!isAnimatedAvatar) return { stillAvatarUrl: stillAvatarUrl };
+
+  const animatedAvatarUrl =
+    getAvatarProperty(user, size, "gif") ?? defaultAvatar;
+
+  return {
+    stillAvatarUrl: stillAvatarUrl,
+    animatedAvatarUrl: animatedAvatarUrl,
+  };
 }
 
 export default getAvatar;

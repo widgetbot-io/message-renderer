@@ -1,14 +1,14 @@
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import NormalMessage from "./NormalMessage";
 import LargeTimestamp from "../LargeTimestamp";
 import { Trans, useTranslation } from "react-i18next";
+import type { ChatMessage } from "../../types";
 
 interface ThreadStarterMessageProps {
-  createdAt: APIMessage["timestamp"];
-  referencedMessage: APIMessage | null | undefined;
+  createdAt: ChatMessage["timestamp"];
+  referencedMessage: ChatMessage | null | undefined;
 }
 
 function ThreadStarterMessage({

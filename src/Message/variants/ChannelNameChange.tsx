@@ -3,15 +3,15 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
+import type { ChatMessage } from "../../types";
 
 interface ChannelNameChangeProps {
   content: string;
-  createdAt: APIMessage["timestamp"];
-  channelId: APIMessage["channel_id"];
-  author: APIMessage["author"];
+  createdAt: ChatMessage["timestamp"];
+  channelId: ChatMessage["channel_id"];
+  author: ChatMessage["author"];
 }
 
 function ChannelNameChange(props: ChannelNameChangeProps) {

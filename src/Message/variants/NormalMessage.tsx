@@ -9,7 +9,6 @@ import LargeTimestamp from "../LargeTimestamp";
 import ChatTag from "../../ChatTag";
 import * as Styles from "../style/message";
 import type {
-  APIMessage,
   APIMessageInteraction,
   APIRole,
   APIUser,
@@ -18,10 +17,11 @@ import type {
 import { MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
+import type { ChatMessage } from "../../types";
 
 interface ReplyInfoProps {
   channelId: Snowflake;
-  referencedMessage: APIMessage["referenced_message"];
+  referencedMessage: ChatMessage["referenced_message"];
   mentioned?: boolean;
   interaction: APIMessageInteraction | undefined;
   isContextMenuInteraction?: boolean;
@@ -30,7 +30,6 @@ interface ReplyInfoProps {
 function getMiniAvatarUrl(user: APIUser) {
   const getAvatarSettings: GetAvatarOptions = {
     size: 16,
-    animated: false,
   };
 
   return getAvatar(user, getAvatarSettings);
@@ -125,7 +124,9 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
         </>
       ) : (
         <Styles.ReplyUser>
-          {miniAvatarUrl && <Styles.MiniUserAvatar src={miniAvatarUrl} />}
+          {miniAvatarUrl && (
+            <Styles.MiniUserAvatar src={miniAvatarUrl.stillAvatarUrl} />
+          )}
           {props.referencedMessage && (
             <ChatTag
               author={props.referencedMessage.author}
@@ -166,7 +167,7 @@ ReplyInfo.displayName = "ReplyInfo";
 
 interface MessageProps {
   isFirstMessage?: boolean;
-  message: APIMessage;
+  message: ChatMessage;
   isHovered?: boolean;
   noThreadButton?: boolean;
   isContextMenuInteraction?: boolean;
@@ -189,6 +190,8 @@ function NormalMessage(props: MessageProps) {
     const userMentionedOverride = props.overrides?.userMentioned ?? false;
     if (userMentionedOverride) return true;
 
+    if (props.message.mention_everyone) return true;
+
     const user = currentUser();
 
     if (!user) return false;
@@ -196,11 +199,16 @@ function NormalMessage(props: MessageProps) {
     return (
       props.message.mentions.find(({ id }) => id === user.id) !== undefined
     );
-  }, [currentUser, props.message.mentions, props.overrides?.userMentioned]);
+  }, [
+    currentUser,
+    props.message.mentions,
+    props.overrides?.userMentioned,
+    props.message.mention_everyone,
+  ]);
 
   if (props.isFirstMessage)
     return (
-      <Styles.Message mentioned={isUserMentioned}>
+      <Styles.Message isMentioned={isUserMentioned}>
         {shouldShowReply && (
           <ReplyInfo
             channelId={props.message.channel_id}
@@ -216,7 +224,6 @@ function NormalMessage(props: MessageProps) {
           <MessageAuthor
             guildId={guildId}
             author={props.message.author}
-            avatarAnimated={props.isHovered ?? false}
             crossPost={Boolean((props.message.flags ?? 0) & FLAG_CROSSPOST)}
             referenceGuild={props.message.message_reference?.guild_id}
           />
@@ -232,7 +239,7 @@ function NormalMessage(props: MessageProps) {
     );
 
   return (
-    <Styles.Message mentioned={isUserMentioned}>
+    <Styles.Message isMentioned={isUserMentioned}>
       <Tooltip
         placement="top"
         overlay={Moment(props.message.timestamp).format("LLLL")}

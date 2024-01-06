@@ -3,16 +3,16 @@ import LargeTimestamp from "../LargeTimestamp";
 import React from "react";
 import * as Styles from "../style/message";
 import { SystemMessageIconSize } from "../style/message";
-import type { APIMessage } from "discord-api-types/v10";
 import getDisplayName from "../../utils/getDisplayName";
 import { useConfig } from "../../core/ConfigContext";
 import { Trans, useTranslation } from "react-i18next";
+import type { ChatMessage } from "../../types";
 
 interface RecipientAddProps {
-  createdAt: APIMessage["timestamp"];
-  author: APIMessage["author"];
-  target: APIMessage["mentions"][0];
-  channelId: APIMessage["channel_id"];
+  createdAt: ChatMessage["timestamp"];
+  author: ChatMessage["author"];
+  target: ChatMessage["mentions"][0];
+  channelId: ChatMessage["channel_id"];
 }
 
 // todo: check if this also applies to group chats, and support those as well.

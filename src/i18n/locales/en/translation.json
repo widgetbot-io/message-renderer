@@ -75,5 +75,40 @@
   },
   "ThreadStarterMessage": {
     "content": "Sorry, we couldn't load the first message in this thread"
+  },
+  "AutomodAction": {
+    "username": "AutoMod",
+    "flagged_message": "has flagged a message in <Channel/>",
+    "blocked_message": "has blocked a message in <Channel/>",
+    "block_profile_update": "blocked a {{event}}",
+    "quarantine_user": "has quarantined a member at {{event}}",
+    "block_guest_join": "has blocked a guest at {{event}}",
+    "voice_channel_status_flagged": "has flagged a voice channel status for <Channel/>",
+    "voice_channel_status_blocked": "has blocked a voice channel status for <Channel/>",
+    "profile_event": {
+      "username_update": "username update",
+      "nickname_update": "nickname update",
+      "nickname_reset": "nickname reset",
+      "message_send": "message send",
+      "guild_join": "server join"
+    },
+    "info": {
+      "keyword": "Keyword: {{keyword}}",
+      "rule": "Rule: {{rule}}",
+      "timeout": "Timeout: {{timeout, duration}}",
+      "reason": "Reason: {{reason}}"
+    }
+  },
+  "duration": {
+    "seconds_one": "1 sec",
+    "seconds_other": "{{count}} secs",
+    "minutes_one": "1 min",
+    "minutes_other": "{{count}} mins",
+    "hours_one": "1 hour",
+    "hours_other": "{{count}} hours",
+    "days_one": "1 day",
+    "days_other": "{{count}} days",
+    "weeks_one": "1 week",
+    "weeks_other": "{{count}} weeks"
   }
 }

@@ -1,7 +1,7 @@
 import NormalMessage from "./variants/NormalMessage";
 import React, { memo } from "react";
 import MessageContainer from "./MessageContainer";
-import type { APIChannel, APIMessage } from "discord-api-types/v10";
+import type { APIChannel } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import GuildMemberJoin from "./variants/GuildMemberJoin";
 import GuildDiscoveryRequalified from "./variants/GuildDiscoveryRequalified";
@@ -16,12 +16,14 @@ import ChannelPinnedMessage from "./variants/ChannelPinnedMessage";
 import RecipientAdd from "./variants/RecipientAdd";
 import RecipientRemove from "./variants/RecipientRemove";
 import ThreadCreated from "./variants/ThreadCreated";
-import { useConfig } from "../core/ConfigContext";
+import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
+import AutomodAction from "./variants/AutomodAction";
+import type { ChatMessage } from "../types";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
-  message: APIMessage;
+  message: ChatMessage;
   isHovered?: boolean;
   showButtons?: boolean;
   thread?: boolean;
@@ -29,6 +31,9 @@ export interface MessageProps {
 }
 
 function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
+  const { unknownMessageTypeResponse = MessageTypeResponse.ConsoleError } =
+    useConfig();
+
   switch (props.message.type) {
     case MessageType.ChannelPinnedMessage:
       return (
@@ -144,23 +149,46 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
           createdAt={props.message.timestamp}
         />
       );
-    default: {
-      // todo: lock behind a debug mode
-      const errorMessage: APIMessage = {
-        ...props.message,
-        type: MessageType.Default,
-        content: `Unknown message type \`${
-          props.message.type
-        }\`\n\n\`\`\`json\n${JSON.stringify(props.message, null, 2)}\n\`\`\``,
-      };
-
+    case MessageType.AutoModerationAction:
       return (
-        <NormalMessage
-          message={errorMessage}
-          isFirstMessage={props.isFirstMessage}
-          isHovered={props.isHovered}
-        />
+        <AutomodAction message={props.message} isHovered={props.isHovered} />
       );
+    default: {
+      switch (unknownMessageTypeResponse) {
+        case MessageTypeResponse.InAppError: {
+          const errorMessage: ChatMessage = {
+            ...props.message,
+            type: MessageType.Default,
+            content: `Unknown message type \`${
+              props.message.type
+            }\`\n\n\`\`\`json\n${JSON.stringify(
+              props.message,
+              null,
+              2
+            )}\n\`\`\``,
+          };
+
+          console.error(
+            `Unknown message type \`${props.message.type}\``,
+            props.message
+          );
+
+          return (
+            <NormalMessage
+              message={errorMessage}
+              isFirstMessage={props.isFirstMessage}
+            />
+          );
+        }
+        case MessageTypeResponse.ConsoleError:
+          console.error(
+            `Unknown message type \`${props.message.type}\``,
+            props.message
+          );
+          return null;
+        case MessageTypeResponse.None:
+          return null;
+      }
     }
   }
 }

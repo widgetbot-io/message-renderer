@@ -1,31 +1,41 @@
 import "./i18n";
 import type { CSSProperties } from "react";
-import React, { useState } from "react";
+import React from "react";
 import Message from "./Message";
-import type { APIMessage } from "discord-api-types/v10";
+import { commonComponentId, styled } from "./Stitches/stitches.config";
+import * as MessageAuthorStyles from "./Message/style/author";
+import type { ChatMessage } from "./types";
 
 export interface MessageProps {
-  messages: APIMessage[];
+  messages: ChatMessage[];
   style?: CSSProperties;
   showButtons?: boolean;
   thread: boolean;
 }
 
+const MessageGroupStyle = styled.withConfig({
+  displayName: "message-group",
+  componentId: commonComponentId,
+})("div", {
+  [`&:hover ${MessageAuthorStyles.AnimatedAvatarTrigger}[data-is-animated='true']`]:
+    {
+      [`& ${MessageAuthorStyles.Avatar}`]: {
+        display: "none",
+      },
+      [`& ${MessageAuthorStyles.AnimatedAvatar}`]: {
+        display: "unset",
+      },
+    },
+});
+
 export function MessageGroup(props: MessageProps) {
   const [firstMessage, ...otherMessages] = props.messages;
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className="message-group"
-      style={props.style}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <MessageGroupStyle style={props.style}>
       <Message
         isFirstMessage={true}
         message={firstMessage}
-        isHovered={isHovered}
         showButtons={props.showButtons ?? true}
         thread={props.thread}
       />
@@ -37,9 +47,10 @@ export function MessageGroup(props: MessageProps) {
           thread={props.thread}
         />
       ))}
-    </div>
+    </MessageGroupStyle>
   );
 }
 
 export { default as Message } from "./Message";
 export { default as MessageRendererProvider } from "./MessageRendererProvider";
+export { default as Markdown, LinkMarkdown } from "./markdown/render";
