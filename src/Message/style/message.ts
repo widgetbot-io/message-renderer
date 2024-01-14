@@ -33,6 +33,10 @@ export const LargeTimestamp = styled.withConfig({
   lineHeight: `1.375rem`,
 });
 
+export const messageHoverStyles = {
+  backgroundColor: theme.colors.messageHover,
+};
+
 export const Message = styled.withConfig({
   displayName: "message",
   componentId: commonComponentId,
@@ -58,9 +62,7 @@ export const Message = styled.withConfig({
 
     // IF THERE IS A BUG WITH THE HOVER COLOR IT'S BECAUSE WE MOVED THIS
     // FROM THE CONTAINER TO HERE
-    "&:hover": {
-      backgroundColor: theme.colors.messageHover,
-    },
+    "&:hover": messageHoverStyles,
 
     variants: {
       isMentioned: {

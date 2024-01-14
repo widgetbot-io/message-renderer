@@ -87,7 +87,7 @@ export function MessageContextMenu({ children, message }: Props) {
 
   return (
     <ContextMenu.Root>
-      <ContextMenu.Trigger>{children}</ContextMenu.Trigger>
+      <Styles.Trigger>{children}</Styles.Trigger>
       <ContextMenu.Portal>
         <Styles.Content>
           {menuItems.map((value, index) => (

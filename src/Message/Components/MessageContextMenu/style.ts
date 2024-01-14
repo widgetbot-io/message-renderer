@@ -4,6 +4,12 @@ import {
   styled,
   theme,
 } from "../../../Stitches/stitches.config";
+import * as MessageStyles from "../../style/message";
+
+export const Trigger = styled(ContextMenu.Trigger, {
+  [`&[data-state="open"] ${MessageStyles.Message}`]:
+    MessageStyles.messageHoverStyles,
+});
 
 export const Content = styled.withConfig({
   displayName: "context-menu-content",
