@@ -185,6 +185,7 @@ export const ReplyIcon = styled.withConfig({
   marginLeft: theme.space.small,
   width: 20,
   height: 20,
+  color: theme.colors.primaryOpacity100,
 });
 
 export const StickerTooltipIcon = styled.withConfig({

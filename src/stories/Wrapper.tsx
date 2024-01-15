@@ -37,6 +37,7 @@ import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channe
 import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
 import SvgIconLinkExternal from "../assets/storybookOnlyAssets/icon-link-external.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
+import SvgCustomDelete from "../assets/storybookOnlyAssets/custom-delete.svg";
 
 import ggSansNormal400 from "../assets/storybookOnlyAssets/gg-sans-normal-400.woff2";
 import ggSansNormal500 from "../assets/storybookOnlyAssets/gg-sans-normal-500.woff2";
@@ -54,6 +55,7 @@ import automodAvatarStill from "../assets/storybookOnlyAssets/automod-avatar.png
 import automodAvatarAnimated from "../assets/storybookOnlyAssets/automod-avatar.gif";
 
 import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
+import SvgMiscCaret from "../assets/storybookOnlyAssets/misc-caret.svg";
 import type {
   APIChannel,
   APIGuild,
@@ -67,9 +69,14 @@ import { globalCss, prefix, styled, theme } from "../Stitches/stitches.config";
 import getDisplayName from "../utils/getDisplayName";
 import type {
   ChatBadgeProps,
+  ContextMenuItem,
   MessageButtonListOption,
 } from "../core/ConfigContext";
-import { MessageTypeResponse } from "../core/ConfigContext";
+import {
+  ContextMenuItemType,
+  IconType,
+  MessageTypeResponse,
+} from "../core/ConfigContext";
 import { testTextChannel, testVoiceChannel } from "./commonTestData";
 import type { Decorator } from "@storybook/react";
 import type { ChatMessage } from "../types";
@@ -111,6 +118,9 @@ const svgUrls = {
   IconStageChannel: SvgIconStageChannel,
   IconLinkExternal: SvgIconLinkExternal,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
+  MiscCaret: SvgMiscCaret,
+
+  CustomDelete: SvgCustomDelete,
 };
 
 function getButtons(
@@ -121,6 +131,115 @@ function getButtons(
       icon: "IconId",
       onClick: () => navigator.clipboard.writeText(message.id),
       actionDescription: "Copy Message ID",
+    },
+  ];
+}
+
+function getContextMenuItems(
+  message: ChatMessage
+): ContextMenuItem<typeof svgUrls>[] {
+  return [
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconPencil",
+      },
+      content: "Edit Message",
+      onSelect() {
+        alert(`Edit Message selected on ${message.id}`);
+      },
+    },
+    {
+      type: ContextMenuItemType.SubMenu,
+      content: "Submenu",
+      items: [
+        {
+          type: ContextMenuItemType.Item,
+          icon: {
+            type: IconType.Svg,
+            svg: "IconAttachment",
+          },
+          content: "Submenu Item 1",
+          onSelect() {
+            alert("Submenu Item 1 selected");
+          },
+        },
+        {
+          type: ContextMenuItemType.Item,
+          icon: {
+            type: IconType.Svg,
+            svg: "IconCommand",
+          },
+          content: "Submenu Item 2",
+          onSelect() {
+            alert("Submenu Item 2 selected");
+          },
+        },
+        {
+          type: ContextMenuItemType.Separator,
+        },
+        {
+          type: ContextMenuItemType.Item,
+          icon: {
+            type: IconType.Svg,
+            svg: "IconDownload",
+          },
+          content: "Submenu Item 3",
+          onSelect() {
+            alert("Submenu Item 3 selected");
+          },
+        },
+      ],
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconPin",
+      },
+      content: "Pin Message",
+      onSelect() {
+        alert(`Pin Message selected on ${message.id}`);
+      },
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconFullscreen",
+      },
+      content: "Pop Out",
+      isDisabled: true,
+      onSelect() {
+        alert(`Pop Out selected on ${message.id}`);
+      },
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "CustomDelete",
+      },
+      isDanger: true,
+      content: "Delete Message",
+      onSelect() {
+        alert(`Delete Message selected on ${message.id}`);
+      },
+    },
+    {
+      type: ContextMenuItemType.Separator,
+    },
+    {
+      type: ContextMenuItemType.Item,
+      icon: {
+        type: IconType.Svg,
+        svg: "IconId",
+      },
+      content: "Copy Message ID",
+      onSelect() {
+        alert(`Copy Message ID selected on ${message.id}`);
+      },
     },
   ];
 }
@@ -383,6 +502,7 @@ const Wrapper: Decorator = (Story) => {
         animated: automodAvatarAnimated,
       }}
       messageButtons={getButtons}
+      messageContextMenuItems={getContextMenuItems}
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}
       resolveMember={resolveMember}

@@ -34,7 +34,6 @@ export function AutomodAuthor({ isAvatarAnimated }: AutomodAuthorProps) {
 interface MessageAuthorProps
   extends ComponentProps<typeof Styles.MessageAuthor> {
   author: APIUser;
-  isAvatarAnimated?: boolean;
   onlyShowUsername?: boolean;
   crossPost?: boolean;
   referenceGuild?: Snowflake;

@@ -218,21 +218,20 @@ function AutomodAction({ message, isHovered }: AutomodActionProps) {
       <Styles.AutomodMessageInQuestion>
         <MessageAuthor
           author={message.author}
-          isAvatarAnimated={isHovered}
           crossPost={false}
           referenceGuild={undefined}
           guildId={guildId}
         />
         <Styles.AutomodMessageContent>
           {messageContent.map((content, index) => (
-            <>
-              <span key={`content-${index}`}>{content}</span>
+            <React.Fragment key={`content-${index}`}>
+              <span>{content}</span>
               {index < messageContent.length - 1 && (
-                <Styles.AutomodFlaggedKeyword key={`match-${index}`}>
+                <Styles.AutomodFlaggedKeyword>
                   {matches?.[index]}
                 </Styles.AutomodFlaggedKeyword>
               )}
-            </>
+            </React.Fragment>
           ))}
         </Styles.AutomodMessageContent>
         <Styles.AutomodMatchInfoContainer>
