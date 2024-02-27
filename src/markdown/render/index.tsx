@@ -160,7 +160,6 @@ const rulesWithoutMaskedLinks = createRules({
     match: () => null,
   },
 });
-const parse = parserFor(rulesWithoutMaskedLinks);
 
 export const parseAllowLinks = parserFor(createRules(baseRules));
 export const parseEmbedTitle = parserFor(
@@ -190,22 +189,6 @@ function handleUnicodeEmojis(content: string): string {
   );
 }
 
-function Markdown({
-  children: content,
-  mentions,
-  users,
-}: {
-  children: string;
-  mentions?: ChatMessage["mentions"];
-  users?: Map<string, APIUser>;
-}) {
-  const unicodeEmojisHandled = handleUnicodeEmojis(content);
-
-  return content
-    ? parse(unicodeEmojisHandled, undefined, { mentions, users })
-    : null;
-}
-
 export function LinkMarkdown({
   children: content,
   mentions,
@@ -221,5 +204,3 @@ export function LinkMarkdown({
     ? parseAllowLinks(unicodeEmojisHandled, undefined, { mentions, users })
     : null;
 }
-
-export default Markdown;
