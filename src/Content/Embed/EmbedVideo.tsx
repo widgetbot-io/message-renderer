@@ -57,11 +57,11 @@ interface EmbedVideoProps
   extends Required<Pick<APIEmbedVideo, "width" | "height">> {
   thumbnail?: APIEmbedThumbnail["url"];
   url: APIEmbedVideo["url"] | undefined;
-  proxyUrl: APIEmbedVideo["proxy_url"] | undefined;
+  proxyUrl: APIEmbedVideo["proxy_url"] | undefined | null;
 }
 
 function EmbedVideo(props: EmbedVideoProps) {
-  if (props.proxyUrl !== undefined)
+  if (props.proxyUrl)
     return (
       <ThumbnailWrapper
         thumbnail={props.thumbnail}
