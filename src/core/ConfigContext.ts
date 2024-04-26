@@ -54,7 +54,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   // Click handlers
   currentUser(): APIUser | null;
   seeThreadOnClick?(messageId: Snowflake, thread: APIChannel): void;
-  userOnClick?(user: APIUser): void;
+  userOnClick?(user: APIUser, element: EventTarget & HTMLSpanElement): void;
   roleMentionOnClick?(role: APIRole): void;
   channelMentionOnClick?(channel: APIChannel): void;
   openPinnedMessagesOnClick?(channel: APIChannel): void;
