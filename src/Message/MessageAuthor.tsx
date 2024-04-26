@@ -101,7 +101,7 @@ function MessageAuthor({
       <Styles.MessageAuthor
         clickable={userOnClick !== undefined}
         {...props}
-        onClick={() => userOnClick?.(author)}
+        onClick={(e) => userOnClick?.(author, e.currentTarget)}
       >
         <Styles.Username style={{ color: dominantRoleColor }}>
           {displayName}
@@ -114,7 +114,7 @@ function MessageAuthor({
     <Styles.MessageAuthor
       clickable={userOnClick !== undefined}
       {...props}
-      onClick={() => userOnClick?.(author)}
+      onClick={(e) => userOnClick?.(author, e.currentTarget)}
     >
       <Styles.AnimatedAvatarTrigger
         data-is-animated={animatedAvatarUrl !== undefined}
