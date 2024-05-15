@@ -53,4 +53,4 @@ export function MessageGroup(props: MessageProps) {
 
 export { default as Message } from "./Message";
 export { default as MessageRendererProvider } from "./MessageRendererProvider";
-export { LinkMarkdown } from "./markdown/render";
+export { Markdown, LinkMarkdown } from "./markdown/render";
