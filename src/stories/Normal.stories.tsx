@@ -58,7 +58,13 @@ Basic.args = {
             animated: true,
           },
           count: 241,
+          count_details: {
+            normal: 241,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -66,7 +72,13 @@ Basic.args = {
             name: "🦏",
           },
           count: 272,
+          count_details: {
+            normal: 272,
+            burst: 0,
+          },
           me: true,
+          me_burst: false,
+          burst_colors: [],
         },
       ],
     },
@@ -110,7 +122,13 @@ Optimistic.args = {
             animated: true,
           },
           count: 241,
+          count_details: {
+            normal: 241,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -118,7 +136,13 @@ Optimistic.args = {
             name: "🦏",
           },
           count: 272,
+          count_details: {
+            normal: 272,
+            burst: 0,
+          },
           me: true,
+          me_burst: false,
+          burst_colors: [],
         },
       ],
     },
@@ -189,7 +213,13 @@ FailedToSend.args = {
             animated: true,
           },
           count: 241,
+          count_details: {
+            normal: 241,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -197,7 +227,13 @@ FailedToSend.args = {
             name: "🦏",
           },
           count: 272,
+          count_details: {
+            normal: 272,
+            burst: 0,
+          },
           me: true,
+          me_burst: false,
+          burst_colors: [],
         },
       ],
     },
@@ -239,7 +275,13 @@ Reactions.args = {
             name: "controller",
           },
           count: 55,
+          count_details: {
+            normal: 55,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -247,7 +289,13 @@ Reactions.args = {
             name: "letter",
           },
           count: 38,
+          count_details: {
+            normal: 38,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -255,7 +303,13 @@ Reactions.args = {
             name: "ddev_professional",
           },
           count: 42,
+          count_details: {
+            normal: 42,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -263,7 +317,13 @@ Reactions.args = {
             name: "Poker_Heart",
           },
           count: 36,
+          count_details: {
+            normal: 36,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -271,15 +331,13 @@ Reactions.args = {
             name: "Birthday_MallowCelebrate",
           },
           count: 37,
-          me: false,
-        },
-        {
-          emoji: {
-            id: "1107724343397580900",
-            name: "Birthday_CakeSmash",
+          count_details: {
+            normal: 37,
+            burst: 0,
           },
-          count: 34,
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -287,7 +345,13 @@ Reactions.args = {
             name: "Birthday_Cake",
           },
           count: 36,
+          count_details: {
+            normal: 36,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -295,15 +359,13 @@ Reactions.args = {
             name: "Birthday_WumpusCake",
           },
           count: 32,
-          me: false,
-        },
-        {
-          emoji: {
-            id: "1106993985525923951",
-            name: "Birthday_Star",
+          count_details: {
+            normal: 32,
+            burst: 0,
           },
-          count: 32,
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
       ],
     },
@@ -734,7 +796,13 @@ MultipleEmbeds.args = {
             name: "❤️",
           },
           count: 1,
+          count_details: {
+            normal: 1,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
       ],
     },
@@ -1046,7 +1114,13 @@ Reply.args = {
             name: "👍",
           },
           count: 234,
+          count_details: {
+            normal: 234,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
         {
           emoji: {
@@ -1054,7 +1128,13 @@ Reply.args = {
             name: "App_Broom",
           },
           count: 185,
+          count_details: {
+            normal: 185,
+            burst: 0,
+          },
           me: false,
+          me_burst: false,
+          burst_colors: [],
         },
       ],
       referenced_message: {

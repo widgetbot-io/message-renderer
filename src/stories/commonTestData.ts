@@ -5,7 +5,7 @@ export const testUser: APIUser = {
   id: "132819036282159104",
   username: "johnythecarrot",
   global_name: "JohnyTheCarrot",
-  avatar: "3a30ffeeeb354950804d77ded94162d3",
+  avatar: "a_8eccef95181a9e5de97a5382452412ec",
   discriminator: "0001",
   public_flags: 4457220,
 };
