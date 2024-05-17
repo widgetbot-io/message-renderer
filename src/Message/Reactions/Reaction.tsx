@@ -53,6 +53,8 @@ function Reaction(props: ReactionProps) {
     props.reaction.emoji.name,
   ]);
 
+  const isNormal = props.reaction.burst_colors.length === 0;
+
   return (
     <Tooltip overlay={<Emoji />} placement="top" mouseEnterDelay={0.5}>
       <Styles.Reaction>
@@ -70,7 +72,11 @@ function Reaction(props: ReactionProps) {
             disableTooltip
           />
         )}
-        <Styles.ReactionCount>{props.reaction.count}</Styles.ReactionCount>
+        <Styles.ReactionCount>
+          {isNormal
+            ? props.reaction.count_details.normal
+            : props.reaction.count_details.burst}
+        </Styles.ReactionCount>
       </Styles.Reaction>
     </Tooltip>
   );
