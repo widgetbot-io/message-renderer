@@ -99,6 +99,13 @@
       "reason": "Reason: {{reason}}"
     }
   },
+  "polls": {
+    "n_votes_one": "1 vote",
+    "n_votes_other": "{{count}} votes",
+    "time_left": "{{timeLeft, duration_short}} left",
+    "closed": "Poll closed",
+    "vote_percentage": "{{percentage}}%"
+  },
   "duration": {
     "seconds_one": "1 sec",
     "seconds_other": "{{count}} secs",
@@ -110,5 +117,12 @@
     "days_other": "{{count}} days",
     "weeks_one": "1 week",
     "weeks_other": "{{count}} weeks"
+  },
+  "duration_short": {
+    "seconds": "{{count}}s",
+    "minutes": "{{count}}m",
+    "hours": "{{count}}h",
+    "days": "{{count}}d",
+    "weeks": "{{count}}w"
   }
 }

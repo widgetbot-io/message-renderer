@@ -17,6 +17,7 @@ import Components from "../Message/Components";
 import getDisplayName from "../utils/getDisplayName";
 import { useTranslation } from "react-i18next";
 import type { ChatMessage } from "../types";
+import { Poll } from "./Poll";
 
 interface EditedProps {
   editedAt: string;
@@ -245,9 +246,11 @@ function Content(props: ContentProps) {
             (props.message.sticker_items?.length ?? 0) > 0 ||
             props.message.thread !== undefined ||
             props.message.embeds?.length > 0 ||
-            (props.message.components?.length ?? 0) > 0
+            (props.message.components?.length ?? 0) > 0 ||
+            props.message.poll !== undefined
           }
         >
+          {props.message.poll && <Poll poll={props.message.poll} />}
           {props.message.attachments.map((attachment) => (
             <Attachment key={attachment.url} attachment={attachment} />
           ))}
