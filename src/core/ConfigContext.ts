@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { createContext, useContext } from "react";
 import type {
   APIChannel,
@@ -16,6 +16,50 @@ import type { UserAvatar } from "../utils/getAvatar";
 import type { ChatMessage } from "../types";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
+
+export enum ContextMenuItemType {
+  Separator,
+  SubMenu,
+  Item,
+}
+
+export interface Separator {
+  type: ContextMenuItemType.Separator;
+}
+
+export interface SubMenu<SC extends PartialSvgConfig> {
+  type: ContextMenuItemType.SubMenu;
+  content: ReactNode;
+  isDisabled?: boolean;
+  items: ContextMenuItem<SC>[];
+}
+
+export enum IconType {
+  Svg,
+  Url,
+}
+
+export interface MenuItem<SC extends PartialSvgConfig> {
+  type: ContextMenuItemType.Item;
+  icon:
+    | {
+        type: IconType.Svg;
+        svg: keyof SC;
+      }
+    | {
+        type: IconType.Url;
+        url: string;
+      };
+  content: ReactNode;
+  isDanger?: boolean;
+  isDisabled?: boolean;
+  onSelect?(): void;
+}
+
+export type ContextMenuItem<SC extends PartialSvgConfig> =
+  | Separator
+  | SubMenu<SC>
+  | MenuItem<SC>;
 
 export interface MessageButtonListOption<SC extends PartialSvgConfig> {
   onClick: () => void;
@@ -41,6 +85,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
     animated: string;
   };
   messageButtons(message: ChatMessage): MessageButtonListOption<SvgConfig>[];
+  messageContextMenuItems?(message: ChatMessage): ContextMenuItem<SvgConfig>[];
   resolveRole(id: Snowflake): APIRole | null;
   resolveChannel(id: Snowflake): APIChannel | null;
   resolveMember(user: APIUser, guildId: Snowflake): APIGuildMember | null;

@@ -20,6 +20,7 @@ import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 import AutomodAction from "./variants/AutomodAction";
 import type { ChatMessage } from "../types";
+import { MessageContextMenu } from "./Components/MessageContextMenu";
 
 export interface MessageProps {
   isFirstMessage?: boolean;
@@ -200,12 +201,18 @@ function Message(props: MessageProps) {
 
   if (props.showButtons)
     return (
-      <MessageContainer buttons={buttonOptions}>
-        <MessageTypeSwitch {...props} />
-      </MessageContainer>
+      <MessageContextMenu message={props.message}>
+        <MessageContainer buttons={buttonOptions}>
+          <MessageTypeSwitch {...props} />
+        </MessageContainer>
+      </MessageContextMenu>
     );
 
-  return <MessageTypeSwitch {...props} />;
+  return (
+    <MessageContextMenu message={props.message}>
+      <MessageTypeSwitch {...props} />
+    </MessageContextMenu>
+  );
 }
 
 export default memo(Message);
