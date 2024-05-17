@@ -16,6 +16,7 @@ const stitches = createStitches({
       primaryDark: "#72767d",
       systemMessageDark: "#999999",
       textMuted: "rgb(163, 166, 170)",
+      textNormal: "rgb(219, 222, 225)",
       interactiveNormal: "#dcddde",
       accent: "#5865f2",
       background: "#36393f",
@@ -49,6 +50,8 @@ const stitches = createStitches({
       automodMatchedWord: "rgba(240, 177, 50, 0.3)",
       automodMessageBackground: "rgb(43, 45, 49)",
       automodDot: "rgba(78, 80, 88, 0.48)",
+      pollBackground: "rgba(78, 80, 88, 0.3)",
+      backgroundModifier: "rgba(77, 80, 88, 0.48)",
     },
     fonts: {
       main: "Open Sans, sans-serif",
@@ -77,6 +80,9 @@ const stitches = createStitches({
     },
     borderWidths: {
       spines: "2px",
+    },
+    radii: {
+      sm: "8px",
     },
   },
 });

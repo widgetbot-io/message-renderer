@@ -85,6 +85,77 @@ Basic.args = {
   ],
 };
 
+export const Poll: StoryFn<typeof MessageGroup> = Template.bind({});
+Poll.args = {
+  messages: [
+    {
+      type: 0,
+      channel_id: "859165227983568946",
+      content: "",
+      attachments: [],
+      embeds: [],
+      timestamp: "2024-05-17T11:31:43.796000+00:00",
+      edited_timestamp: null,
+      flags: 0,
+      components: [],
+      id: "1240990131351982191",
+      author: {
+        id: "132819036282159104",
+        username: "johnythecarrot",
+        avatar: "a_8eccef95181a9e5de97a5382452412ec",
+        discriminator: "0",
+        public_flags: 4457220,
+        flags: 4457220,
+        banner: "c060758efa0f2af537c74dfeb5dfadd8",
+        accent_color: null,
+        global_name: "JohnyTheCarrot",
+      },
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      nonce: "1240990128596320256",
+      position: 0,
+      poll: {
+        question: {
+          text: "binger?",
+        },
+        answers: [
+          {
+            answer_id: 1,
+            poll_media: {
+              text: "binger",
+              emoji: {
+                id: null,
+                name: "✅",
+              },
+            },
+          },
+          {
+            answer_id: 2,
+            poll_media: {
+              text: "no binger :(",
+              emoji: {
+                id: null,
+                name: "❌",
+              },
+            },
+          },
+        ],
+        expiry: "2024-05-18T11:31:43.783059+00:00",
+        allow_multiselect: false,
+        layout_type: 1,
+        results: {
+          answer_counts: [],
+          is_finalized: false,
+        },
+      },
+      referenced_message: null,
+    },
+  ],
+};
+
 export const Optimistic: StoryFn<typeof MessageGroup> = Template.bind({});
 Optimistic.args = {
   messages: [

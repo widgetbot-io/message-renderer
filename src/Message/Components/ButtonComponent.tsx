@@ -11,6 +11,7 @@ import Emoji from "../../Emoji";
 import { useConfig } from "../../core/ConfigContext";
 import ExternalLink from "../../ExternalLink";
 import type { ChatMessage } from "../../types";
+import { getEmojiUrl } from "../../utils/getEmojiUrl";
 
 const buttonStyleMap: Record<
   ButtonStyle,
@@ -52,9 +53,10 @@ function ButtonComponent({ button, message }: ButtonComponentProps) {
               emojiName={button.emoji.name}
               src={
                 button.emoji.id &&
-                `https://cdn.discordapp.com/emojis/${button.emoji.id}.${
-                  button.emoji.animated ? "gif" : "png"
-                }`
+                getEmojiUrl({
+                  id: button.emoji.id,
+                  animated: button.emoji.animated ?? false,
+                })
               }
             />
           )}
@@ -76,9 +78,10 @@ function ButtonComponent({ button, message }: ButtonComponentProps) {
             emojiName={button.emoji.name}
             src={
               button.emoji.id &&
-              `https://cdn.discordapp.com/emojis/${button.emoji.id}.${
-                button.emoji.animated ? "gif" : "png"
-              }`
+              getEmojiUrl({
+                id: button.emoji.id,
+                animated: button.emoji.animated ?? false,
+              })
             }
           />
         )}
