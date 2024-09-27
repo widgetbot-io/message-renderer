@@ -96,6 +96,26 @@ export const MessageHeaderBase = styled.withConfig({
   flexWrap: "wrap",
 });
 
+export const MessageEditor = styled.withConfig({
+  displayName: "message-editor",
+  componentId: commonComponentId,
+})("input", {
+  paddingTop: theme.space.xl,
+  paddingBottom: theme.space.xl,
+  paddingLeft: theme.space.xxl,
+  paddingRight: theme.space.large,
+  backgroundColor: "rgb(56, 58, 64)",
+  // backgroundColor: theme.colors.primaryOpacity10,
+  outline: "none",
+  borderRadius: 8,
+  border: "none",
+  color: theme.colors.primaryOpacity80,
+  fontWeight: 400,
+  lineHeight: "1.375rem",
+  width: "100%",
+  whiteSpace: "pre-wrap",
+});
+
 export const AutomodHeaderText = styled.withConfig({
   displayName: "automod-header-text",
   componentId: commonComponentId,
