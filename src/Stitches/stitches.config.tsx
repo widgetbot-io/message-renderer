@@ -74,6 +74,7 @@ const stitches = createStitches({
       messageLeftPadding: "72px",
       threadButton: "34px",
       messageTypeIcon: "16px",
+      embedThumbnail: "80px",
     },
     borderWidths: {
       spines: "2px",

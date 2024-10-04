@@ -5,7 +5,7 @@ import * as Styles from "./style";
 import { colorIntToRgba } from "../../utils/colorIntToCss";
 import moment from "moment";
 import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
-import useSize from "./useSize";
+// import useSize from "./useSize";
 import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
 import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
@@ -13,6 +13,7 @@ import { EmbedType } from "discord-api-types/v10";
 import EmbeddedImage from "./EmbeddedImage";
 import ExternalLink from "../../ExternalLink";
 import { error } from "../../utils/error";
+import useSize from "src/Content/Embed/useSize";
 
 export interface EmbedProps {
   embed: APIEmbed;
@@ -38,7 +39,7 @@ function Embed({ embed, images }: EmbedProps) {
       ? colorIntToRgba(embed.color)
       : undefined;
 
-  const { width: widthImage, height: heightImage } = useSize(
+  const { width: widthImage } = useSize(
     embed.type,
     embed.image,
     "EmbedImage",
@@ -140,8 +141,11 @@ function Embed({ embed, images }: EmbedProps) {
       {(images === undefined || images?.length === 0) && embed.image && (
         <EmbeddedImage
           embedImage={embed.image}
-          width={widthImage ?? undefined}
-          height={heightImage ?? undefined}
+          withMargin
+          image={embed.image}
+          width={embed.image.width}
+          height={embed.image.height}
+          type="EmbedImage"
         />
       )}
       {images && images.length > 0 && (
