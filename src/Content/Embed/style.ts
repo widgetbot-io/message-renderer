@@ -198,9 +198,6 @@ export const Image = styled.withConfig({
   gridColumnStart: "2",
   maxWidth: "100%",
   height: "auto",
-  
-  // height: "auto",
-  // height: "auto",
 
   variants: {
     clickable: {
