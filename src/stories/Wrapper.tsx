@@ -418,6 +418,11 @@ const Wrapper: Decorator = (Story) => {
       attachmentImageOnClick={(image) => {
         alert(`Image attachment ${image.filename} clicked!`);
       }}
+      forwardedMessageChannelOnClick={(channelId, messageId) => {
+        alert(
+          `Forwarded message id is ${messageId} and was sent in ${channelId}.`
+        );
+      }}
       embedImageOnClick={(embed) => {
         alert(`Embed image ${embed.url} clicked!`);
       }}

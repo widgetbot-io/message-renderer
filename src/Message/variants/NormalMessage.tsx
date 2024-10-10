@@ -244,10 +244,8 @@ function NormalMessage(props: MessageProps) {
         {shouldShowFoward && "message_snapshots" in props.message ? (
           <ForwardInfo
             channelId={props.message.message_reference?.channel_id}
+            messageId={props.message.message_reference?.message_id}
             messageSnapshot={props.message.message_snapshots[0].message}
-            mentioned={props.message.mentions.some(
-              (m) => m.id === props.message.referenced_message?.author.id
-            )}
             interaction={props.message.interaction}
             isContextMenuInteraction={props.isContextMenuInteraction}
           />

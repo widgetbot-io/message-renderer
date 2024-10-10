@@ -56,6 +56,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   seeThreadOnClick?(messageId: Snowflake, thread: APIChannel): void;
   userOnClick?(user: APIUser): void;
   roleMentionOnClick?(role: APIRole): void;
+  forwardedMessageChannelOnClick?(channelId:string, messageId?:string): void;
   channelMentionOnClick?(channel: APIChannel): void;
   openPinnedMessagesOnClick?(channel: APIChannel): void;
   messageComponentButtonOnClick?(message: ChatMessage, customId: string): void;

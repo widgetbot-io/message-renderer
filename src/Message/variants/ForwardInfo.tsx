@@ -11,6 +11,7 @@ import moment from "moment";
 
 interface ForwardInfoProps {
   channelId: Snowflake;
+  messageId?: Snowflake;
   messageSnapshot: APIMessageSnapshot["message"];
   mentioned?: boolean;
   interaction: APIMessageInteraction | undefined;
@@ -18,7 +19,7 @@ interface ForwardInfoProps {
 }
 
 export const ForwardInfo = memo((props: ForwardInfoProps) => {
-  const { resolveChannel } = useConfig();
+  const { resolveChannel, forwardedMessageChannelOnClick } = useConfig();
 
   const channel = resolveChannel(props.channelId);
 
@@ -35,18 +36,26 @@ export const ForwardInfo = memo((props: ForwardInfoProps) => {
 
         <Content message={props.messageSnapshot} />
 
-        {channel && (
-          <Styles.ForwardFooter>
-            {/* {props.referencedMessage?.} */}#{channel.name}
-            {props.messageSnapshot.timestamp && (
+        {channel ? (
+          <Styles.ForwardFooter
+            onClick={() => {
+              forwardedMessageChannelOnClick?.(
+                channel.id,
+                props.messageId
+              );
+            }}
+          >
+            #{channel.name}
+            
+            {props.messageSnapshot.timestamp ? (
               <>
                 {" • "}
 
                 {moment(props.messageSnapshot.timestamp).calendar()}
               </>
-            )}
+            ) : null}
           </Styles.ForwardFooter>
-        )}
+        ) : null}
       </Styles.ForwardBody>
     </Styles.ForwardInfo>
   );
