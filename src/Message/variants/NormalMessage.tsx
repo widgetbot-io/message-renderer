@@ -14,10 +14,11 @@ import type {
   APIUser,
   Snowflake,
 } from "discord-api-types/v10";
-import { MessageType } from "discord-api-types/v10";
+import { MessageReferenceType, MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
 import type { ChatMessage } from "../../types";
+import { ForwardInfo } from "src/Message/variants/ForwardInfo";
 
 interface ReplyInfoProps {
   channelId: Snowflake;
@@ -178,9 +179,16 @@ interface MessageProps {
 }
 
 function NormalMessage(props: MessageProps) {
+  const shouldShowFoward = Boolean(
+    props.message?.message_reference !== undefined &&
+      props.message.message_reference.type === MessageReferenceType.Forward
+  );
+
   const shouldShowReply =
-    props.message.type === MessageType.Reply ||
-    Boolean(props.message.interaction);
+    (props.message.type === MessageType.Reply ||
+      Boolean(props.message.interaction)) &&
+    !shouldShowFoward;
+
   const { currentUser, resolveChannel } = useConfig();
   const channel = resolveChannel(props.message.channel_id);
   const guildId =
@@ -220,6 +228,7 @@ function NormalMessage(props: MessageProps) {
             isContextMenuInteraction={props.isContextMenuInteraction}
           />
         )}
+
         <Styles.MessageHeaderBase>
           <MessageAuthor
             guildId={guildId}
@@ -231,6 +240,19 @@ function NormalMessage(props: MessageProps) {
             <LargeTimestamp timestamp={props.message.timestamp} />
           )}
         </Styles.MessageHeaderBase>
+
+        {shouldShowFoward && "message_snapshots" in props.message ? (
+          <ForwardInfo
+            channelId={props.message.message_reference?.channel_id}
+            messageSnapshot={props.message.message_snapshots[0].message}
+            mentioned={props.message.mentions.some(
+              (m) => m.id === props.message.referenced_message?.author.id
+            )}
+            interaction={props.message.interaction}
+            isContextMenuInteraction={props.isContextMenuInteraction}
+          />
+        ) : null}
+
         <Content
           message={props.message}
           noThreadButton={props.noThreadButton}

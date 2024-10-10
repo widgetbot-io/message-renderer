@@ -142,7 +142,7 @@ function Embed({ embed, images }: EmbedProps) {
           embedImage={embed.image}
           width={widthImage ?? undefined}
           height={heightImage ?? undefined}
-        />
+         />
       )}
       {images && images.length > 0 && (
         <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
