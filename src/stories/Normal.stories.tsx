@@ -1006,6 +1006,87 @@ VideoAttachment.args = {
   ],
 };
 
+export const Forward: StoryFn<typeof MessageGroup> = Template.bind({});
+Forward.args = {
+  messages: [
+    {
+      id: "1101275906716213339",
+      type: 19,
+      content:
+        "Small update: We needed to roll this back ~~for 24 hours~~ to patch some security issues. It'll be back real soon. Update: we don't want to re-roll it out on a friday afternoon, so thisll be back next week.",
+      channel_id: "697138785317814292",
+      author: {
+        id: "933123872641921044",
+        username: "therealjethro",
+        global_name: "Jeff",
+        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+        discriminator: "0",
+        public_flags: 4604871,
+      },
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-27T22:37:16.878000+00:00",
+      edited_timestamp: "2023-04-28T21:00:43.827000+00:00",
+      flags: 0,
+      components: [],
+      message_reference: {
+        channel_id: "697138785317814292",
+        guild_id: "613425648685547541",
+        message_id: "1101188115344920607",
+      },
+      reactions: [
+        {
+          emoji: {
+            id: null,
+            name: "👍",
+          },
+          count: 234,
+          me: false,
+        },
+        {
+          emoji: {
+            id: "1085363933579329656",
+            name: "App_Broom",
+          },
+          count: 185,
+          me: false,
+        },
+      ],
+      referenced_message: {
+        id: "1101188115344920607",
+        type: 0,
+        content:
+          "# Hey DDevs! <:KermitSmile:798808491590156349> \n\nToday we are launching 🚀  **expanded markdown** (lists, headers, and masked links) to 100% of all guilds and users.\n\nYou can read more about it here [Support Article](https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)\n\nNot just users but also Apps/Bots/Webhooks 🤖  can take advantage of this new functionality!\n\nAs always, everything we do is a work in progress. We are still open to feedback and bug info, and we welcome you to provide both. <:KermitDab:803138503935524864>",
+        channel_id: "697138785317814292",
+        author: {
+          id: "933123872641921044",
+          username: "therealjethro",
+          global_name: "Jeff",
+          avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
+          discriminator: "0",
+          public_flags: 4604871,
+        },
+        attachments: [],
+        embeds: [],
+        mentions: [],
+        mention_roles: [],
+        pinned: false,
+        mention_everyone: false,
+        tts: false,
+        timestamp: "2023-04-27T16:48:25.784000+00:00",
+        edited_timestamp: null,
+        flags: 5,
+        components: [],
+      },
+    },
+  ],
+};
+
 export const Reply: StoryFn<typeof MessageGroup> = Template.bind({});
 Reply.args = {
   messages: [
