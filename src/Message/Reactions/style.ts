@@ -39,7 +39,7 @@ export const Reaction = styled.withConfig({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  padding: `${theme.space.small} ${theme.space.medium}`,
+  padding: `${theme.space.xs} ${theme.space.medium}`,
   borderRadius: 8,
   cursor: "not-allowed",
   backgroundColor: theme.colors.backgroundSecondary,
