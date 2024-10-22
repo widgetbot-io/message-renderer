@@ -1,14 +1,14 @@
+import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
 import * as React from "react";
 import type { ComponentProps } from "react";
 import { useMemo } from "react";
-import ChatTag from "../ChatTag";
-import RoleIcon from "./RoleIcon";
-import getAvatar from "../utils/getAvatar";
-import * as Styles from "./style/author";
-import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
-import { useConfig } from "../core/ConfigContext";
-import getDisplayName from "../utils/getDisplayName";
 import { useTranslation } from "react-i18next";
+import ChatTag from "../ChatTag";
+import { useConfig } from "../core/ConfigContext";
+import getAvatar from "../utils/getAvatar";
+import getDisplayName from "../utils/getDisplayName";
+import RoleIcon from "./RoleIcon";
+import * as Styles from "./style/author";
 
 interface AutomodAuthorProps {
   isAvatarAnimated?: boolean;
@@ -99,7 +99,8 @@ function MessageAuthor({
   if (onlyShowUsername) {
     return (
       <Styles.MessageAuthor
-        clickable={userOnClick !== undefined}
+        clickable
+        // clickable={userOnClick !== undefined}
         {...props}
         onClick={() => userOnClick?.(author)}
       >
