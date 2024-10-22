@@ -5,7 +5,6 @@ import * as Styles from "./style";
 import { colorIntToRgba } from "../../utils/colorIntToCss";
 import moment from "moment";
 import { LinkMarkdown, parseEmbedTitle } from "../../markdown/render";
-// import useSize from "./useSize";
 import EmbedVideo from "./EmbedVideo";
 import React, { useMemo } from "react";
 import type { APIEmbed, APIEmbedImage } from "discord-api-types/v10";
