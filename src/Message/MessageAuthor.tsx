@@ -96,15 +96,19 @@ function MessageAuthor({
     return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
   }, [isGuildMember, resolveRole, member]);
 
+  const clickable = userOnClick !== undefined;
+
   if (onlyShowUsername) {
     return (
       <Styles.MessageAuthor
-        clickable
-        // clickable={userOnClick !== undefined}
+        clickable={clickable}
         {...props}
         onClick={() => userOnClick?.(author)}
       >
-        <Styles.Username style={{ color: dominantRoleColor }}>
+        <Styles.Username
+          clickable={clickable}
+          style={{ color: dominantRoleColor }}
+        >
           {displayName}
         </Styles.Username>
       </Styles.MessageAuthor>
@@ -113,7 +117,7 @@ function MessageAuthor({
 
   return (
     <Styles.MessageAuthor
-      clickable={userOnClick !== undefined}
+      clickable={clickable}
       {...props}
       onClick={() => userOnClick?.(author)}
     >
@@ -151,9 +155,13 @@ function MessageAuthor({
           </Styles.AnimatedAvatar>
         )}
       </Styles.AnimatedAvatarTrigger>
-      <Styles.Username style={{ color: dominantRoleColor }}>
+      <Styles.Username
+        clickable={clickable}
+        style={{ color: dominantRoleColor }}
+      >
         {displayName}
       </Styles.Username>
+
       {dominantRoleIconRole !== null && (
         <RoleIcon role={dominantRoleIconRole} />
       )}
