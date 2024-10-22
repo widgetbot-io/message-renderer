@@ -15,7 +15,6 @@ export const MessageAuthor = styled.withConfig({
       true: {
         "&:hover": {
           cursor: "pointer",
-          textDecoration: "underline",
         },
       },
     },
@@ -35,6 +34,13 @@ export const Username = styled.withConfig({
   lineHeight: `1.375rem`,
 
   variants: {
+    clickable: {
+      true: {
+        "&:hover": {
+          textDecoration: "underline",
+        },
+      },
+    },
     automod: {
       true: {
         color: theme.colors.automodUsername,
