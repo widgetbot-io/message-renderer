@@ -3,8 +3,8 @@ import {
   styled,
   theme,
 } from "../../Stitches/stitches.config";
-import { Link } from "../../markdown/render/elements";
 import SvgFromUrl from "../../SvgFromUrl";
+import { Link } from "../../markdown/render/elements";
 
 export const SmallTimestamp = styled.withConfig({
   displayName: "small-timestamp",
@@ -104,7 +104,7 @@ export const MessageEditor = styled.withConfig({
   paddingBottom: theme.space.xl,
   paddingLeft: theme.space.xxl,
   paddingRight: theme.space.large,
-  backgroundColor: "rgb(56, 58, 64)",
+  backgroundColor: theme.colors.primaryOpacity10,
   // backgroundColor: theme.colors.primaryOpacity10,
   outline: "none",
   borderRadius: 8,
@@ -113,7 +113,6 @@ export const MessageEditor = styled.withConfig({
   fontWeight: 400,
   lineHeight: "1.375rem",
   width: "100%",
-  whiteSpace: "pre-wrap",
 });
 
 export const AutomodHeaderText = styled.withConfig({

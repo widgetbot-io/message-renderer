@@ -1,5 +1,3 @@
-import type { ReactElement } from "react";
-import { createContext, useContext } from "react";
 import type {
   APIChannel,
   APIEmbedImage,
@@ -9,11 +7,14 @@ import type {
   APIUser,
   Snowflake,
 } from "discord-api-types/v10";
-import type { SvgConfig } from "./svgs";
-import type { Tag } from "../ChatTag/style";
 import type { APIAttachment } from "discord-api-types/v10";
-import type { UserAvatar } from "../utils/getAvatar";
+import type { ReactElement } from "react";
+import { createContext, useContext } from "react";
+import EditMessageInput from "src/Message/variants/EditMessageInput";
+import type { Tag } from "../ChatTag/style";
 import type { ChatMessage } from "../types";
+import type { UserAvatar } from "../utils/getAvatar";
+import type { SvgConfig } from "./svgs";
 
 export type PartialSvgConfig = Partial<SvgConfig>;
 
@@ -29,9 +30,9 @@ export interface ChatBadgeProps {
 }
 
 export enum MessageTypeResponse {
-  InAppError,
-  ConsoleError,
-  None,
+  InAppError = 0,
+  ConsoleError = 1,
+  None = 2,
 }
 
 export type Config<SvgConfig extends PartialSvgConfig> = {
@@ -62,6 +63,8 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   attachmentImageOnClick?(image: APIAttachment): void;
   embedImageOnClick?(image: APIEmbedImage): void;
   externalLinkOpenRequested?(url: string): void;
+  handleMessageEditSubmit?(message: ChatMessage): void;
+  EditMessageComponent?:( (props: { message: ChatMessage }) => JSX.Element);
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({
@@ -76,6 +79,7 @@ export const ConfigContext = createContext<Config<PartialSvgConfig>>({
     still: "",
     animated: "",
   },
+  EditMessageComponent: EditMessageInput,
 });
 
 export function useConfig() {

@@ -6,7 +6,7 @@ import type {
 } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
 import Moment from "moment";
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useRef } from "react";
 import ChatTag from "../../ChatTag";
 import Content from "../../Content";
 import Tooltip from "../../Tooltip";
@@ -165,100 +165,43 @@ ReplyInfo.displayName = "ReplyInfo";
 
 // type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
 
-interface MessageProps {
-  isFirstMessage?: boolean;
+interface EditMessageInputProps {
+  //   isFirstMessage?: boolean;
   message: ChatMessage;
-  isHovered?: boolean;
-  noThreadButton?: boolean;
-  isEditing?: boolean;
-  isContextMenuInteraction?: boolean;
-  hideTimestamp?: boolean;
-  overrides?: {
-    userMentioned?: boolean;
-  };
+  //   isHovered?: boolean;
+  //   noThreadButton?: boolean;
+  //   isEditing?:boolean;
+  //   isContextMenuInteraction?: boolean;
+  //   hideTimestamp?: boolean;
+  //   overrides?: {
+  //     userMentioned?: boolean;
+  //   };
 }
 
-function NormalMessage(props: MessageProps) {
-  const shouldShowReply =
-    props.message.type === MessageType.Reply ||
-    Boolean(props.message.interaction);
+function EditMessageInput(props: EditMessageInputProps) {
+  const { handleMessageEditSubmit } = useConfig();
 
-  const { currentUser, resolveChannel, EditMessageComponent } = useConfig();
+  const submitMessageCallback = (content: string) => {
+    if (!handleMessageEditSubmit || !content) return;
 
-  const channel = resolveChannel(props.message.channel_id);
-  const guildId =
-    channel !== null && "guild_id" in channel ? channel.guild_id : null;
-
-  const isUserMentioned = useMemo(() => {
-    const userMentionedOverride = props.overrides?.userMentioned ?? false;
-    if (userMentionedOverride) return true;
-
-    if (props.message.mention_everyone) return true;
-
-    const user = currentUser();
-
-    if (!user) return false;
-
-    return (
-      props.message.mentions.find(({ id }) => id === user.id) !== undefined
-    );
-  }, [
-    currentUser,
-    props.message.mentions,
-    props.overrides?.userMentioned,
-    props.message.mention_everyone,
-  ]);
-
-  if (props.isFirstMessage)
-    return (
-      <Styles.Message isMentioned={isUserMentioned}>
-        {shouldShowReply && (
-          <ReplyInfo
-            channelId={props.message.channel_id}
-            referencedMessage={props.message.referenced_message}
-            mentioned={props.message.mentions.some(
-              (m) => m.id === props.message.referenced_message?.author.id
-            )}
-            interaction={props.message.interaction}
-            isContextMenuInteraction={props.isContextMenuInteraction}
-          />
-        )}
-
-        <Styles.MessageHeaderBase>
-          <MessageAuthor
-            guildId={guildId}
-            author={props.message.author}
-            crossPost={Boolean((props.message.flags ?? 0) & FLAG_CROSSPOST)}
-            referenceGuild={props.message.message_reference?.guild_id}
-          />
-          {props.hideTimestamp || (
-            <LargeTimestamp timestamp={props.message.timestamp} />
-          )}
-        </Styles.MessageHeaderBase>
-        {EditMessageComponent ? (
-          <EditMessageComponent message={props.message} />
-        ) : null}
-        {/* <Content
-          message={props.message}
-          noThreadButton={props.noThreadButton}
-        /> */}
-      </Styles.Message>
-    );
+    handleMessageEditSubmit({
+      ...props.message,
+      content: content,
+      edited_timestamp: new Date().getMilliseconds().toString(),
+    });
+  };
 
   return (
-    <Styles.Message isMentioned={isUserMentioned}>
-      <Tooltip
-        placement="top"
-        overlay={Moment(props.message.timestamp).format("LLLL")}
-        mouseEnterDelay={1}
-      >
-        <Styles.SmallTimestamp dateTime={props.message.timestamp}>
-          {Moment(props.message.timestamp).format("h:mm A")}
-        </Styles.SmallTimestamp>
-      </Tooltip>
-      <Content message={props.message} noThreadButton={props.noThreadButton} />
-    </Styles.Message>
+    <Styles.MessageEditor
+      autoCorrect={"false"}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          submitMessageCallback(e.target.value);
+        }
+      }}
+      defaultValue={props.message.content}
+    />
   );
 }
 
-export default NormalMessage;
+export default EditMessageInput;
