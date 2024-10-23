@@ -160,8 +160,8 @@ const rulesWithoutMaskedLinks = createRules({
     match: () => null,
   },
 });
-const parse = parserFor(rulesWithoutMaskedLinks);
 
+const parse = parserFor(rulesWithoutMaskedLinks);
 export const parseAllowLinks = parserFor(createRules(baseRules));
 export const parseEmbedTitle = parserFor(
   R.omit(
@@ -190,7 +190,7 @@ function handleUnicodeEmojis(content: string): string {
   );
 }
 
-function Markdown({
+export function Markdown({
   children: content,
   mentions,
   users,
@@ -221,5 +221,3 @@ export function LinkMarkdown({
     ? parseAllowLinks(unicodeEmojisHandled, undefined, { mentions, users })
     : null;
 }
-
-export default Markdown;
