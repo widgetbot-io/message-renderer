@@ -12,6 +12,8 @@ export const ImageAttachment = styled.withConfig({
   displayName: "image-attachment",
   componentId: commonComponentId,
 })(LazyLoadImage, {
+  maxWidth: "100%",
+  height: "auto",
   variants: {
     clickable: {
       true: {
@@ -30,6 +32,8 @@ export const LazyImagePlaceholder = styled.withConfig({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  maxWidth: "100%",
+  height: "auto",
 });
 
 export const VideoAttachmentContainer = styled.withConfig({

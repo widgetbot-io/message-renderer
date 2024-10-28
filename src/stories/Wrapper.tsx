@@ -394,7 +394,17 @@ const Wrapper: Decorator = (Story) => {
       seeThreadOnClick={(messageId, thread) =>
         alert(`See Thread "${thread.name}" clicked on message ${messageId}`)
       }
-      userOnClick={(user) => alert(`User "${getDisplayName(user)}" clicked!`)}
+      userOnClick={(user, el) => {
+        const elPos = el.getBoundingClientRect();
+
+        return alert(
+          `User "${getDisplayName(
+            user
+          )}" clicked! \nClicked Position: X - ${Math.floor(
+            elPos.left
+          )}   Y - ${Math.floor(elPos.top)}`
+        );
+      }}
       roleMentionOnClick={(role) =>
         alert(`Role "${role.name}" mention clicked!`)
       }
