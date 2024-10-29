@@ -10,7 +10,6 @@ import type {
 import type { APIAttachment } from "discord-api-types/v10";
 import type { ReactElement } from "react";
 import { createContext, useContext } from "react";
-import EditMessageInput from "src/Message/variants/EditMessageInput";
 import type { Tag } from "../ChatTag/style";
 import type { ChatMessage } from "../types";
 import type { UserAvatar } from "../utils/getAvatar";
@@ -51,6 +50,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   avatarUrlOverride?(user: APIUser): UserAvatar | null;
   themeOverrideClassName?: string;
   unknownMessageTypeResponse?: MessageTypeResponse;
+  editingMessageId?: string;
 
   // Click handlers
   currentUser(): APIUser | null;
@@ -64,7 +64,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   embedImageOnClick?(image: APIEmbedImage): void;
   externalLinkOpenRequested?(url: string): void;
   handleMessageEditSubmit?(message: ChatMessage): void;
-  EditMessageComponent?:( (props: { message: ChatMessage }) => JSX.Element);
+  EditMessageComponent?: (props: { message: ChatMessage }) => JSX.Element;
 };
 
 export const ConfigContext = createContext<Config<PartialSvgConfig>>({
@@ -79,7 +79,6 @@ export const ConfigContext = createContext<Config<PartialSvgConfig>>({
     still: "",
     animated: "",
   },
-  EditMessageComponent: EditMessageInput,
 });
 
 export function useConfig() {

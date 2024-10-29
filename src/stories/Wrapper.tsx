@@ -384,15 +384,16 @@ const Wrapper: Decorator = (Story) => {
         animated: automodAvatarAnimated,
       }}
       EditMessageComponent={EditMessageInput}
+      handleMessageEditSubmit={(message) => {
+        alert(`Edited message: ${message.id}`);
+      }}
+      editingMessageId="1101275906716213331"
       messageButtons={getButtons}
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}
       resolveMember={resolveMember}
       resolveGuild={resolveGuild}
       resolveUser={resolveUser}
-      handleMessageEditSubmit={(message) => {
-        alert(`Edited message: ${message.id}`);
-      }}
       currentUser={() => resolveUser("132819036282159104")}
       seeThreadOnClick={(messageId, thread) =>
         alert(`See Thread "${thread.name}" clicked on message ${messageId}`)

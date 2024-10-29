@@ -163,14 +163,11 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
 
 ReplyInfo.displayName = "ReplyInfo";
 
-// type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
-
 interface MessageProps {
   isFirstMessage?: boolean;
   message: ChatMessage;
   isHovered?: boolean;
   noThreadButton?: boolean;
-  isEditing?: boolean;
   isContextMenuInteraction?: boolean;
   hideTimestamp?: boolean;
   overrides?: {
@@ -183,7 +180,12 @@ function NormalMessage(props: MessageProps) {
     props.message.type === MessageType.Reply ||
     Boolean(props.message.interaction);
 
-  const { currentUser, resolveChannel, EditMessageComponent } = useConfig();
+  const {
+    currentUser,
+    resolveChannel,
+    editingMessageId,
+    EditMessageComponent,
+  } = useConfig();
 
   const channel = resolveChannel(props.message.channel_id);
   const guildId =
@@ -235,13 +237,14 @@ function NormalMessage(props: MessageProps) {
             <LargeTimestamp timestamp={props.message.timestamp} />
           )}
         </Styles.MessageHeaderBase>
-        {EditMessageComponent ? (
+        {editingMessageId === props.message.id && EditMessageComponent ? (
           <EditMessageComponent message={props.message} />
-        ) : null}
-        {/* <Content
-          message={props.message}
-          noThreadButton={props.noThreadButton}
-        /> */}
+        ) : (
+          <Content
+            message={props.message}
+            noThreadButton={props.noThreadButton}
+          />
+        )}
       </Styles.Message>
     );
 

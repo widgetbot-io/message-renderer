@@ -1008,20 +1008,21 @@ VideoAttachment.args = {
 
 export const Editing: StoryFn<typeof MessageGroup> = Template.bind({});
 Editing.args = {
+  showButtons: true,
   messages: [
     {
-      id: "1101275906716213339",
+      id: "1101275906716213331",
       type: 0,
       content:
         "Small update: We needed to roll this back ~~for 24 hours~~ to patch some security issues. It'll be back real soon. Update: we don't want to re-roll it out on a friday afternoon, so thisll be back next week.",
       channel_id: "697138785317814292",
       author: {
-        id: "933123872641921044",
-        username: "therealjethro",
-        global_name: "Jeff",
-        avatar: "e4d8c186d8900eed2ace6aed5cefe1c0",
-        discriminator: "0",
-        public_flags: 4604871,
+        id: "132819036282159104",
+        username: "mrquine",
+        global_name: "Mr. Quine",
+        avatar: "3a30ffeeeb354950804d77ded94162d3",
+        discriminator: "0001",
+        public_flags: 4457220,
       },
       attachments: [],
       embeds: [],
@@ -1057,7 +1058,6 @@ Editing.args = {
           me: false,
         },
       ],
-    
     },
   ],
 };
