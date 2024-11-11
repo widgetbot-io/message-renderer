@@ -31,7 +31,7 @@ function EditMessageInput(props: EditMessageInputProps) {
 
   return (
     <Styles.MessageEditor
-      autoCorrect={"false"}
+      autoCorrect="false"
       onKeyDown={onKeyDown}
       defaultValue={props.message.content}
     />
