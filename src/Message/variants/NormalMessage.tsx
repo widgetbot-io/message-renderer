@@ -1,13 +1,3 @@
-import React, { memo, useMemo } from "react";
-import MessageAuthor from "../MessageAuthor";
-import Content from "../../Content";
-import Moment from "moment";
-import Tooltip from "../../Tooltip";
-import type { GetAvatarOptions } from "../../utils/getAvatar";
-import getAvatar from "../../utils/getAvatar";
-import LargeTimestamp from "../LargeTimestamp";
-import ChatTag from "../../ChatTag";
-import * as Styles from "../style/message";
 import type {
   APIMessageInteraction,
   APIRole,
@@ -15,9 +5,19 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import { MessageType } from "discord-api-types/v10";
+import Moment from "moment";
+import React, { memo, useMemo } from "react";
+import ChatTag from "../../ChatTag";
+import Content from "../../Content";
+import Tooltip from "../../Tooltip";
 import { useConfig } from "../../core/ConfigContext";
-import getDisplayName from "../../utils/getDisplayName";
 import type { ChatMessage } from "../../types";
+import type { GetAvatarOptions } from "../../utils/getAvatar";
+import getAvatar from "../../utils/getAvatar";
+import getDisplayName from "../../utils/getDisplayName";
+import LargeTimestamp from "../LargeTimestamp";
+import MessageAuthor from "../MessageAuthor";
+import * as Styles from "../style/message";
 
 interface ReplyInfoProps {
   channelId: Snowflake;
@@ -163,8 +163,6 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
 
 ReplyInfo.displayName = "ReplyInfo";
 
-// type Message = Omit<MessageData, "referencedMessage"> & Partial<MessageData>;
-
 interface MessageProps {
   isFirstMessage?: boolean;
   message: ChatMessage;
@@ -181,7 +179,14 @@ function NormalMessage(props: MessageProps) {
   const shouldShowReply =
     props.message.type === MessageType.Reply ||
     Boolean(props.message.interaction);
-  const { currentUser, resolveChannel } = useConfig();
+
+  const {
+    currentUser,
+    resolveChannel,
+    editingMessageId,
+    EditMessageComponent,
+  } = useConfig();
+
   const channel = resolveChannel(props.message.channel_id);
   const guildId =
     channel !== null && "guild_id" in channel ? channel.guild_id : null;
@@ -220,6 +225,7 @@ function NormalMessage(props: MessageProps) {
             isContextMenuInteraction={props.isContextMenuInteraction}
           />
         )}
+
         <Styles.MessageHeaderBase>
           <MessageAuthor
             guildId={guildId}
@@ -231,10 +237,14 @@ function NormalMessage(props: MessageProps) {
             <LargeTimestamp timestamp={props.message.timestamp} />
           )}
         </Styles.MessageHeaderBase>
-        <Content
-          message={props.message}
-          noThreadButton={props.noThreadButton}
-        />
+        {editingMessageId === props.message.id && EditMessageComponent ? (
+          <EditMessageComponent message={props.message} />
+        ) : (
+          <Content
+            message={props.message}
+            noThreadButton={props.noThreadButton}
+          />
+        )}
       </Styles.Message>
     );
 

@@ -3,8 +3,8 @@ import {
   styled,
   theme,
 } from "../../Stitches/stitches.config";
-import { Link } from "../../markdown/render/elements";
 import SvgFromUrl from "../../SvgFromUrl";
+import { Link } from "../../markdown/render/elements";
 
 export const SmallTimestamp = styled.withConfig({
   displayName: "small-timestamp",
@@ -94,6 +94,24 @@ export const MessageHeaderBase = styled.withConfig({
   flexDirection: "row",
   alignItems: "center",
   flexWrap: "wrap",
+});
+
+export const MessageEditor = styled.withConfig({
+  displayName: "message-editor",
+  componentId: commonComponentId,
+})("input", {
+  paddingTop: theme.space.xl,
+  paddingBottom: theme.space.xl,
+  paddingLeft: theme.space.xxl,
+  paddingRight: theme.space.large,
+  backgroundColor: theme.colors.primaryOpacity10,
+  outline: "none",
+  borderRadius: 8,
+  border: "none",
+  color: theme.colors.primaryOpacity80,
+  fontWeight: 400,
+  lineHeight: "1.375rem",
+  width: "100%",
 });
 
 export const AutomodHeaderText = styled.withConfig({

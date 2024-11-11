@@ -1006,6 +1006,62 @@ VideoAttachment.args = {
   ],
 };
 
+export const Editing: StoryFn<typeof MessageGroup> = Template.bind({});
+Editing.args = {
+  showButtons: true,
+  messages: [
+    {
+      id: "1101275906716213331",
+      type: 0,
+      content:
+        "Small update: We needed to roll this back ~~for 24 hours~~ to patch some security issues. It'll be back real soon. Update: we don't want to re-roll it out on a friday afternoon, so thisll be back next week.",
+      channel_id: "697138785317814292",
+      author: {
+        id: "132819036282159104",
+        username: "mrquine",
+        global_name: "Mr. Quine",
+        avatar: "3a30ffeeeb354950804d77ded94162d3",
+        discriminator: "0001",
+        public_flags: 4457220,
+      },
+      attachments: [],
+      embeds: [],
+      mentions: [],
+      mention_roles: [],
+      pinned: false,
+      mention_everyone: false,
+      tts: false,
+      timestamp: "2023-04-27T22:37:16.878000+00:00",
+      edited_timestamp: "2023-04-28T21:00:43.827000+00:00",
+      flags: 0,
+      components: [],
+      message_reference: {
+        channel_id: "697138785317814292",
+        guild_id: "613425648685547541",
+        message_id: "1101188115344920607",
+      },
+      reactions: [
+        {
+          emoji: {
+            id: null,
+            name: "👍",
+          },
+          count: 234,
+          me: false,
+        },
+        {
+          emoji: {
+            id: "1085363933579329656",
+            name: "App_Broom",
+          },
+          count: 185,
+          me: false,
+        },
+      ],
+    },
+  ],
+};
+
 export const Reply: StoryFn<typeof MessageGroup> = Template.bind({});
 Reply.args = {
   messages: [

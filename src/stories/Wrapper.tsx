@@ -1,42 +1,42 @@
-import { MessageRendererProvider } from "../index";
 import React from "react";
+import { MessageRendererProvider } from "../index";
 
-// SVGs
-import SvgFileAudio from "../assets/storybookOnlyAssets/file-audio.svg";
-import SvgSketch from "../assets/storybookOnlyAssets/file-sketch.svg";
-import SvgFileArchive from "../assets/storybookOnlyAssets/file-archive.svg";
-import SvgFileUnknown from "../assets/storybookOnlyAssets/file-unknown.svg";
+import SvgAcrobat from "../assets/storybookOnlyAssets/file-acrobat.svg";
 import SvgAe from "../assets/storybookOnlyAssets/file-ae.svg";
 import SvgAi from "../assets/storybookOnlyAssets/file-ai.svg";
-import SvgAcrobat from "../assets/storybookOnlyAssets/file-acrobat.svg";
+import SvgFileArchive from "../assets/storybookOnlyAssets/file-archive.svg";
+// SVGs
+import SvgFileAudio from "../assets/storybookOnlyAssets/file-audio.svg";
 import SvgCode from "../assets/storybookOnlyAssets/file-code.svg";
 import SvgDocument from "../assets/storybookOnlyAssets/file-document.svg";
+import SvgSketch from "../assets/storybookOnlyAssets/file-sketch.svg";
 import SvgSpreadsheet from "../assets/storybookOnlyAssets/file-spreadsheet.svg";
+import SvgFileUnknown from "../assets/storybookOnlyAssets/file-unknown.svg";
 import SvgWebCode from "../assets/storybookOnlyAssets/file-webcode.svg";
 
 import SvgIconAdd from "../assets/storybookOnlyAssets/icon-add.svg";
-import SvgIconRemove from "../assets/storybookOnlyAssets/icon-remove.svg";
-import SvgWarning from "../assets/storybookOnlyAssets/icon-warning.svg";
-import SvgIconDownload from "../assets/storybookOnlyAssets/icon-download.svg";
-import SvgIconCheckmark from "../assets/storybookOnlyAssets/icon-checkmark.svg";
-import SvgIconCross from "../assets/storybookOnlyAssets/icon-cross.svg";
-import SvgIconPin from "../assets/storybookOnlyAssets/icon-pin.svg";
-import SvgIconPencil from "../assets/storybookOnlyAssets/icon-pencil.svg";
-import SvgIconBoost from "../assets/storybookOnlyAssets/icon-boost.svg";
-import SvgIconThreadCreated from "../assets/storybookOnlyAssets/icon-thread-created.svg";
-import SvgIconId from "../assets/storybookOnlyAssets/icon-id.svg";
-import SvgIconSticker from "../assets/storybookOnlyAssets/icon-sticker.svg";
-import SvgIconCommand from "../assets/storybookOnlyAssets/icon-command.svg";
 import SvgIconAttachment from "../assets/storybookOnlyAssets/icon-attachment.svg";
+import SvgIconBoost from "../assets/storybookOnlyAssets/icon-boost.svg";
+import SvgIconCheckmark from "../assets/storybookOnlyAssets/icon-checkmark.svg";
+import SvgIconCommand from "../assets/storybookOnlyAssets/icon-command.svg";
+import SvgIconCross from "../assets/storybookOnlyAssets/icon-cross.svg";
 import SvgIconDanger from "../assets/storybookOnlyAssets/icon-danger.svg";
-import SvgIconPause from "../assets/storybookOnlyAssets/icon-pause.svg";
+import SvgIconDownload from "../assets/storybookOnlyAssets/icon-download.svg";
 import SvgIconFullscreen from "../assets/storybookOnlyAssets/icon-fullscreen.svg";
-import SvgIconPlay from "../assets/storybookOnlyAssets/icon-play.svg";
-import SvgIconTextChannel from "../assets/storybookOnlyAssets/icon-text-channel.svg";
-import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channel.svg";
-import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
+import SvgIconId from "../assets/storybookOnlyAssets/icon-id.svg";
 import SvgIconLinkExternal from "../assets/storybookOnlyAssets/icon-link-external.svg";
+import SvgIconPause from "../assets/storybookOnlyAssets/icon-pause.svg";
+import SvgIconPencil from "../assets/storybookOnlyAssets/icon-pencil.svg";
+import SvgIconPin from "../assets/storybookOnlyAssets/icon-pin.svg";
+import SvgIconPlay from "../assets/storybookOnlyAssets/icon-play.svg";
+import SvgIconRemove from "../assets/storybookOnlyAssets/icon-remove.svg";
+import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
+import SvgIconSticker from "../assets/storybookOnlyAssets/icon-sticker.svg";
+import SvgIconTextChannel from "../assets/storybookOnlyAssets/icon-text-channel.svg";
+import SvgIconThreadCreated from "../assets/storybookOnlyAssets/icon-thread-created.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
+import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channel.svg";
+import SvgWarning from "../assets/storybookOnlyAssets/icon-warning.svg";
 
 import ggSansNormal400 from "../assets/storybookOnlyAssets/gg-sans-normal-400.woff2";
 import ggSansNormal500 from "../assets/storybookOnlyAssets/gg-sans-normal-500.woff2";
@@ -50,10 +50,10 @@ import ggSansItalic600 from "../assets/storybookOnlyAssets/gg-sans-italic-600.wo
 import ggSansItalic700 from "../assets/storybookOnlyAssets/gg-sans-italic-700.woff2";
 import ggSansItalic800 from "../assets/storybookOnlyAssets/gg-sans-italic-800.woff2";
 
-import automodAvatarStill from "../assets/storybookOnlyAssets/automod-avatar.png";
 import automodAvatarAnimated from "../assets/storybookOnlyAssets/automod-avatar.gif";
+import automodAvatarStill from "../assets/storybookOnlyAssets/automod-avatar.png";
 
-import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
+import type { Decorator } from "@storybook/react";
 import type {
   APIChannel,
   APIGuild,
@@ -63,16 +63,17 @@ import type {
   Snowflake,
 } from "discord-api-types/v10";
 import { ChannelType, GuildNSFWLevel } from "discord-api-types/v10";
+import EditMessageInput from "../Message/variants/EditMessageInput";
 import { globalCss, prefix, styled, theme } from "../Stitches/stitches.config";
-import getDisplayName from "../utils/getDisplayName";
+import SvgMiscDiscordImageFailure from "../assets/storybookOnlyAssets/misc-discord-image-failure.svg";
 import type {
   ChatBadgeProps,
   MessageButtonListOption,
 } from "../core/ConfigContext";
 import { MessageTypeResponse } from "../core/ConfigContext";
-import { testTextChannel, testVoiceChannel } from "./commonTestData";
-import type { Decorator } from "@storybook/react";
 import type { ChatMessage } from "../types";
+import getDisplayName from "../utils/getDisplayName";
+import { testTextChannel, testVoiceChannel } from "./commonTestData";
 
 const svgUrls = {
   FileAudio: SvgFileAudio,
@@ -382,6 +383,11 @@ const Wrapper: Decorator = (Story) => {
         still: automodAvatarStill,
         animated: automodAvatarAnimated,
       }}
+      EditMessageComponent={EditMessageInput}
+      messageEditOnSubmit={(message) => {
+        alert(`Edited message: ${message.id}`);
+      }}
+      editingMessageId="1101275906716213331"
       messageButtons={getButtons}
       resolveRole={resolveRole}
       resolveChannel={resolveChannel}
