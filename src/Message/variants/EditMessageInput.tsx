@@ -5,16 +5,7 @@ import type { ChatMessage } from "../../types";
 import * as Styles from "../style/message";
 
 interface EditMessageInputProps {
-  //   isFirstMessage?: boolean;
   message: ChatMessage;
-  //   isHovered?: boolean;
-  //   noThreadButton?: boolean;
-  //   isEditing?:boolean;
-  //   isContextMenuInteraction?: boolean;
-  //   hideTimestamp?: boolean;
-  //   overrides?: {
-  //     userMentioned?: boolean;
-  //   };
 }
 
 function EditMessageInput(props: EditMessageInputProps) {
