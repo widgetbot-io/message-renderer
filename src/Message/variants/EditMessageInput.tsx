@@ -9,12 +9,12 @@ interface EditMessageInputProps {
 }
 
 function EditMessageInput(props: EditMessageInputProps) {
-  const { handleMessageEditSubmit } = useConfig();
+  const { messageEditOnSubmit } = useConfig();
 
   function submitMessageCallback(content: string) {
-    if (!handleMessageEditSubmit || !content) return;
+    if (!messageEditOnSubmit || !content) return;
 
-    handleMessageEditSubmit({
+    messageEditOnSubmit({
       ...props.message,
       content: content,
       edited_timestamp: new Date().getMilliseconds().toString(),

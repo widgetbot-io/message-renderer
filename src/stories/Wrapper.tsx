@@ -384,7 +384,7 @@ const Wrapper: Decorator = (Story) => {
         animated: automodAvatarAnimated,
       }}
       EditMessageComponent={EditMessageInput}
-      handleMessageEditSubmit={(message) => {
+      messageEditOnSubmit={(message) => {
         alert(`Edited message: ${message.id}`);
       }}
       editingMessageId="1101275906716213331"

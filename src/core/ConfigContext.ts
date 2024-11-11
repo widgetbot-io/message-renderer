@@ -63,7 +63,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   attachmentImageOnClick?(image: APIAttachment): void;
   embedImageOnClick?(image: APIEmbedImage): void;
   externalLinkOpenRequested?(url: string): void;
-  handleMessageEditSubmit?(message: ChatMessage): void;
+  messageEditOnSubmit?(message: ChatMessage): void;
   EditMessageComponent?: (props: { message: ChatMessage }) => JSX.Element;
 };
 
