@@ -21,7 +21,6 @@ export const Embed = styled.withConfig({
   display: "flex",
   flexDirection: "column",
   maxWidth: 520,
-
   variants: {
     thin: {
       true: {
@@ -35,9 +34,10 @@ export const ContentAndThumbnail = styled.withConfig({
   displayName: "embed-content-and-thumbnail",
   componentId: commonComponentId,
 })("div", {
-  display: "flex",
+  display: "grid",
+  gridAutoColumns: "auto",
   gap: theme.space.xxl,
-
+  maxWidth: "100%",
   variants: {
     hasLargeThumbnail: {
       true: {
@@ -54,6 +54,8 @@ export const Content = styled.withConfig({
 })("div", {
   display: "grid",
   gap: theme.space.large,
+  gridColumnStart: "1",
+  gridColumnEnd: "1",
 });
 
 export const Provider = styled.withConfig({
@@ -192,6 +194,10 @@ export const Image = styled.withConfig({
   componentId: commonComponentId,
 })("img", {
   borderRadius: 3,
+  flexShrink: 0,
+  gridColumnStart: "2",
+  maxWidth: "100%",
+  height: "auto",
 
   variants: {
     clickable: {
@@ -279,6 +285,8 @@ export const MediaEmbed = styled.withConfig({
 })("img", {
   borderRadius: 3,
   cursor: "pointer",
+  maxWidth: "100%",
+  height: "auto",
 });
 
 export const VideoIframe = styled.withConfig({
