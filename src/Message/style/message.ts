@@ -105,7 +105,6 @@ export const MessageEditor = styled.withConfig({
   paddingLeft: theme.space.xxl,
   paddingRight: theme.space.large,
   backgroundColor: theme.colors.primaryOpacity10,
-  // backgroundColor: theme.colors.primaryOpacity10,
   outline: "none",
   borderRadius: 8,
   border: "none",
