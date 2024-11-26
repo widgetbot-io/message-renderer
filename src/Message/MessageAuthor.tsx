@@ -1,14 +1,14 @@
+import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
 import * as React from "react";
 import type { ComponentProps } from "react";
 import { useMemo } from "react";
-import ChatTag from "../ChatTag";
-import RoleIcon from "./RoleIcon";
-import getAvatar from "../utils/getAvatar";
-import * as Styles from "./style/author";
-import type { APIRole, APIUser, Snowflake } from "discord-api-types/v10";
-import { useConfig } from "../core/ConfigContext";
-import getDisplayName from "../utils/getDisplayName";
 import { useTranslation } from "react-i18next";
+import ChatTag from "../ChatTag";
+import { useConfig } from "../core/ConfigContext";
+import getAvatar from "../utils/getAvatar";
+import getDisplayName from "../utils/getDisplayName";
+import RoleIcon from "./RoleIcon";
+import * as Styles from "./style/author";
 
 interface AutomodAuthorProps {
   isAvatarAnimated?: boolean;
@@ -96,14 +96,19 @@ function MessageAuthor({
     return color > 0 ? `#${color.toString(16).padStart(6, "0")}` : undefined;
   }, [isGuildMember, resolveRole, member]);
 
+  const clickable = userOnClick !== undefined;
+
   if (onlyShowUsername) {
     return (
       <Styles.MessageAuthor
-        clickable={userOnClick !== undefined}
+        clickable={clickable}
         {...props}
         onClick={(e) => userOnClick?.(author, e.currentTarget)}
       >
-        <Styles.Username style={{ color: dominantRoleColor }}>
+        <Styles.Username
+          clickable={clickable}
+          style={{ color: dominantRoleColor }}
+        >
           {displayName}
         </Styles.Username>
       </Styles.MessageAuthor>
@@ -112,7 +117,7 @@ function MessageAuthor({
 
   return (
     <Styles.MessageAuthor
-      clickable={userOnClick !== undefined}
+      clickable={clickable}
       {...props}
       onClick={(e) => userOnClick?.(author, e.currentTarget)}
     >
@@ -150,9 +155,13 @@ function MessageAuthor({
           </Styles.AnimatedAvatar>
         )}
       </Styles.AnimatedAvatarTrigger>
-      <Styles.Username style={{ color: dominantRoleColor }}>
+      <Styles.Username
+        clickable={clickable}
+        style={{ color: dominantRoleColor }}
+      >
         {displayName}
       </Styles.Username>
+
       {dominantRoleIconRole !== null && (
         <RoleIcon role={dominantRoleIconRole} />
       )}
