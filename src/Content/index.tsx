@@ -7,7 +7,7 @@ import type { APIEmbedImage } from "discord-api-types/v10";
 import { MessageFlags } from "discord-api-types/v10";
 import Tooltip from "../Tooltip";
 import SvgFromUrl from "../SvgFromUrl";
-import Markdown, { LinkMarkdown } from "../markdown/render";
+import { LinkMarkdown } from "../markdown/render";
 import Attachment from "./Attachment";
 import Sticker from "./Sticker";
 import Embed from "./Embed";
@@ -215,15 +215,9 @@ function Content(props: ContentProps) {
           >
             {props.message.content.length > 0 ? (
               <>
-                {props.message.webhook_id !== undefined ? (
-                  <LinkMarkdown mentions={props.message.mentions}>
-                    {props.message.content}
-                  </LinkMarkdown>
-                ) : (
-                  <Markdown mentions={props.message.mentions}>
-                    {props.message.content}
-                  </Markdown>
-                )}
+                <LinkMarkdown mentions={props.message.mentions}>
+                  {props.message.content}
+                </LinkMarkdown>
                 {props.message.edited_timestamp && (
                   <Edited editedAt={props.message.edited_timestamp} />
                 )}
