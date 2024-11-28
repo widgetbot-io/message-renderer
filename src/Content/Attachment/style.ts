@@ -42,7 +42,7 @@ export const VideoAttachmentContainer = styled.withConfig({
 })("div", {
   borderRadius: 3,
   overflow: "hidden",
-  maxWidth: "min(400px, 100%)",
+  maxWidth: "100%",
   backgroundColor: theme.colors.backgroundTertiary,
   cursor: "pointer",
   position: "relative",
@@ -57,7 +57,8 @@ export const VideoAttachment = styled.withConfig({
   cursor: "pointer",
 
   "&[width]": {
-    maxWidth: "min(400px, 100%)",
+    maxWidth: "100%",
+    height: "auto",
   },
 
   "&:not([width])": {

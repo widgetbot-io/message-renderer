@@ -5,6 +5,7 @@ import {
 } from "../../Stitches/stitches.config";
 import { Link } from "../../markdown/render/elements";
 import SvgFromUrl from "../../SvgFromUrl";
+import { Embed, Footer } from "src/Content/Embed/style";
 
 export const SmallTimestamp = styled.withConfig({
   displayName: "small-timestamp",
@@ -219,6 +220,76 @@ export namespace MessageContainerStyle {
   });
 }
 
+export const ForwardInfo = styled.withConfig({
+  displayName: "forward-info",
+  componentId: commonComponentId,
+})("div", {
+  display: "flex",
+  paddingTop: "0.125rem",
+  paddingBottom: "0.125rem",
+});
+
+export const ForwardBody = styled.withConfig({
+  displayName: "forward-body",
+  componentId: commonComponentId,
+})("div", {
+  display: "flex",
+  width: "100%",
+  flexDirection: "column",
+});
+
+export const ForwardSpine = styled.withConfig({
+  displayName: "forward-spine",
+  componentId: commonComponentId,
+})("div", {
+  width: 4,
+  borderRadius: 2,
+  marginRight: theme.space.xl,
+  flexShrink: 0,
+  backgroundColor: theme.colors.primaryOpacity20,
+});
+
+export const ForwardHeader = styled.withConfig({
+  displayName: "forward-header",
+  componentId: commonComponentId,
+})("div", {
+  marginTop: 2,
+  marginBottom: 4,
+  display: "flex",
+  gap: 4,
+  color: theme.colors.primaryOpacity50,
+  alignSelf: "flex-start",
+  alignItems: "center",
+  fontWeight: 600,
+});
+
+export const Forwarded = styled.withConfig({
+  displayName: "forwarded",
+  componentId: commonComponentId,
+})("span", {
+  color: theme.colors.primaryOpacity50,
+  fontSize: theme.fontSizes.m,
+  userSelect: "none",
+  fontStyle: "italic",
+});
+
+export const ForwardFooter = styled.withConfig({
+  displayName: "forward-footer",
+  componentId: commonComponentId,
+})(Footer, {
+  marginTop: 4,
+  display: "flex",
+  gap: 4,
+  alignSelf: "flex-start",
+  color: theme.colors.primaryOpacity50,
+  fontSize: theme.fontSizes.m,
+  cursor: "pointer",
+
+  "&:hover": {
+    color: theme.colors.primaryOpacity60,
+  },
+});
+
 export const ReplyInfo = styled.withConfig({
   displayName: "reply-info",
   componentId: commonComponentId,
@@ -226,6 +297,7 @@ export const ReplyInfo = styled.withConfig({
   display: "flex",
   flexDirection: "row",
   marginBottom: theme.space.small,
+  color: theme.colors.textMuted,
 });
 
 export const ReplyUser = styled.withConfig({
@@ -382,7 +454,7 @@ export const UnknownReply = styled.withConfig({
   displayName: "unknown-reply",
   componentId: commonComponentId,
 })("span", {
-  color: theme.colors.primaryOpacity60,
+  color: theme.colors.primaryOpacity50,
   fontSize: theme.fontSizes.m,
   userSelect: "none",
   fontStyle: "italic",
@@ -396,6 +468,13 @@ export const UnknownReplyIcon = styled.withConfig({
   borderRadius: "50%",
   marginRight: theme.space.small,
   padding: 4, // 16 - size of svg (12), aka do not tie up to theme
+});
+
+export const ForwardIcon = styled.withConfig({
+  displayName: "forward-icon",
+  componentId: commonComponentId,
+})(SvgFromUrl, {
+  color: theme.colors.textMuted,
 });
 
 export const SlashCommandText = styled.withConfig({

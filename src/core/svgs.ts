@@ -36,6 +36,7 @@ export type Svg =
   | "IconFullscreen"
   | "IconPlay"
   | "IconCross"
+  | "IconForward"
   | "IconUnknownReply"
   | "IconTextChannel"
   | "IconVoiceChannel"
@@ -78,6 +79,7 @@ const defaultSvgUrls: Record<Svg, string> = {
   IconPlay: SvgMissingAsset,
   IconTextChannel: SvgMissingAsset,
   IconVoiceChannel: SvgMissingAsset,
+  IconForward: SvgMissingAsset,
   IconUnknownReply: SvgMissingAsset,
   IconStageChannel: SvgMissingAsset,
   IconForumChannel: SvgMissingAsset,
