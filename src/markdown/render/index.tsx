@@ -72,6 +72,27 @@ function createRules(rule: { [key: string]: any }) {
         );
       },
     },
+    subtext: {
+      order: defaultRules.heading.order,
+      match(source, state) {
+        const prevCaptureStr =
+          state.prevCapture === null ? "" : state.prevCapture[0];
+        const isStartOfLineCapture = /(?:^|\n)( *)$/.exec(prevCaptureStr);
+
+        if (isStartOfLineCapture) {
+          source = isStartOfLineCapture[1] + source;
+          return /^ *-#([^\n]+?)(?:\n|$)/.exec(source);
+        }
+
+        return null;
+      },
+      parse: (capture) => ({ content: capture[1] }),
+      react: (node, recurseOutput, state) => (
+        <Styles.Subtext key={state.key}>
+          {parse(node.content, state)}
+        </Styles.Subtext>
+      ),
+    },
     s: {
       order: rule.u.order,
       match: SimpleMarkdown.inlineRegex(/^~~([\s\S]+?)~~(?!_)/),
