@@ -132,7 +132,7 @@ ExtendedMarkdown.args = {
       id: "1042882684902453278",
       type: 0,
       content:
-        "# :sparkles: Heading 1\n## :sparkles: Heading 2\n### :sparkles: Heading 3",
+        "# :sparkles: Heading 1\n## :sparkles: Heading 2\n### :sparkles: Heading 3\n-# :sparkles: Subtext",
       channel_id: "998637045327081502",
       author: testUser,
       attachments: [],

@@ -48,6 +48,15 @@ export const Heading = styled.withConfig({
   },
 });
 
+export const Subtext = styled.withConfig({
+  displayName: "md-subtext",
+  componentId: commonComponentId,
+})("small", {
+  color: theme.colors.textMuted,
+  fontSize: theme.fontSizes.s,
+  display: "block",
+});
+
 export const QuoteContainer = styled.withConfig({
   displayName: "md-quote-container",
   componentId: commonComponentId,
