@@ -44,7 +44,7 @@ interface ReplyIconProps {
 }
 
 function ReplyIcon({ message }: ReplyIconProps) {
-  if (message.interaction)
+  if ("interaction" in message && message.interaction)
     return <Styles.ReplyIcon width={20} height={20} svg="IconCommand" />;
 
   if (message.sticker_items && message.sticker_items?.length > 0)
@@ -214,13 +214,13 @@ function Content(props: ContentProps) {
         }
       >
         <ContentCore
-          referencedMessage={props.message}
+          referencedMessage={"id" in props.message ? props.message : null}
           showTooltip={props.isReplyContent ?? false}
         >
           <Styles.ContentContainer
             isReplyContent={props.isReplyContent}
             didFailToSend={
-              "failedToSend" in props.message && props.message?.failedToSend
+              "failedToSend" in props.message && props.message.failedToSend
             }
           >
             {props.message.content.length > 0 ? (
@@ -251,10 +251,10 @@ function Content(props: ContentProps) {
       {!props.isReplyContent && (
         <MessageAccessories
           active={
-            (props.message?.reactions?.length ?? 0) > 0 ||
+            ("reactions" in props.message ? props.message.reactions?.length ?? 0 : 0) > 0 ||
             props.message.attachments.length > 0 ||
             (props.message.sticker_items?.length ?? 0) > 0 ||
-            props.message?.thread !== undefined ||
+            "thread" in props.message && props.message.thread !== undefined ||
             props.message.embeds?.length > 0 ||
             (props.message.components?.length ?? 0) > 0
           }

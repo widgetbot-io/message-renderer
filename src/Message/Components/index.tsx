@@ -2,10 +2,11 @@ import ActionRow from "./ActionRow";
 import React from "react";
 import * as Styles from "./style";
 import type { ChatMessage } from "../../types";
+import type { APIMessageSnapshotFields } from "discord-api-types/v10";
 
 interface ComponentsProps {
   components: ChatMessage["components"];
-  message: ChatMessage;
+  message: ChatMessage | APIMessageSnapshotFields;
 }
 
 function Components({ components, message }: ComponentsProps) {

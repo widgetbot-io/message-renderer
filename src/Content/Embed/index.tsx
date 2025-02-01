@@ -141,10 +141,8 @@ function Embed({ embed, images }: EmbedProps) {
         <EmbeddedImage
           embedImage={embed.image}
           withMargin
-          image={embed.image}
           width={embed.image.width}
           height={embed.image.height}
-          type="EmbedImage"
         />
       )}
       {images && images.length > 0 && (

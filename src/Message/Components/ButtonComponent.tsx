@@ -1,6 +1,7 @@
 import type {
   APIButtonComponentWithCustomId,
   APIButtonComponentWithURL,
+  APIMessageSnapshotFields,
 } from "discord-api-types/v10";
 import * as Styles from "./style";
 import type { ComponentProps } from "react";
@@ -21,6 +22,7 @@ const buttonStyleMap: Record<
   [ButtonStyle.Link]: "secondary",
   [ButtonStyle.Danger]: "danger",
   [ButtonStyle.Success]: "success",
+  [ButtonStyle.Premium]: "primary",
 };
 
 type ButtonComponentWithCustomId = APIButtonComponentWithCustomId & {
@@ -33,7 +35,7 @@ type ButtonComponentWithURL = APIButtonComponentWithURL & {
 
 interface ButtonComponentProps {
   button: ButtonComponentWithCustomId | ButtonComponentWithURL;
-  message: ChatMessage;
+  message: ChatMessage | APIMessageSnapshotFields;
 }
 
 function ButtonComponent({ button, message }: ButtonComponentProps) {

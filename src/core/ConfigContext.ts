@@ -5,6 +5,7 @@ import type {
   APIEmbedImage,
   APIGuild,
   APIGuildMember,
+  APIMessageSnapshotFields,
   APIRole,
   APIUser,
   Snowflake,
@@ -59,7 +60,7 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   forwardedMessageChannelOnClick?(channelId:string, messageId?:string): void;
   channelMentionOnClick?(channel: APIChannel): void;
   openPinnedMessagesOnClick?(channel: APIChannel): void;
-  messageComponentButtonOnClick?(message: ChatMessage, customId: string): void;
+  messageComponentButtonOnClick?(message: ChatMessage | APIMessageSnapshotFields, customId: string): void;
   attachmentImageOnClick?(image: APIAttachment): void;
   embedImageOnClick?(image: APIEmbedImage): void;
   externalLinkOpenRequested?(url: string): void;

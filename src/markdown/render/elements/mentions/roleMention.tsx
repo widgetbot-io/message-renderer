@@ -15,7 +15,7 @@ function RoleMention({ roleId }: RoleMentionProps) {
   const role = resolveRole(roleId);
 
   if (!role) {
-    return "@deleted-role";
+    return <>@deleted-role</>;
   }
 
   return (

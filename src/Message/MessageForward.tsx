@@ -1,24 +1,20 @@
 import React, { memo } from "react";
-import Content from "../../Content";
-import * as Styles from "../style/message";
+import Content from "../Content";
+import * as Styles from "./style/message";
 import type {
-  APIMessageInteraction,
   APIMessageSnapshot,
   Snowflake,
 } from "discord-api-types/v10";
-import { useConfig } from "../../core/ConfigContext";
+import { useConfig } from "../core/ConfigContext";
 import moment from "moment";
 
-interface ForwardInfoProps {
+interface MessageForwardProps {
   channelId: Snowflake;
-  messageId?: Snowflake;
+  messageId: Snowflake;
   messageSnapshot: APIMessageSnapshot["message"];
-  mentioned?: boolean;
-  interaction: APIMessageInteraction | undefined;
-  isContextMenuInteraction?: boolean;
 }
 
-export const ForwardInfo = memo((props: ForwardInfoProps) => {
+const MessageForward = memo((props: MessageForwardProps) => {
   const { resolveChannel, forwardedMessageChannelOnClick } = useConfig();
 
   const channel = resolveChannel(props.channelId);
@@ -61,4 +57,6 @@ export const ForwardInfo = memo((props: ForwardInfoProps) => {
   );
 });
 
-ForwardInfo.displayName = "ForwardInfo";
+export default MessageForward
+
+MessageForward.displayName = "ForwardInfo";
