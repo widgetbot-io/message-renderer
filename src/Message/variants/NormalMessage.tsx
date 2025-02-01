@@ -14,10 +14,11 @@ import type {
   APIUser,
   Snowflake,
 } from "discord-api-types/v10";
-import { MessageType } from "discord-api-types/v10";
+import { MessageReferenceType, MessageType } from "discord-api-types/v10";
 import { useConfig } from "../../core/ConfigContext";
 import getDisplayName from "../../utils/getDisplayName";
 import type { ChatMessage } from "../../types";
+import MessageForward from "../MessageForward";
 
 interface ReplyInfoProps {
   channelId: Snowflake;
@@ -178,9 +179,13 @@ interface MessageProps {
 }
 
 function NormalMessage(props: MessageProps) {
+  const shouldShowForward = props.message.message_reference?.type === MessageReferenceType.Forward;
+
   const shouldShowReply =
-    props.message.type === MessageType.Reply ||
-    Boolean(props.message.interaction);
+    (props.message.type === MessageType.Reply ||
+      Boolean(props.message.interaction)) &&
+    !shouldShowForward;
+
   const { currentUser, resolveChannel } = useConfig();
   const channel = resolveChannel(props.message.channel_id);
   const guildId =
@@ -220,6 +225,7 @@ function NormalMessage(props: MessageProps) {
             isContextMenuInteraction={props.isContextMenuInteraction}
           />
         )}
+
         <Styles.MessageHeaderBase>
           <MessageAuthor
             guildId={guildId}
@@ -231,6 +237,15 @@ function NormalMessage(props: MessageProps) {
             <LargeTimestamp timestamp={props.message.timestamp} />
           )}
         </Styles.MessageHeaderBase>
+
+        {shouldShowForward && props.message.message_reference && props.message.message_snapshots ? (
+          <MessageForward
+            channelId={props.message.message_reference.channel_id}
+            messageId={props.message.message_reference.message_id as string}
+            messageSnapshot={props.message.message_snapshots[0].message}
+          />
+        ) : null}
+
         <Content
           message={props.message}
           noThreadButton={props.noThreadButton}

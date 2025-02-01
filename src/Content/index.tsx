@@ -3,7 +3,10 @@ import React, { Children, memo, useMemo } from "react";
 import Moment from "moment/moment";
 import Message from "../Message";
 import * as Styles from "./style";
-import type { APIEmbedImage } from "discord-api-types/v10";
+import type {
+  APIEmbedImage,
+  APIMessageSnapshotFields,
+} from "discord-api-types/v10";
 import { MessageFlags } from "discord-api-types/v10";
 import Tooltip from "../Tooltip";
 import SvgFromUrl from "../SvgFromUrl";
@@ -41,7 +44,7 @@ interface ReplyIconProps {
 }
 
 function ReplyIcon({ message }: ReplyIconProps) {
-  if (message.interaction)
+  if ("interaction" in message && message.interaction)
     return <Styles.ReplyIcon width={20} height={20} svg="IconCommand" />;
 
   if (message.sticker_items && message.sticker_items?.length > 0)
@@ -98,7 +101,7 @@ function ContentCore(props: ContentCoreProps) {
 }
 
 interface ContentProps {
-  message: ChatMessage;
+  message: ChatMessage | APIMessageSnapshotFields;
   isReplyContent?: boolean;
   noThreadButton?: boolean;
 }
@@ -109,7 +112,7 @@ function Content(props: ContentProps) {
   const dominantAccessoryText = useMemo(() => {
     if (!props.isReplyContent) return null;
 
-    if (props.message.interaction)
+    if ("interaction" in props.message && props.message.interaction)
       return t("messageGeneric.slash_command_click");
 
     if (props.message.sticker_items && props.message.sticker_items?.length > 0)
@@ -194,7 +197,10 @@ function Content(props: ContentProps) {
             />
           </g>
         </Styles.TypingIndicator>
-        {getDisplayName(props.message.author)} is thinking...
+
+        {"author" in props.message
+          ? `${getDisplayName(props.message.author)} is thinking...`
+          : null}
       </Styles.DeferredContent>
     );
   }
@@ -203,19 +209,24 @@ function Content(props: ContentProps) {
     <>
       <Styles.MessageContent
         isReplyContent={props.isReplyContent}
-        isOptimistic={props.message.optimistic}
+        isOptimistic={
+          "optimistic" in props.message && !!props.message.optimistic
+        }
       >
         <ContentCore
-          referencedMessage={props.message}
+          referencedMessage={"id" in props.message ? props.message : null}
           showTooltip={props.isReplyContent ?? false}
         >
           <Styles.ContentContainer
             isReplyContent={props.isReplyContent}
-            didFailToSend={props.message.failedToSend}
+            didFailToSend={
+              "failedToSend" in props.message && props.message.failedToSend
+            }
           >
             {props.message.content.length > 0 ? (
               <>
-                {props.message.webhook_id !== undefined ? (
+                {"webhook_id" in props.message &&
+                props.message.webhook_id !== undefined ? (
                   <LinkMarkdown mentions={props.message.mentions}>
                     {props.message.content}
                   </LinkMarkdown>
@@ -240,10 +251,10 @@ function Content(props: ContentProps) {
       {!props.isReplyContent && (
         <MessageAccessories
           active={
-            (props.message.reactions?.length ?? 0) > 0 ||
+            ("reactions" in props.message ? props.message.reactions?.length ?? 0 : 0) > 0 ||
             props.message.attachments.length > 0 ||
             (props.message.sticker_items?.length ?? 0) > 0 ||
-            props.message.thread !== undefined ||
+            "thread" in props.message && props.message.thread !== undefined ||
             props.message.embeds?.length > 0 ||
             (props.message.components?.length ?? 0) > 0
           }
@@ -265,24 +276,28 @@ function Content(props: ContentProps) {
               <Embed key={embed.url} embed={embed} images={undefined} />
             ))
           )}
-          {props.message.reactions && props.message.reactions?.length > 0 && (
-            <Reactions reactions={props.message.reactions} />
-          )}
+          {"reactions" in props.message &&
+            props.message?.reactions &&
+            props.message.reactions?.length > 0 && (
+              <Reactions reactions={props.message.reactions} />
+            )}
           {(props.message.components?.length ?? 0) > 0 && (
             <Components
               components={props.message.components}
               message={props.message}
             />
           )}
-          {!props.noThreadButton && props.message.thread && (
-            <ThreadButton
-              hasReply={props.message.referenced_message !== undefined}
-              thread={props.message.thread}
-              messageId={props.message.id}
-              messageContent={props.message.content}
-              messageType={props.message.type}
-            />
-          )}
+          {!props.noThreadButton &&
+            "thread" in props.message &&
+            props.message.thread && (
+              <ThreadButton
+                hasReply={props.message.referenced_message !== undefined}
+                thread={props.message.thread}
+                messageId={props.message.id}
+                messageContent={props.message.content}
+                messageType={props.message.type}
+              />
+            )}
         </MessageAccessories>
       )}
     </>

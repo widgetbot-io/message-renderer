@@ -37,6 +37,7 @@ import SvgIconVoiceChannel from "../assets/storybookOnlyAssets/icon-voice-channe
 import SvgIconStageChannel from "../assets/storybookOnlyAssets/icon-stage-channel.svg";
 import SvgIconLinkExternal from "../assets/storybookOnlyAssets/icon-link-external.svg";
 import SvgIconUnknownReply from "../assets/storybookOnlyAssets/icon-unknown-reply.svg";
+import SvgIconForward from "../assets/storybookOnlyAssets/icon-forward.svg";
 
 import ggSansNormal400 from "../assets/storybookOnlyAssets/gg-sans-normal-400.woff2";
 import ggSansNormal500 from "../assets/storybookOnlyAssets/gg-sans-normal-500.woff2";
@@ -110,6 +111,7 @@ const svgUrls = {
   IconVoiceChannel: SvgIconVoiceChannel,
   IconStageChannel: SvgIconStageChannel,
   IconLinkExternal: SvgIconLinkExternal,
+  IconForward: SvgIconForward,
   MiscDiscordImageFailure: SvgMiscDiscordImageFailure,
 };
 
@@ -425,6 +427,11 @@ const Wrapper: Decorator = (Story) => {
       }}
       attachmentImageOnClick={(image) => {
         alert(`Image attachment ${image.filename} clicked!`);
+      }}
+      forwardedMessageChannelOnClick={(channelId, messageId) => {
+        alert(
+          `Forwarded message id is ${messageId} and was sent in ${channelId}.`
+        );
       }}
       embedImageOnClick={(embed) => {
         alert(`Embed image ${embed.url} clicked!`);

@@ -1,4 +1,4 @@
-import type { APIMessageActionRowComponent } from "discord-api-types/v10";
+import type { APIMessageActionRowComponent, APIMessageSnapshotFields } from "discord-api-types/v10";
 import { ComponentType } from "discord-api-types/v10";
 import ButtonComponent from "./ButtonComponent";
 import React from "react";
@@ -6,7 +6,7 @@ import type { ChatMessage } from "../../types";
 
 interface ComponentProps {
   component: APIMessageActionRowComponent;
-  message: ChatMessage;
+  message: ChatMessage | APIMessageSnapshotFields;
 }
 
 function Component({ component, message }: ComponentProps) {
