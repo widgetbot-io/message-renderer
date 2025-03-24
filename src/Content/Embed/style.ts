@@ -334,3 +334,8 @@ export const VideoThumbnailPlayButton = styled.withConfig({
     opacity: 1,
   },
 });
+
+export const Div = styled.withConfig({
+  displayName: "div",
+  componentId: commonComponentId,
+})("div", {});
