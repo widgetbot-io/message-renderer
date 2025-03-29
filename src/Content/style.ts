@@ -85,6 +85,10 @@ export const ContentContainer = styled.withConfig({
       },
     },
   },
+  "@media (max-width: 413px)": {
+    maxWidth: "160px",
+    wordBreak: "break-all"
+  },
 });
 
 export const ReplyAccessoryText = styled.withConfig({
