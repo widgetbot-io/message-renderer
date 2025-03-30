@@ -148,13 +148,21 @@ function Embed({ embed, images }: EmbedProps) {
         />
       )}
       {images && images.length > 0 && (
-        <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
-          {images.map((image) => (
-            <Styles.ImageGridImageContainer key={image.url}>
-              <EmbeddedImage embedImage={image} withMargin />
-            </Styles.ImageGridImageContainer>
-          ))}
-        </Styles.Images>
+        // <Styles.Images nImages={images.length}>
+        //   {images.map((image) => (
+        //     <Styles.ImageGridImageContainer key={image.url}>
+        //       <EmbeddedImage embedImage={image} withMargin />
+        //     </Styles.ImageGridImageContainer>
+        //   ))}
+        // </Styles.Images>
+        <EmbeddedImage
+          embedImage={images[0]}
+          withMargin
+          image={images[0]}
+          width={images[0].width}
+          height={images[0].height}
+          type="EmbedImage"
+        />
       )}
 
       {(embed.footer || embed.timestamp) && (

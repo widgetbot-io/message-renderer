@@ -104,9 +104,9 @@ function EmbedVideo(props: EmbedVideoProps) {
         width="100%"
         height="100%"
         style={{
-          height: adjustedHeight,
           maxWidth: adjustedWidth,
           maxHeight: adjustedHeight,
+          aspectRatio:"16 / 9"
         }}
         src={url.toString()}
         allowFullScreen={true}

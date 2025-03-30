@@ -28,6 +28,12 @@ export const Embed = styled.withConfig({
       },
     },
   },
+  "@media (max-width: 413px)": {
+    maxWidth: "170px",
+  },
+  "@media (min-width: 414px) and (max-width: 833px)": {
+    maxWidth: "260px",
+  },
 });
 
 export const ContentAndThumbnail = styled.withConfig({
