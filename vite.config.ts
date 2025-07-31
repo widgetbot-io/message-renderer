@@ -22,8 +22,16 @@ export default defineConfig({
     rollupOptions: {
       external: [
         "src/stories/**/*",
+        "react/jsx-runtime",
         ...Object.keys(packageJson.peerDependencies),
       ],
+      output: {
+        globals: {
+          'react-dom': 'ReactDom',
+          react: 'React',
+          'react/jsx-runtime': 'ReactJsxRuntime',
+        },
+      },
     },
   },
 });

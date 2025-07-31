@@ -131,7 +131,7 @@ function Content(props: ContentProps) {
 
     if (
       !props.message.embeds.every(
-        (e) => e.url !== undefined && props.message.embeds[0].url === e.url
+        (e) => e.url !== undefined && props.message.embeds[0].url === e.url,
       )
     )
       return [];
@@ -139,11 +139,11 @@ function Content(props: ContentProps) {
     const images = props.message.embeds
       .reduce(
         (acc, embed) => [...acc, embed.image],
-        [] as (APIEmbedImage | null | undefined)[]
+        [] as (APIEmbedImage | null | undefined)[],
       )
       .filter(
         (embedImage): embedImage is APIEmbedImage =>
-          embedImage !== null && embedImage !== undefined
+          embedImage !== null && embedImage !== undefined,
       );
 
     if (images.length === 0) return [];
@@ -261,8 +261,8 @@ function Content(props: ContentProps) {
               images={embedImages}
             />
           ) : (
-            props.message.embeds.map((embed) => (
-              <Embed key={embed.url} embed={embed} images={undefined} />
+            props.message.embeds.map((embed, i) => (
+              <Embed key={i} embed={embed} images={undefined} />
             ))
           )}
           {props.message.reactions && props.message.reactions?.length > 0 && (

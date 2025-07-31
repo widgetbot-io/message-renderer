@@ -41,9 +41,7 @@
     "memoizee": "^0.4.15",
     "moment": "2.24.0",
     "ramda": "^0.28.0",
-    "rc-tooltip": "^3.7.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "rc-tooltip": "^6.4.0",
     "react-easy-emoji": "^1.8.0",
     "react-i18next": "^13.1.2",
     "react-lazy-load-image-component": "^1.6.0",
@@ -89,6 +87,8 @@
     "typescript": "^4.9.4",
     "vite": "^4.3.9",
     "vite-plugin-dts": "3.0.0-beta.2",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
