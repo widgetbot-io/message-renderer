@@ -20,16 +20,13 @@ export interface EmbedProps {
 }
 
 function Embed({ embed, images }: EmbedProps) {
-  if (embed.type === undefined) {
-    error("Embed: Embed type is undefined", embed);
-    return null;
-  }
+  const embedType = embed.type ?? EmbedType.Rich;
 
-  if (embed.type === EmbedType.GIFV) return <GifVEmbed embed={embed} />;
+  if (embedType === EmbedType.GIFV) return <GifVEmbed embed={embed} />;
 
-  if (embed.type === EmbedType.Image) return <ImageEmbed embed={embed} />;
+  if (embedType === EmbedType.Image) return <ImageEmbed embed={embed} />;
 
-  if (embed.type === EmbedType.Video && !embed.thumbnail)
+  if (embedType === EmbedType.Video && !embed.thumbnail)
     // @ts-expect-error TS2322 Type error not applicable (tl;dr: video embeds always have a width and height)
     return <VideoAttachment attachmentOrEmbed={embed} />;
 
@@ -39,23 +36,23 @@ function Embed({ embed, images }: EmbedProps) {
       : undefined;
 
   const { width: widthImage } = useSize(
-    embed.type,
+    embedType,
     embed.image,
     "EmbedImage",
-    !images || images.length > 0
+    !images || images.length > 0,
   );
 
   const {
     width: widthThumbnail,
     height: heightThumbnail,
     isLarge: isThumbnailLarge,
-  } = useSize(embed.type, embed.thumbnail, "EmbedThumbnail", undefined);
+  } = useSize(embedType, embed.thumbnail, "EmbedThumbnail", undefined);
 
   const isEmbedThin = useMemo(
     () =>
       widthImage !== null ||
-      (embed.type === EmbedType.Video && embed.thumbnail !== null),
-    [widthImage, embed.type, embed.thumbnail]
+      (embedType === EmbedType.Video && embed.thumbnail !== null),
+    [widthImage, embedType, embed.thumbnail],
   );
 
   return (
@@ -94,7 +91,7 @@ function Embed({ embed, images }: EmbedProps) {
             ) : (
               <Styles.Title>{parseEmbedTitle(embed.title)}</Styles.Title>
             ))}
-          {embed.type === EmbedType.Video && embed.video ? (
+          {embedType === EmbedType.Video && embed.video ? (
             <EmbedVideo
               url={embed.video.url}
               proxyUrl={embed.video.proxy_url}
@@ -129,7 +126,7 @@ function Embed({ embed, images }: EmbedProps) {
             </Styles.Fields>
           )}
         </Styles.Content>
-        {embed.thumbnail && embed.type !== EmbedType.Video && (
+        {embed.thumbnail && embedType !== EmbedType.Video && (
           <EmbeddedImage
             embedImage={embed.thumbnail}
             width={widthThumbnail ?? undefined}
