@@ -21,6 +21,9 @@ export const ImageAttachment = styled.withConfig({
       },
     },
   },
+  "@media (max-width: 413px)": {
+    maxWidth: "60vw",
+  },
 });
 
 export const LazyImagePlaceholder = styled.withConfig({
@@ -318,6 +321,7 @@ export const AttachmentContainer = styled.withConfig({
   borderRadius: 3,
   width: "fit-content",
   flexWrap: "wrap",
+  position: "relative",
 
   variants: {
     withoutChildren: {
@@ -351,6 +355,9 @@ export const AttachmentFileName = styled.withConfig({
   "&:hover": {
     textDecoration: "underline",
   },
+  "@media (max-width: 339px)": {
+    maxWidth: "35vw",
+  },
 });
 
 export const AttachmentFileSize = styled.withConfig({
@@ -373,6 +380,12 @@ export const DownloadIcon = styled.withConfig({
   "&:hover": {
     opacity: 1,
   },
+  "@media (max-width: 339px)": {
+    position: "absolute",
+    right: 2,
+    top: 10,
+    marginLeft: 0,
+  },
 });
 
 export const ExtraUserInterface = styled.withConfig({
@@ -382,6 +395,10 @@ export const ExtraUserInterface = styled.withConfig({
   flexBasis: "100%",
   marginTop: theme.space.large,
   display: "flex",
+  "@media (max-width: 339px)": {
+    marginTop: "10px",
+    maxWidth: "55vw",
+  },
 });
 
 export const AttachmentAudioControls = styled.withConfig({
@@ -393,4 +410,7 @@ export const AttachmentAudioControls = styled.withConfig({
   outline: "none",
   borderRadius: 3,
   maxWidth: "70vw",
+  "@media (max-width: 433px)": {
+    maxWidth: "60vw"
+  }
 });

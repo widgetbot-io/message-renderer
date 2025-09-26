@@ -86,5 +86,6 @@ export const ActionRow = styled.withConfig({
 })("div", {
   display: "flex",
   flexDirection: "row",
+  flexWrap: "wrap",
   gap: theme.space.large,
 });

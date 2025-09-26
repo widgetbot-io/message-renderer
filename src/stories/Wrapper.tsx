@@ -368,7 +368,7 @@ const StorybookStyles = styled("div", {
   [`--${prefix}-fonts-main`]:
     '"gg sans","Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif',
   fontFamily: theme.fonts.main,
-  padding: 40,
+  padding: "40px 0px",
 });
 
 // eslint-disable-next-line func-style
