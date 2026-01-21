@@ -60,6 +60,7 @@ export const ContentContainer = styled.withConfig({
   color: theme.colors.primaryOpacity80,
   fontWeight: 400,
   lineHeight: "1.375rem",
+  wordBreak: "break-all",
 
   variants: {
     didFailToSend: {
@@ -84,6 +85,12 @@ export const ContentContainer = styled.withConfig({
         },
       },
     },
+  },
+  "@media (max-width: 413px)": {
+    maxWidth: "160px",
+  },
+  "@media (min-width: 414px) and (max-width: 833px)": {
+    maxWidth: "290px",
   },
 });
 
