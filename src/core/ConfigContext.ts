@@ -48,6 +48,13 @@ export type Config<SvgConfig extends PartialSvgConfig> = {
   resolveUser(id: Snowflake): APIUser | null;
   chatBadge?({ user, TagWrapper }: ChatBadgeProps): ReactElement | null;
   avatarUrlOverride?(user: APIUser): UserAvatar | null;
+  /**
+   * Replaces the fallback rendered when a user has no avatar OR when their
+   * primary avatar URL fails to load. When omitted, the renderer falls back
+   * to Discord's hardcoded default avatars at
+   * `cdn.discordapp.com/embed/avatars/N.png`.
+   */
+  defaultAvatar?(user: APIUser): UserAvatar;
   themeOverrideClassName?: string;
   unknownMessageTypeResponse?: MessageTypeResponse;
 

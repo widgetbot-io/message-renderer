@@ -49,13 +49,19 @@ function MessageAuthor({
   guildId,
   ...props
 }: MessageAuthorProps) {
-  const { resolveRole, resolveMember, userOnClick, avatarUrlOverride } =
-    useConfig();
+  const {
+    resolveRole,
+    resolveMember,
+    userOnClick,
+    avatarUrlOverride,
+    defaultAvatar,
+  } = useConfig();
   const member = guildId ? resolveMember(author, guildId) : null;
   const isGuildMember = member !== null;
 
   const { stillAvatarUrl, animatedAvatarUrl } =
-    avatarUrlOverride?.(author) ?? getAvatar(author);
+    avatarUrlOverride?.(author) ??
+    getAvatar(author, { defaultOverride: defaultAvatar });
 
   const displayName = isGuildMember
     ? member.nick ?? getDisplayName(author)
@@ -133,6 +139,7 @@ function MessageAuthor({
             src={
               getAvatar(author, {
                 forceDefault: true,
+                defaultOverride: defaultAvatar,
               }).stillAvatarUrl
             }
             alt="avatar"

@@ -51,6 +51,7 @@ function getAvatarProperty(
 export interface GetAvatarOptions {
   size?: AvatarSize;
   forceDefault?: boolean;
+  defaultOverride?: (user: APIUser) => UserAvatar;
 }
 
 export interface UserAvatar {
@@ -60,25 +61,30 @@ export interface UserAvatar {
 
 function getAvatar(
   user: APIUser,
-  { size = 80, forceDefault = false }: GetAvatarOptions = {}
+  {
+    size = 80,
+    forceDefault = false,
+    defaultOverride,
+  }: GetAvatarOptions = {}
 ): UserAvatar {
   const defaultAvatarIndex = isNaN(Number(user.id))
     ? 0
     : Number(BigInt(user.id) >> 22n) % 6;
 
-  const defaultAvatar = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
+  const fallback: UserAvatar = defaultOverride?.(user) ?? {
+    stillAvatarUrl: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`,
+  };
 
   const stillAvatarUrl = getAvatarProperty(user, size);
 
-  if (forceDefault || stillAvatarUrl === null)
-    return { stillAvatarUrl: defaultAvatar };
+  if (forceDefault || stillAvatarUrl === null) return fallback;
 
   const isAnimatedAvatar = checkIfAnimatedAvatar(stillAvatarUrl);
 
   if (!isAnimatedAvatar) return { stillAvatarUrl: stillAvatarUrl };
 
   const animatedAvatarUrl =
-    getAvatarProperty(user, size, "gif") ?? defaultAvatar;
+    getAvatarProperty(user, size, "gif") ?? fallback.stillAvatarUrl;
 
   return {
     stillAvatarUrl: stillAvatarUrl,

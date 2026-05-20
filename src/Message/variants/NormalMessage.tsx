@@ -27,12 +27,8 @@ interface ReplyInfoProps {
   isContextMenuInteraction?: boolean;
 }
 
-function getMiniAvatarUrl(user: APIUser) {
-  const getAvatarSettings: GetAvatarOptions = {
-    size: 16,
-  };
-
-  return getAvatar(user, getAvatarSettings);
+function getMiniAvatarUrl(user: APIUser, getAvatarSettings: GetAvatarOptions = {}) {
+  return getAvatar(user, { size: 16, ...getAvatarSettings });
 }
 
 const FLAG_CROSSPOST = 1 << 1;
@@ -42,8 +38,13 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
     ? props.interaction.user
     : props.referencedMessage?.author;
 
-  const { resolveRole, resolveChannel, resolveMember, avatarUrlOverride } =
-    useConfig();
+  const {
+    resolveRole,
+    resolveChannel,
+    resolveMember,
+    avatarUrlOverride,
+    defaultAvatar,
+  } = useConfig();
   const miniUserName = useMemo(() => {
     if (!props.interaction && !props.referencedMessage) return null;
 
@@ -74,7 +75,8 @@ const ReplyInfo = memo((props: ReplyInfoProps) => {
     () =>
       user === undefined
         ? null
-        : avatarUrlOverride?.(user) ?? getMiniAvatarUrl(user),
+        : avatarUrlOverride?.(user) ??
+          getMiniAvatarUrl(user, { defaultOverride: defaultAvatar }),
     [props.referencedMessage, props.interaction]
   );
 
