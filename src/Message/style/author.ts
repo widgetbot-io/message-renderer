@@ -9,6 +9,7 @@ export const MessageAuthor = styled.withConfig({
   componentId: commonComponentId,
 })("span", {
   display: "inline-flex",
+  wordBreak: "break-all",
 
   variants: {
     clickable: {
@@ -18,6 +19,9 @@ export const MessageAuthor = styled.withConfig({
         },
       },
     },
+  },
+  "@media (max-width: 319px)": {
+    flexWrap: 'wrap'
   },
 });
 
@@ -30,7 +34,6 @@ export const Username = styled.withConfig({
   fontSize: theme.fontSizes.l,
   display: "inline",
   verticalAlign: "baseline",
-  whiteSpace: "nowrap",
   lineHeight: `1.375rem`,
 
   variants: {
@@ -64,7 +67,10 @@ export const Avatar = styled.withConfig({
   transform: "translateX(-50%)",
   marginTop: "calc(4px - .125rem)",
   zIndex: 1,
-});
+  "@media (max-width: 319px)": {
+    left: `calc(${theme.sizes.messageLeftPadding} / 3)`,
+  }
+},);
 
 export const StillAvatar = styled.withConfig({
   displayName: "message-author-still-avatar",
