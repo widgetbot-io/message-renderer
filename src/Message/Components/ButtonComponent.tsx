@@ -19,6 +19,7 @@ const buttonStyleMap: Record<
   [ButtonStyle.Primary]: "primary",
   [ButtonStyle.Secondary]: "secondary",
   [ButtonStyle.Link]: "secondary",
+  [ButtonStyle.Premium]: "secondary",
   [ButtonStyle.Danger]: "danger",
   [ButtonStyle.Success]: "success",
 };
