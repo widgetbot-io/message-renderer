@@ -1,6 +1,6 @@
 import type {
   APIActionRowComponent,
-  APIMessageActionRowComponent,
+  APIComponentInMessageActionRow,
 } from "discord-api-types/v10";
 import * as Styles from "./style";
 import React from "react";
@@ -8,7 +8,7 @@ import Component from "./Component";
 import type { ChatMessage } from "../../types";
 
 interface ActionRowProps {
-  actionRow: APIActionRowComponent<APIMessageActionRowComponent>;
+  actionRow: APIActionRowComponent<APIComponentInMessageActionRow>;
   message: ChatMessage;
 }
 

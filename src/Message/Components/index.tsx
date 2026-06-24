@@ -1,4 +1,4 @@
-import ActionRow from "./ActionRow";
+import Component from "./Component";
 import React from "react";
 import * as Styles from "./style";
 import type { ChatMessage } from "../../types";
@@ -13,8 +13,8 @@ function Components({ components, message }: ComponentsProps) {
 
   return (
     <Styles.Components>
-      {components.map((actionRow, index) => (
-        <ActionRow actionRow={actionRow} message={message} key={index} />
+      {components.map((component, index) => (
+        <Component component={component} message={message} key={index} />
       ))}
     </Styles.Components>
   );
