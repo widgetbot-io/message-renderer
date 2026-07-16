@@ -83,6 +83,13 @@ export const Message = styled.withConfig({
         },
       },
     },
+    "@media (max-width: 319px)": {
+      paddingRight: `0px`,
+      paddingLeft: `calc(${theme.sizes.messageLeftPadding} - 15px)`,
+    },
+    "@media (min-width: 320px) and (max-width: 833px)": {
+      paddingRight: `8px`,
+    },
   }
 );
 

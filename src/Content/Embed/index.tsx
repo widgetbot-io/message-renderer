@@ -14,6 +14,7 @@ import ExternalLink from "../../ExternalLink";
 import { error } from "../../utils/error";
 import useSize from "src/Content/Embed/useSize";
 
+// const MAX_IMAGES = 1;
 export interface EmbedProps {
   embed: APIEmbed;
   images: APIEmbedImage[] | undefined;
@@ -145,13 +146,18 @@ function Embed({ embed, images }: EmbedProps) {
         />
       )}
       {images && images.length > 0 && (
-        <Styles.Images nImages={images.length as 1 | 2 | 3 | 4}>
-          {images.map((image) => (
-            <Styles.ImageGridImageContainer key={image.url}>
-              <EmbeddedImage embedImage={image} withMargin />
-            </Styles.ImageGridImageContainer>
-          ))}
-        </Styles.Images>
+        // <Styles.Images nImages={images.length}>
+        //   {images.slice(0, MAX_IMAGES).map((image) => (
+        //     <Styles.ImageGridImageContainer key={image.url}>
+        //       <EmbeddedImage embedImage={image} withMargin
+        //   width={embed.image.width}
+        //   height={embed.image.height}  />
+        //     </Styles.ImageGridImageContainer>
+        //   ))}
+        // </Styles.Images>
+        <EmbeddedImage embedImage={images[0]} withMargin
+          width={images[0].width}
+          height={images[0].height}  />
       )}
 
       {(embed.footer || embed.timestamp) && (

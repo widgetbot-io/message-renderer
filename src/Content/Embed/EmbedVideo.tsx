@@ -37,11 +37,13 @@ function ThumbnailWrapper({
       onClick={() => setHideThumbnail(true)}
       onError={() => setError(true)}
       style={{
-        width: adjustedWidth,
-        height: adjustedHeight,
-        backgroundImage: `url(${error ? discordImageFailure : thumbnail})`,
+        width: "100%",
+        height: "auto",
+        maxWidth: adjustedWidth,
+        maxHeight: adjustedHeight,
       }}
     >
+      <Styles.Image src={error ? discordImageFailure : thumbnail} />
       <Styles.VideoThumbnailPlayButtonContainer>
         <Styles.VideoThumbnailPlayButton
           width={12}
@@ -61,6 +63,11 @@ interface EmbedVideoProps
 }
 
 function EmbedVideo(props: EmbedVideoProps) {
+  const { width: adjustedWidth, height: adjustedHeight } = useSize(
+    props.width,
+    props.height
+  );
+
   if (props.proxyUrl)
     return (
       <ThumbnailWrapper
@@ -94,8 +101,13 @@ function EmbedVideo(props: EmbedVideoProps) {
       height={props.height}
     >
       <Styles.VideoIframe
-        width={400}
-        height={225}
+        width="100%"
+        height="100%"
+        style={{
+          maxWidth: adjustedWidth,
+          maxHeight: adjustedHeight,
+          aspectRatio:"16 / 9"
+        }}
         src={url.toString()}
         allowFullScreen={true}
       />
