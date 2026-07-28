@@ -19,6 +19,7 @@ import ThreadCreated from "./variants/ThreadCreated";
 import { MessageTypeResponse, useConfig } from "../core/ConfigContext";
 import ThreadStarterMessage from "./variants/ThreadStarterMessage";
 import AutomodAction from "./variants/AutomodAction";
+import StageMessage from "./variants/StageMessage";
 import type { ChatMessage } from "../types";
 
 export interface MessageProps {
@@ -152,6 +153,20 @@ function MessageTypeSwitch(props: Omit<MessageProps, "showButtons">) {
     case MessageType.AutoModerationAction:
       return (
         <AutomodAction message={props.message} isHovered={props.isHovered} />
+      );
+    case MessageType.StageStart:
+    case MessageType.StageEnd:
+    case MessageType.StageSpeaker:
+    case MessageType.StageRaiseHand:
+    case MessageType.StageTopic:
+      return (
+        <StageMessage
+          createdAt={props.message.timestamp}
+          channelId={props.message.channel_id}
+          author={props.message.author}
+          content={props.message.content}
+          type={props.message.type}
+        />
       );
     default: {
       switch (unknownMessageTypeResponse) {

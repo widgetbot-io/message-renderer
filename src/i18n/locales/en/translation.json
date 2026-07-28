@@ -70,6 +70,21 @@
   "RecipientRemove": {
     "content": "<Author/> removed <Target>{{displayName}}</Target> from the thread."
   },
+  "StageStart": {
+    "content": "<Author/> started <strong>{{topic}}</strong>"
+  },
+  "StageEnd": {
+    "content": "<Author/> ended <strong>{{topic}}</strong>"
+  },
+  "StageSpeaker": {
+    "content": "<Author/> is now a speaker"
+  },
+  "StageRaiseHand": {
+    "content": "<Author/> requested to speak"
+  },
+  "StageTopic": {
+    "content": "<Author/> changed the Stage topic to <strong>{{topic}}</strong>"
+  },
   "ThreadCreated": {
     "content": "<Author/> started a thread: <OpenThreadLink>{{threadName}}</OpenThreadLink>"
   },
