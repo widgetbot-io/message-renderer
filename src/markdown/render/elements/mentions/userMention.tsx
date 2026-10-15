@@ -1,19 +1,20 @@
 import * as Styles from "./style";
 import * as React from "react";
-import type { Snowflake } from "discord-api-types/v10";
+import type { APIUser, Snowflake } from "discord-api-types/v10";
 import { useConfig } from "../../../../core/ConfigContext";
 import SimpleMarkdown from "simple-markdown";
 import getDisplayName from "../../../../utils/getDisplayName";
 
 interface UserMentionProps {
   userId: Snowflake;
+  fallbackUser?: APIUser;
 }
 
-function UserMention({ userId }: UserMentionProps) {
+function UserMention({ userId, fallbackUser }: UserMentionProps) {
   const { resolveUser, userOnClick } = useConfig();
 
   // todo: resolve current channel to resolve member
-  const user = resolveUser(userId);
+  const user = resolveUser(userId) ?? fallbackUser ?? null;
   const text = user ? getDisplayName(user) : "Unknown User";
 
   return (
@@ -34,6 +35,10 @@ export const userMention = {
   match: (source) => /^<@!?([0-9]+?)>/.exec(source),
   parse: ([, id]) => ({ id }),
   react: ({ id }, recurseParse, state) => (
-    <UserMention userId={id} key={state.key} />
+    <UserMention
+      userId={id}
+      fallbackUser={state.mentions?.find((user: APIUser) => user.id === id)}
+      key={state.key}
+    />
   ),
 };

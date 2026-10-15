@@ -4,6 +4,7 @@ import { MessageGroup } from "../index";
 import { testUser } from "./commonTestData";
 import Wrapper from "./Wrapper";
 import { EmbedType } from "discord-api-types/v10";
+import type { APIUser } from "discord-api-types/v10";
 
 const meta: Meta<typeof MessageGroup> = {
   title: "Message Types/Normal",
@@ -21,6 +22,14 @@ export default meta;
 const Template: StoryFn<typeof MessageGroup> = (args) => (
   <MessageGroup {...args} />
 );
+
+const payloadOnlyMention: APIUser = {
+  id: "123456789012345678",
+  username: "member1",
+  global_name: "member1",
+  avatar: null,
+  discriminator: "0",
+};
 
 export const Basic: StoryFn<typeof MessageGroup> = Template.bind({});
 Basic.args = {
@@ -349,12 +358,12 @@ Mentions.args = {
       id: "1101622366137749574",
       type: 0,
       content:
-        "User ping: <@132819036282159104>\nText channel mention: <#697138785317814292>\nVoice channel mention: <#1234>\nStage channel mention: <#1337>\nRole ping: <@&613426354628722689>\nUnknown channel mention: <#404>\nUnknown user mention: <@404>\nUnknown role mention: <@&404>",
+        "Resolver-backed user ping: <@132819036282159104>\nPayload-backed user ping: <@123456789012345678>\nText channel mention: <#697138785317814292>\nVoice channel mention: <#1234>\nStage channel mention: <#1337>\nRole ping: <@&613426354628722689>\nUnknown channel mention: <#404>\nUnknown user mention: <@404>\nUnknown role mention: <@&404>",
       channel_id: "697138785317814292",
       author: testUser,
       attachments: [],
       embeds: [],
-      mentions: [testUser],
+      mentions: [testUser, payloadOnlyMention],
       mention_roles: [],
       pinned: false,
       mention_everyone: false,
